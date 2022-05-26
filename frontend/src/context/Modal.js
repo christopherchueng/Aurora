@@ -6,9 +6,11 @@ const ModalContext = React.createContext();
 
 export function ModalProvider({ children }) {
   const modalRef = useRef();
+  // value state variable will be set to modalRef.current after initial render
   const [value, setValue] = useState();
 
   useEffect(() => {
+    // modalRef.current will be set to the actual HTML DOM element that gets rendered from the div
     setValue(modalRef.current);
   }, [])
 
@@ -27,12 +29,14 @@ export function Modal({ onClose, children }) {
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(
+    // Divs must come first to get elements to show up in the ModalProvider component
     <div id="modal">
       <div id="modal-background" onClick={onClose} />
       <div id="modal-content">
         {children}
       </div>
     </div>,
+    // reference to the actual HTML DOM element of the ModalProvider's div
     modalNode
   );
 }
