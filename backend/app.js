@@ -8,11 +8,15 @@ const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
+const routes = require('./routes');
+
 const app = express();
 
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
+
+app.use(routes); // Connect all routes
 
 // Security Middleware
 if (!isProduction) {
@@ -20,7 +24,7 @@ if (!isProduction) {
     app.use(cors());
 }
 
-  // helmet helps set a variety of headers to better secure your app
+// helmet helps set a variety of headers to better secure your app
 app.use(
     helmet.crossOriginResourcePolicy({
         policy: "cross-origin"
@@ -37,3 +41,6 @@ app.use(
         }
     })
 );
+
+
+module.exports = app;
