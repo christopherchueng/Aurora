@@ -13,7 +13,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className='app'>
       <title>Aurora</title>
       <Navigation isLoaded={isLoaded} />
       <Switch>

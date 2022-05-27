@@ -4,8 +4,9 @@ import './SplashPage.css'
 const SplashPage = () => {
     return (
         <div className='splash-ctn'>
+            <h1>Hi from Splash</h1>
             <div className='home-banner-ctn'>
-                <img className='aurora-banner' src='images/home-banner.jpg'></img>
+                <h1 className='banner-header'>Aurora</h1>
             </div>
         </div>
     )
