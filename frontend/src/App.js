@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import SplashPage from "./components/SplashPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,11 @@ function App() {
     <div>
       <title>Aurora</title>
       <Navigation isLoaded={isLoaded} />
+      <Switch>
+        <Route exact path='/'>
+          <SplashPage />
+        </Route>
+      </Switch>
     </div>
   );
 }
