@@ -10,6 +10,7 @@ Aurora is a Soundcloud clone that gives creators a platform to upload their trac
 - Redux
 - HTML
 - CSS
+- Git
 
 # Features
 
