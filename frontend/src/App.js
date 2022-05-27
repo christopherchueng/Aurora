@@ -14,7 +14,6 @@ function App() {
   return (
     <div>
       <title>Aurora</title>
-      {/* <link rel="aurora-icon" type="image/x-icon" href="/images/favicon.ico" /> */}
       <Navigation isLoaded={isLoaded} />
     </div>
   );
