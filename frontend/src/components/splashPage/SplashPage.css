@@ -8,7 +8,7 @@
     margin: auto;
     flex-direction: column;
     width: 100vw;
-    height: 1500px;
+    height: auto;
     background-color: black;
     color: white;
 }
@@ -38,4 +38,70 @@
     font-size: 150px;
     animation-name: slide-fade;
     animation-duration: 6s;
+}
+
+.splash-upload,
+.splash-listen,
+.splash-connect,
+.splash-closing-remarks {
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.splash-upload-btn {
+    width: 100vw;
+}
+
+.splash-upload-btn,
+.track-content {
+    background-color: white;
+    color: black;
+
+}
+
+.splash-listen {
+    background: linear-gradient(black 30%, #041742);
+    background-blend-mode: normal;
+}
+
+.splash-connect {
+    background: linear-gradient(#041742 5%, black);
+    background-blend-mode: normal;
+
+}
+
+.splash-upload-btn,
+.track-content {
+    background-color: black;
+}
+
+.track-content {
+    color: white;
+}
+
+.splash-track-grid {
+    width: 100vw;
+    height: 900px;
+}
+
+.splash-closing-remarks {
+    background: linear-gradient(rgb(0, 0, 0) 1%, rgba(86, 30, 88, 0.8) 50%, rgb(0, 0, 0));
+}
+
+footer {
+    background-color: black;
+    height: 100px;
+    border-top: 1px solid lightgray;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: lightgray;
+}
+
+footer > a {
+    color: lightgray;
+    text-decoration: none;
+    padding: 0 40px;
 }
