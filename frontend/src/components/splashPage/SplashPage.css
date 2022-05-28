@@ -7,21 +7,34 @@
 .splash-ctn {
     margin: auto;
     flex-direction: column;
-    width: 1240px;
+    width: 100vw;
     height: 1500px;
     background-color: rgb(255, 255, 255);
 }
 
 .home-banner-ctn {
-    width: 1240px;
-    height: 450px;
+    width: 100vw;
+    height: 100vh;
     background-image: url('../../../public/images/home-banner.jpg');
     background-size: 100%;
     background-position: center;
     justify-content: center;
 }
 
+@keyframes slide-fade {
+    0% {
+        transform: translate(200px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px);
+        opacity: 1;
+    }
+}
+
 .banner-header {
     color: white;
     font-size: 150px;
+    animation-name: slide-fade;
+    animation-duration: 6s;
 }
