@@ -1,5 +1,5 @@
 .navbar {
-    position: absolute;
+    position: fixed;
     right: 0px;
     display: flex;
     justify-content: center;
@@ -14,4 +14,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.profile-dropdown-menu {
+    position: fixed;
+    border: 1px solid black;
+    top: 50px;
+    /* justify-content: flex-start; */
+    background-color: black;
+    width: auto;
+}
+
+.profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: auto;
+}
+
+.profile-dropdown > li {
+    width: 92%;
+    padding: 5px;
+    color: white;
 }
