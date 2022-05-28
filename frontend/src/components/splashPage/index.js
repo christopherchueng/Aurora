@@ -8,6 +8,9 @@ const SplashPage = () => {
             <div className='home-banner-ctn'>
                 <h1 className='banner-header'>Aurora</h1>
             </div>
+            <div className='-splash-upload-btn'>
+                <button type='button'>Upload your own</button>
+            </div>
             <div className='track-content'>
                 <div className='splash-track-header'>
                     <span>

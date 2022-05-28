@@ -1,7 +1,15 @@
 /* TODO Add site wide styles */
+* {
+    font-family: sans-serif;
+}
+
 html {
     background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+body {
+    margin: auto;
 }

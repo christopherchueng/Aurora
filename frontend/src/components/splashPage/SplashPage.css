@@ -5,11 +5,11 @@
 }
 
 .splash-ctn {
+    margin: auto;
     flex-direction: column;
     width: 1240px;
     height: 1500px;
     background-color: rgb(255, 255, 255);
-    font-family: sans-serif;
 }
 
 .home-banner-ctn {
