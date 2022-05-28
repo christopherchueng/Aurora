@@ -30,6 +30,7 @@ function Navigation({ isLoaded }){
               <NavLink exact to="/">Home</NavLink>
             </div>
             <div className='navbar-right'>
+              <NavLink to='/upload'>Upload</NavLink>
               {isLoaded && sessionLinks}
             </div>
           </div>
