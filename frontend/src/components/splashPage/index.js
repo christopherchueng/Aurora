@@ -209,21 +209,23 @@ const SplashPage = () => {
                 </div>
             </div>
             <footer>
-                <a href='/https://javascript.plainenglish.io/'>Javascript</a>
+                <a href='https://javascript.plainenglish.io/'>Javascript</a>
                 •
-                <a href='/https://expressjs.com/'>Express</a>
+                <a href='https://expressjs.com/'>Express</a>
                 •
-                <a href='/https://www.postgresql.org/'>PostgreSQL</a>
+                <a href='https://www.postgresql.org/'>PostgreSQL</a>
+                •
+                <a href='https://sequelize.org/'>Sequelize</a>
                 •
                 <a href='https://reactjs.org/'>React</a>
                 •
-                <a href='/https://redux.js.org/'>Redux</a>
+                <a href='https://redux.js.org/'>Redux</a>
                 •
-                <a href='/https://html.com/'>HTML</a>
+                <a href='https://html.com/'>HTML</a>
                 •
-                <a href='/https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/What_is_CSS'>CSS</a>
+                <a href='https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/What_is_CSS'>CSS</a>
                 •
-                <a href='/https://git-scm.com/'>Git</a>
+                <a href='https://git-scm.com/'>Git</a>
             </footer>
         </>
     )
