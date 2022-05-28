@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
 import './SplashPage.css'
 
 const SplashPage = () => {
+
     return (
         <>
             <div className='splash-ctn'>
@@ -194,11 +198,13 @@ const SplashPage = () => {
                     <div className='splash-closing-remarks'>
                         <h1>Get on track with Aurora now.</h1>
                         <div className='remarks-btns'>
-                            <button type='submit'>Create account</button>
+                            <SignupFormModal />
                             <button type='submit'>Demo User</button>
                         </div>
                         <div className='bottom-sign-in'></div>
-                            <span>Already have an account?<button>Sign in</button></span>
+                            <span>Already have an account?
+                                <LoginFormModal />
+                            </span>
                     </div>
                 </div>
             </div>
