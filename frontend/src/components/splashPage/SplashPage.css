@@ -1,7 +1,6 @@
 .splash-ctn,
 .home-banner-ctn {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -10,6 +9,7 @@
     width: 1240px;
     height: 1500px;
     background-color: rgb(255, 255, 255);
+    font-family: sans-serif;
 }
 
 .home-banner-ctn {
@@ -18,11 +18,10 @@
     background-image: url('../../../public/images/home-banner.jpg');
     background-size: 100%;
     background-position: center;
-
+    justify-content: center;
 }
 
 .banner-header {
     color: white;
-    font-family: sans-serif;
     font-size: 150px;
 }
