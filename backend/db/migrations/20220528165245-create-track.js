@@ -9,22 +9,27 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(100)
       },
       description: {
         type: Sequelize.TEXT
       },
       genre: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       trackPath: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       imagePath: {
         type: Sequelize.STRING
       },
       userId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Users' }
       },
       createdAt: {
         allowNull: false,
