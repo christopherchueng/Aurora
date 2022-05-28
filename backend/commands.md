@@ -8,3 +8,12 @@ npx sequelize seed:generate --name likeSeeds
 
 npx dotenv sequelize db:migrate
 npx dotenv sequelize db:seed:all
+
+
+<!-- Tracks -->
+
+
+<!-- Comments -->
+
+
+<!-- Likes -->
