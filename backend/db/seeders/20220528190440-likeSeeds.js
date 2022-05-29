@@ -9,7 +9,12 @@ module.exports = {
       Example:
       */
     return queryInterface.bulkInsert('Likes', [
-
+      {
+        trackId: 1,
+        userId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
     ], {});
   },
 
