@@ -23,6 +23,14 @@ const trackValidators = [
     handleValidationErrors
 ];
 
+// Find a track
+router.get('/:trackId', asyncHandler(async (req, res) => {
+    const trackId = req.params.trackId;
+    const track = await Tracks.findByPk(trackId);
+    return res.json(track);
+}))
+
+// Upload a track
 router.post('/', requireAuth, trackValidators, asyncHandler(async (req, res) => {
     const track = await Tracks.create(req.body)
 
