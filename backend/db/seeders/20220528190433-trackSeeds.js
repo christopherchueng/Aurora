@@ -12,7 +12,7 @@ module.exports = {
       {
         title: 'All I Got Mashup',
         description: 'Test description',
-        genre: 'EDM',
+        genre: 'Dance & EDM',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/All+I+Got+X+Moments+X+Sound+of+Walking+Away+Mashup.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/All+I+Got+Mashup+Cover.jpeg',
         userId: 1,
@@ -22,7 +22,7 @@ module.exports = {
       {
         title: 'Clarity (Remix)',
         description: 'Test description',
-        genre: 'EDM',
+        genre: 'Dance & EDM',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Clarity+(Remix).mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Clarity+Cover.jpeg',
         userId: 1,
@@ -32,7 +32,7 @@ module.exports = {
       {
         title: 'Shelter',
         description: 'Test description',
-        genre: 'EDM',
+        genre: 'Dance & EDM',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Shelter.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Shelter+Cover.jpeg',
         userId: 1,
@@ -42,7 +42,7 @@ module.exports = {
       {
         title: 'Get It Right',
         description: 'Test description',
-        genre: 'R&B',
+        genre: 'R&B & Soul',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Get+It+Right.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Get+It+Right+Cover.jpeg',
         userId: 2,
@@ -52,7 +52,7 @@ module.exports = {
       {
         title: '0.03',
         description: 'Test description',
-        genre: 'R&B',
+        genre: 'R&B & Soul',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/0.03.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/0.03+Cover.webp',
         userId: 2,
@@ -62,7 +62,7 @@ module.exports = {
       {
         title: 'Mo Freaky',
         description: 'Test description',
-        genre: 'R&B',
+        genre: 'R&B & Soul',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Mo+Freaky.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Mo+Freaky+Cover.jpeg',
         userId: 2,
@@ -72,7 +72,7 @@ module.exports = {
       {
         title: 'Boom',
         description: 'Test description',
-        genre: 'Hip-Hop/Rap',
+        genre: 'Hip-Hop & Rap',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Boom+Just+Fired.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Boom+Cover.jpeg',
         userId: 3,
@@ -82,7 +82,7 @@ module.exports = {
       {
         title: 'Bruce Wayne',
         description: 'Test description',
-        genre: 'Hip-Hop/Rap',
+        genre: 'Hip-Hop & Rap',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Bruce+Wayne.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Bruce+Wayne+Cover.webp',
         userId: 3,
@@ -92,7 +92,7 @@ module.exports = {
       {
         title: 'N95',
         description: 'Test description',
-        genre: 'Hip-Hop/Rap',
+        genre: 'Hip-Hop & Rap',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/N95.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/N95+Cover.png',
         userId: 3,
@@ -142,7 +142,7 @@ module.exports = {
       {
         title: '2AM (Cover)',
         description: 'Test description',
-        genre: 'R&B',
+        genre: 'R&B & Soul',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/2AM+(Cover).mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/2AM+Cover.jpeg',
         userId: 5,
@@ -152,7 +152,7 @@ module.exports = {
       {
         title: 'Stuck',
         description: 'Test description',
-        genre: 'R&B',
+        genre: 'R&B & Soul',
         trackPath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Stuck.mp3',
         imagePath: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/Stuck+Cover.png',
         userId: 5,
