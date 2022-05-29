@@ -37,6 +37,7 @@ router.post('/', requireAuth, trackValidators, asyncHandler(async (req, res) => 
     return res.json(track);
 }))
 
+// Update a track
 router.put('/:trackId', requireAuth, trackValidators, asyncHandler(async (req, res) => {
     const trackId = req.params.trackId;
     const track = await Track.findByPk(trackId);
