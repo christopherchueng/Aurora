@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import './DiscoverPage.css'
 
 const DiscoverPage = () => {
     return (
-        <h1>Here in Discover</h1>
+        <div className='discover-ctn'>
+            <h1>Here in Discover</h1>
+
+        </div>
     );
 }
 
