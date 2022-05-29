@@ -1,4 +1,4 @@
-const TextareaInput = ({ name, label, handleChange, error, value, hasSubmitted, placeholder }) => {
+const TextareaInput = ({ name, label, error, value, onChange, hasSubmitted, placeholder }) => {
     return (
         <>
             <label htmlFor={name}>{label}</label>
@@ -8,7 +8,7 @@ const TextareaInput = ({ name, label, handleChange, error, value, hasSubmitted, 
                 id={name}
                 value={value}
                 placeholder={placeholder}
-                onChange={handleChange}
+                onChange={onChange}
             />
         </>
     )

@@ -1,4 +1,4 @@
-const SelectInput = ({ name, label, handleChange, value, options }) => {
+const SelectInput = ({ name, label, onChange, value, options }) => {
     return (
         <>
             <label htmlFor={name}>{label}</label>
@@ -6,7 +6,7 @@ const SelectInput = ({ name, label, handleChange, value, options }) => {
                 name={name}
                 id={name}
                 value={value}
-                onChange={handleChange}
+                onChange={onChange}
             >
                 <option value='' disabled>
                     {label}

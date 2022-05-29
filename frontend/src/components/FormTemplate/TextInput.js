@@ -1,4 +1,4 @@
-const TextInput = ({ name, label, handleChange, error, value, hasSubmitted, placeholder }) => {
+const TextInput = ({ name, label, onChange, error, value, hasSubmitted, placeholder }) => {
     return (
         <>
             <label htmlFor={name}>{label}</label>
@@ -9,7 +9,7 @@ const TextInput = ({ name, label, handleChange, error, value, hasSubmitted, plac
                 type='text'
                 placeholder={placeholder}
                 value={value}
-                onChange={handleChange}
+                onChange={onChange}
             />
         </>
     )

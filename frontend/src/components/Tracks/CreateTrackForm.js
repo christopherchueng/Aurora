@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createTrack } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
+import { FormRowInput, SelectInput, TextareaInput, TextareaInput } from '../FormTemplate'
+import TextInput from "../FormTemplate/TextInput";
 import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
@@ -11,7 +13,8 @@ const CreateTrackForm = () => {
     const [genre, setGenre] = useState('')
     const [trackPath, setTrackPath] = useState('')
     const [imagePath, setImagePath] = useState('')
-    const [errors, setErrors] = useState()
+    const [errors, setErrors] = useState();
+    const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -50,6 +53,68 @@ const CreateTrackForm = () => {
             <div className='track-form-content'>
                 <form onSubmit={handleSubmit}>
                     <div>
+                        <FormRowInput>
+                            <TextInput
+                                name='title'
+                                label='Title'
+                                value={title}
+                                placeholder='Title'
+                                onChange={(e) => setTitle(e.target.value)}
+                                hasSubmitted={hasSubmitted}
+                            />
+                        </FormRowInput>
+                    </div>
+                    <div>
+                        <FormRowInput>
+                            <TextareaInput
+                                name='description'
+                                label='Description'
+                                value={description}
+                                placeholder='Description'
+                                onChange={(e) => setDescription(e.target.value)}
+                                hasSubmitted={hasSubmitted}
+                            />
+                        </FormRowInput>
+                    </div>
+                    <div>
+                        <FormRowInput>
+                            <SelectInput
+                                name='genre'
+                                label='Select a genre'
+                                value={genre}
+                                options={genres}
+                                onChange={(e) => setGenre(e.target.value)}
+                            />
+                        </FormRowInput>
+                    </div>
+                    <div>
+                        <FormRowInput>
+                            <TextInput
+                                name='trackPath'
+                                label='Track'
+                                value={trackPath}
+                                placeholder='Insert a track link'
+                                onChange={(e) => setTrackPath(e.target.value)}
+                                hasSubmitted={hasSubmitted}
+                            />
+                        </FormRowInput>
+                    </div>
+                    <div>
+                        <FormRowInput>
+                            <TextInput
+                                name='imagePath'
+                                label='Upload Image'
+                                value={imagePath}
+                                placeholder='Insert an image link'
+                                onChange={(e) => setImagePath(e.target.value)}
+                                hasSubmitted={hasSubmitted}
+                            />
+                        </FormRowInput>
+                    </div>
+
+
+
+                    {/* <div>
                         <input
                             name='title'
                             type='text'
@@ -98,7 +163,7 @@ const CreateTrackForm = () => {
                             placeholder='Insert an image link'
                             onChange={e => setImagePath(e.target.value)}
                         />
-                    </div>
+                    </div> */}
                     <div>
                         <button>Upload</button>
                     </div>
