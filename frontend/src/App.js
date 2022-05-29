@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/DiscoverPage";
+import CreateTrackForm from "./components/Tracks/CreateTrackForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path='/discover'>
           <DiscoverPage />
+        </Route>
+        <Route path='/upload'>
+          <CreateTrackForm />
         </Route>
       </Switch>
     </div>
