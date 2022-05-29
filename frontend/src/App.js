@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
+import DiscoverPage from "./components/DiscoverPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <SplashPage />
+        </Route>
+        <Route path='/discover'>
+          <DiscoverPage />
         </Route>
       </Switch>
     </div>
