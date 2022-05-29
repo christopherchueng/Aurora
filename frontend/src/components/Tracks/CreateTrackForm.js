@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createTrack } from "../../store/trackReducer";
+import { genres } from "../../utils/genreData";
 import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
@@ -34,12 +35,13 @@ const CreateTrackForm = () => {
 
         if (track) {
             history.push(`/tracks/${track.id}`)
-            setTitle('');
-            setDescription('');
-            setGenre('');
-            setTrackPath('');
-            setImagePath('');
         }
+
+        setTitle('');
+        setDescription('');
+        setGenre('');
+        setTrackPath('');
+        setImagePath('');
     }
 
     return (
@@ -74,12 +76,10 @@ const CreateTrackForm = () => {
                             <option value='' disabled>
                                 Select a genre
                             </option>
-                            <option>RnB</option>
-                            <option>Pop</option>
-                            <option>Hip-Hop/Rap</option>
-                            <option>K-Pop</option>
+                            {genres.map(genre => (
+                                <option key={genre}>{genre}</option>
+                            ))}
                         </select>
-
                     </div>
                     <div>
                         <input
