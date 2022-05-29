@@ -1,5 +1,10 @@
 import ErrorMessage from './ErrorMessage';
 
+/*
+Takes in child Input component and ErrorMessage component.
+Wrap both components into a div called 'form-row.'
+
+*/
 const FormRowInput = ({ classTag, skipErrors = false, children}) => {
     const inputs = (children instanceof Array) ? (
         <div className={classTag}>
@@ -7,8 +12,11 @@ const FormRowInput = ({ classTag, skipErrors = false, children}) => {
                 const { error, hasSubmitted, name } = Component.props;
                 return (
                     <div className='form-row' key={name}>
+                        {/* child input component */}
                         {Component}
-                        {(!skipErrors || !skipErrors(index)) ? (
+                        {/* ErrorMessage component.
+                        */}
+                        {(!skipErrors || !skipErrors(i)) ? (
                             <ErrorMessage error={error} hasSubmitted={hasSubmitted} />
                         ) : ""}
                     </div>
