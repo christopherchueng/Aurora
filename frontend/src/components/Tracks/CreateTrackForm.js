@@ -15,6 +15,10 @@ const CreateTrackForm = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        console.log('in Track useEffect!')
+    }, [])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -41,13 +45,65 @@ const CreateTrackForm = () => {
     return (
         <div className='create-track-form-ctn'>
             <h1>Upload</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    onChange={e => setTitle(e.target.value)}
-                    value={title}
-                />
-            </form>
+            <div className='track-form-content'>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <input
+                            name='title'
+                            type='text'
+                            value={title}
+                            placeholder='Title'
+                            onChange={e => setTitle(e.target.value)}
+                        />
+
+                    </div>
+                    <div>
+                        <textarea
+                            name='description'
+                            value={description}
+                            placeholder='Description'
+                            onChange={e => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <select
+                            name='genre'
+                            value={genre}
+                            onChange={e => setGenre(e.target.value)}
+                        >
+                            <option value='' disabled>
+                                Select a genre
+                            </option>
+                            <option>RnB</option>
+                            <option>Pop</option>
+                            <option>Hip-Hop/Rap</option>
+                            <option>K-Pop</option>
+                        </select>
+
+                    </div>
+                    <div>
+                        <input
+                            name='trackPath'
+                            type='text'
+                            value={trackPath}
+                            placeholder='Insert a track link'
+                            onChange={e => setTrackPath(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            name='imagePath'
+                            type='text'
+                            value={imagePath}
+                            placeholder='Insert an image link'
+                            onChange={e => setImagePath(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <button>Upload</button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

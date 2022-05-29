@@ -1,4 +1,12 @@
 .create-track-form-ctn {
     background-color: lightblue;
     width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.track-form-content {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
 }
