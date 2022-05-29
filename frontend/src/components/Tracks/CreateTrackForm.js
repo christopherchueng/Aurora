@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createTrack } from "../../store/trackReducer";
+import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
     const [title, setTitle] = useState('')
@@ -40,7 +41,13 @@ const CreateTrackForm = () => {
     return (
         <div className='create-track-form-ctn'>
             <h1>Upload</h1>
-
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    onChange={e => setTitle(e.target.value)}
+                    value={title}
+                />
+            </form>
         </div>
     )
 }
