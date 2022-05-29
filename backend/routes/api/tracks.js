@@ -1,5 +1,5 @@
 const express = require('express');
-const { Tracks } = require('../../db/models');
+const { Track } = require('../../db/models');
 const { check } = require('express-validator');
 
 const { requireAuth } = require('../../utils/auth');
@@ -26,15 +26,27 @@ const trackValidators = [
 // Find a track
 router.get('/:trackId', asyncHandler(async (req, res) => {
     const trackId = req.params.trackId;
-    const track = await Tracks.findByPk(trackId);
+    const track = await Track.findByPk(trackId);
     return res.json(track);
 }))
 
 // Upload a track
 router.post('/', requireAuth, trackValidators, asyncHandler(async (req, res) => {
-    const track = await Tracks.create(req.body)
+    const track = await Track.create(req.body)
 
     return res.json(track);
+}))
+
+// Delete a track
+router.delete('/:trackId', asyncHandler(async (req, res) => {
+    const trackId = req.params.trackId;
+    const track = await Track.findByPk(trackId);
+    if (track) {
+        await track.destroy()
+        return res.json({ trackId });
+    } else {
+        throw new Error('Cannot find track.')
+    }
 }))
 
 module.exports = router;
