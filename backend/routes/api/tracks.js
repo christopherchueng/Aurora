@@ -31,14 +31,19 @@ router.get('/:trackId', asyncHandler(async (req, res) => {
 }))
 
 // Upload a track
-router.post('/', requireAuth, trackValidators, asyncHandler(async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
+    const tracks = await Track.findAll();
+    res.json(tracks);
+}))
+
+router.post('/', trackValidators, asyncHandler(async (req, res) => {
     const track = await Track.create(req.body);
 
     return res.json(track);
 }))
 
 // Update a track
-router.put('/:trackId', requireAuth, trackValidators, asyncHandler(async (req, res) => {
+router.put('/:trackId', trackValidators, asyncHandler(async (req, res) => {
     const trackId = req.params.trackId;
     const track = await Track.findByPk(trackId);
     await track.update(req.body);
@@ -46,7 +51,7 @@ router.put('/:trackId', requireAuth, trackValidators, asyncHandler(async (req, r
 }))
 
 // Delete a track
-router.delete('/:trackId', requireAuth, asyncHandler(async (req, res) => {
+router.delete('/:trackId', asyncHandler(async (req, res) => {
     const trackId = req.params.trackId;
     const track = await Track.findByPk(trackId);
     if (track) {
