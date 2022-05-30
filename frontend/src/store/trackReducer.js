@@ -50,14 +50,14 @@ export const deleteTrack = (track) => {
     }
 }
 
-// export const getGenres = () => async (dispatch) => {
-//     const response = await fetch('/api/tracks/genres');
+export const getGenres = () => async (dispatch) => {
+    const response = await fetch('/api/tracks/genres');
 
-//     if (response.ok) {
-//         const genres = await response.json();
-//         dispatch(loadGenres(genres));
-//     }
-// }
+    if (response.ok) {
+        const genres = await response.json();
+        dispatch(loadGenres(genres));
+    }
+}
 
 export const getOneTrack = (trackId) => async (dispatch) => {
     const response = await fetch(`/api/tracks/${trackId}`)

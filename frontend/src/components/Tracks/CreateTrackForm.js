@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createTrack, getGenres } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
+import ErrorMessage from '../FormTemplate/ErrorMessage'
 import FormRowInput from "../FormTemplate/FormRowInput";
 import SelectInput from "../FormTemplate/SelectInput";
 import TextareaInput from "../FormTemplate/TextareaInput";
@@ -10,16 +11,22 @@ import TextInput from "../FormTemplate/TextInput";
 import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
-    // const genres = useSelector(state => state.track.genres)
+    const trackGenres = useSelector(state => state.track.genres)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [genre, setGenre] = useState('')
     const [trackPath, setTrackPath] = useState('')
     const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getGenres())
+    }, [dispatch])
 
     useEffect(() => {
         const validationErrors = {};
@@ -39,6 +46,7 @@ const CreateTrackForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setHasSubmitted(true);
 
         const payload = {
             title,
@@ -50,7 +58,8 @@ const CreateTrackForm = () => {
         const track = await dispatch(createTrack(payload))
         if (track) {
             setErrors({});
-            history.push(`/tracks/${track.id}`)
+            setHasSubmitted(false)
+            history.push(`/discover`)
         }
 
         setTitle('');
@@ -76,7 +85,7 @@ const CreateTrackForm = () => {
                         />
                     </div>
                     <div>
-                        {}
+                        {hasSubmitted && <ErrorMessage error={errors.title} />}
                     </div>
                     <div>
                         <textarea
@@ -99,6 +108,7 @@ const CreateTrackForm = () => {
                                 <option key={genre}>{genre}</option>
                             ))}
                         </select>
+                        {hasSubmitted && <ErrorMessage error={errors.genre} />}
                     </div>
                     <div>
                         <input
@@ -109,6 +119,7 @@ const CreateTrackForm = () => {
                             onChange={e => setTrackPath(e.target.value)}
                         />
                     </div>
+                    {hasSubmitted && <ErrorMessage error={errors.trackPath}/>}
                     <div>
                         <input
                             name='imagePath'
