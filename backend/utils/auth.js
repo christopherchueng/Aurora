@@ -4,6 +4,22 @@ const { User } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
 
+const loginUser = (req, res, user) => {
+    req.session.auth = {
+        userId: user.id
+    }
+    req.session.save(() => {
+        return res.redirect('/');
+    })
+}
+
+const logoutUser = (req, res) => {
+    delete req.session.auth;
+    req.session.save(() => {
+        return res.redirect('/users/login');
+    })
+}
+
 // Sends a JWT Cookie
 const setTokenCookie = (res, user) => {
     // Create the token.
@@ -63,4 +79,4 @@ const requireAuth = [
     }
 ];
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+module.exports = { setTokenCookie, restoreUser, requireAuth, loginUser, logoutUser };

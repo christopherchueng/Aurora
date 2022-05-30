@@ -1,5 +1,5 @@
 const express = require('express');
-const { Track } = require('../../db/models');
+const { Track, User } = require('../../db/models');
 const { check } = require('express-validator');
 const { genres } = require('../../db/models/genres')
 
@@ -33,12 +33,34 @@ router.get('/:trackId', asyncHandler(async (req, res) => {
 
 // Upload a track
 router.get('/', asyncHandler(async (req, res) => {
-    const tracks = await Track.findAll();
+    const userId = req.session.auth.userId;
+    const user = await User.findByPk(userId)
+    const tracks = await Track.build();
     res.json(tracks);
 }))
 
 router.post('/', trackValidators, asyncHandler(async (req, res) => {
-    const track = await Track.create(req.body);
+    const userId = req.session.auth.userId;
+    const user = await User.findByPk(userId)
+
+    const {
+        title,
+        description,
+        genre,
+        trackPath,
+        imagePath
+    } = req.body
+
+    console.log(req.body);
+
+    const track = await Track.create({
+        title,
+        description,
+        genre,
+        trackPath,
+        imagePath,
+        user
+    });
 
     return res.json(track);
 }))
