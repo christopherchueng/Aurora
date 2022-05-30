@@ -50,30 +50,39 @@ export const deleteTrack = (track) => {
     }
 }
 
-export const getGenres = () => async (dispatch) => {
-    const response = await csrfFetch('/api/tracks/genres');
+// export const getGenres = () => async (dispatch) => {
+//     console.log('in get Genres')
+//     const response = await csrfFetch('/api/tracks/genres');
 
-    if (response.ok) {
-        const genres = await response.json();
-        dispatch(loadGenres(genres));
-    }
-}
+//     if (response.ok) {
+//         const genres = await response.json();
+//         dispatch(loadGenres(genres));
+//     }
+// }
 
-export const getOneTrack = (trackId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/tracks/${trackId}`)
+// export const getOneTrack = (trackId) => async (dispatch) => {
+//     const response = await csrfFetch(`/api/tracks/${trackId}`)
 
-    if (response.ok) {
-        const track = response.json();
-        dispatch(loadTrack(track));
-    }
+//     if (response.ok) {
+//         const track = response.json();
+//         dispatch(loadTrack(track));
+//     }
+// }
+
+export const getTracks = () => async (dispatch) => {
+    const response = await fetch('api/tracks')
+    const tracks = await response.json();
+    dispatch(loadTracks(tracks));
 }
 
 export const createTrack = (payload) => async (dispatch) => {
+    console.log('before response')
     const response = await csrfFetch('/api/tracks', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
+    console.log('after response in createTrack')
 
     const track = await response.json();
     dispatch(addTrack(track))
@@ -84,11 +93,15 @@ const initialState = { entries: {}, isLoading: true };
 
 const trackReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD_GENRES:
-            return {
-                ...state,
-                genres: action.genres
-            }
+        // case LOAD_GENRES:
+        //     return {
+        //         ...state,
+        //         genres: action.genres
+        //     }
+        case LOAD_TRACKS:
+            const newState = { ...state, entries: {...state.entries} };
+            action.tracks.forEach(track => (newState.entries[track.id] = track))
+            return newState
         case ADD_TRACK:
             return {
                 ...state,

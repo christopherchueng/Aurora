@@ -11,7 +11,8 @@ import TextInput from "../FormTemplate/TextInput";
 import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
-    const trackGenres = useSelector(state => state.track.genres)
+    // const trackGenres = useSelector(state => state.track.genres)
+    const user = useSelector(state => state.session.user)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [genre, setGenre] = useState('')
@@ -24,9 +25,9 @@ const CreateTrackForm = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getGenres())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getGenres())
+    // }, [dispatch])
 
     useEffect(() => {
         const validationErrors = {};
@@ -53,7 +54,8 @@ const CreateTrackForm = () => {
             description,
             genre,
             trackPath,
-            imagePath
+            imagePath,
+            userId: user.id
         }
         const track = await dispatch(createTrack(payload))
         if (track) {
