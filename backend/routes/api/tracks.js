@@ -33,6 +33,7 @@ router.get('/:trackId', asyncHandler(async (req, res) => {
 
 // Upload a track
 router.get('/', asyncHandler(async (req, res) => {
+    console.log('here in get route')
     const userId = req.session.auth.userId;
     const user = await User.findByPk(userId)
     const tracks = await Track.build();
@@ -40,6 +41,7 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 router.post('/', trackValidators, asyncHandler(async (req, res) => {
+    console.log('here in post route')
     const userId = req.session.auth.userId;
     const user = await User.findByPk(userId)
 

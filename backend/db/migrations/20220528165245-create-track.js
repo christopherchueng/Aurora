@@ -20,8 +20,7 @@ module.exports = {
       },
       genre: {
         allowNull: false,
-        type: Sequelize.ENUM(genres),
-        values: genres
+        type: Sequelize.ENUM(genres)
       },
       trackPath: {
         allowNull: false,
