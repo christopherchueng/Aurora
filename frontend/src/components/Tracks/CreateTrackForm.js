@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createTrack } from "../../store/trackReducer";
+import { createTrack, getGenres } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
 import FormRowInput from "../FormTemplate/FormRowInput";
 import SelectInput from "../FormTemplate/SelectInput";
@@ -10,6 +10,7 @@ import TextInput from "../FormTemplate/TextInput";
 import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
+    // const genres = useSelector(state => state.track.genres)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [genre, setGenre] = useState('')
@@ -21,8 +22,20 @@ const CreateTrackForm = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        const validationErrors = {};
+        if (!title) {
+            validationErrors.title = 'Please provide a title.'
+        }
+        if (!genre) {
+            validationErrors.genre = 'Please select a genre.'
+        }
+        if (!trackPath) {
+            validationErrors.trackPath = 'Please provide a track.'
+        }
 
-    }, [])
+        setErrors(validationErrors);
+
+    }, [title, genre, trackPath])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,13 +47,7 @@ const CreateTrackForm = () => {
             trackPath,
             imagePath
         }
-        let track;
-        try {
-            track = await dispatch(createTrack(payload))
-        } catch (error) {
-            // console.log(error.errors);
-            setErrors(error.errors);
-        }
+        const track = await dispatch(createTrack(payload))
         if (track) {
             setErrors({});
             history.push(`/tracks/${track.id}`)
@@ -67,6 +74,9 @@ const CreateTrackForm = () => {
                             placeholder='Title'
                             onChange={e => setTitle(e.target.value)}
                         />
+                    </div>
+                    <div>
+                        {}
                     </div>
                     <div>
                         <textarea
@@ -109,7 +119,7 @@ const CreateTrackForm = () => {
                         />
                     </div>
                     <div>
-                        <button>Upload</button>
+                        <button type='submit'>Upload</button>
                     </div>
 
                     {/* <div>

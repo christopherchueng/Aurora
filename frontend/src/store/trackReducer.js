@@ -50,6 +50,15 @@ export const deleteTrack = (track) => {
     }
 }
 
+// export const getGenres = () => async (dispatch) => {
+//     const response = await fetch('/api/tracks/genres');
+
+//     if (response.ok) {
+//         const genres = await response.json();
+//         dispatch(loadGenres(genres));
+//     }
+// }
+
 export const getOneTrack = (trackId) => async (dispatch) => {
     const response = await fetch(`/api/tracks/${trackId}`)
 
@@ -60,27 +69,26 @@ export const getOneTrack = (trackId) => async (dispatch) => {
 }
 
 export const createTrack = (payload) => async (dispatch) => {
-    try {
-        const response = await csrfFetch('/api/tracks', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(payload)
-        })
+    const response = await csrfFetch('/api/tracks', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
 
-        const track = await response.json();
-        dispatch(addTrack(track))
-        return track;
-
-    } catch (error) {
-        console.log(error.error)
-        throw error;
-    }
+    const track = await response.json();
+    dispatch(addTrack(track))
+    return track;
 }
 
 const initialState = { entries: {}, isLoading: true };
 
 const trackReducer = (state = initialState, action) => {
     switch (action.type) {
+        case LOAD_GENRES:
+            return {
+                ...state,
+                genres: action.genres
+            }
         case ADD_TRACK:
             return {
                 ...state,
