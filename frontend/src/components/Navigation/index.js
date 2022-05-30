@@ -27,10 +27,14 @@ function Navigation({ isLoaded }){
       <div className='navbar'>
           <div className='navbar-list'>
             <div className='navbar-left'>
-              <NavLink exact to="/">Home</NavLink>
+              <NavLink exact to="/">
+                <img src='/images/favicon.ico' className='home-logo'></img>
+                </NavLink>
             </div>
             <div className='navbar-right'>
-              <NavLink to='/upload'>Upload</NavLink>
+              <NavLink to='/upload'>
+                <i class="fa-thin fa-plus"></i>
+              </NavLink>
               {isLoaded && sessionLinks}
             </div>
           </div>
