@@ -108,6 +108,11 @@
     height: 175px;
 }
 
+.grid-image:hover {
+    opacity: 30%;
+    transition: opacity 0.15s ease-in;
+}
+
 .splash-track-title > a,
 .splash-track-artist {
     color: lightgray;
