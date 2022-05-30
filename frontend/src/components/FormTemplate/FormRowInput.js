@@ -9,7 +9,7 @@ const FormRowInput = ({ classTag, skipErrors = false, children}) => {
     const inputs = (children instanceof Array) ? (
         <div className={classTag}>
             {children.map((Component, i) => {
-                const { error, hasSubmitted, name } = Component.props;
+                const { error, name } = Component.props;
                 return (
                     <div className='form-row' key={name}>
                         {/* child input component */}
@@ -17,7 +17,7 @@ const FormRowInput = ({ classTag, skipErrors = false, children}) => {
                         {/* ErrorMessage component.
                         */}
                         {(!skipErrors || !skipErrors(i)) ? (
-                            <ErrorMessage error={error} hasSubmitted={hasSubmitted} />
+                            <ErrorMessage error={error} />
                         ) : ""}
                     </div>
                 )
@@ -28,8 +28,7 @@ const FormRowInput = ({ classTag, skipErrors = false, children}) => {
         <div className='form-row'>
             {children}
             {!skipErrors ? (
-                <ErrorMessage error={children.props.error}
-                    hasSubmitted={children.props.hasSubmitted} />
+                <ErrorMessage error={children.props.error} />
             ) : ""}
         </div>
     )

@@ -1,9 +1,9 @@
-const TextareaInput = ({ name, label, error, value, onChange, hasSubmitted, placeholder }) => {
+const TextareaInput = ({ name, label, error, value, onChange, placeholder }) => {
     return (
         <>
             <label htmlFor={name}>{label}</label>
             <textarea
-                className={(hasSubmitted && error) ? 'input-error' : undefined}
+                className={(error) ? 'input-error' : undefined}
                 name={name}
                 id={name}
                 value={value}

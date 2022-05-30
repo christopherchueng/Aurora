@@ -1,7 +1,7 @@
-function ErrorMessage ({ error, hasSubmitted }) {
+function ErrorMessage ({ error }) {
     return (
       <p className="error-message">
-          {(hasSubmitted && error) ? error : undefined}
+          {error ? error : undefined}
       </p>
     )
   }
