@@ -32,10 +32,13 @@ router.get('/:trackId', asyncHandler(async (req, res) => {
     return res.json(track);
 }))
 
-// Grab all tracks
+// Grab 12 most recent tracks
 router.get('/', asyncHandler(async (req, res) => {
-    const tracks = await Track.findAll();
-    return res.json(tracks);
+    const tracks = await Track.findAll({
+        order: [['createdAt', 'DESC']]
+    });
+    const mostRecentTracks = tracks.slice(tracks.length - 13, tracks.length - 1)
+    return res.json(mostRecentTracks);
 }))
 
 // Upload a track
