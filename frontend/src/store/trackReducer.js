@@ -51,7 +51,7 @@ export const deleteTrack = (track) => {
 }
 
 export const getGenres = () => async (dispatch) => {
-    const response = await fetch('/api/tracks/genres');
+    const response = await csrfFetch('/api/tracks/genres');
 
     if (response.ok) {
         const genres = await response.json();
@@ -60,7 +60,7 @@ export const getGenres = () => async (dispatch) => {
 }
 
 export const getOneTrack = (trackId) => async (dispatch) => {
-    const response = await fetch(`/api/tracks/${trackId}`)
+    const response = await csrfFetch(`/api/tracks/${trackId}`)
 
     if (response.ok) {
         const track = response.json();
