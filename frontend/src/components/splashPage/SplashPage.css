@@ -42,18 +42,20 @@
 
 .splash-upload,
 .splash-listen,
-.splash-connect,
-.splash-closing-remarks {
+.splash-connect {
     width: 100vw;
-    height: 100vh;
+    height: 1200px;
 
+}
+
+.splash-closing-remarks {
+    height: 600px;
 }
 
 .splash-upload-btn {
     width: 100vw;
 }
 
-.splash-upload-btn,
 .track-content {
     background-color: white;
     color: black;
@@ -71,26 +73,112 @@
 
 }
 
-.splash-upload-btn,
+.splash-upload,
+.splash-listen,
+.splash-connect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.splash-upload-text,
+.splash-listen-text,
+.splash-connect-text {
+    height: 100vh;
+    width: 450px;
+    font-weight: bold;
+    font-size: 80pt;
+}
+
+.splash-upload-img,
+.splash-connect-img {
+    height: 100vh;
+    width: 850px;
+}
+
+.splash-listen-img {
+    height: 100vh;
+    width: 900px;
+}
+
+.splash-upload-text {
+    display: flex;
+    align-items: center;
+}
+
+.splash-listen-text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.splash-listen-text > p {
+    display: flex;
+    flex-direction: column;
+}
+
+.splash-connect-text {
+    display: flex;
+    align-items: center;
+}
+
 .track-content {
     background-color: black;
+}
+
+.splash-upload-btn > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(50, 50, 200);
+    border-radius: 5px;
+    color: white;
+    width: 200px;
+    height: 55px;
+    font-weight: bold;
+    font-size: 14pt;
+    text-decoration: none;
+}
+
+.splash-upload-btn > a:hover {
+    transition: opacity 0.15s ease-in;
+    opacity: 70%;
+}
+
+.splash-upload-btn {
+    display: inline-flex;
+    justify-content: center;
+    height: 65px;
 }
 
 .track-content {
     color: white;
 }
 
+.splash-track-header {
+    display: inline-flex;
+    justify-content: center;
+    width: 100vw;
+    font-size: 28pt;
+}
+
 .splash-track-grid {
     width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .splash-track-grid > ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-areas:
+    "img img img img img img"
+    "img img img img img img";
     list-style: none;
     padding-inline-start: 0;
+    width: 100vw;
+    justify-content: center;
 }
 
 .track-container {
@@ -104,6 +192,7 @@
 
 
 .grid-image {
+    grid-area: img;
     width: 175px;
     height: 175px;
 }
@@ -129,6 +218,45 @@
 
 .splash-closing-remarks {
     background: linear-gradient(rgb(0, 0, 0) 1%, rgba(86, 30, 88, 0.8) 50%, rgb(0, 0, 0));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash-closing-remarks h2 {
+    font-size: 48pt;
+}
+
+.remarks-btns > .signupModal-btn {
+    background-color: transparent;
+    font-size: 12pt;
+    /* font-weight: bold; */
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 125px;
+    height: 50px;
+    margin: 20px 10px;
+}
+
+.account-inquiry-span {
+    font-size: 10pt;
+}
+
+.account-inquiry-span span {
+    margin: 0 10px;
+}
+.account-inquiry-span .loginModal-btn {
+    margin: 0 10px;
+    background-color: transparent;
+    font-size: 8pt;
+    /* font-weight: bold; */
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 70px;
+    height: 35px;
 }
 
 footer {

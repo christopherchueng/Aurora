@@ -22,11 +22,11 @@ const SplashPage = () => {
                 </div>
                 <div className='splash-features'>
                     <div className='splash-upload'>
-                        <div className='splash-upload-img'>
-
-                        </div>
                         <div className='splash-upload-text'>
                             Upload your tracks.
+                        </div>
+                        <div className='splash-upload-img'>
+
                         </div>
                     </div>
                     <div className='splash-listen'>
@@ -34,25 +34,25 @@ const SplashPage = () => {
 
                         </div>
                         <div className='splash-listen-text'>
-                            Play. Listen. Repeat.
+                            <p>Play. Listen. Repeat.</p>
                         </div>
                     </div>
                     <div className='splash-connect'>
-                        <div className='splash-connect-img'>
-
-                        </div>
                         <div className='splash-connect-text'>
                             Connect with other creators.
+                        </div>
+                        <div className='splash-connect-img'>
+
                         </div>
                     </div>
                 </div>
                 <div className='splash-upload-btn'>
-                    <button type='button'>Upload your own</button>
+                    <Link to='/tracks/upload'>Upload your own</Link>
                 </div>
                 <div className='track-content'>
                     <div className='splash-track-header'>
                         <span>
-                            Hear what’s trending for free in the Aurora community
+                            <h2>Hear the latest tracks in the Aurora community</h2>
                         </span>
                     </div>
                     <div className='splash-track-grid'>
@@ -74,15 +74,16 @@ const SplashPage = () => {
 
                     </div>
                     <div className='splash-closing-remarks'>
-                        <h1>Get on track with Aurora now.</h1>
+                        <h2>Get on track with Aurora now.</h2>
                         <div className='remarks-btns'>
                             <SignupFormModal />
-                            <button type='submit'>Demo User</button>
+                            <button className='signupModal-btn' type='submit'>Demo</button>
                         </div>
                         <div className='bottom-sign-in'></div>
-                            <span>Already have an account?
+                            <div className='account-inquiry-span'>
+                                <span>Already have an account?</span>
                                 <LoginFormModal />
-                            </span>
+                            </div>
                     </div>
                 </div>
             </div>
