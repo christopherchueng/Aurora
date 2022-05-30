@@ -82,7 +82,12 @@
 
 .splash-track-grid {
     width: 100vw;
-    height: 900px;
+    height: 3000px;
+}
+
+.grid-image {
+    width: 200px;
+    height: 200px;
 }
 
 .splash-closing-remarks {

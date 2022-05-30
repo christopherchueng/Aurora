@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom'
+import { getTracks } from '../../store/trackReducer';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './SplashPage.css'
 
 const SplashPage = () => {
+    const dispatch = useDispatch();
+    const tracks = useSelector(state => state.track.entries)
+
+    useEffect(() => {
+        dispatch(getTracks())
+    }, [dispatch]);
 
     return (
         <>
@@ -49,150 +56,22 @@ const SplashPage = () => {
                         </span>
                     </div>
                     <div className='splash-track-grid'>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
-                        <li className='splash-track-item'>
-                            <Link to=''>Image Link here</Link>
-                                {/* Background image */}
-                                <span>Image here</span>
-                                <button>Play Button on top of Image</button>
-                            <div className='splash-track-title'>
-                                <span>Title here</span>
-                            </div>
-                            <div className='splash-track-artist'>
-                                <span>Artist here</span>
-                            </div>
-                        </li>
+                        <ul>
+                            {Object.values(tracks).map(({ id, title, userId, trackPath, imagePath }) => (
+                                <li key={id}>
+                                    <NavLink to={`/tracks/${id}`}>
+                                        <img src={imagePath} className='grid-image'></img>
+                                        <div className='splash-track-title'>
+                                            <span>{title}</span>
+                                        </div>
+                                    </NavLink>
+                                    <div className='splash-track-artist'>
+                                        <span>{userId}</span>
+                                    </div>
+                                    <audio controls src={trackPath}></audio>
+                                </li>
+                            ))}
+                        </ul>
 
                     </div>
                     <div className='splash-closing-remarks'>
