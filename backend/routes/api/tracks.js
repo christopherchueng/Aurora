@@ -32,14 +32,20 @@ router.get('/:trackId', asyncHandler(async (req, res) => {
     return res.json(track);
 }))
 
-// Upload a track
+// Grab all tracks
 router.get('/', asyncHandler(async (req, res) => {
-    console.log('here in get route')
-    const userId = req.session.auth.userId;
-    const user = await User.findByPk(userId)
-    const tracks = await Track.build();
-    res.json(tracks);
+    const tracks = await Track.findAll();
+    return res.json(tracks);
 }))
+
+// Upload a track
+// router.get('/', asyncHandler(async (req, res) => {
+//     console.log('here in get route')
+//     const userId = req.session.auth.userId;
+//     const user = await User.findByPk(userId)
+//     const tracks = await Track.build();
+//     res.json(tracks);
+// }))
 
 router.post('/', trackValidators, asyncHandler(async (req, res) => {
     console.log('here in post route')
