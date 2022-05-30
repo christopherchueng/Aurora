@@ -16,7 +16,8 @@ const trackValidators = [
         .withMessage('Please provide a title that is no more than 100 characters long.'),
     check('genre')
         .exists({ checkFalsy: true })
-        .withMessage('Please select a genre.'),
+        .withMessage('Please select a genre.')
+        .isIn(genres),
     check('trackPath')
         .exists({ checkFalsy: true })
         .withMessage('Please provide a track.')
