@@ -1,6 +1,7 @@
 const express = require('express');
 const { Track } = require('../../db/models');
 const { check } = require('express-validator');
+const { genres } = require('../../db/models/genres')
 
 const { requireAuth } = require('../../utils/auth');
 const asyncHandler = require('express-async-handler');
@@ -60,6 +61,11 @@ router.delete('/:trackId', asyncHandler(async (req, res) => {
     } else {
         throw new Error('Cannot find track.');
     }
+}))
+
+// Get genres
+router.get('/genres', asyncHandler(async (req, res) => {
+    return res.json(genres)
 }))
 
 module.exports = router;
