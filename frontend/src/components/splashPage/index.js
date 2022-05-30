@@ -66,7 +66,7 @@ const SplashPage = () => {
                                             <Link to={`/tracks/${id}`}>{title}</Link>
                                         </div>
                                     <div className='splash-track-artist'>
-                                        <span>{userId}</span>
+                                        {userId}
                                     </div>
                                 </li>
                             ))}
