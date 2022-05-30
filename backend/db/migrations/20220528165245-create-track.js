@@ -1,4 +1,7 @@
 'use strict';
+
+const { genres } = require('../models/genres')
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Tracks', {
@@ -17,7 +20,7 @@ module.exports = {
       },
       genre: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.ENUM(genres)
       },
       trackPath: {
         allowNull: false,
