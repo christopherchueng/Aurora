@@ -82,12 +82,44 @@
 
 .splash-track-grid {
     width: 100vw;
-    height: 3000px;
 }
 
-.grid-image {
-    width: 200px;
+.splash-track-grid > ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+.track-container {
+    padding: 20px;
+    width: 175px;
     height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.grid-image {
+    width: 175px;
+    height: 175px;
+}
+
+.splash-track-title > a,
+.splash-track-artist {
+    color: lightgray;
+}
+
+.splash-track-title > a {
+    text-decoration: none;
+}
+
+.splash-track-title > a:hover {
+    transition: color 0.3s ease-in;
+    color: gray;
 }
 
 .splash-closing-remarks {

@@ -58,17 +58,16 @@ const SplashPage = () => {
                     <div className='splash-track-grid'>
                         <ul>
                             {Object.values(tracks).map(({ id, title, userId, trackPath, imagePath }) => (
-                                <li key={id}>
+                                <li key={id} className='track-container'>
                                     <NavLink to={`/tracks/${id}`}>
                                         <img src={imagePath} className='grid-image'></img>
-                                        <div className='splash-track-title'>
-                                            <span>{title}</span>
-                                        </div>
                                     </NavLink>
+                                        <div className='splash-track-title'>
+                                            <Link to={`/tracks/${id}`}>{title}</Link>
+                                        </div>
                                     <div className='splash-track-artist'>
                                         <span>{userId}</span>
                                     </div>
-                                    <audio controls src={trackPath}></audio>
                                 </li>
                             ))}
                         </ul>
