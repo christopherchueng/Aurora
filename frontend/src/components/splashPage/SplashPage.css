@@ -82,6 +82,14 @@
     flex-direction: row;
 }
 
+.splash-upload-img,
+.splash-listen-img,
+.splash-connect-img {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .splash-upload-text,
 .splash-listen-text,
 .splash-connect-text {
@@ -92,14 +100,17 @@
 }
 
 .splash-upload-img,
-.splash-connect-img {
+.splash-connect-img,
+.upload-img,
+.connect-img,
+.listen-img {
     height: 100vh;
     width: 850px;
 }
 
 .splash-listen-img {
-    height: 100vh;
-    width: 900px;
+    height: 1200px;
+    width: 750px;
 }
 
 .splash-upload-text {
