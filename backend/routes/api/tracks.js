@@ -50,20 +50,17 @@ router.get('/', asyncHandler(async (req, res) => {
 //     res.json(tracks);
 // }))
 
-router.post('/', trackValidators, asyncHandler(async (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
     console.log('here in post route')
-    const userId = req.session.auth.userId;
-    const user = await User.findByPk(userId)
 
     const {
         title,
         description,
         genre,
         trackPath,
-        imagePath
+        imagePath,
+        userId
     } = req.body
-
-    console.log(req.body);
 
     const track = await Track.create({
         title,
@@ -71,14 +68,14 @@ router.post('/', trackValidators, asyncHandler(async (req, res) => {
         genre,
         trackPath,
         imagePath,
-        user
+        userId
     });
 
     return res.json(track);
 }))
 
 // Update a track
-router.put('/:trackId', trackValidators, asyncHandler(async (req, res) => {
+router.put('/:trackId', asyncHandler(async (req, res) => {
     const trackId = req.params.trackId;
     const track = await Track.findByPk(trackId);
     await track.update(req.body);
