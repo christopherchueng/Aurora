@@ -29,7 +29,7 @@ function Navigation({ isLoaded }){
             <div className='navbar-left'>
               <NavLink exact to="/">
                 <img src='/images/favicon.ico' className='home-logo'></img>
-                </NavLink>
+              </NavLink>
             </div>
             <div className='navbar-right'>
               <NavLink to='/upload'>
