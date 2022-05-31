@@ -25,12 +25,12 @@ const SplashPage = () => {
                         <div className='splash-upload-text'>
                             Upload your tracks.
                         </div>
-                        <div className='splash-upload-img'>
-                            {/* <img className='upload-img' src='/images/upload-your-tracks.jpeg'></img> */}
+                        <div className='upload-img-ctn'>
+                            <img className='upload-img' src='/images/upload-your-tracks.jpeg'></img>
                         </div>
                     </div>
                     <div className='splash-listen'>
-                        <div className='splash-listen-img'>
+                        <div className='listen-img-ctn'>
                         {/* <img className='listen-img' src='/images/play-listen-repeat.jpg'></img> */}
                         </div>
                         <div className='splash-listen-text'>
@@ -41,7 +41,7 @@ const SplashPage = () => {
                         <div className='splash-connect-text'>
                             Connect with other creators.
                         </div>
-                        <div className='splash-connect-img'>
+                        <div className='connect-img-ctn'>
                             {/* <img className='connect-img' src='/images/connect-with-creators.jpeg'></img> */}
                         </div>
                     </div>
