@@ -51,8 +51,6 @@ router.get('/', asyncHandler(async (req, res) => {
 // }))
 
 router.post('/', asyncHandler(async (req, res) => {
-    console.log('here in post route')
-
     const {
         title,
         description,
