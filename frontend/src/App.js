@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/DiscoverPage";
 import CreateTrackForm from "./components/Tracks/CreateTrackForm";
+import TrackIdPage from './components/Tracks/TrackIdPage'
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ function App() {
         <Route path='/upload'>
           <CreateTrackForm />
         </Route>
+        <Route path={'/tracks/:trackId'}>
+          <TrackIdPage />
+        </Route>
+
       </Switch>
     </div>
   );
