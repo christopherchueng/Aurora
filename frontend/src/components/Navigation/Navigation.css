@@ -30,13 +30,6 @@
     align-items: center;
 }
 
-.add-track-icon {
-    width: 31px;
-    height: 31px;
-    text-decoration: none;
-    padding: 0 5px;
-}
-
 .navbar-right > .loginModal-btn,
 .navbar-right > .signupModal-btn {
     margin: 0 10px;
@@ -58,6 +51,13 @@
     transition: background-color 0.15s ease-in;
 }
 
+.add-track-icon {
+    width: 31px;
+    height: 31px;
+    text-decoration: none;
+    padding: 0 5px;
+}
+
 .home-logo {
     width: 41px;
     height: 41px;
@@ -68,6 +68,14 @@
     width: 33px;
     height: 33px;
     padding: 0 5px;
+}
+
+.add-track-icon:hover,
+.home-logo:hover,
+.github-logo:hover {
+    opacity: 40%;
+    transition: opacity 0.15s ease-in;
+
 }
 
 .profile-dropdown-menu {
