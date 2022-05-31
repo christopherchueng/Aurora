@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "README under construction...",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
     "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
@@ -14,13 +17,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/christopherchueng/aurora.git"
+    "url": "git+https://github.com/christopherchueng/Aurora.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/christopherchueng/aurora/issues"
+    "url": "https://github.com/christopherchueng/Aurora/issues"
   },
-  "homepage": "https://github.com/christopherchueng/aurora#readme"
+  "homepage": "https://github.com/christopherchueng/Aurora#readme"
 }
