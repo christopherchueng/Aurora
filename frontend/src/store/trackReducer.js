@@ -76,13 +76,11 @@ export const getTracks = () => async (dispatch) => {
 }
 
 export const createTrack = (payload) => async (dispatch) => {
-    console.log('before response')
     const response = await csrfFetch('/api/tracks', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
-    console.log('after response in createTrack')
 
     const track = await response.json();
     dispatch(addTrack(track))

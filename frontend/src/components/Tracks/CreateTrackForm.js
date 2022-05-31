@@ -4,14 +4,9 @@ import { useHistory } from "react-router-dom";
 import { createTrack, getGenres } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
 import ErrorMessage from '../FormTemplate/ErrorMessage'
-import FormRowInput from "../FormTemplate/FormRowInput";
-import SelectInput from "../FormTemplate/SelectInput";
-import TextareaInput from "../FormTemplate/TextareaInput";
-import TextInput from "../FormTemplate/TextInput";
 import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
-    // const trackGenres = useSelector(state => state.track.genres)
     const user = useSelector(state => state.session.user)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -21,13 +16,8 @@ const CreateTrackForm = () => {
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
-
     const history = useHistory();
     const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(getGenres())
-    // }, [dispatch])
 
     useEffect(() => {
         const validationErrors = {};
@@ -134,71 +124,6 @@ const CreateTrackForm = () => {
                     <div>
                         <button type='submit'>Upload</button>
                     </div>
-
-                    {/* <div>
-                        <FormRowInput>
-                            <TextInput
-                                name='title'
-                                label='Title'
-                                value={title}
-                                placeholder='Title'
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
-                        </FormRowInput>
-                    </div>
-                    <div>
-                        <FormRowInput>
-                            <TextareaInput
-                                name='description'
-                                label='Description'
-                                value={description}
-                                placeholder='Description'
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
-                        </FormRowInput>
-                    </div>
-                    <div>
-                        <FormRowInput>
-                            <SelectInput
-                                name='genre'
-                                label='Select a genre'
-                                value={genre}
-                                options={genres}
-                                onChange={(e) => setGenre(e.target.value)}
-                            />
-                        </FormRowInput>
-                    </div>
-                    <div>
-                        <FormRowInput>
-                            <TextInput
-                                name='trackPath'
-                                label='Track'
-                                value={trackPath}
-                                placeholder='Insert a track link'
-                                onChange={(e) => setTrackPath(e.target.value)}
-                            />
-                        </FormRowInput>
-                    </div>
-                    <div>
-                        <FormRowInput>
-                            <TextInput
-                                name='imagePath'
-                                label='Upload Image'
-                                value={imagePath}
-                                placeholder='Insert an image link'
-                                onChange={(e) => setImagePath(e.target.value)}
-                            />
-                        </FormRowInput>
-                    </div> */}
-
-                        {/* {errors.length > 0 && (
-                            <div className='errors'>
-                                The following errors were found:
-                                <ul>
-                                    {errors.map(error => <li key={error}>{error}</li>)}
-                                </ul>
-                            </div>
-                        )} */}
                 </form>
             </div>
         </div>
