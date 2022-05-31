@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/christopherchueng/Aurora.git"
+    "url": "git+https://github.com/christopherchueng/aurora.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/christopherchueng/Aurora/issues"
+    "url": "https://github.com/christopherchueng/aurora/issues"
   },
-  "homepage": "https://github.com/christopherchueng/Aurora#readme"
+  "homepage": "https://github.com/christopherchueng/aurora#readme"
 }
