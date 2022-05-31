@@ -30,14 +30,14 @@ function Navigation({ isLoaded }){
               <div className='home-logo-ctn'>
                 <div className='home-logo-click'>
                   <NavLink exact to="/">
-                    <img className='home-logo' src='/images/favicon.ico'></img>
+                    <img className='home-logo' title='Home' src='/images/favicon.ico'></img>
                   </NavLink>
                 </div>
               </div>
               <div className='github-logo-ctn'>
                 <div className='github-logo-click'>
                   <a href='https://github.com/christopherchueng/Aurora'>
-                    <img className='github-logo' src='/images/github-logo.png'></img>
+                    <img className='github-logo' title='Github' src='/images/github-logo.png'></img>
                   </a>
                 </div>
               </div>
@@ -46,7 +46,7 @@ function Navigation({ isLoaded }){
               <div className='add-track-ctn'>
                 <div className='add-track-click'>
                   <NavLink to='/upload'>
-                    <img className='add-track-icon' src='/images/add-track-icon.png'></img>
+                    <img className='add-track-icon' title='Upload' src='/images/add-track-icon.png'></img>
                   </NavLink>
                 </div>
               </div>
