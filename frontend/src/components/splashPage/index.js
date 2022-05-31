@@ -31,7 +31,7 @@ const SplashPage = () => {
                     </div>
                     <div className='splash-listen'>
                         <div className='listen-img-ctn'>
-                        {/* <img className='listen-img' src='/images/play-listen-repeat.jpg'></img> */}
+                        <img className='listen-img' src='/images/play-listen-repeat.jpg'></img>
                         </div>
                         <div className='splash-listen-text'>
                             <p>Play. Listen. Repeat.</p>
