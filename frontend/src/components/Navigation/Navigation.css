@@ -7,18 +7,19 @@
     width: 100%;
     height: 75px;
     background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
 }
 
 .navbar-list {
     width: 100vw;
     height: auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-.navbar-left > a,
-.navbar-right > a {
+.home-logo-click > a,
+.github-logo-click > a {
     height: auto;
     display: flex;
     align-items: center;
@@ -28,6 +29,14 @@
 .navbar-right {
     display: flex;
     align-items: center;
+}
+
+.navbar-left {
+    padding-left: 30px;
+}
+
+.navbar-right {
+    padding-right: 30px;
 }
 
 .navbar-right > .loginModal-btn,
@@ -51,6 +60,18 @@
     transition: background-color 0.15s ease-in;
 }
 
+.home-logo-ctn {
+    padding-right: 30px;
+}
+
+.github-logo-click {
+    padding-right: 30px;
+}
+
+.add-track-ctn {
+    padding: 0 5px;
+}
+
 .add-track-icon {
     width: 31px;
     height: 31px;
@@ -61,13 +82,11 @@
 .home-logo {
     width: 41px;
     height: 41px;
-    padding: 0 5px;
 }
 
 .github-logo {
     width: 33px;
     height: 33px;
-    padding: 0 5px;
 }
 
 .add-track-icon:hover,

@@ -27,17 +27,29 @@ function Navigation({ isLoaded }){
       <div className='navbar'>
           <div className='navbar-list'>
             <div className='navbar-left'>
-              <NavLink exact to="/">
-                <img className='home-logo' src='/images/favicon.ico'></img>
-              </NavLink>
-              <a href='https://github.com/christopherchueng/Aurora'>
-                <img className='github-logo' src='/images/github-logo.png'></img>
-              </a>
+              <div className='home-logo-ctn'>
+                <div className='home-logo-click'>
+                  <NavLink exact to="/">
+                    <img className='home-logo' src='/images/favicon.ico'></img>
+                  </NavLink>
+                </div>
+              </div>
+              <div className='github-logo-ctn'>
+                <div className='github-logo-click'>
+                  <a href='https://github.com/christopherchueng/Aurora'>
+                    <img className='github-logo' src='/images/github-logo.png'></img>
+                  </a>
+                </div>
+              </div>
             </div>
             <div className='navbar-right'>
-              <NavLink to='/upload'>
-                <img className='add-track-icon' src='/images/add-track-icon.png'></img>
-              </NavLink>
+              <div className='add-track-ctn'>
+                <div className='add-track-click'>
+                  <NavLink to='/upload'>
+                    <img className='add-track-icon' src='/images/add-track-icon.png'></img>
+                  </NavLink>
+                </div>
+              </div>
               {isLoaded && sessionLinks}
             </div>
           </div>
