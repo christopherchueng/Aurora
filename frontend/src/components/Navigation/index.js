@@ -33,7 +33,7 @@ function Navigation({ isLoaded }){
             </div>
             <div className='navbar-right'>
               <NavLink to='/upload'>
-                <i class="fa-thin fa-plus"></i>
+                <img className='add-track-icon' src='/images/add-track-icon.png'></img>
               </NavLink>
               {isLoaded && sessionLinks}
             </div>
