@@ -97,13 +97,34 @@
 
 }
 
+.profile-btn {
+    background-color: transparent;
+    border: 0px solid transparent;
+    color: white;
+    cursor: pointer;
+    padding-left: 20px;
+}
+
 .profile-dropdown-menu {
     position: fixed;
     border: 1px solid black;
-    top: 50px;
+    top: 75px;
+    right: 35px;
     /* justify-content: flex-start; */
     background-color: black;
-    width: auto;
+    width: 150px;
+}
+
+.profile-btn:hover {
+    opacity: 40%;
+    transition: opacity 0.15s ease-in;
+}
+
+.profile-btn:active,
+.home-logo:active,
+.github-logo:active,
+.add-track-icon:active {
+    opacity: 20%;
 }
 
 .profile-dropdown {
