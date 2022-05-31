@@ -24,6 +24,7 @@
     align-items: center;
 }
 
+.navbar-left,
 .navbar-right {
     display: flex;
     align-items: center;
@@ -33,7 +34,7 @@
     width: 31px;
     height: 31px;
     text-decoration: none;
-    padding: 0 20px;
+    padding: 0 5px;
 }
 
 .navbar-right > .loginModal-btn,
@@ -49,11 +50,25 @@
     cursor: pointer
 }
 
+.navbar-right > .signupModal-btn:hover,
+.navbar-right .loginModal-btn:hover {
+    background-color: white;
+    color: black;
+    transition: color 0.15 ease-in;
+    transition: background-color 0.15s ease-in;
+}
+
 .home-logo {
     width: 41px;
     height: 41px;
+    padding: 0 5px;
 }
 
+.github-logo {
+    width: 33px;
+    height: 33px;
+    padding: 0 5px;
+}
 
 .profile-dropdown-menu {
     position: fixed;

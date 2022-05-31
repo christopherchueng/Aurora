@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
@@ -28,8 +28,11 @@ function Navigation({ isLoaded }){
           <div className='navbar-list'>
             <div className='navbar-left'>
               <NavLink exact to="/">
-                <img src='/images/favicon.ico' className='home-logo'></img>
+                <img className='home-logo' src='/images/favicon.ico'></img>
               </NavLink>
+              <a href='https://github.com/christopherchueng/Aurora'>
+                <img className='github-logo' src='/images/github-logo.png'></img>
+              </a>
             </div>
             <div className='navbar-right'>
               <NavLink to='/upload'>
