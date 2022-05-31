@@ -48,14 +48,6 @@
 
 }
 
-.splash-closing-remarks {
-    height: 600px;
-}
-
-.splash-upload-btn {
-    width: 100vw;
-}
-
 .track-content {
     background-color: white;
     color: black;
@@ -98,7 +90,8 @@
     font-size: 80pt;
 }
 
-.upload-img-ctn {
+.upload-img-ctn,
+.connect-img-ctn {
     width: 100%;
 }
 
@@ -140,6 +133,18 @@
 .splash-connect-text {
     display: flex;
     align-items: center;
+    padding-left: 70px;
+}
+
+.connect-img-ctn {
+    display: flex;
+    justify-content: flex-end;
+    height: 100vh;
+}
+
+.connect-img {
+    width: 900px;
+    height: 600px;
 }
 
 .track-content {
@@ -147,12 +152,6 @@
     color: white;
 }
 
-.connect-img-ctn {
-    display: flex;
-    justify-content: flex-start;
-    height: 100vh;
-    width: 850px;
-}
 
 .splash-upload-btn > a {
     display: flex;
@@ -177,6 +176,7 @@
     display: inline-flex;
     justify-content: center;
     height: 65px;
+    width: 100vw;
 }
 
 .splash-track-header {
@@ -245,6 +245,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 600px;
 }
 
 .splash-closing-remarks h2 {

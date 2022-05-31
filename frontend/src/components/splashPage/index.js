@@ -42,7 +42,7 @@ const SplashPage = () => {
                             Connect with other creators.
                         </div>
                         <div className='connect-img-ctn'>
-                            {/* <img className='connect-img' src='/images/connect-with-creators.jpeg'></img> */}
+                            <img className='connect-img' src='/images/connect-with-creators.jpeg'></img>
                         </div>
                     </div>
                 </div>
