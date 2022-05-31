@@ -61,7 +61,7 @@ const CreateTrackForm = () => {
         if (track) {
             setErrors({});
             setHasSubmitted(false)
-            history.push(`/discover`)
+            history.push(`/tracks/${track.id}`)
         }
 
         setTitle('');
