@@ -29,13 +29,13 @@ const SplashPage = () => {
                         </div>
                         <div className='upload-img-ctn'>
                             {/* <img className='upload-img' src='/images/upload-your-tracks.jpeg'></img> */}
-                            {/* <img className='upload-img' src={process.env.PUBLIC_URL + '/images/upload-your-tracks.jpeg'}></img> */}
+                            <img className='upload-img' src={process.env.PUBLIC_URL + '/images/upload-your-tracks.jpeg'}></img>
                         </div>
                     </div>
                     <div className='splash-listen'>
                         <div className='listen-img-ctn'>
                         {/* <img className='listen-img' src='/images/play-listen-repeat.jpg'></img> */}
-                        {/* <img className='listen-img' src={process.env.PUBLIC_URL + '/images/play-listen-repeat.jpg'}></img> */}
+                        <img className='listen-img' src={process.env.PUBLIC_URL + '/images/play-listen-repeat.jpg'}></img>
                         </div>
                         <div className='splash-listen-text'>
                             <p>Play. Listen. Repeat.</p>
@@ -47,7 +47,7 @@ const SplashPage = () => {
                         </div>
                         <div className='connect-img-ctn'>
                             {/* <img className='connect-img' src='/images/connect-with-creators.jpeg'></img> */}
-                            {/* <img className='connect-img' src={process.env.PUBLIC_URL + '/images/connect-with-creators.jpeg'}></img> */}
+                            <img className='connect-img' src={process.env.PUBLIC_URL + '/images/connect-with-creators.jpeg'}></img>
                         </div>
                     </div>
                 </div>
