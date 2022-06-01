@@ -25,21 +25,26 @@ const TrackIdPage = () => {
                         <img className='cover-photo' src={singleTrack?.imagePath}></img>
                     </div>
                 </div>
-                <div className='track-info-ctn'>
+                {/* <div className='track-info-ctn'>
                     <div className='track-title'>
                         <h1>{singleTrack?.title}</h1>
                     </div>
                     <div className='track-artist'>
-                        <h3>{singleTrack?.User.username}</h3>
+                        <p>{singleTrack?.User.username}</p>
                     </div>
-                </div>
+                </div> */}
                 <div className='media-controls'>
                     <div className='control-left'>
-                        {/* Dead Space */}
+                        <div className='track-title'>
+                            <h1>{singleTrack?.title}</h1>
+                        </div>
+                        <div className='track-artist'>
+                            <p>{singleTrack?.User.username}</p>
+                        </div>
                     </div>
                     <div className='control-center'>
                         <div className='back-ctn'>
-                            <button className='back'><i className="fa-solid fa-caret-left fa-3x"></i></button>
+                            <button className='back'><i className="fa-solid fa-backward-step fa-3x"></i></button>
                         </div>
                         <div className='play-ctn'>
                             {/* If not playing, play button will display */}
@@ -48,7 +53,7 @@ const TrackIdPage = () => {
                             {isPlaying && (<button className='pause' onClick={() => setIsPlaying(!isPlaying)}><i className="fa-solid fa-circle-pause fa-7x"></i></button>)}
                         </div>
                         <div className='next-ctn'>
-                            <button className='next'><i className="fa-solid fa-caret-right fa-3x"></i></button>
+                            <button className='next'><i className="fa-solid fa-forward-step fa-3x"></i></button>
                         </div>
 
                     </div>

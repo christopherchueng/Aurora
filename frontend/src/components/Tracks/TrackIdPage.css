@@ -16,7 +16,7 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 70vh;
+    height: 60vh;
     background-color: lightblue;
 }
 
@@ -33,16 +33,36 @@
     width: 100vw;
 }
 
+.track-title,
+.track-artist {
+    width: 150px;
+}
+
+.track-title > h1 {
+    margin: 0;
+    font-size: 24pt;
+    width: 500px;
+}
+
+.track-artist > p {
+    font-size: 12pt;
+    margin: 0;
+
+}
+
 .media-controls {
-    height: 20vh;
+    height: 100px;
     width: 100vw;
+    padding-top: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .control-left {
-    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .control-center {
@@ -70,11 +90,12 @@
 .control-left,
 .volume-ctn {
     display: flex;
+    flex-direction: column;
     /* justify-content: flex-end; */
     align-items: center;
     /* padding-right: 80px; */
-    width: 200px;
-    height: 40px;
+    width: 250px;
+    height: 100px;
 }
 
 .volume-ctn {
