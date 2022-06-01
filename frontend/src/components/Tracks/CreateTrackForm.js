@@ -52,9 +52,6 @@ const CreateTrackForm = () => {
 
         const track = await dispatch(createTrack(payload))
         if (track) {
-            if (!imagePath) {
-                setImagePath('https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png')
-            }
             setErrors({});
             setHasSubmitted(false)
             history.push(`/tracks/${track.id}`)
