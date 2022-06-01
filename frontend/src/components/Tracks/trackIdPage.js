@@ -9,6 +9,9 @@ const TrackIdPage = () => {
     const track = useSelector(state => state.track.entries)
     const [isPlaying, setIsPlaying] = useState(true)
     const dispatch = useDispatch();
+    const trackObj = track[trackId]
+    console.log(trackObj)
+    console.log(Object.keys(trackObj))
 
 
     useEffect(() => {
@@ -20,7 +23,7 @@ const TrackIdPage = () => {
             <div className='music-player-content'>
                 <div className='track-bar'>
                     <div className='cover-photo-ctn'>
-                        <img className='cover-photo' src={track[trackId.toString()].imagePath}></img>
+                        <img className='cover-photo' src={trackObj['imagePath']}></img>
                     </div>
                 </div>
                 <div className='media-controls'>
