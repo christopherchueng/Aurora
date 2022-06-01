@@ -10,8 +10,6 @@ const TrackIdPage = () => {
     const tracks = useSelector(state => state.track.entries)
     const [isPlaying, setIsPlaying] = useState(true)
     const singleTrack = Object.values(tracks).find(track => track.id === +trackId)
-    console.log('HERE IN TRACKIDPAGEEEEE', singleTrack)
-
 
     useEffect(() => {
         dispatch(getTracks())
