@@ -58,10 +58,10 @@ router.post('/', asyncHandler(async (req, res) => {
         genre,
         trackPath,
         imagePath,
-        user
+        userId
     } = req.body
 
-    console.log('ARE WE HITTING THIS REQ BODY', req.body)
+    console.log('ARE WE HITTING THIS REQ BODY USER', req.body)
 
     const track = await Track.create({
         title,
@@ -69,10 +69,10 @@ router.post('/', asyncHandler(async (req, res) => {
         genre,
         trackPath,
         imagePath,
-        userId: user.id
+        userId
     });
 
-    console.log('THIS IS THE TRACK BEING DELIVERED TO FRONTEND', track)
+    console.log('THIS IS THE USER INFO BEING DELIVERED TO FRONTEND', track)
 
     return res.json(track);
 }))
