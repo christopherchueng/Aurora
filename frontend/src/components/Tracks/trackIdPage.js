@@ -2,16 +2,7 @@ import { useState, useEffect } from 'react';
 import './TrackIdPage.css';
 
 const TrackIdPage = () => {
-    const [isPlaying, setisPlaying] = useState(false)
-
-    const playBtn = document.querySelector('.play')
-    // playBtn.addEventListener('click', () => {
-    //     console.log('here')
-    // })
-
-    useEffect(() => {
-        setisPlaying(!isPlaying)
-    }, [])
+    const [isPlaying, setIsPlaying] = useState(true)
 
 
     return (
@@ -29,8 +20,10 @@ const TrackIdPage = () => {
                             <button className='back'><i className="fa-solid fa-caret-left fa-3x"></i></button>
                         </div>
                         <div className='play-ctn'>
-                            {!isPlaying && <button className='play'><i className="fa-solid fa-circle-play fa-7x"></i></button>}
-                            {isPlaying && <button className='pause'><i className="fa-solid fa-circle-pause fa-7x"></i></button>}
+                            {/* If not playing, play button will display */}
+                            {!isPlaying && (<button className='play' onClick={() => setIsPlaying(!isPlaying)}><i className="fa-solid fa-circle-play fa-7x"></i></button>)}
+                            {/* If playing, pause button will display */}
+                            {isPlaying && (<button className='pause' onClick={() => setIsPlaying(!isPlaying)}><i className="fa-solid fa-circle-pause fa-7x"></i></button>)}
                         </div>
                         <div className='next-ctn'>
                             <button className='next'><i className="fa-solid fa-caret-right fa-3x"></i></button>
