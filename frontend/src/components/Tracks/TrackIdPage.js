@@ -37,7 +37,7 @@ const TrackIdPage = () => {
                             <h1>{singleTrack?.title}</h1>
                         </div>
                         <div className='track-artist'>
-                            <p>{singleTrack?.User.username}</p>
+                            <p>{singleTrack?.User?.username}</p>
                         </div>
                     </div>
                     <div className='control-center'>

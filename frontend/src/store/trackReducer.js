@@ -30,6 +30,7 @@ export const loadGenres = (genres) => {
 }
 
 export const addTrack = (track) => {
+    console.log('this is the track arg in action')
     return {
         type: ADD_TRACK,
         track
