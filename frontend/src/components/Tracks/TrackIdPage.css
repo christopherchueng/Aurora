@@ -13,23 +13,53 @@
 
 .track-bar {
     width: 100vw;
-    height: 80vh;
+    height: 70vh;
     background-color: lightblue;
 }
 
 .media-controls {
-    height: 10vh;
+    height: 20vh;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
-.fa-horizontal-rule {
-    background-color: red;
+.control-left {
+    justify-content: flex-start;
+}
+
+.control-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+}
+
+.back,
+.play,
+.pause,
+.next {
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+.play-ctn {
+    padding: 0 40px;
+}
+
+.control-left,
+.volume-ctn {
+    display: flex;
+    /* justify-content: flex-end; */
+    align-items: center;
+    /* padding-right: 80px; */
+    width: 200px;
+    height: 40px;
 }
 
 .volume-ctn {
-    width: 500px;
-    height: 40px;
+    justify-content: flex-end;
 }

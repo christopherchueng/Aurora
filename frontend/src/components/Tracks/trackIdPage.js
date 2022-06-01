@@ -21,18 +21,24 @@ const TrackIdPage = () => {
 
                 </div>
                 <div className='media-controls'>
-                    <div className='back-ctn'>
-                        <button className='back'><i className="fa-solid fa-caret-left fa-4x"></i></button>
+                    <div className='control-left'>
+                        {/* Dead Space */}
                     </div>
-                    <div className='play-ctn'>
-                        {!isPlaying && <button className='play'><i className="fa-solid fa-circle-play fa-10x"></i></button>}
-                        {isPlaying && <button className='pause'><i className="fa-solid fa-circle-pause fa-10x"></i></button>}
-                    </div>
-                    <div className='next-ctn'>
-                        <button className='next'><i className="fa-solid fa-caret-right fa-4x"></i></button>
+                    <div className='control-center'>
+                        <div className='back-ctn'>
+                            <button className='back'><i className="fa-solid fa-caret-left fa-3x"></i></button>
+                        </div>
+                        <div className='play-ctn'>
+                            {!isPlaying && <button className='play'><i className="fa-solid fa-circle-play fa-7x"></i></button>}
+                            {isPlaying && <button className='pause'><i className="fa-solid fa-circle-pause fa-7x"></i></button>}
+                        </div>
+                        <div className='next-ctn'>
+                            <button className='next'><i className="fa-solid fa-caret-right fa-3x"></i></button>
+                        </div>
+
                     </div>
                     <div className='volume-ctn'>
-                        <i class="fa-thin fa-dash"></i>
+                        Volume line here
                     </div>
                 </div>
             </div>
