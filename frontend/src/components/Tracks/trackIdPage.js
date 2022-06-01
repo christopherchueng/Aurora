@@ -1,9 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getOneTrack } from '../../store/trackReducer';
 import './TrackIdPage.css';
 
 const TrackIdPage = () => {
+    const { trackId } = useParams();
+    const track = useSelector(state => state.track.entries)
     const [isPlaying, setIsPlaying] = useState(true)
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(getOneTrack(trackId))
+    }, [dispatch])
 
     return (
         <div className='music-player-ctn'>

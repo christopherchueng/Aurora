@@ -60,14 +60,14 @@ export const deleteTrack = (track) => {
 //     }
 // }
 
-// export const getOneTrack = (trackId) => async (dispatch) => {
-//     const response = await csrfFetch(`/api/tracks/${trackId}`)
+export const getOneTrack = (trackId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/tracks/${trackId}`)
 
-//     if (response.ok) {
-//         const track = response.json();
-//         dispatch(loadTrack(track));
-//     }
-// }
+    if (response.ok) {
+        const track = await response.json();
+        dispatch(loadTrack(track));
+    }
+}
 
 export const getTracks = () => async (dispatch) => {
     const response = await fetch('api/tracks')
@@ -96,6 +96,11 @@ const trackReducer = (state = initialState, action) => {
         //         ...state,
         //         genres: action.genres
         //     }
+        case LOAD_TRACK:
+            return {
+                ...state,
+                entries: {...state.entries, [action.track.id]: action.track}
+            }
         case LOAD_TRACKS:
             const newState = { ...state, entries: {...state.entries} };
             action.tracks.forEach(track => (newState.entries[track.id] = track))
