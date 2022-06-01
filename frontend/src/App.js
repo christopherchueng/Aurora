@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import SplashPage from "./components/SplashPage";
+// import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/DiscoverPage";
 import CreateTrackForm from "./components/Tracks/CreateTrackForm";
 import TrackIdPage from './components/Tracks/TrackIdPage'
@@ -21,7 +21,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       <Switch>
         <Route exact path='/'>
-          <SplashPage />
+          {/* <SplashPage /> */}
         </Route>
         <Route path='/discover'>
           <DiscoverPage />
