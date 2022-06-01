@@ -27,6 +27,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       imagePath: {
+        allowNull: false,
         type: Sequelize.STRING,
         defaultValue: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
       },

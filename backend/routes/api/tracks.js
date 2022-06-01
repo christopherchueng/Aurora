@@ -10,26 +10,20 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-const trackValidators = [
-    // check('title')
-    //     .exists({ checkFalsy: true })
-    //     .isLength({ max: 100 })
-    //     .withMessage('Please provide a title that is no more than 100 characters long.'),
-    // check('genre')
-    //     .exists({ checkFalsy: true })
-    //     .withMessage('Please select a genre.')
-    //     .isIn(genres),
-    // check('trackPath')
-    //     .exists({ checkFalsy: true })
-    //     .withMessage('Please provide a track.')
-    //     .isURL({ protocols: false }),
-    check('imagePath')
-        // .exists({ checkFalsy: true })
-        // .bail()
-        // .isEmpty()
-        .customSanitizer(value => value = 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png' || value)
-        .bail()
-];
+// const trackValidators = [
+//     // check('title')
+//     //     .exists({ checkFalsy: true })
+//     //     .isLength({ max: 100 })
+//     //     .withMessage('Please provide a title that is no more than 100 characters long.'),
+//     // check('genre')
+//     //     .exists({ checkFalsy: true })
+//     //     .withMessage('Please select a genre.')
+//     //     .isIn(genres),
+//     // check('trackPath')
+//     //     .exists({ checkFalsy: true })
+//     //     .withMessage('Please provide a track.')
+//     //     .isURL({ protocols: false }),
+// ];
 
 // Find a track
 router.get('/:trackId', asyncHandler(async (req, res) => {
@@ -57,7 +51,7 @@ router.get('/', asyncHandler(async (req, res) => {
 //     res.json(tracks);
 // }))
 
-router.post('/', trackValidators, asyncHandler(async (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
     const {
         title,
         description,
