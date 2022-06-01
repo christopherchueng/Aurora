@@ -37,10 +37,6 @@ const CreateTrackForm = () => {
 
     }, [title, genre, trackPath])
 
-    const onError = () => {
-        setImagePath('https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png')
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
