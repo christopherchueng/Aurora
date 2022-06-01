@@ -5,24 +5,30 @@ const { genres } = require('../../db/models/genres')
 
 const { requireAuth } = require('../../utils/auth');
 const asyncHandler = require('express-async-handler');
+const { validationResult } = require('express-validator')
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
 const trackValidators = [
-    check('title')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 100 })
-        .withMessage('Please provide a title that is no more than 100 characters long.'),
-    check('genre')
-        .exists({ checkFalsy: true })
-        .withMessage('Please select a genre.')
-        .isIn(genres),
-    check('trackPath')
-        .exists({ checkFalsy: true })
-        .withMessage('Please provide a track.')
-        .isURL({ protocols: false }),
-    handleValidationErrors
+    // check('title')
+    //     .exists({ checkFalsy: true })
+    //     .isLength({ max: 100 })
+    //     .withMessage('Please provide a title that is no more than 100 characters long.'),
+    // check('genre')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage('Please select a genre.')
+    //     .isIn(genres),
+    // check('trackPath')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage('Please provide a track.')
+    //     .isURL({ protocols: false }),
+    check('imagePath')
+        // .exists({ checkFalsy: true })
+        // .bail()
+        // .isEmpty()
+        .customSanitizer(value => value = 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png' || value)
+        .bail()
 ];
 
 // Find a track
@@ -51,7 +57,7 @@ router.get('/', asyncHandler(async (req, res) => {
 //     res.json(tracks);
 // }))
 
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', trackValidators, asyncHandler(async (req, res) => {
     const {
         title,
         description,
@@ -61,8 +67,6 @@ router.post('/', asyncHandler(async (req, res) => {
         userId
     } = req.body
 
-    console.log('ARE WE HITTING THIS REQ BODY USER', req.body)
-
     const track = await Track.create({
         title,
         description,
@@ -71,8 +75,6 @@ router.post('/', asyncHandler(async (req, res) => {
         imagePath,
         userId
     });
-
-    console.log('THIS IS THE USER INFO BEING DELIVERED TO FRONTEND', track)
 
     return res.json(track);
 }))

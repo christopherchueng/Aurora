@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
       values: genres
     },
     trackPath: DataTypes.STRING,
-    imagePath: DataTypes.STRING,
+    imagePath: {
+      type: DataTypes.STRING,
+      defaultValue: 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
+    },
     userId: DataTypes.INTEGER
   }, {});
   Track.associate = function(models) {
