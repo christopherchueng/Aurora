@@ -9,6 +9,8 @@ import './SplashPage.css'
 const SplashPage = () => {
     const dispatch = useDispatch();
     const tracks = useSelector(state => state.track.entries)
+    const tracksObj = Object.values(tracks)
+    const mostRecentTracks = tracksObj.slice(tracksObj.length - 13, tracksObj.length - 1)
 
     useEffect(() => {
         dispatch(getTracks())
@@ -60,7 +62,7 @@ const SplashPage = () => {
                     </div>
                     <div className='splash-track-grid'>
                         <ul>
-                            {Object.values(tracks).map(({ id, title, User, trackPath, imagePath }) => (
+                            {mostRecentTracks.map(({ id, title, User, trackPath, imagePath }) => (
                                 <li key={id} className='track-container'>
                                     <NavLink to={`/tracks/${id}`}>
                                         <img src={imagePath} className='grid-image'></img>
