@@ -8,6 +8,7 @@ import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
     const user = useSelector(state => state.session.user)
+    console.log(user)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [genre, setGenre] = useState('')
@@ -45,8 +46,9 @@ const CreateTrackForm = () => {
             genre,
             trackPath,
             imagePath,
-            userId: user.id
+            user: user
         }
+        console.log('HERE IN TRACK FORM', payload)
         const track = await dispatch(createTrack(payload))
         if (track) {
             setErrors({});
