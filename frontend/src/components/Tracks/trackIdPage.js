@@ -10,6 +10,7 @@ const TrackIdPage = () => {
     const [isPlaying, setIsPlaying] = useState(true)
     const dispatch = useDispatch();
 
+
     useEffect(() => {
         dispatch(getOneTrack(trackId))
     }, [dispatch])
@@ -18,7 +19,9 @@ const TrackIdPage = () => {
         <div className='music-player-ctn'>
             <div className='music-player-content'>
                 <div className='track-bar'>
-
+                    <div className='cover-photo-ctn'>
+                        <img className='cover-photo' src={track[trackId.toString()].imagePath}></img>
+                    </div>
                 </div>
                 <div className='media-controls'>
                     <div className='control-left'>

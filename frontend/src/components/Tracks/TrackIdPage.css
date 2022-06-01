@@ -12,9 +12,17 @@
 }
 
 .track-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 70vh;
     background-color: lightblue;
+}
+
+.cover-photo {
+    width: 200px;
+    height: 200px;
 }
 
 .media-controls {
