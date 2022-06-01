@@ -97,6 +97,10 @@ const trackReducer = (state = initialState, action) => {
         //         genres: action.genres
         //     }
         case LOAD_TRACK:
+            /* Returns {
+                track
+                |- entries: { trackId: { backend data } }
+            } */
             return {
                 ...state,
                 entries: {...state.entries, [action.track.id]: action.track}
