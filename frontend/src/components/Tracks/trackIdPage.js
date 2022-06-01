@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getOneTrack } from '../../store/trackReducer';
+import { getTracks } from '../../store/trackReducer';
 import './TrackIdPage.css';
 
 const TrackIdPage = () => {
-    const { trackId } = useParams();
-    const track = useSelector(state => state.track.entries)
-    const [isPlaying, setIsPlaying] = useState(true)
     const dispatch = useDispatch();
-    const trackObj = track[trackId]
-    console.log(trackObj)
-    console.log(Object.keys(trackObj))
+    const { trackId } = useParams();
+    const tracks = useSelector(state => state.track.entries)
+    const [isPlaying, setIsPlaying] = useState(true)
+    const singleTrack = Object.values(tracks).find(track => track.id === +trackId)
+    console.log('HERE IN TRACKIDPAGEEEEE', singleTrack)
 
 
     useEffect(() => {
-        dispatch(getOneTrack(trackId))
+        dispatch(getTracks())
     }, [dispatch])
 
     return (
@@ -23,7 +22,15 @@ const TrackIdPage = () => {
             <div className='music-player-content'>
                 <div className='track-bar'>
                     <div className='cover-photo-ctn'>
-                        <img className='cover-photo' src={trackObj['imagePath']}></img>
+                        <img className='cover-photo' src={singleTrack?.imagePath}></img>
+                    </div>
+                </div>
+                <div className='track-info-ctn'>
+                    <div className='track-title'>
+                        <h1>{singleTrack?.title}</h1>
+                    </div>
+                    <div className='track-artist'>
+                        <h3>{singleTrack?.User.username}</h3>
                     </div>
                 </div>
                 <div className='media-controls'>

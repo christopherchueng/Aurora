@@ -70,7 +70,7 @@ export const getOneTrack = (trackId) => async (dispatch) => {
 }
 
 export const getTracks = () => async (dispatch) => {
-    const response = await fetch('api/tracks')
+    const response = await fetch('/api/tracks')
     const tracks = await response.json();
     dispatch(loadTracks(tracks));
 }
@@ -96,15 +96,15 @@ const trackReducer = (state = initialState, action) => {
         //         ...state,
         //         genres: action.genres
         //     }
-        case LOAD_TRACK:
-            /* Returns {
-                track
-                |- entries: { trackId: { backend data } }
-            } */
-            return {
-                ...state,
-                entries: {...state.entries, [action.track.id]: action.track}
-            }
+        // case LOAD_TRACK:
+        //     /* Returns {
+        //         track
+        //         |- entries: { trackId: { backend data } }
+        //     } */
+        //     return {
+        //         ...state,
+        //         entries: {...state.entries, [action.track.id]: action.track}
+        //     }
         case LOAD_TRACKS:
             const newState = { ...state, entries: {...state.entries} };
             action.tracks.forEach(track => (newState.entries[track.id] = track))
