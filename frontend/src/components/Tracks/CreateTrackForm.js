@@ -4,15 +4,17 @@ import { useHistory } from "react-router-dom";
 import { createTrack, getGenres } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
 import ErrorMessage from '../FormTemplate/ErrorMessage'
+import { useImagePathContext } from "../../context/NoImagePathContext";
 import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
     const user = useSelector(state => state.session.user)
+    const { imagePath, setImagePath } = useImagePathContext()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [genre, setGenre] = useState('')
     const [trackPath, setTrackPath] = useState('')
-    const [imagePath, setImagePath] = useState('')
+    // const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -34,6 +36,10 @@ const CreateTrackForm = () => {
         setErrors(validationErrors);
 
     }, [title, genre, trackPath])
+
+    const onError = () => {
+        setImagePath('https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png')
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -120,6 +126,7 @@ const CreateTrackForm = () => {
                             value={imagePath}
                             placeholder='Insert an image link'
                             onChange={e => setImagePath(e.target.value)}
+                            onError={onError}
                         />
                     </div>
                     <div>
