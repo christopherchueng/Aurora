@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 // import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/DiscoverPage";
 import CreateTrackForm from "./components/Tracks/CreateTrackForm";
-import TrackIdPage from './components/Tracks/TrackIdPage'
+// import TrackIdPage from './components/Tracks/TrackIdPage'
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function App() {
           <CreateTrackForm />
         </Route>
         <Route path={'/tracks/:trackId'}>
-          <TrackIdPage />
+          {/* <TrackIdPage /> */}
         </Route>
 
       </Switch>
