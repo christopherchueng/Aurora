@@ -29,6 +29,7 @@ const trackValidators = [
 router.get('/:trackId', asyncHandler(async (req, res) => {
     const trackId = req.params.trackId;
     const track = await Track.findByPk(trackId);
+
     return res.json(track);
 }))
 
