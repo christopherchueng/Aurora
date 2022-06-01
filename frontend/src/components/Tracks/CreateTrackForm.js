@@ -14,7 +14,7 @@ const CreateTrackForm = () => {
     const [description, setDescription] = useState('')
     const [genre, setGenre] = useState('')
     const [trackPath, setTrackPath] = useState('')
-    const [imagePath, setImagePath] = useState('')
+    const [imagePath, setImagePath] = useState()
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
