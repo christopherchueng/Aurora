@@ -10,7 +10,7 @@ const SplashPage = () => {
     const dispatch = useDispatch();
     const tracks = useSelector(state => state.track.entries)
     const tracksObj = Object.values(tracks)
-    const mostRecentTracks = tracksObj.slice(tracksObj.length - 13, tracksObj.length - 1)
+    const mostRecentTracks = tracksObj.slice(tracksObj.length - 12)
 
     useEffect(() => {
         dispatch(getTracks())
@@ -62,7 +62,7 @@ const SplashPage = () => {
                     </div>
                     <div className='splash-track-grid'>
                         <ul>
-                            {mostRecentTracks.map(({ id, title, User, trackPath, imagePath }) => (
+                            {mostRecentTracks.reverse().map(({ id, title, User, trackPath, imagePath }) => (
                                 <li key={id} className='track-container'>
                                     <NavLink to={`/tracks/${id}`}>
                                         <img src={imagePath} className='grid-image'></img>
