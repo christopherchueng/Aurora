@@ -65,7 +65,7 @@ const SplashPage = () => {
                             {mostRecentTracks.map(({ id, title, User, trackPath, imagePath }) => (
                                 <li key={id} className='track-container'>
                                     <NavLink to={`/tracks/${id}`}>
-                                        <img src={imagePath} className='grid-image'></img>
+                                        <img src={process.env.PUBLIC_URL + imagePath} className='grid-image'></img>
                                     </NavLink>
                                         <div className='splash-track-title'>
                                             <Link to={`/tracks/${id}`}>{title}</Link>
