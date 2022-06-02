@@ -4,12 +4,10 @@ import { useHistory } from "react-router-dom";
 import { createTrack, getGenres } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
 import ErrorMessage from '../FormTemplate/ErrorMessage'
-import { useImagePathContext } from "../../context/NoImagePathContext";
 import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
     const user = useSelector(state => state.session.user)
-    // const { imagePath, setImagePath } = useImagePathContext()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [genre, setGenre] = useState('')

@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ModalProvider } from "./context/Modal";
-import ImagePathProvider from "./context/NoImagePathContext";
 
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
@@ -25,11 +24,9 @@ function Root() {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <ImagePathProvider>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </ImagePathProvider>
       </ModalProvider>
     </Provider>
   );

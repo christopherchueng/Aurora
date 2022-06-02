@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
 import './TrackIdPage.css';
 
@@ -14,6 +14,10 @@ const TrackIdPage = () => {
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
+
+    // useEffect(() => {
+    //     dispatch(deleteTrack())
+    // })
 
     return (
         <div className='music-player-ctn'>
@@ -60,6 +64,14 @@ const TrackIdPage = () => {
                     </div>
                 </div>
             </div>
+        <div className='adjustment-ctn'>
+            <div className='edit-ctn'>
+                <button>Edit</button>
+            </div>
+            <div className='delete-ctn'>
+                <button>Delete</button>
+            </div>
+        </div>
         <div className='comment-section-ctn'>
             <h1>Comments down below</h1>
         </div>

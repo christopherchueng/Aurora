@@ -43,10 +43,11 @@ export const updateTrack = (track) => {
     }
 }
 
-export const deleteTrack = (track) => {
+export const deleteTrack = (trackId, userId) => {
     return {
         type: DELETE_TRACK,
-        track
+        trackId,
+        userId
     }
 }
 
