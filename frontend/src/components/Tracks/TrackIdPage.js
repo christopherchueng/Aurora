@@ -111,22 +111,24 @@ const TrackIdPage = ({tracks}) => {
                 </div>
             </div>
         <div className='adjustment-ctn'>
-            <div className='edit-ctn'>
-                {!openEdit &&
-                (<button
-                    className='inline-edit-Track'
-                    onClick={() => setOpenEdit(true) &&
-                    setSaveChanges(false)}>
-                        Edit
-                </button>)}
-                {openEdit &&
-                (<button
-                    className='saveChanges'
-                    onClick={() => setOpenEdit(false) &&
-                    setSaveChanges(true)}>
-                        Save Changes
-                </button>)}
-            </div>
+            <form onSubmit={handleSubmit}>
+                <div className='edit-ctn'>
+                    {!openEdit &&
+                    (<button
+                        className='inline-edit-Track'
+                        onClick={() => setOpenEdit(true) &&
+                        setSaveChanges(false)}>
+                            Edit
+                    </button>)}
+                    {openEdit &&
+                    (<button
+                        className='saveChanges'
+                        onClick={() => setOpenEdit(false) &&
+                        setSaveChanges(true)}>
+                            Save Changes
+                    </button>)}
+                </div>
+            </form>
             <div className='delete-ctn'>
                 <DeleteTrackComponent trackId={trackId} />
             </div>
