@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
 import DeleteTrackComponent from './DeleteTrackComponent';
+import UpdateTrackForm from './UpdateTrackForm';
 import './TrackIdPage.css';
 
 const TrackIdPage = () => {
@@ -55,7 +56,7 @@ const TrackIdPage = () => {
             </div>
         <div className='adjustment-ctn'>
             <div className='edit-ctn'>
-                <button>Edit</button>
+                <UpdateTrackForm trackId={trackId} />
             </div>
             <div className='delete-ctn'>
                 <DeleteTrackComponent trackId={trackId} />
