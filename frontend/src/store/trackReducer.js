@@ -6,6 +6,7 @@ const LOAD_GENRES = 'track/loadGenres'
 const ADD_TRACK = 'track/addTrack'
 const UPDATE_TRACK = 'track/updateTrack'
 const DELETE_TRACK = 'track/deleteTrack'
+const FETCH_USER = 'user/fetchUser'
 
 // Action creators
 export const loadTrack = (track) => {
@@ -51,6 +52,13 @@ export const deleteTrack = (trackId, userId) => {
     }
 }
 
+export const fetchUser = (userId) => {
+    return {
+        type: FETCH_USER,
+        userId
+    }
+}
+
 // export const getGenres = () => async (dispatch) => {
 //     console.log('in get Genres')
 //     const response = await csrfFetch('/api/tracks/genres');
@@ -89,7 +97,7 @@ export const createTrack = (payload) => async (dispatch) => {
 }
 
 export const removeTrack = (trackId, userId) => async (dispatch) => {
-    const response = await csrfFetch(`api/tracks/${trackId}`, {
+    const response = await csrfFetch(`/api/tracks/${trackId}`, {
         method: 'DELETE'
     })
 
@@ -97,6 +105,14 @@ export const removeTrack = (trackId, userId) => async (dispatch) => {
         const { id: deletedTrackId } = await response.json();
         dispatch(deleteTrack(deletedTrackId, userId))
         return deletedTrackId;
+    }
+}
+
+export const getUser = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/users/${userId}`)
+    if (response.ok) {
+        const user = await response.json();
+        dispatch(fetchUser(user));
     }
 }
 
