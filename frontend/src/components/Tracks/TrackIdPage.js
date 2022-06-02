@@ -13,25 +13,19 @@ const TrackIdPage = ({tracks}) => {
     const dispatch = useDispatch();
     const history = useHistory()
     const { trackId } = useParams();
-    const track = tracks[trackId];
-    // const tracks = useSelector(state => state.track.entries)
-    // Tomorrow, think about making a tracks index to pass track as a prop.
-    // const track = Object.values(tracks).find(track => track.id === +trackId)
-    // console.log(track['title'])
-    console.log('-----------inTrackIdPage-----------', track);
-    console.log(track.title)
+    const track = tracks[+trackId];
+    console.log('heres the track again', track)
 
     const [title, setTitle] = useState(track.title)
     const [description, setDescription] = useState(track.description)
     const [genre, setGenre] = useState(track.genre)
+    const [trackPath, setTrackPath] = useState(track.trackPath)
     const [imagePath, setImagePath] = useState(track.imagePath)
     const [errors, setErrors] = useState({});
     // const [value, setValue] = useState();
     const [openEdit, setOpenEdit] = useState(false);
     const [saveChanges, setSaveChanges] = useState(true)
     const [isPlaying, setIsPlaying] = useState(true)
-
-    // const track = Object.values(tracks).find(track => track.id === +trackId)
 
     useEffect(() => {
         dispatch(getTracks())
@@ -60,11 +54,14 @@ const TrackIdPage = ({tracks}) => {
             title,
             description,
             genre,
+            trackPath,
             imagePath,
+            // userId: track[User].id
         }
+        console.log('this is what were sending to thunk', payload.id)
 
         // When form is submitted, track will be updated through payload
-        const updatedTrack = await dispatch(updateTrack(payload))
+        const updatedTrack = await dispatch(updateTrack(payload, trackId))
         if (updatedTrack) {
             setErrors({})
             setOpenEdit(false);
@@ -75,7 +72,7 @@ const TrackIdPage = ({tracks}) => {
 
     return (
         <>
-            {/* <form onSubmit={handleSubmit}> */}
+            <form onSubmit={handleSubmit}>
                 <div className='music-player-ctn'>
                     <div className='music-player-content'>
                         <div className='track-bar'>
@@ -110,7 +107,7 @@ const TrackIdPage = ({tracks}) => {
                                                     value={title}
                                                     onChange={e => setTitle(e.target.value)}
                                                 /> :
-                                                <span>Why don't you like my title state</span>
+                                                (track?.title)
                                             }
                                         </h1>
                                     </div>
@@ -188,7 +185,7 @@ const TrackIdPage = ({tracks}) => {
                                         placeholder='Description'
                                         onChange={e => setDescription(e.target.value)}
                                     />) :
-                                    <span>WHY DONT YOU ALSO LIKE MY DESCRIPTION. BOGUS.</span>
+                                    (track?.description)
                                 }
                             </div>
                             <div>
@@ -211,7 +208,7 @@ const TrackIdPage = ({tracks}) => {
                                                     <option key={genre}>{genre}</option>
                                                 ))}
                                             </select>) :
-                                            <span>{genre}</span>
+                                            <span>{track?.genre}</span>
                                         }
                                     </div>
                                     <div>
@@ -221,7 +218,7 @@ const TrackIdPage = ({tracks}) => {
                             </div>
                     </div>
                 </div>
-            {/* </form> */}
+            </form>
                 <div className='comment-section-ctn'>
                     <h1>Comments down below</h1>
                 </div>

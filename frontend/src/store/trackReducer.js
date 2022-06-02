@@ -95,9 +95,8 @@ export const createTrack = (payload) => async (dispatch) => {
     return track;
 }
 
-export const updateTrack = (payload) => async (dispatch) => {
-    console.log('are we even hitting this updateTrack????????????????')
-    const response = await csrfFetch('/api/tracks', {
+export const updateTrack = (payload, trackId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/tracks/${trackId}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
