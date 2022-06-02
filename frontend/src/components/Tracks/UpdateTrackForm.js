@@ -29,11 +29,11 @@ const UpdateTrackForm = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
-    useEffect(() => {
-        if (saveChanges) {
-            setCancelled(false)
-        };
-    }, [])
+    // useEffect(() => {
+    //     if (saveChanges) {
+    //         setCancelled(false)
+    //     };
+    // }, [])
 
     // useEffect(() => {
     //     if (sa) {
@@ -68,12 +68,6 @@ const UpdateTrackForm = ({tracks}) => {
     // onSubmit function
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (errors) {
-            setOpenEdit(true)
-            setSaveChanges(false)
-            //render errors
-        }
 
         // Payload to be delivered to thunk
         const payload = {
@@ -199,15 +193,19 @@ const UpdateTrackForm = ({tracks}) => {
                                 Edit button has a 'submit' type because when openEdit is false, that means we are NOT
                                 making any changes. Thus, the edits are made and locked in.*/}
 
-                                <button
+                                {<button
                                     type='submit'
                                     className='saveChanges'
                                     // When Save Changes button is CLICKED, Editing will NOT be allowed and
                                     // Edit button WILL BE DISPLAYED.
+                                    disabled={errors.length !== 0}
                                     >
                                     Save Changes
-                                </button>
-                                <button type='button'>Cancel</button>
+                                </button>}
+                                <button
+                                    type='button'
+                                    onClick={() => setOpenEdit(false)}
+                                    >Cancel</button>
                             </div>
                             <div className='track-info-ctn'>
                                 {/* ------------------ DESCRIPTION ------------------ */}
