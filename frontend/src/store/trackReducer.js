@@ -37,7 +37,7 @@ export const addTrack = (track) => {
     }
 }
 
-export const updateTrack = (track) => {
+export const editTrack = (track) => {
     return {
         type: UPDATE_TRACK,
         track
@@ -92,6 +92,18 @@ export const createTrack = (payload) => async (dispatch) => {
 
     const track = await response.json();
     dispatch(addTrack(track))
+    return track;
+}
+
+export const updateTrack = (payload) => async (dispatch) => {
+    const response = await csrfFetch('/api/tracks', {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+
+    const track = await response.json();
+    dispatch(editTrack(track));
     return track;
 }
 
