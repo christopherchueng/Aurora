@@ -154,7 +154,11 @@ const trackReducer = (state = initialState, action) => {
                 ...state,
                 entries: { ...state.entries, [action.track.id]: action.track }
             }
-
+        case UPDATE_TRACK:
+            return {
+                ...state,
+                [action.track.id]: action.track
+            }
         case DELETE_TRACK:
             newState = { ...state };
             delete newState[action.trackId]
