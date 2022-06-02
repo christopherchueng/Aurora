@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getTracks } from '../../store/trackReducer';
+import { getTracks, updateTrack } from '../../store/trackReducer';
 import { genres } from "../../utils/genreData";
 import DeleteTrackComponent from './DeleteTrackComponent';
 import UpdateTrackForm from './UpdateTrackForm';
+import { useHistory } from 'react-router-dom';
 import './TrackIdPage.css';
 
 const TrackIdPage = ({tracks}) => {
     const dispatch = useDispatch();
+    const history = useHistory()
     const { trackId } = useParams();
     const track = tracks[trackId];
     // const tracks = useSelector(state => state.track.entries)
@@ -32,17 +34,22 @@ const TrackIdPage = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const payload = {
-        //     title,
-        //     description,
-        //     genre,
-        //     imagePath,
-        // }
+        const payload = {
+            title,
+            description,
+            genre,
+            imagePath,
+        }
 
-        // const track = await dispatch(updateTrack(payload))
+        const updatedTrack = await dispatch(updateTrack(payload))
+        if (updatedTrack) {
+            setErrors({})
+            setOpenEdit(false);
+            history.pushState(`/tracks/${updatedTrack.id}`)
+        }
     }
 
     return (
@@ -80,7 +87,7 @@ const TrackIdPage = ({tracks}) => {
                             </div>
                         </form>
                         <div className='track-artist'>
-                            <p>{track?.User.username}</p>
+                            <p>{track?.User?.username}</p>
                         </div>
                     </div>
                     <div className='control-center'>
