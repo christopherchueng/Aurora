@@ -88,9 +88,22 @@ export const createTrack = (payload) => async (dispatch) => {
     return track;
 }
 
+export const removeTrack = (trackId, userId) => async (dispatch) => {
+    const response = await fetch(`api/tracks/${trackId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const { id: deletedTrackId } = await response.json();
+        dispatch(deleteTrack(deletedTrackId, userId))
+        return deletedTrackId;
+    }
+}
+
 const initialState = { entries: {}, isLoading: true };
 
 const trackReducer = (state = initialState, action) => {
+    let newState = {};
     switch (action.type) {
         // case LOAD_GENRES:
         //     return {
@@ -107,7 +120,7 @@ const trackReducer = (state = initialState, action) => {
         //         entries: {...state.entries, [action.track.id]: action.track}
         //     }
         case LOAD_TRACKS:
-            const newState = { ...state, entries: {...state.entries} };
+            newState = { ...state, entries: {...state.entries} };
             action.tracks.forEach(track => (newState.entries[track.id] = track))
             return newState
         case ADD_TRACK:
@@ -115,6 +128,11 @@ const trackReducer = (state = initialState, action) => {
                 ...state,
                 entries: { ...state.entries, [action.track.id]: action.track }
             }
+
+        case DELETE_TRACK:
+            newState = { ...state };
+            delete newState[action.trackId]
+            return newState;
         default:
             return state;
     }
