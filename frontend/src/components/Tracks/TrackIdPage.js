@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../FormTemplate/ErrorMessage'
 import { useEditTrackContext } from '../../context/EditTrackContext';
 
-// import './TrackIdPage.css';
+import './TrackIdPage.css';
 
 const TrackIdPage = ({tracks}) => {
     const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
@@ -153,7 +153,7 @@ const TrackIdPage = ({tracks}) => {
 
                             {/* ------------------ DELETE ------------------ */}
                             <div className='delete-ctn'>
-                                    <DeleteTrackComponent trackId={trackId} />
+                                <DeleteTrackComponent trackId={trackId} />
                             </div>
                         </div>
                     </div>
