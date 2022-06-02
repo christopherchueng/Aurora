@@ -56,7 +56,7 @@ const TrackIdPage = () => {
             </div>
         <div className='adjustment-ctn'>
             <div className='edit-ctn'>
-                <UpdateTrackForm trackId={trackId} />
+                <UpdateTrackForm track={singleTrack} />
             </div>
             <div className='delete-ctn'>
                 <DeleteTrackComponent trackId={trackId} />
