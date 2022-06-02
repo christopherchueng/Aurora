@@ -21,6 +21,7 @@ const UpdateTrackForm = ({tracks}) => {
     const [trackPath, setTrackPath] = useState(track.trackPath)
     const [imagePath, setImagePath] = useState(track.imagePath)
     const [errors, setErrors] = useState({});
+    const [cancelled, setCancelled] = useState(false);
     // const [value, setValue] = useState();
     const [isPlaying, setIsPlaying] = useState(true)
 
@@ -28,9 +29,11 @@ const UpdateTrackForm = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
-    // useEffect(() => {
-    //     if ();
-    // }, [])
+    useEffect(() => {
+        if (saveChanges) {
+            setCancelled(false)
+        };
+    }, [])
 
     // useEffect(() => {
     //     setSaveChanges(false);
@@ -54,8 +57,10 @@ const UpdateTrackForm = ({tracks}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setOpenEdit(true)
-        setSaveChanges(false)
+        if (errors) {
+            setOpenEdit(true)
+            setSaveChanges(false)
+        }
 
         // Payload to be delivered to thunk
         const payload = {
@@ -192,7 +197,7 @@ const UpdateTrackForm = ({tracks}) => {
                                 <button
                                     type='button'
                                     className='cancel-edit'
-                                    onClick={() => setSaveChanges(false) && setOpenEdit(false)}
+                                    onClick={() => setCancelled(true)}
                                 >
                                     Cancel
                                 </button>

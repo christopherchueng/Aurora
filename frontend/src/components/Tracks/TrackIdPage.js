@@ -31,6 +31,7 @@ const TrackIdPage = ({tracks}) => {
     }, [dispatch])
 
     useEffect(() => {
+
         setOpenEdit(false);
     }, [])
 
