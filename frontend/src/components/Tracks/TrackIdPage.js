@@ -66,11 +66,17 @@ const TrackIdPage = ({tracks}) => {
         // When form is submitted, track will be updated through payload
         const updatedTrack = await dispatch(updateTrack(payload, trackId))
         if (updatedTrack) {
-            setErrors({})
             setOpenEdit(false);
             setSaveChanges(true);
             history.push(`/tracks/${updatedTrack.id}`)
         }
+
+        // setTitle(track?.title);
+        // setDescription(track?.description);
+        // setGenre(track?.genre);
+        // setTrackPath(track?.trackPath)
+        // setImagePath(track?.imagePath);
+        // setErrors({});
     }
 
     return (
