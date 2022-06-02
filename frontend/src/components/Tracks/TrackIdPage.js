@@ -11,6 +11,11 @@ const TrackIdPage = () => {
     const { trackId } = useParams();
     const tracks = useSelector(state => state.track.entries)
 
+    // const [title, setTitle] = useState(track.title)
+    // const [description, setDescription] = useState(track.description)
+    // const [genre, setGenre] = useState(track.genre)
+    // const [imagePath, setImagePath] = useState(track.imagePath)
+    const [errors, setErrors] = useState({});
     const [value, setValue] = useState();
     const [openEdit, setOpenEdit] = useState(false);
     const [saveChanges, setSaveChanges] = useState(true)
@@ -23,28 +28,44 @@ const TrackIdPage = () => {
 
     const onChange = e => setValue(e.target.value);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // const payload = {
+        //     title,
+        //     description,
+        //     genre,
+        //     imagePath,
+        // }
+
+        // const track = await dispatch(updateTrack(payload))
+    }
+
     return (
         <div className='music-player-ctn'>
             <div className='music-player-content'>
                 <div className='track-bar'>
-                    <div className='cover-photo-ctn'>
-                        <img className='cover-photo' src={singleTrack?.imagePath}></img>
-                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <div className='cover-photo-ctn'>
+                            <img className='cover-photo' src={singleTrack?.imagePath}></img>
+                        </div>
+                    </form>
                 </div>
                 <div className='media-controls'>
                     <div className='control-left'>
-                        <div className='track-title'>
-                            <h1>
-                                {(!openEdit && (singleTrack?.title)) ||
-                                (openEdit && <input
-                                    type='text'
-                                    aria-label='Title'
-                                    value={singleTrack?.title}
-                                    onChange={onChange}
-                                />)}
-                            </h1>
-
-                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className='track-title'>
+                                <h1>
+                                    {(!openEdit && (singleTrack?.title)) ||
+                                    (openEdit && <input
+                                        type='text'
+                                        aria-label='Title'
+                                        value={singleTrack?.title}
+                                        onChange={onChange}
+                                    />)}
+                                </h1>
+                            </div>
+                        </form>
                         <div className='track-artist'>
                             <p>{singleTrack?.User?.username}</p>
                         </div>
@@ -71,11 +92,23 @@ const TrackIdPage = () => {
             </div>
         <div className='adjustment-ctn'>
             <div className='edit-ctn'>
-                <button className='inline-edit-Track' onClick={() => setOpenEdit(true) && setSaveChanges(false)}>Edit</button>
-                <button className='saveChanges' onClick={() => setOpenEdit(false) && setSaveChanges(true)}>Save Changes</button>
+                {!openEdit && (<button className='inline-edit-Track' onClick={() => setOpenEdit(true) && setSaveChanges(false)}>Edit</button>)}
+                {openEdit && (<button className='saveChanges' onClick={() => setOpenEdit(false) && setSaveChanges(true)}>Save Changes</button>)}
             </div>
             <div className='delete-ctn'>
                 <DeleteTrackComponent trackId={trackId} />
+            </div>
+        </div>
+        <div className='track-info-ctn'>
+            <div className='description'>
+                <form onSubmit={handleSubmit}>
+                    {singleTrack?.description}
+                </form>
+            </div>
+            <div className='genre-ctn'>
+                <div className='genre'>
+                    {singleTrack?.genre}
+                </div>
             </div>
         </div>
         <div className='comment-section-ctn'>
