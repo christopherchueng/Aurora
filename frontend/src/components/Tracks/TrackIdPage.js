@@ -179,13 +179,17 @@ const TrackIdPage = ({tracks}) => {
                     <div className='track-info-ctn'>
                         {/* <form onSubmit={handleSubmit}> */}
                             <div className='description'>
-                                {(!openEdit && (description)) ||
-                                (openEdit && (<textarea
-                                    name='description'
-                                    value={description}
-                                    placeholder='Description'
-                                    onChange={e => setDescription(e.target.value)}
-                                />))}
+                                {/* If edit button is clicked, form will appear.
+                                Otherwise, display description */}
+                                {openEdit ?
+                                    (<textarea
+                                        name='description'
+                                        value={description}
+                                        placeholder='Description'
+                                        onChange={e => setDescription(e.target.value)}
+                                    />) :
+                                    <span>WHY DONT YOU ALSO LIKE MY DESCRIPTION. BOGUS.</span>
+                                }
                             </div>
                             <div>
                                 {saveChanges && <ErrorMessage error={errors.description} />}
@@ -194,20 +198,21 @@ const TrackIdPage = ({tracks}) => {
                             <div className='genre-ctn'>
                                 {/* <form onSubmit={handleSubmit}> */}
                                     <div className='genre'>
-                                        {/* {track?.genre} */}
-                                        {(!openEdit && (genre)) ||
-                                        (openEdit &&
-                                        (<select
-                                            type='text'
-                                            aria-label='Title'
-                                            value={genre}
-                                            onChange={e => setGenre(e.target.value)}
-                                        >
-                                            {genres.map(genre => (
-                                                <option key={genre}>{genre}</option>
-                                            ))}
-                                        </select>)
-                                        )}
+                                        {/* If edit button is clicked, form will appear.
+                                        Otherwise, display genre dropdown */}
+                                        {openEdit ?
+                                            (<select
+                                                type='text'
+                                                aria-label='Title'
+                                                value={genre}
+                                                onChange={e => setGenre(e.target.value)}
+                                            >
+                                                {genres.map(genre => (
+                                                    <option key={genre}>{genre}</option>
+                                                ))}
+                                            </select>) :
+                                            <span>{genre}</span>
+                                        }
                                     </div>
                                     <div>
                                         {saveChanges && <ErrorMessage error={errors.genre} />}
