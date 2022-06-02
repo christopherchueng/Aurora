@@ -71,7 +71,7 @@ export const getOneTrack = (trackId) => async (dispatch) => {
 }
 
 export const getTracks = () => async (dispatch) => {
-    const response = await fetch('/api/tracks')
+    const response = await csrfFetch('/api/tracks')
     const tracks = await response.json();
     dispatch(loadTracks(tracks));
 }
@@ -89,7 +89,7 @@ export const createTrack = (payload) => async (dispatch) => {
 }
 
 export const removeTrack = (trackId, userId) => async (dispatch) => {
-    const response = await fetch(`api/tracks/${trackId}`, {
+    const response = await csrfFetch(`api/tracks/${trackId}`, {
         method: 'DELETE'
     })
 
