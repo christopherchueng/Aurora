@@ -14,13 +14,13 @@ const TrackIdPage = ({tracks}) => {
     const history = useHistory()
     const { trackId } = useParams();
     const track = tracks[+trackId];
-    console.log('heres the track again', track)
+    console.log('heres the track again', track?.User?.id)
 
-    const [title, setTitle] = useState(track.title)
-    const [description, setDescription] = useState(track.description)
-    const [genre, setGenre] = useState(track.genre)
-    const [trackPath, setTrackPath] = useState(track.trackPath)
-    const [imagePath, setImagePath] = useState(track.imagePath)
+    const [title, setTitle] = useState(track?.title)
+    const [description, setDescription] = useState(track?.description)
+    const [genre, setGenre] = useState(track?.genre)
+    const [trackPath, setTrackPath] = useState(track?.trackPath)
+    const [imagePath, setImagePath] = useState(track?.imagePath)
     const [errors, setErrors] = useState({});
     // const [value, setValue] = useState();
     const [openEdit, setOpenEdit] = useState(false);
@@ -49,6 +49,9 @@ const TrackIdPage = ({tracks}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setOpenEdit(true)
+        setSaveChanges(false)
+
         // Payload to be delivered to thunk
         const payload = {
             title,
@@ -72,11 +75,13 @@ const TrackIdPage = ({tracks}) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <div className='music-player-ctn'>
+            <div className='music-player-ctn'>
+                <form onSubmit={handleSubmit}>
                     <div className='music-player-content'>
                         <div className='track-bar'>
                             {/* <form onSubmit={handleSubmit}> */}
+
+                                {/* ------------------ IMAGEPATH ------------------ */}
                                 <div className='cover-photo-ctn'>
                                     {/* If edit button is clicked, form will appear.
                                     Otherwise, display cover photo */}
@@ -89,13 +94,15 @@ const TrackIdPage = ({tracks}) => {
                                         placeholder='Insert an image link'
                                         onChange={e => setImagePath(e.target.value)}
                                     /> :
-                                    (<img className='cover-photo' src={track?.imagePath}></img>)}
+                                    (saveChanges && <img className='cover-photo' src={track?.imagePath}></img>)}
                                 </div>
                             {/* </form> */}
                         </div>
                         <div className='media-controls'>
                             <div className='control-left'>
                                 {/* <form onSubmit={handleSubmit}> */}
+
+                                    {/* ------------------ TITLE ------------------ */}
                                     <div className='track-title'>
                                         <h1>
                                             {/* If edit button is clicked, form will appear.
@@ -107,18 +114,22 @@ const TrackIdPage = ({tracks}) => {
                                                     value={title}
                                                     onChange={e => setTitle(e.target.value)}
                                                 /> :
-                                                (track?.title)
+                                                (saveChanges && track?.title)
                                             }
                                         </h1>
                                     </div>
                                     <div>
-                                        {saveChanges && <ErrorMessage error={errors.title} />}
+                                        {openEdit && <ErrorMessage error={errors.title} />}
                                     </div>
                                 {/* </form> */}
+
+                                {/* ------------------ ARTIST ------------------ */}
                                 <div className='track-artist'>
                                     <p>{track?.User?.username}</p>
                                 </div>
                             </div>
+
+                            {/* ------------------ MEDIA CONTROLS ------------------ */}
                             <div className='control-center'>
                                 <div className='back-ctn'>
                                     <button type='button' className='back'><i className="fa-solid fa-backward-step fa-3x"></i></button>
@@ -140,7 +151,9 @@ const TrackIdPage = ({tracks}) => {
                         </div>
                     </div>
                 <div className='adjustment-ctn'>
-                    <form onSubmit={handleSubmit}>
+                    {/* <form onSubmit={handleSubmit}> */}
+
+                        {/* ------------------ EDIT AND DELETE BUTTONS ------------------ */}
                         <div className='edit-ctn'>
                             {/* If edit button is clicked, openEdit will be set to true and
                             will display save changes button. This will allow form to appear.
@@ -168,13 +181,17 @@ const TrackIdPage = ({tracks}) => {
                                 </button>)
                             }
                         </div>
-                    </form>
+                    {/* </form> */}
+
+                    {/* ------------------ DELETE ------------------ */}
                     <div className='delete-ctn'>
                         <DeleteTrackComponent trackId={trackId} />
                     </div>
                 </div>
                     <div className='track-info-ctn'>
                         {/* <form onSubmit={handleSubmit}> */}
+
+                            {/* ------------------ DESCRIPTION ------------------ */}
                             <div className='description'>
                                 {/* If edit button is clicked, form will appear.
                                 Otherwise, display description */}
@@ -185,13 +202,15 @@ const TrackIdPage = ({tracks}) => {
                                         placeholder='Description'
                                         onChange={e => setDescription(e.target.value)}
                                     />) :
-                                    (track?.description)
+                                    (saveChanges && track?.description)
                                 }
                             </div>
                             <div>
                                 {saveChanges && <ErrorMessage error={errors.description} />}
                             </div>
                         {/* </form> */}
+
+                            {/* ------------------ GENRE ------------------ */}
                             <div className='genre-ctn'>
                                 {/* <form onSubmit={handleSubmit}> */}
                                     <div className='genre'>
@@ -208,17 +227,18 @@ const TrackIdPage = ({tracks}) => {
                                                     <option key={genre}>{genre}</option>
                                                 ))}
                                             </select>) :
-                                            <span>{track?.genre}</span>
+                                            <span>{saveChanges && track?.genre}</span>
                                         }
                                     </div>
                                     <div>
-                                        {saveChanges && <ErrorMessage error={errors.genre} />}
+                                        {openEdit && <ErrorMessage error={errors.genre} />}
                                     </div>
                                 {/* </form> */}
                             </div>
+                        {/* </form> */}
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
                 <div className='comment-section-ctn'>
                     <h1>Comments down below</h1>
                 </div>

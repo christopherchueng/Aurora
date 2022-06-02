@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Tracks = () => {
     const tracks = useSelector(state => state.track.entries)
+    console.log('in tracks right now to see state', tracks)
 
     return (
         <>
