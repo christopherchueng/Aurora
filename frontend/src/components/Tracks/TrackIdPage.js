@@ -19,6 +19,7 @@ const TrackIdPage = ({tracks}) => {
     // const track = Object.values(tracks).find(track => track.id === +trackId)
     // console.log(track['title'])
     console.log('-----------inTrackIdPage-----------', track);
+    console.log(track.title)
 
     const [title, setTitle] = useState(track.title)
     const [description, setDescription] = useState(track.description)
@@ -36,6 +37,7 @@ const TrackIdPage = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
+    // Validator errors
     useEffect(() => {
         const validationErrors = {};
         if (!title) {
@@ -49,9 +51,11 @@ const TrackIdPage = ({tracks}) => {
 
     }, [title, genre])
 
+    // onSubmit function
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Payload to be delivered to thunk
         const payload = {
             title,
             description,
@@ -59,6 +63,7 @@ const TrackIdPage = ({tracks}) => {
             imagePath,
         }
 
+        // When form is submitted, track will be updated through payload
         const updatedTrack = await dispatch(updateTrack(payload))
         if (updatedTrack) {
             setErrors({})
@@ -76,15 +81,18 @@ const TrackIdPage = ({tracks}) => {
                         <div className='track-bar'>
                             {/* <form onSubmit={handleSubmit}> */}
                                 <div className='cover-photo-ctn'>
-                                    {(!openEdit && (<img className='cover-photo' src={track?.imagePath}></img>)) ||
-                                    (openEdit && <input
+                                    {/* If edit button is clicked, form will appear.
+                                    Otherwise, display cover photo */}
+                                    {openEdit ?
+                                    <input
                                         name='imagePath'
                                         type='text'
                                         alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
                                         value={imagePath}
                                         placeholder='Insert an image link'
                                         onChange={e => setImagePath(e.target.value)}
-                                    />)}
+                                    /> :
+                                    (<img className='cover-photo' src={track?.imagePath}></img>)}
                                 </div>
                             {/* </form> */}
                         </div>
@@ -93,13 +101,17 @@ const TrackIdPage = ({tracks}) => {
                                 {/* <form onSubmit={handleSubmit}> */}
                                     <div className='track-title'>
                                         <h1>
-                                            {(!openEdit && (title)) ||
-                                            (openEdit && <input
-                                                type='text'
-                                                aria-label='Title'
-                                                value={title}
-                                                onChange={e => setTitle(e.target.value)}
-                                            />)}
+                                            {/* If edit button is clicked, form will appear.
+                                            Otherwise, display title */}
+                                            {openEdit ?
+                                                <input
+                                                    type='text'
+                                                    aria-label='Title'
+                                                    value={title}
+                                                    onChange={e => setTitle(e.target.value)}
+                                                /> :
+                                                <span>Why don't you like my title state</span>
+                                            }
                                         </h1>
                                     </div>
                                     <div>
@@ -133,22 +145,31 @@ const TrackIdPage = ({tracks}) => {
                 <div className='adjustment-ctn'>
                     <form onSubmit={handleSubmit}>
                         <div className='edit-ctn'>
-                            {!openEdit &&
-                            (<button
-                                type='button'
-                                className='inline-edit-Track'
-                                onClick={() => setOpenEdit(true) &&
-                                setSaveChanges(false)}>
-                                    Edit
-                            </button>)}
-                            {openEdit &&
-                            (<button
-                                type='submit'
-                                className='saveChanges'
-                                onClick={() => setOpenEdit(false) &&
-                                setSaveChanges(true)}>
-                                    Save Changes
-                            </button>)}
+                            {/* If edit button is clicked, openEdit will be set to true and
+                            will display save changes button. This will allow form to appear.
+                            Conversely, if edit button is not clicked, the edit button will be displayed.
+                            Edit button has a 'submit' type because when openEdit is false, that means we are NOT
+                            making any changes. Thus, the edits are made and locked in.*/}
+                            {openEdit ?
+                                (<button
+                                    type='button'
+                                    className='saveChanges'
+                                    // When Save Changes button is CLICKED, Editing will NOT be allowed and
+                                    // Edit button WILL BE DISPLAYED.
+                                    onClick={() => setOpenEdit(false) &&
+                                    setSaveChanges(false)}>
+                                        Save Changes
+                                </button>) :
+                                (<button
+                                    type='submit'
+                                    className='inline-edit-Track'
+                                    // When Edit button is CLICKED, Editing will be allowed and Save Changes
+                                    // button WILL BE DISPLAYED.
+                                    onClick={() => setOpenEdit(true) &&
+                                    setSaveChanges(true)}>
+                                        Edit
+                                </button>)
+                            }
                         </div>
                     </form>
                     <div className='delete-ctn'>
