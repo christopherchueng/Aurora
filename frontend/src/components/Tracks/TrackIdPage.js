@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
+import { genres } from "../../utils/genreData";
 import DeleteTrackComponent from './DeleteTrackComponent';
 import UpdateTrackForm from './UpdateTrackForm';
 import './TrackIdPage.css';
@@ -107,7 +108,20 @@ const TrackIdPage = () => {
             </div>
             <div className='genre-ctn'>
                 <div className='genre'>
-                    {singleTrack?.genre}
+                    {/* {singleTrack?.genre} */}
+                    {(!openEdit && (singleTrack?.genre)) ||
+                    (openEdit &&
+                    (<select
+                        type='text'
+                        aria-label='Title'
+                        value={singleTrack?.genre}
+                        onChange={onChange}
+                    >
+                        {genres.map(genre => (
+                            <option key={genre}>{genre}</option>
+                        ))}
+                    </select>)
+                    )}
                 </div>
             </div>
         </div>
