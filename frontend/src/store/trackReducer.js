@@ -96,6 +96,7 @@ export const createTrack = (payload) => async (dispatch) => {
 }
 
 export const updateTrack = (payload) => async (dispatch) => {
+    console.log('are we even hitting this updateTrack????????????????')
     const response = await csrfFetch('/api/tracks', {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
