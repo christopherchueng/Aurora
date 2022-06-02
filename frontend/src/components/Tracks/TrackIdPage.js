@@ -43,10 +43,10 @@ const TrackIdPage = ({tracks}) => {
     //     setSaveChanges(!saveChanges);
     // }, [openEdit])
 
-    const editOnClick =() => {
-        setOpenEdit(true);
-        setSaveChanges(false);
-    }
+    // const editOnClick =() => {
+    //     setOpenEdit(true);
+    //     setSaveChanges(false);
+    // }
 
     return (
         <>
@@ -140,7 +140,7 @@ const TrackIdPage = ({tracks}) => {
                                 className='inline-edit-Track'
                                 // When Edit button is CLICKED, Editing will be allowed and Save Changes
                                 // button WILL BE DISPLAYED.
-                                onClick={editOnClick}
+                                // onClick={editOnClick}
                                 >
                                 Edit
                             </button>
