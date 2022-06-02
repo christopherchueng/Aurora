@@ -10,12 +10,18 @@ const TrackIdPage = () => {
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const tracks = useSelector(state => state.track.entries)
+
+    const [value, setValue] = useState();
+    const [openEdit, setOpenEdit] = useState(false);
+    const [saveChanges, setSaveChanges] = useState(true)
     const [isPlaying, setIsPlaying] = useState(true)
     const singleTrack = Object.values(tracks).find(track => track.id === +trackId)
 
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
+
+    const onChange = e => setValue(e.target.value);
 
     return (
         <div className='music-player-ctn'>
@@ -28,7 +34,16 @@ const TrackIdPage = () => {
                 <div className='media-controls'>
                     <div className='control-left'>
                         <div className='track-title'>
-                            <h1>{singleTrack?.title}</h1>
+                            <h1>
+                                {(!openEdit && (singleTrack?.title)) ||
+                                (openEdit && <input
+                                    type='text'
+                                    aria-label='Title'
+                                    value={singleTrack?.title}
+                                    onChange={onChange}
+                                />)}
+                            </h1>
+
                         </div>
                         <div className='track-artist'>
                             <p>{singleTrack?.User?.username}</p>
@@ -56,7 +71,8 @@ const TrackIdPage = () => {
             </div>
         <div className='adjustment-ctn'>
             <div className='edit-ctn'>
-                <UpdateTrackForm track={singleTrack} />
+                <button className='inline-edit-Track' onClick={() => setOpenEdit(true) && setSaveChanges(false)}>Edit</button>
+                <button className='saveChanges' onClick={() => setOpenEdit(false) && setSaveChanges(true)}>Save Changes</button>
             </div>
             <div className='delete-ctn'>
                 <DeleteTrackComponent trackId={trackId} />
