@@ -82,7 +82,7 @@ const TrackIdPage = ({tracks}) => {
     return (
         <>
             <div className='music-player-ctn'>
-                <form onSubmit={handleSubmit}>
+                {/* <form onSubmit={handleSubmit}> */}
                     <div className='music-player-content'>
                         <div className='track-bar'>
                             {/* <form onSubmit={handleSubmit}> */}
@@ -120,7 +120,7 @@ const TrackIdPage = ({tracks}) => {
                                                     value={title}
                                                     onChange={e => setTitle(e.target.value)}
                                                 /> :
-                                                (saveChanges && track?.title)
+                                                (track?.title)
                                             }
                                         </h1>
                                     </div>
@@ -264,7 +264,7 @@ const TrackIdPage = ({tracks}) => {
                             </div>
                         {/* </form> */}
                     </div>
-                </form>
+                {/* </form> */}
             </div>
                 <div className='comment-section-ctn'>
                     <h1>Comments down below</h1>
