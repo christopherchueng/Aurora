@@ -10,20 +10,19 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-// const trackValidators = [
-//     // check('title')
-//     //     .exists({ checkFalsy: true })
-//     //     .isLength({ max: 100 })
-//     //     .withMessage('Please provide a title that is no more than 100 characters long.'),
-//     // check('genre')
-//     //     .exists({ checkFalsy: true })
-//     //     .withMessage('Please select a genre.')
-//     //     .isIn(genres),
-//     // check('trackPath')
-//     //     .exists({ checkFalsy: true })
-//     //     .withMessage('Please provide a track.')
-//     //     .isURL({ protocols: false }),
-// ];
+const trackValidators = [
+    check('title')
+        .exists({ checkFalsy: true })
+        .isLength({ max: 100 })
+        .withMessage('Please provide a title that is no more than 100 characters long.'),
+    check('genre')
+        .exists({ checkFalsy: true })
+        .withMessage('Please select a genre.'),
+    check('trackPath')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a track.')
+        .isURL({ protocols: false })
+];
 
 // Find a track
 router.get('/:trackId', asyncHandler(async (req, res) => {
@@ -74,7 +73,7 @@ router.post('/', asyncHandler(async (req, res) => {
 }))
 
 // Update a track
-router.put('/:trackId', asyncHandler(async (req, res) => {
+router.put('/:trackId', trackValidators, asyncHandler(async (req, res) => {
     const trackId = parseInt(req.params.trackId, 10);
     const track = await Track.findByPk(trackId);
 
