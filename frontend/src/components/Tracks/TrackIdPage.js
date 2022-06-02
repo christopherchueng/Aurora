@@ -82,14 +82,11 @@ const TrackIdPage = ({tracks}) => {
     return (
         <>
             <div className='music-player-ctn'>
-                {/* IF THE EDIT BUTTON IS PRESSED, BRING UP FORM */}
                 <div className='music-player-content'>
                     <div className='track-bar'>
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
-                            {/* If edit button is clicked, form will appear.
-                            Otherwise, display cover photo */}
-                            {saveChanges && <img className='cover-photo' src={track?.imagePath}></img>}
+                            <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
                     </div>
                     {/* START MEDIA CONTROLS */}
@@ -169,7 +166,7 @@ const TrackIdPage = ({tracks}) => {
                             Conversely, if edit button is not clicked, the edit button will be displayed.
                             Edit button has a 'submit' type because when openEdit is false, that means we are NOT
                             making any changes. Thus, the edits are made and locked in.*/}
-                            (<button
+                            <button
                                 type='submit'
                                 className='inline-edit-Track'
                                 // When Edit button is CLICKED, Editing will be allowed and Save Changes
@@ -177,7 +174,7 @@ const TrackIdPage = ({tracks}) => {
                                 onClick={() => setOpenEdit(true) &&
                                 setSaveChanges(true)}>
                                     Edit
-                            </button>)
+                            </button>
 
                             {/* ------------------ DELETE ------------------ */}
                             <div className='delete-ctn'>
@@ -191,12 +188,12 @@ const TrackIdPage = ({tracks}) => {
                         <div className='description'>
                             {/* If edit button is clicked, form will appear.
                             Otherwise, display description */}
-                            {saveChanges && track?.description}
+                            {track?.description}
                         </div>
                         {/* ------------------ GENRE ------------------ */}
                         <div className='genre-ctn'>
                             <div className='genre'>
-                                <span>{saveChanges && track?.genre}</span>
+                                <span>{track?.genre}</span>
                             </div>
                         </div>
                     </div>

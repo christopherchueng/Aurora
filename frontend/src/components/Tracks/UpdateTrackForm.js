@@ -174,14 +174,14 @@ const UpdateTrackForm = ({tracks}) => {
                                 Edit button has a 'submit' type because when openEdit is false, that means we are NOT
                                 making any changes. Thus, the edits are made and locked in.*/}
 
-                                (<button
+                                <button
                                     type='submit'
                                     className='saveChanges'
                                     // When Save Changes button is CLICKED, Editing will NOT be allowed and
                                     // Edit button WILL BE DISPLAYED.
                                     >
                                     Save Changes
-                                </button>)
+                                </button>
                                 <button
                                     type='button'
                                     className='cancel-edit'
@@ -194,12 +194,12 @@ const UpdateTrackForm = ({tracks}) => {
                                 <div className='description'>
                                     {/* If edit button is clicked, form will appear.
                                     Otherwise, display description */}
-                                        (<textarea
+                                        <textarea
                                             name='description'
                                             value={description}
                                             placeholder='Description'
                                             onChange={e => setDescription(e.target.value)}
-                                        />)
+                                        />
                                         {/* :(saveChanges && track?.description) */}
                                 </div>
                                 <div>
@@ -210,7 +210,7 @@ const UpdateTrackForm = ({tracks}) => {
                                     <div className='genre'>
                                         {/* If edit button is clicked, form will appear.
                                         Otherwise, display genre dropdown */}
-                                        (<select
+                                        <select
                                             type='text'
                                             aria-label='Title'
                                             value={genre}
@@ -219,7 +219,7 @@ const UpdateTrackForm = ({tracks}) => {
                                             {genres.map(genre => (
                                                 <option key={genre}>{genre}</option>
                                             ))}
-                                        </select>)
+                                        </select>
                                         {/* :<span>{saveChanges && track?.genre}</span> */}
                                     </div>
                                     <div>
