@@ -29,11 +29,13 @@ const UpdateTrackForm = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
-    useEffect(() => {
-        if (saveChanges) {
-            setCancelled(false)
-        };
-    }, [])
+    // useEffect(() => {
+    //     if (saveChanges) {
+    //         setCancelled(false)
+    //     } else {
+    //         setCancelled(true)
+    //     };
+    // }, [])
 
     // useEffect(() => {
     //     setSaveChanges(false);
@@ -53,14 +55,20 @@ const UpdateTrackForm = ({tracks}) => {
 
     }, [title, genre])
 
+    // const cancelOnClick = () => {
+    //     setCancelled(true)
+    //     setSaveChanges(false)
+    //     setOpenEdit(false);
+    // }
+
     // onSubmit function
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (errors) {
-            setOpenEdit(true)
-            setSaveChanges(false)
-        }
+        // if (errors) {
+        //     setOpenEdit(true)
+        //     setSaveChanges(false)
+        // }
 
         // Payload to be delivered to thunk
         const payload = {
@@ -76,8 +84,8 @@ const UpdateTrackForm = ({tracks}) => {
         // When form is submitted, track will be updated through payload
         const updatedTrack = await dispatch(updateTrack(payload, trackId))
         if (updatedTrack) {
-            setOpenEdit(false);
-            setSaveChanges(true);
+            // setOpenEdit(false);
+            // setSaveChanges(true);
             history.push(`/tracks/${updatedTrack.id}`)
         }
 
@@ -197,7 +205,7 @@ const UpdateTrackForm = ({tracks}) => {
                                 <button
                                     type='button'
                                     className='cancel-edit'
-                                    onClick={() => setCancelled(true)}
+                                    // onClick={cancelOnClick}
                                 >
                                     Cancel
                                 </button>

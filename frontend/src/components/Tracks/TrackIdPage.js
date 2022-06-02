@@ -30,14 +30,21 @@ const TrackIdPage = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
-    useEffect(() => {
-
-        setOpenEdit(false);
-    }, [])
-
+    // ON MOUNT RENDER, EDIT IS OFF AND NO CHANGES MADE.
     // useEffect(() => {
+    //     setOpenEdit(false);
     //     setSaveChanges(true);
-    // }, [saveChanges])
+    // }, [])
+
+    // EVERY TIME WHEN EDIT BUTTON IS CLICKED, saveChanges IS FALSE
+    // useEffect(() => {
+    //     setSaveChanges(!saveChanges);
+    // }, [openEdit])
+
+    // const editOnClick =() => {
+    //     setOpenEdit(true);
+    //     setSaveChanges(false);
+    // }
 
     return (
         <>
@@ -131,7 +138,7 @@ const TrackIdPage = ({tracks}) => {
                                 className='inline-edit-Track'
                                 // When Edit button is CLICKED, Editing will be allowed and Save Changes
                                 // button WILL BE DISPLAYED.
-                                onClick={() => setOpenEdit(true)}
+                                // onClick={editOnClick}
                             >
                                 Edit
                             </button>

@@ -10,13 +10,14 @@ const Tracks = () => {
     const tracks = useSelector(state => state.track.entries)
     const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
 
+    // On mount, edit button is off.
     useEffect(() => {
         setOpenEdit(false);
     }, [])
 
+    // On mount, changes are saved.
     useEffect(() => {
         setSaveChanges(true);
-
     }, [])
 
     return (
@@ -26,6 +27,8 @@ const Tracks = () => {
                     <CreateTrackForm />
                 </Route>
                 <Route path='/tracks/:trackId'>
+                    {/* If edit button is clicked: 2 options:
+                    If save changes is clicked, Update the track. Otherwise, */}
                     {openEdit
                         ? saveChanges
                             ? <UpdateTrackForm tracks={tracks} />
