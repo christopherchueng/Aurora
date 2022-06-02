@@ -11,12 +11,15 @@ const TrackIdPage = () => {
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const tracks = useSelector(state => state.track.entries)
+    // Tomorrow, think about making a tracks index to pass track as a prop.
+    const track = Object.values(tracks).find(track => track.id === +trackId)
+    // console.log(track['title'])
 
     // const [title, setTitle] = useState(track.title)
     // const [description, setDescription] = useState(track.description)
     // const [genre, setGenre] = useState(track.genre)
     // const [imagePath, setImagePath] = useState(track.imagePath)
-    const [errors, setErrors] = useState({});
+    // const [errors, setErrors] = useState({});
     const [value, setValue] = useState();
     const [openEdit, setOpenEdit] = useState(false);
     const [saveChanges, setSaveChanges] = useState(true)
@@ -102,9 +105,16 @@ const TrackIdPage = () => {
         </div>
         <div className='track-info-ctn'>
             <div className='description'>
-                <form onSubmit={handleSubmit}>
+                {/* <form onSubmit={handleSubmit}>
                     {singleTrack?.description}
-                </form>
+                    {(!openEdit && (singleTrack?.title)) ||
+                    (openEdit && (<textarea
+                        name='description'
+                        value={description}
+                        placeholder='Description'
+                        onChange={e => setDescription(e.target.value)}
+                    />))}
+                </form> */}
             </div>
             <div className='genre-ctn'>
                 <div className='genre'>
