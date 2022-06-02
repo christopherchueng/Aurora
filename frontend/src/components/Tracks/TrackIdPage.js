@@ -11,16 +11,15 @@ import ErrorMessage from '../FormTemplate/ErrorMessage'
 
 const TrackIdPage = ({tracks}) => {
     const dispatch = useDispatch();
-    const history = useHistory()
     const { trackId } = useParams();
     const track = tracks[+trackId];
     console.log('heres the track again', track?.User?.id)
 
-    const [title, setTitle] = useState(track?.title)
-    const [description, setDescription] = useState(track?.description)
-    const [genre, setGenre] = useState(track?.genre)
-    const [trackPath, setTrackPath] = useState(track?.trackPath)
-    const [imagePath, setImagePath] = useState(track?.imagePath)
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [genre, setGenre] = useState('')
+    const [trackPath, setTrackPath] = useState('')
+    const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     // const [value, setValue] = useState();
     const [openEdit, setOpenEdit] = useState(false);
@@ -30,54 +29,6 @@ const TrackIdPage = ({tracks}) => {
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
-
-    // Validator errors
-    useEffect(() => {
-        const validationErrors = {};
-        if (!title) {
-            validationErrors.title = 'Please provide a title.'
-        }
-        if (!genre) {
-            validationErrors.genre = 'Please select a genre.'
-        }
-
-        setErrors(validationErrors);
-
-    }, [title, genre])
-
-    // onSubmit function
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        setOpenEdit(true)
-        setSaveChanges(false)
-
-        // Payload to be delivered to thunk
-        const payload = {
-            title,
-            description,
-            genre,
-            trackPath,
-            imagePath,
-            // userId: track[User].id
-        }
-        console.log('this is what were sending to thunk', payload.id)
-
-        // When form is submitted, track will be updated through payload
-        const updatedTrack = await dispatch(updateTrack(payload, trackId))
-        if (updatedTrack) {
-            setOpenEdit(false);
-            setSaveChanges(true);
-            history.push(`/tracks/${updatedTrack.id}`)
-        }
-
-        // setTitle(track?.title);
-        // setDescription(track?.description);
-        // setGenre(track?.genre);
-        // setTrackPath(track?.trackPath)
-        // setImagePath(track?.imagePath);
-        // setErrors({});
-    }
 
     return (
         <>
@@ -147,11 +98,11 @@ const TrackIdPage = ({tracks}) => {
                                     <i className="fa-solid fa-forward-step fa-3x"></i>
                                 </button>
                             </div>
+                        </div>
 
-                            {/* ------------------ VOLUME ------------------ */}
-                            <div className='volume-ctn'>
-                                Volume line here
-                            </div>
+                        {/* ------------------ VOLUME ------------------ */}
+                        <div className='volume-ctn'>
+                            Volume line here
                         </div>
                         {/* END CENTER OF MEDIA CONTROLS */}
                     </div>
@@ -198,10 +149,10 @@ const TrackIdPage = ({tracks}) => {
                         </div>
                     </div>
                 </div>
+                <div className='comment-section-ctn'>
+                    <h1>Comments down below</h1>
+                </div>
             </div>
-                {/* // <div className='comment-section-ctn'>
-                //     <h1>Comments down below</h1>
-                // </div> */}
         </>
     )
 }

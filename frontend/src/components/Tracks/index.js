@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Tracks = () => {
     const tracks = useSelector(state => state.track.entries)
-    const [openEdit, setOpenEdit] = useState(true);
+    const [openEdit, setOpenEdit] = useState(false);
     const [saveChanges, setSaveChanges] = useState(true)
 
     return (

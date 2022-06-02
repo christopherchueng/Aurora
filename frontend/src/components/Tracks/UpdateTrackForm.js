@@ -159,7 +159,6 @@ const UpdateTrackForm = ({tracks}) => {
                                         <i className="fa-solid fa-forward-step fa-3x"></i>
                                     </button>
                                 </div>
-
                             </div>
                             <div className='volume-ctn'>
                                 Volume line here
