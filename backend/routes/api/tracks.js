@@ -75,9 +75,23 @@ router.post('/', asyncHandler(async (req, res) => {
 
 // Update a track
 router.put('/:trackId', asyncHandler(async (req, res) => {
-    const trackId = req.params.trackId;
+    const trackId = parseInt(req.params.trackId, 10);
     const track = await Track.findByPk(trackId);
-    await track.update(req.body);
+
+    const {
+        title,
+        description,
+        genre,
+        imagePath
+    } = req.body
+
+    await track.update({
+        title,
+        description,
+        genre,
+        imagePath
+    });
+
     return res.json(track);
 }))
 
