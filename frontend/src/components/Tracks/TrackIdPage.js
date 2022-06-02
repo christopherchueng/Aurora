@@ -136,12 +136,33 @@ const TrackIdPage = ({tracks}) => {
                                 </div>
                                 <div className='play-ctn'>
                                     {/* If not playing, play button will display */}
-                                    {!isPlaying && (<button type='button' className='play' onClick={() => setIsPlaying(!isPlaying)}><i className="fa-solid fa-circle-play fa-7x"></i></button>)}
+                                    {!isPlaying &&
+                                    (<button
+                                        type='button'
+                                        className='play'
+                                        onClick={() => setIsPlaying(!isPlaying)}
+                                    >
+                                        <i className="fa-solid fa-circle-play fa-7x"></i>
+                                    </button>
+                                    )}
                                     {/* If playing, pause button will display */}
-                                    {isPlaying && (<button type='button' className='pause' onClick={() => setIsPlaying(!isPlaying)}><i className="fa-solid fa-circle-pause fa-7x"></i></button>)}
+                                    {isPlaying &&
+                                    (<button
+                                        type='button'
+                                        className='pause'
+                                        onClick={() => setIsPlaying(!isPlaying)}
+                                    >
+                                        <i className="fa-solid fa-circle-pause fa-7x"></i>
+                                    </button>
+                                    )}
                                 </div>
                                 <div className='next-ctn'>
-                                    <button type='button' className='next'><i className="fa-solid fa-forward-step fa-3x"></i></button>
+                                    <button
+                                        type='button'
+                                        className='next'
+                                    >
+                                        <i className="fa-solid fa-forward-step fa-3x"></i>
+                                    </button>
                                 </div>
 
                             </div>
