@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getTracks, updateTrack } from '../../store/trackReducer';
 import { genres } from "../../utils/genreData";
 import { useHistory } from 'react-router-dom';
@@ -30,11 +30,9 @@ const UpdateTrackForm = ({tracks}) => {
     }, [dispatch])
 
     // useEffect(() => {
-    //     if (saveChanges) {
-    //         setCancelled(false)
-    //     } else {
-    //         setCancelled(true)
-    //     };
+    //     if (sa) {
+
+    //     }
     // }, [])
 
     // useEffect(() => {
@@ -202,13 +200,7 @@ const UpdateTrackForm = ({tracks}) => {
                                     >
                                     Save Changes
                                 </button>
-                                <button
-                                    type='button'
-                                    className='cancel-edit'
-                                    // onClick={cancelOnClick}
-                                >
-                                    Cancel
-                                </button>
+                                <button type='button'>Cancel</button>
                             </div>
                             <div className='track-info-ctn'>
                                 {/* ------------------ DESCRIPTION ------------------ */}

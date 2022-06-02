@@ -12,7 +12,7 @@ import { useEditTrackContext } from '../../context/EditTrackContext';
 // import './TrackIdPage.css';
 
 const TrackIdPage = ({tracks}) => {
-    const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
+    // const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
@@ -24,6 +24,8 @@ const TrackIdPage = ({tracks}) => {
     const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     // const [value, setValue] = useState();
+    const [openEdit, setOpenEdit] = useState(false)
+    const [saveChanges, setSaveChanges] = useState(true)
     const [isPlaying, setIsPlaying] = useState(true)
 
     useEffect(() => {
@@ -41,10 +43,10 @@ const TrackIdPage = ({tracks}) => {
     //     setSaveChanges(!saveChanges);
     // }, [openEdit])
 
-    // const editOnClick =() => {
-    //     setOpenEdit(true);
-    //     setSaveChanges(false);
-    // }
+    const editOnClick =() => {
+        setOpenEdit(true);
+        setSaveChanges(false);
+    }
 
     return (
         <>
@@ -134,12 +136,12 @@ const TrackIdPage = ({tracks}) => {
                             Edit button has a 'submit' type because when openEdit is false, that means we are NOT
                             making any changes. Thus, the edits are made and locked in.*/}
                             <button
-                                type='submit'
+                                type='button'
                                 className='inline-edit-Track'
                                 // When Edit button is CLICKED, Editing will be allowed and Save Changes
                                 // button WILL BE DISPLAYED.
-                                // onClick={editOnClick}
-                            >
+                                onClick={editOnClick}
+                                >
                                 Edit
                             </button>
 
