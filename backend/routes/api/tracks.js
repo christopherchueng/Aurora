@@ -83,7 +83,7 @@ router.put('/:trackId', asyncHandler(async (req, res) => {
 
 // Delete a track
 router.delete('/:trackId', asyncHandler(async (req, res) => {
-    const trackId = req.params.trackId;
+    const trackId = parseInt(req.params.trackId, 10);
     const track = await Track.findByPk(trackId);
     if (track) {
         await track.destroy();
