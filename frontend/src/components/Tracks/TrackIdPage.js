@@ -8,6 +8,7 @@ import UpdateTrackForm from './UpdateTrackForm';
 import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../FormTemplate/ErrorMessage'
 import { useEditTrackContext } from '../../context/EditTrackContext';
+import DeleteTrackModal from './DeleteTrackModal';
 
 import './TrackIdPage.css';
 
@@ -153,7 +154,7 @@ const TrackIdPage = ({tracks}) => {
 
                             {/* ------------------ DELETE ------------------ */}
                             <div className='delete-ctn'>
-                                <DeleteTrackComponent trackId={trackId} />
+                                <DeleteTrackModal />
                             </div>
                         </div>
                     </div>

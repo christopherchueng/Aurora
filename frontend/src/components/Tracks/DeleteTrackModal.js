@@ -1,7 +1,7 @@
 import { useState } from "react";
-import DeleteTrackComponent from "../components/Tracks/DeleteTrackComponent";
-import { Modal } from './Modal'
-import './Modal.css'
+import DeleteTrackComponent from "./DeleteTrackComponent";
+import { Modal } from '../../context/Modal'
+// import './Modal.css'
 
 const DeleteTrackModal = ({ track }) => {
     const [showModal, setShowModal] = useState(false)
@@ -20,4 +20,4 @@ const DeleteTrackModal = ({ track }) => {
     )
 }
 
-export default DeleteTrackComponent;
+export default DeleteTrackModal;
