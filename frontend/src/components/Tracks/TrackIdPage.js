@@ -7,7 +7,7 @@ import DeleteTrackComponent from './DeleteTrackComponent';
 import UpdateTrackForm from './UpdateTrackForm';
 import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../FormTemplate/ErrorMessage'
-import './TrackIdPage.css';
+// import './TrackIdPage.css';
 
 const TrackIdPage = ({tracks}) => {
     const dispatch = useDispatch();
@@ -83,86 +83,84 @@ const TrackIdPage = ({tracks}) => {
         <>
             <div className='music-player-ctn'>
                 {/* IF THE EDIT BUTTON IS PRESSED, BRING UP FORM */}
-                openEdit ?
-                    <UpdateTrackForm /> :
-                    // START OF NO EDIT FORM
-                    <div className='music-player-content'>
-                        <div className='track-bar'>
-                            {/* ------------------ IMAGEPATH ------------------ */}
-                            <div className='cover-photo-ctn'>
-                                {/* If edit button is clicked, form will appear.
-                                Otherwise, display cover photo */}
-                                {saveChanges && <img className='cover-photo' src={track?.imagePath}></img>)}
+                <div className='music-player-content'>
+                    <div className='track-bar'>
+                        {/* ------------------ IMAGEPATH ------------------ */}
+                        <div className='cover-photo-ctn'>
+                            {/* If edit button is clicked, form will appear.
+                            Otherwise, display cover photo */}
+                            {saveChanges && <img className='cover-photo' src={track?.imagePath}></img>}
+                        </div>
+                    </div>
+                    {/* START MEDIA CONTROLS */}
+                    <div className='media-controls'>
+                        <div className='control-left'>
+
+                            {/* ------------------ TITLE ------------------ */}
+                            <div className='track-title'>
+                                <h1>
+                                    {track?.title}
+                                </h1>
+                            </div>
+
+                            {/* ------------------ ARTIST ------------------ */}
+                            <div className='track-artist'>
+                                <p>{track?.User?.username}</p>
                             </div>
                         </div>
-                        {/* START MEDIA CONTROLS */}
-                        <div className='media-controls'>
-                            <div className='control-left'>
 
-                                {/* ------------------ TITLE ------------------ */}
-                                <div className='track-title'>
-                                    <h1>
-                                        {track?.title}
-                                    </h1>
-                                </div>
-
-                                {/* ------------------ ARTIST ------------------ */}
-                                <div className='track-artist'>
-                                    <p>{track?.User?.username}</p>
-                                </div>
+                        {/* ------------------ MEDIA CONTROLS ------------------ */}
+                        {/* START CENTER OF CONTROLS */}
+                        <div className='control-center'>
+                            <div className='back-ctn'>
+                                <button
+                                    type='button'
+                                    className='back'
+                                >
+                                    <i className="fa-solid fa-backward-step fa-3x"></i>
+                                </button>
                             </div>
-
-                            {/* ------------------ MEDIA CONTROLS ------------------ */}
-                            {/* START MEDIA CONTROLS */}
-                            <div className='control-center'>
-                                <div className='back-ctn'>
-                                    <button
-                                        type='button'
-                                        className='back'
-                                    >
-                                        <i className="fa-solid fa-backward-step fa-3x"></i>
-                                    </button>
-                                </div>
-                                <div className='play-ctn'>
-                                    {/* If not playing, play button will display */}
-                                    {!isPlaying &&
-                                    (<button
-                                        type='button'
-                                        className='play'
-                                        onClick={() => setIsPlaying(!isPlaying)}
-                                    >
-                                        <i className="fa-solid fa-circle-play fa-7x"></i>
-                                    </button>
-                                    )}
-                                    {/* If playing, pause button will display */}
-                                    {isPlaying &&
-                                    (<button
-                                        type='button'
-                                        className='pause'
-                                        onClick={() => setIsPlaying(!isPlaying)}
-                                    >
-                                        <i className="fa-solid fa-circle-pause fa-7x"></i>
-                                    </button>
-                                    )}
-                                </div>
-                                <div className='next-ctn'>
-                                    <button
-                                        type='button'
-                                        className='next'
-                                    >
-                                        <i className="fa-solid fa-forward-step fa-3x"></i>
-                                    </button>
-                                </div>
+                            <div className='play-ctn'>
+                                {/* If not playing, play button will display */}
+                                {!isPlaying &&
+                                (<button
+                                    type='button'
+                                    className='play'
+                                    onClick={() => setIsPlaying(!isPlaying)}
+                                >
+                                    <i className="fa-solid fa-circle-play fa-7x"></i>
+                                </button>
+                                )}
+                                {/* If playing, pause button will display */}
+                                {isPlaying &&
+                                (<button
+                                    type='button'
+                                    className='pause'
+                                    onClick={() => setIsPlaying(!isPlaying)}
+                                >
+                                    <i className="fa-solid fa-circle-pause fa-7x"></i>
+                                </button>
+                                )}
+                            </div>
+                            <div className='next-ctn'>
+                                <button
+                                    type='button'
+                                    className='next'
+                                >
+                                    <i className="fa-solid fa-forward-step fa-3x"></i>
+                                </button>
+                            </div>
 
                             {/* ------------------ VOLUME ------------------ */}
                             <div className='volume-ctn'>
                                 Volume line here
                             </div>
-                        {/* END MEDIA CONTROLS */}
                         </div>
+                        {/* END CENTER OF MEDIA CONTROLS */}
                     </div>
+                    {/* END MEDIA CONTROLS */}
 
-                    {/* START EDIT/DELETE */}
+                    {  /* START EDIT/DELETE */}
                     <div className='edit-save-ctn'>
                         {/* ------------------ EDIT AND DELETE BUTTONS ------------------ */}
                         <div className='edit-ctn'>
@@ -203,9 +201,10 @@ const TrackIdPage = ({tracks}) => {
                         </div>
                     </div>
                 </div>
-                <div className='comment-section-ctn'>
-                    <h1>Comments down below</h1>
-                </div>
+            </div>
+                {/* // <div className='comment-section-ctn'>
+                //     <h1>Comments down below</h1>
+                // </div> */}
         </>
     )
 }
