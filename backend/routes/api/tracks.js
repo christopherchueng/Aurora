@@ -82,14 +82,20 @@ router.put('/:trackId', asyncHandler(async (req, res) => {
         title,
         description,
         genre,
-        imagePath
+        trackPath,
+        imagePath,
+        userId
     } = req.body
+
+    console.log('What are we getting from the frontend?', req.body)
 
     await track.update({
         title,
         description,
         genre,
-        imagePath
+        trackPath,
+        imagePath,
+        userId
     });
 
     return res.json(track);
