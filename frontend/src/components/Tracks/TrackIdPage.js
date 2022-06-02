@@ -7,30 +7,30 @@ import DeleteTrackComponent from './DeleteTrackComponent';
 import UpdateTrackForm from './UpdateTrackForm';
 import './TrackIdPage.css';
 
-const TrackIdPage = () => {
+const TrackIdPage = ({tracks}) => {
     const dispatch = useDispatch();
     const { trackId } = useParams();
-    const tracks = useSelector(state => state.track.entries)
+    const track = tracks[trackId];
+    // const tracks = useSelector(state => state.track.entries)
     // Tomorrow, think about making a tracks index to pass track as a prop.
-    const track = Object.values(tracks).find(track => track.id === +trackId)
+    // const track = Object.values(tracks).find(track => track.id === +trackId)
     // console.log(track['title'])
+    console.log('-----------inTrackIdPage-----------', track);
 
-    // const [title, setTitle] = useState(track.title)
-    // const [description, setDescription] = useState(track.description)
-    // const [genre, setGenre] = useState(track.genre)
-    // const [imagePath, setImagePath] = useState(track.imagePath)
-    // const [errors, setErrors] = useState({});
+    const [title, setTitle] = useState(track.title)
+    const [description, setDescription] = useState(track.description)
+    const [genre, setGenre] = useState(track.genre)
+    const [imagePath, setImagePath] = useState(track.imagePath)
+    const [errors, setErrors] = useState({});
     const [value, setValue] = useState();
     const [openEdit, setOpenEdit] = useState(false);
     const [saveChanges, setSaveChanges] = useState(true)
     const [isPlaying, setIsPlaying] = useState(true)
-    const singleTrack = Object.values(tracks).find(track => track.id === +trackId)
+    // const track = Object.values(tracks).find(track => track.id === +trackId)
 
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
-
-    const onChange = e => setValue(e.target.value);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -51,7 +51,16 @@ const TrackIdPage = () => {
                 <div className='track-bar'>
                     <form onSubmit={handleSubmit}>
                         <div className='cover-photo-ctn'>
-                            <img className='cover-photo' src={singleTrack?.imagePath}></img>
+
+                            {(!openEdit && (<img className='cover-photo' src={track?.imagePath}></img>)) ||
+                                    (openEdit && <input
+                                        name='imagePath'
+                                        type='text'
+                                        alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
+                                        value={imagePath}
+                                        placeholder='Insert an image link'
+                                        onChange={e => setImagePath(e.target.value)}
+                                    />)}
                         </div>
                     </form>
                 </div>
@@ -60,18 +69,18 @@ const TrackIdPage = () => {
                         <form onSubmit={handleSubmit}>
                             <div className='track-title'>
                                 <h1>
-                                    {(!openEdit && (singleTrack?.title)) ||
+                                    {(!openEdit && (title)) ||
                                     (openEdit && <input
                                         type='text'
                                         aria-label='Title'
-                                        value={singleTrack?.title}
-                                        onChange={onChange}
+                                        value={title}
+                                        onChange={e => setTitle(e.target.value)}
                                     />)}
                                 </h1>
                             </div>
                         </form>
                         <div className='track-artist'>
-                            <p>{singleTrack?.User?.username}</p>
+                            <p>{track?.User.username}</p>
                         </div>
                     </div>
                     <div className='control-center'>
@@ -96,8 +105,20 @@ const TrackIdPage = () => {
             </div>
         <div className='adjustment-ctn'>
             <div className='edit-ctn'>
-                {!openEdit && (<button className='inline-edit-Track' onClick={() => setOpenEdit(true) && setSaveChanges(false)}>Edit</button>)}
-                {openEdit && (<button className='saveChanges' onClick={() => setOpenEdit(false) && setSaveChanges(true)}>Save Changes</button>)}
+                {!openEdit &&
+                (<button
+                    className='inline-edit-Track'
+                    onClick={() => setOpenEdit(true) &&
+                    setSaveChanges(false)}>
+                        Edit
+                </button>)}
+                {openEdit &&
+                (<button
+                    className='saveChanges'
+                    onClick={() => setOpenEdit(false) &&
+                    setSaveChanges(true)}>
+                        Save Changes
+                </button>)}
             </div>
             <div className='delete-ctn'>
                 <DeleteTrackComponent trackId={trackId} />
@@ -105,27 +126,26 @@ const TrackIdPage = () => {
         </div>
         <div className='track-info-ctn'>
             <div className='description'>
-                {/* <form onSubmit={handleSubmit}>
-                    {singleTrack?.description}
-                    {(!openEdit && (singleTrack?.title)) ||
+                <form onSubmit={handleSubmit}>
+                    {(!openEdit && (description)) ||
                     (openEdit && (<textarea
                         name='description'
                         value={description}
                         placeholder='Description'
                         onChange={e => setDescription(e.target.value)}
                     />))}
-                </form> */}
+                </form>
             </div>
             <div className='genre-ctn'>
                 <div className='genre'>
-                    {/* {singleTrack?.genre} */}
-                    {(!openEdit && (singleTrack?.genre)) ||
+                    {/* {track?.genre} */}
+                    {(!openEdit && (genre)) ||
                     (openEdit &&
                     (<select
                         type='text'
                         aria-label='Title'
-                        value={singleTrack?.genre}
-                        onChange={onChange}
+                        value={genre}
+                        onChange={e => setGenre(e.target.value)}
                     >
                         {genres.map(genre => (
                             <option key={genre}>{genre}</option>

@@ -5,8 +5,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/DiscoverPage";
-import CreateTrackForm from "./components/Tracks/CreateTrackForm";
-import TrackIdPage from './components/Tracks/TrackIdPage'
+// import CreateTrackForm from "./components/Tracks/CreateTrackForm";
+// import TrackIdPage from './components/Tracks/TrackIdPage'
+import Tracks from "./components/Tracks";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,12 +27,7 @@ function App() {
         <Route path='/discover'>
           <DiscoverPage />
         </Route>
-        <Route path='/upload'>
-          <CreateTrackForm />
-        </Route>
-        <Route path={'/tracks/:trackId'}>
-          <TrackIdPage />
-        </Route>
+        <Tracks />
 
       </Switch>
     </div>
