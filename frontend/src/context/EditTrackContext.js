@@ -1,0 +1,16 @@
+import { createContext, useContext, useState } from 'react';
+
+export const EditTrackContext = createContext();
+
+export const useEditTrackContext = () => useContext(EditTrackContext);
+
+export default function EditTrackProvider({ children }) {
+    const [openEdit, setOpenEdit] = useState(false);
+    const [saveChanges, setSaveChanges] = useState(true)
+
+    return (
+        <EditTrackContext.Provider value={{openEdit, setOpenEdit, saveChanges, setSaveChanges}}>
+            { children }
+        </EditTrackContext.Provider>
+    );
+}
