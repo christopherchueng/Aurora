@@ -174,7 +174,7 @@ const TrackIdPage = ({tracks}) => {
                 <div className='adjustment-ctn'>
                     {/* <form onSubmit={handleSubmit}> */}
 
-                        {/* ------------------ EDIT AND DELETE BUTTONS ------------------ */}
+                        {/* ------------------ EDIT AND SAVE CHANGES BUTTONS ------------------ */}
                         <div className='edit-ctn'>
                             {/* If edit button is clicked, openEdit will be set to true and
                             will display save changes button. This will allow form to appear.
