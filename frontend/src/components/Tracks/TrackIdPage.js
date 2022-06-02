@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { getTracks, removeTrack } from '../../store/trackReducer';
+import DeleteTrackComponent from './DeleteTrackComponent';
 import './TrackIdPage.css';
 
 const TrackIdPage = () => {
@@ -65,7 +66,7 @@ const TrackIdPage = () => {
                 <button>Edit</button>
             </div>
             <div className='delete-ctn'>
-                <button onClick={() => dispatch(removeTrack(trackId, singleTrack?.User?.id))}>Delete</button>
+                <DeleteTrackComponent />
             </div>
         </div>
         <div className='comment-section-ctn'>
