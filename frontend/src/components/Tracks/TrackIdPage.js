@@ -7,13 +7,15 @@ import DeleteTrackComponent from './DeleteTrackComponent';
 import UpdateTrackForm from './UpdateTrackForm';
 import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../FormTemplate/ErrorMessage'
+import { useEditTrackContext } from '../../context/EditTrackContext';
+
 // import './TrackIdPage.css';
 
 const TrackIdPage = ({tracks}) => {
+    const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
-    console.log('heres the track again', track?.User?.id)
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -22,13 +24,19 @@ const TrackIdPage = ({tracks}) => {
     const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     // const [value, setValue] = useState();
-    const [openEdit, setOpenEdit] = useState(false);
-    const [saveChanges, setSaveChanges] = useState(true)
     const [isPlaying, setIsPlaying] = useState(true)
 
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
+
+    useEffect(() => {
+        setOpenEdit(false);
+    }, [])
+
+    // useEffect(() => {
+    //     setSaveChanges(true);
+    // }, [saveChanges])
 
     return (
         <>
@@ -122,9 +130,9 @@ const TrackIdPage = ({tracks}) => {
                                 className='inline-edit-Track'
                                 // When Edit button is CLICKED, Editing will be allowed and Save Changes
                                 // button WILL BE DISPLAYED.
-                                onClick={() => setOpenEdit(true) &&
-                                setSaveChanges(true)}>
-                                    Edit
+                                onClick={() => setOpenEdit(true)}
+                            >
+                                Edit
                             </button>
 
                             {/* ------------------ DELETE ------------------ */}

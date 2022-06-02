@@ -5,28 +5,36 @@ import { getTracks, updateTrack } from '../../store/trackReducer';
 import { genres } from "../../utils/genreData";
 import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../FormTemplate/ErrorMessage'
+import { useEditTrackContext } from '../../context/EditTrackContext';
 import './UpdateTrackForm.css';
 
 const UpdateTrackForm = ({tracks}) => {
+    const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
     const dispatch = useDispatch();
     const history = useHistory()
     const { trackId } = useParams();
     const track = tracks[+trackId];
 
-    const [title, setTitle] = useState(track?.title)
-    const [description, setDescription] = useState(track?.description)
-    const [genre, setGenre] = useState(track?.genre)
-    const [trackPath, setTrackPath] = useState(track?.trackPath)
-    const [imagePath, setImagePath] = useState(track?.imagePath)
+    const [title, setTitle] = useState(track.title)
+    const [description, setDescription] = useState(track.description)
+    const [genre, setGenre] = useState(track.genre)
+    const [trackPath, setTrackPath] = useState(track.trackPath)
+    const [imagePath, setImagePath] = useState(track.imagePath)
     const [errors, setErrors] = useState({});
     // const [value, setValue] = useState();
-    const [openEdit, setOpenEdit] = useState(false);
-    const [saveChanges, setSaveChanges] = useState(true)
     const [isPlaying, setIsPlaying] = useState(true)
 
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
+
+    // useEffect(() => {
+    //     if ();
+    // }, [])
+
+    // useEffect(() => {
+    //     setSaveChanges(false);
+    // }, [saveChanges])
 
     // Validator errors
     useEffect(() => {
@@ -184,6 +192,7 @@ const UpdateTrackForm = ({tracks}) => {
                                 <button
                                     type='button'
                                     className='cancel-edit'
+                                    onClick={() => setSaveChanges(false) && setOpenEdit(false)}
                                 >
                                     Cancel
                                 </button>

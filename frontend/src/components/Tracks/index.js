@@ -4,11 +4,20 @@ import CreateTrackForm from "./CreateTrackForm";
 import UpdateTrackForm from "./UpdateTrackForm";
 import TrackIdPage from "./TrackIdPage";
 import { useDispatch, useSelector } from "react-redux";
+import { useEditTrackContext } from "../../context/EditTrackContext";
 
 const Tracks = () => {
     const tracks = useSelector(state => state.track.entries)
-    const [openEdit, setOpenEdit] = useState(false);
-    const [saveChanges, setSaveChanges] = useState(true)
+    const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
+
+    useEffect(() => {
+        setOpenEdit(false);
+    }, [])
+
+    useEffect(() => {
+        setSaveChanges(true);
+
+    }, [])
 
     return (
         <>
@@ -18,7 +27,9 @@ const Tracks = () => {
                 </Route>
                 <Route path='/tracks/:trackId'>
                     {openEdit
-                        ? <UpdateTrackForm tracks={tracks} />
+                        ? saveChanges
+                            ? <UpdateTrackForm tracks={tracks} />
+                            : setOpenEdit(false) && setSaveChanges(false)
                         : <TrackIdPage tracks={tracks}/>
 
                     }

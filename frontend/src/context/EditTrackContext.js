@@ -6,7 +6,7 @@ export const useEditTrackContext = () => useContext(EditTrackContext);
 
 export default function EditTrackProvider({ children }) {
     const [openEdit, setOpenEdit] = useState(false);
-    const [saveChanges, setSaveChanges] = useState(true)
+    const [saveChanges, setSaveChanges] = useState(false);
 
     return (
         <EditTrackContext.Provider value={{openEdit, setOpenEdit, saveChanges, setSaveChanges}}>
