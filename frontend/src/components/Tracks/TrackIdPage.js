@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
-import { getTracks, removeTrack } from '../../store/trackReducer';
+import { useParams } from 'react-router-dom';
+import { getTracks } from '../../store/trackReducer';
 import DeleteTrackComponent from './DeleteTrackComponent';
 import './TrackIdPage.css';
 
@@ -24,14 +24,6 @@ const TrackIdPage = () => {
                         <img className='cover-photo' src={singleTrack?.imagePath}></img>
                     </div>
                 </div>
-                {/* <div className='track-info-ctn'>
-                    <div className='track-title'>
-                        <h1>{singleTrack?.title}</h1>
-                    </div>
-                    <div className='track-artist'>
-                        <p>{singleTrack?.User.username}</p>
-                    </div>
-                </div> */}
                 <div className='media-controls'>
                     <div className='control-left'>
                         <div className='track-title'>
@@ -66,7 +58,7 @@ const TrackIdPage = () => {
                 <button>Edit</button>
             </div>
             <div className='delete-ctn'>
-                <DeleteTrackComponent />
+                <DeleteTrackComponent trackId={trackId} />
             </div>
         </div>
         <div className='comment-section-ctn'>

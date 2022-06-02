@@ -44,11 +44,10 @@ export const updateTrack = (track) => {
     }
 }
 
-export const deleteTrack = (trackId, userId) => {
+export const deleteTrack = (trackId) => {
     return {
         type: DELETE_TRACK,
-        trackId,
-        userId
+        trackId
     }
 }
 
@@ -96,15 +95,14 @@ export const createTrack = (payload) => async (dispatch) => {
     return track;
 }
 
-export const removeTrack = (trackId, userId) => async (dispatch) => {
+export const removeTrack = (trackId) => async (dispatch) => {
     const response = await csrfFetch(`/api/tracks/${trackId}`, {
         method: 'DELETE'
     })
 
     if (response.ok) {
-        const { id: deletedTrackId } = await response.json();
-        dispatch(deleteTrack(deletedTrackId, userId))
-        return deletedTrackId;
+        dispatch(deleteTrack(trackId))
+        return trackId;
     }
 }
 
@@ -149,6 +147,9 @@ const trackReducer = (state = initialState, action) => {
             newState = { ...state };
             delete newState[action.trackId]
             return newState;
+
+        case FETCH_USER:
+            newState = { ...state };
         default:
             return state;
     }

@@ -1,12 +1,22 @@
 import { useDispatch } from "react-redux";
-import { removeTrack } from "../../store/trackReducer";
-import { useParams } from "react-router-dom";
+import { removeTrack} from "../../store/trackReducer";
+import { useHistory } from "react-router-dom";
 
-const DeleteTrackComponent = () => {
+const DeleteTrackComponent = ({ trackId }) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const onClick = () => {
+        dispatch(removeTrack(trackId))
+
+        if (trackId) {
+            history.push('/discover');
+        }
+    }
+
     return (
         <>
-            <button>Delete</button>
-            {/* <button onClick={() => dispatch(removeTrack(trackId, singleTrack?.User?.id))}>Delete</button> */}
+            <button onClick={onClick}>Delete</button>
         </>
     )
 }
