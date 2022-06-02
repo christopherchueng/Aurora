@@ -12,7 +12,7 @@ import { useEditTrackContext } from '../../context/EditTrackContext';
 // import './TrackIdPage.css';
 
 const TrackIdPage = ({tracks}) => {
-    // const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
+    const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
@@ -24,13 +24,18 @@ const TrackIdPage = ({tracks}) => {
     const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     // const [value, setValue] = useState();
-    const [openEdit, setOpenEdit] = useState(false)
-    const [saveChanges, setSaveChanges] = useState(true)
+    // const [openEdit, setOpenEdit] = useState(false)
+    // const [saveChanges, setSaveChanges] = useState(true)
     const [isPlaying, setIsPlaying] = useState(true)
 
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
+
+    // useEffect(() => {
+
+    //     setOpenEdit(false);
+    // }, [])
 
     // ON MOUNT RENDER, EDIT IS OFF AND NO CHANGES MADE.
     // useEffect(() => {
@@ -140,10 +145,11 @@ const TrackIdPage = ({tracks}) => {
                                 className='inline-edit-Track'
                                 // When Edit button is CLICKED, Editing will be allowed and Save Changes
                                 // button WILL BE DISPLAYED.
-                                // onClick={editOnClick}
+                                onClick={() => setOpenEdit(true)}
                                 >
                                 Edit
                             </button>
+
 
                             {/* ------------------ DELETE ------------------ */}
                             <div className='delete-ctn'>

@@ -32,9 +32,9 @@ const Tracks = () => {
                     {/* If edit button is clicked: 2 options:
                     If save changes is clicked, Update the track. Otherwise, */}
                     {openEdit
-                        ? saveChanges
-                            ? <UpdateTrackForm tracks={tracks} />
-                            : setOpenEdit(false) && setSaveChanges(true)
+                        // ? saveChanges
+                        ? <UpdateTrackForm tracks={tracks} />
+                            // : setOpenEdit(false) && setSaveChanges(true)
                         : <TrackIdPage tracks={tracks} />
 
                     }

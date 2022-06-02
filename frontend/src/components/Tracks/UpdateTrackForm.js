@@ -20,7 +20,7 @@ const UpdateTrackForm = ({tracks}) => {
     const [genre, setGenre] = useState(track.genre)
     const [trackPath, setTrackPath] = useState(track.trackPath)
     const [imagePath, setImagePath] = useState(track.imagePath)
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState([]);
     const [cancelled, setCancelled] = useState(false);
     // const [value, setValue] = useState();
     const [isPlaying, setIsPlaying] = useState(true)
@@ -28,6 +28,12 @@ const UpdateTrackForm = ({tracks}) => {
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
+
+    useEffect(() => {
+        if (saveChanges) {
+            setCancelled(false)
+        };
+    }, [])
 
     // useEffect(() => {
     //     if (sa) {
@@ -41,12 +47,12 @@ const UpdateTrackForm = ({tracks}) => {
 
     // Validator errors
     useEffect(() => {
-        const validationErrors = {};
+        const validationErrors = [];
         if (!title) {
-            validationErrors.title = 'Please provide a title.'
+            validationErrors.push('Please provide a title.')
         }
         if (!genre) {
-            validationErrors.genre = 'Please select a genre.'
+            validationErrors.push('Please select a genre.')
         }
 
         setErrors(validationErrors);
@@ -63,10 +69,11 @@ const UpdateTrackForm = ({tracks}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // if (errors) {
-        //     setOpenEdit(true)
-        //     setSaveChanges(false)
-        // }
+        if (errors) {
+            setOpenEdit(true)
+            setSaveChanges(false)
+            //render errors
+        }
 
         // Payload to be delivered to thunk
         const payload = {
@@ -82,9 +89,9 @@ const UpdateTrackForm = ({tracks}) => {
         // When form is submitted, track will be updated through payload
         const updatedTrack = await dispatch(updateTrack(payload, trackId))
         if (updatedTrack) {
-            // setOpenEdit(false);
+            setOpenEdit(false);
             // setSaveChanges(true);
-            history.push(`/tracks/${updatedTrack.id}`)
+            // history.push(`/tracks/${updatedTrack.id}`)
         }
 
         // setTitle(track?.title);
