@@ -73,7 +73,7 @@ router.post('/', asyncHandler(async (req, res) => {
 }))
 
 // Update a track
-router.put('/:trackId', trackValidators, asyncHandler(async (req, res) => {
+router.put('/:trackId', asyncHandler(async (req, res) => {
     const trackId = parseInt(req.params.trackId, 10);
     const track = await Track.findByPk(trackId);
 
