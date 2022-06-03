@@ -1,69 +1,42 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getTracks, updateTrack } from '../../store/trackReducer';
-import { genres } from "../../utils/genreData";
-import DeleteTrackComponent from './DeleteTrackComponent';
-import UpdateTrackForm from './UpdateTrackForm';
-import { useHistory } from 'react-router-dom';
-import ErrorMessage from '../FormTemplate/ErrorMessage'
+import { getTracks } from '../../store/trackReducer';
 import { useEditTrackContext } from '../../context/EditTrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
 
 import './TrackIdPage.css';
 
 const TrackIdPage = ({tracks}) => {
-    const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
+    const { openEdit, setOpenEdit } = useEditTrackContext();
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
 
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [genre, setGenre] = useState('')
-    const [trackPath, setTrackPath] = useState('')
-    const [imagePath, setImagePath] = useState('')
-    const [errors, setErrors] = useState({});
-    // const [value, setValue] = useState();
-    // const [openEdit, setOpenEdit] = useState(false)
-    // const [saveChanges, setSaveChanges] = useState(true)
+    // const [title, setTitle] = useState('')
+    // const [description, setDescription] = useState('')
+    // const [genre, setGenre] = useState('')
+    // const [trackPath, setTrackPath] = useState('')
+    // const [imagePath, setImagePath] = useState('')
+    // const [errors, setErrors] = useState({});
     const [isPlaying, setIsPlaying] = useState(true)
 
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
 
-    // useEffect(() => {
-
-    //     setOpenEdit(false);
-    // }, [])
-
-    // ON MOUNT RENDER, EDIT IS OFF AND NO CHANGES MADE.
-    // useEffect(() => {
-    //     setOpenEdit(false);
-    //     setSaveChanges(true);
-    // }, [])
-
-    // EVERY TIME WHEN EDIT BUTTON IS CLICKED, saveChanges IS FALSE
-    // useEffect(() => {
-    //     setSaveChanges(!saveChanges);
-    // }, [openEdit])
-
-    // const editOnClick =() => {
-    //     setOpenEdit(true);
-    //     setSaveChanges(false);
-    // }
-
     return (
         <>
             <div className='music-player-ctn'>
                 <div className='music-player-content'>
                     <div className='track-bar'>
+
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
                             <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
                     </div>
+
                     {/* START MEDIA CONTROLS */}
                     <div className='media-controls'>
                         <div className='control-left'>
@@ -81,9 +54,11 @@ const TrackIdPage = ({tracks}) => {
                             </div>
                         </div>
 
-                        {/* ------------------ MEDIA CONTROLS ------------------ */}
                         {/* START CENTER OF CONTROLS */}
+                        {/* ------------------ MEDIA CONTROLS ------------------ */}
                         <div className='control-center'>
+
+                            {/* ------------------ BACK BUTTON ------------------ */}
                             <div className='back-ctn'>
                                 <button
                                     type='button'
@@ -92,6 +67,8 @@ const TrackIdPage = ({tracks}) => {
                                     <i className="fa-solid fa-backward-step fa-3x"></i>
                                 </button>
                             </div>
+
+                            {/* ------------------ PLAY BUTTON ------------------ */}
                             <div className='play-ctn'>
                                 {/* If not playing, play button will display */}
                                 {!isPlaying &&
@@ -114,6 +91,8 @@ const TrackIdPage = ({tracks}) => {
                                 </button>
                                 )}
                             </div>
+
+                            {/* ------------------ NEXT BUTTON ------------------ */}
                             <div className='next-ctn'>
                                 <button
                                     type='button'
@@ -133,24 +112,18 @@ const TrackIdPage = ({tracks}) => {
                     {/* END MEDIA CONTROLS */}
 
                     {  /* START EDIT/DELETE */}
+                    {/* ------------------ EDIT AND DELETE BUTTONS ------------------ */}
                     <div className='edit-save-ctn'>
-                        {/* ------------------ EDIT AND DELETE BUTTONS ------------------ */}
                         <div className='edit-ctn'>
-                            {/* If edit button is clicked, openEdit will be set to true and
-                            will display save changes button. This will allow form to appear.
-                            Conversely, if edit button is not clicked, the edit button will be displayed.
-                            Edit button has a 'submit' type because when openEdit is false, that means we are NOT
-                            making any changes. Thus, the edits are made and locked in.*/}
                             <button
                                 type='button'
                                 className='inline-edit-Track'
-                                // When Edit button is CLICKED, Editing will be allowed and Save Changes
-                                // button WILL BE DISPLAYED.
+                                // When Edit button is CLICKED, Editing will be allowed by rendering UpdateTrackForm component.
+                                // Save Changes button WILL BE DISPLAYED.
                                 onClick={() => setOpenEdit(true)}
                                 >
                                 Edit
                             </button>
-
 
                             {/* ------------------ DELETE ------------------ */}
                             <div className='delete-ctn'>
@@ -159,13 +132,12 @@ const TrackIdPage = ({tracks}) => {
                         </div>
                     </div>
 
+                    {/* ------------------ DESCRIPTION ------------------ */}
                     <div className='track-info-ctn'>
-                        {/* ------------------ DESCRIPTION ------------------ */}
                         <div className='description'>
-                            {/* If edit button is clicked, form will appear.
-                            Otherwise, display description */}
                             {track?.description}
                         </div>
+
                         {/* ------------------ GENRE ------------------ */}
                         <div className='genre-ctn'>
                             <div className='genre'>
