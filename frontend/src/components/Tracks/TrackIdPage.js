@@ -12,6 +12,7 @@ const TrackIdPage = ({tracks}) => {
     const history = useHistory();
     const { trackId } = useParams();
     const track = tracks[+trackId];
+    // console.log(track);
 
     // States
     const { openEdit, setOpenEdit } = useEditTrackContext();
