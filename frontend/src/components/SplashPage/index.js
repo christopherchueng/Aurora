@@ -8,9 +8,10 @@ import './SplashPage.css'
 
 const SplashPage = () => {
     const dispatch = useDispatch();
-    const tracks = useSelector(state => state.track.entries)
-    const tracksObj = Object.values(tracks)
-    const mostRecentTracks = tracksObj.slice(tracksObj.length - 12)
+    const mostRecentTracks = useSelector(state => {
+        const tracksObj = Object.values(state.track.entries)
+        return tracksObj.slice(tracksObj.length - 12)
+    })
 
     useEffect(() => {
         dispatch(getTracks())

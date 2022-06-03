@@ -44,10 +44,11 @@ export const editTrack = (track) => {
     }
 }
 
-export const deleteTrack = (trackId) => {
+export const deleteTrack = (track) => {
+    // console.log('we about to dispatch this track. we in deleteTrack action creator', track)
     return {
         type: DELETE_TRACK,
-        trackId
+        track
     }
 }
 
@@ -107,14 +108,19 @@ export const updateTrack = (payload, trackId) => async (dispatch) => {
     return track;
 }
 
-export const removeTrack = (trackId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/tracks/${trackId}`, {
+export const removeTrack = (track) => async (dispatch) => {
+    console.log('sending this id in removeTrack thunk', track.id)
+    console.log('we grabbed the id above from this ----->', track)
+    const response = await csrfFetch(`/api/tracks/${track.id}`, {
         method: 'DELETE'
     })
 
     if (response.ok) {
-        dispatch(deleteTrack(trackId))
-        return trackId;
+        const track = await response.json();
+        // console.log('this is the track we got back from backend', track)
+        dispatch(deleteTrack(track))
+        // console.log('not returning anything. This log is after dispatching')
+        return track;
     }
 }
 
@@ -160,8 +166,14 @@ const trackReducer = (state = initialState, action) => {
                 [action.track.id]: action.track
             }
         case DELETE_TRACK:
-            newState = { ...state };
-            delete newState[action.trackId]
+            // newState = { ...state, entries: {...state.entries} };
+            // console.log('here in reducer', newState)
+            // console.log('im trying to delete this', newState.entries[action.trackId])
+            // delete newState.entries[action.trackId]
+            // return newState;
+            newState = { ...state }
+            // console.log('this is the id that were trying to delete', newState)
+            delete newState[action.track.id]
             return newState;
 
         case FETCH_USER:

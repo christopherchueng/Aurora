@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeTrack} from "../../store/trackReducer";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
@@ -8,17 +8,21 @@ const DeleteTrackComponent = () => {
     const { trackId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
-    // const track = useSelector(state => console.log(state.tracks))
+    const tracks = useSelector(state => state.track.entries)
+    const track = tracks[trackId]
 
     const [showModal, setShowModal] = useState(false)
 
-    const onDelete = async (e) => {
-        e.preventDefault();
-        const track = await dispatch(removeTrack(trackId))
-        if (track) {
-            setShowModal(false);
-            history.push('/discover');
-        }
+    const onDelete = (e) => {
+        dispatch(removeTrack(track))
+        history.push('/')
+        // console.log('what does dispatch(removeTrack(track)) return idk', dispatch(removeTrack(track)));
+        setShowModal(false);
+    }
+
+    const cancelClick = (e) => {
+        e.stopPropagation();
+        setShowModal(false);
     }
 
     return (
@@ -27,9 +31,11 @@ const DeleteTrackComponent = () => {
                 <div className='delete-confirm'>
                     <p>Are you sure you want to delete this track?</p>
                 </div>
-                <div className='delete-selections'>
+                <div className='cancel-btn-ctn'>
+                    <button className='cancel-btn' onClick={cancelClick}>Cancel</button>
+                </div>
+                <div className='delete-btn-ctn'>
                     <button onClick={onDelete}>Delete</button>
-                    <button className='cancel-delete' onClick={() => setShowModal(false)}>Cancel</button>
 
                 </div>
             </div>
