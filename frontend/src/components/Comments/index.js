@@ -13,6 +13,10 @@ const Comments = ({tracks}) => {
     const comments = useSelector(state => state.comment.entries)
     const commentsArr = Object.values(comments);
 
+
+    // States
+    const [isHovered, setIsHovered] = useState(false);
+
     useEffect(() => {
         dispatch(getComments(+trackId))
     }, [dispatch])
@@ -26,18 +30,29 @@ const Comments = ({tracks}) => {
                 <ul>
                     {commentsArr.map(comment => (
                         <>
-                            <div className='track-comment-item'>
-                                <li key={comment.id}>
+                            <div
+                                className='track-comment-item'
+                            >
+                                <li
+                                key={comment.id}
+                                className='comment-item'
+                                onMouseEnter={
+                                    (e) => (comment.userId === user.id)
+                                    ? setIsHovered(!isHovered)
+                                    : setIsHovered(false)}
+                                >
                                     {comment.message}
+                                    {isHovered && (comment.userId === user.id)
+                                    ? <div className='comment-manip-ctn'>
+                                        <div className='edit-comment-ctn'>
+                                            <button><i className="fa-solid fa-pen"></i></button>
+                                        </div>
+                                        <div className='delete-comment-ctn'>
+                                            <button><i className="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    : ""}
                                 </li>
-                            </div>
-                            <div className='comment-manip-ctn'>
-                                <div className='edit-comment-ctn'>
-                                    <button><i className="fa-solid fa-pen"></i></button>
-                                </div>
-                                <div className='delete-comment-ctn'>
-                                    <button><i className="fa-solid fa-trash"></i></button>
-                                </div>
                             </div>
 
                         </>
