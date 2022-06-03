@@ -9,19 +9,6 @@ const asyncHandler = require('express-async-handler');
 
 const router = express.Router();
 
-router.get('/', asyncHandler(async (req, res) => {
-    const { track } = req.body;
-
-    const comments = await Comment.findAll({
-        where: {
-            trackId: {
-                [Op.eq]: req.track.id
-            }
-        }
-    })
-
-    res.json(comments);
-}))
 
 router.post('/', asyncHandler(async (req, res) => {
     const { message, trackId, userId } = req.body;

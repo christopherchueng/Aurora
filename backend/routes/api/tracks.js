@@ -24,16 +24,6 @@ const trackValidators = [
         .isURL({ protocols: false })
 ];
 
-// Find a track
-router.get('/:trackId', asyncHandler(async (req, res) => {
-    const trackId = parseInt(req.params.trackId, 10);
-    const track = await Track.findByPk(trackId, {
-        include: Comment
-    });
-
-    return res.json(track);
-}))
-
 // Get tracks
 router.get('/', asyncHandler(async (req, res) => {
     const tracks = await Track.findAll({
@@ -43,14 +33,17 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(tracks);
 }))
 
-// Upload a track
-// router.get('/', asyncHandler(async (req, res) => {
-//     console.log('here in get route')
-//     const userId = req.session.auth.userId;
-//     const user = await User.findByPk(userId)
-//     const tracks = await Track.build();
-//     res.json(tracks);
-// }))
+// Get all comments under a track
+router.get('/:trackId/comments', asyncHandler(async (req, res) => {
+    const trackId = parseInt(req.params.trackId, 10);
+    const comments = await Comment.findAll({
+        where: {
+            trackId
+        }
+    })
+
+    return res.json(comments);
+}))
 
 router.post('/', asyncHandler(async (req, res) => {
     const {
