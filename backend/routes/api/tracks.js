@@ -37,7 +37,7 @@ router.get('/:trackId', asyncHandler(async (req, res) => {
 // Get tracks
 router.get('/', asyncHandler(async (req, res) => {
     const tracks = await Track.findAll({
-        include: User
+        include: { User, Comment }
     });
 
     return res.json(tracks);
