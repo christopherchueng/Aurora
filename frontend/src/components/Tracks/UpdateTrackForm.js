@@ -51,9 +51,9 @@ const UpdateTrackForm = ({tracks}) => {
         if (!title) {
             validationErrors.push('Please provide a title.')
         }
-        if (!genre) {
-            validationErrors.push('Please select a genre.')
-        }
+        // if (!genre) {
+        //     validationErrors.push('Please select a genre.')
+        // }
 
         setErrors(validationErrors);
 
@@ -135,7 +135,7 @@ const UpdateTrackForm = ({tracks}) => {
                                     </h1>
                                 </div>
                                 <div>
-                                    {openEdit && <ErrorMessage error={errors.title} />}
+                                    {openEdit && <ErrorMessage error={errors[0]} />}
                                 </div>
 
                                 {/* ------------------ ARTIST ------------------ */}
@@ -220,9 +220,9 @@ const UpdateTrackForm = ({tracks}) => {
                                         />
                                         {/* :(saveChanges && track?.description) */}
                                 </div>
-                                <div>
+                                {/* <div>
                                     {saveChanges && <ErrorMessage error={errors.description} />}
-                                </div>
+                                </div> */}
                                 {/* ------------------ GENRE ------------------ */}
                                 <div className='genre-ctn'>
                                     <div className='genre'>
@@ -240,9 +240,9 @@ const UpdateTrackForm = ({tracks}) => {
                                         </select>
                                         {/* :<span>{saveChanges && track?.genre}</span> */}
                                     </div>
-                                    <div>
-                                        {openEdit && <ErrorMessage error={errors.genre} />}
-                                    </div>
+                                    {/* <div>
+                                        {errors.length > 0 && <ErrorMessage error={errors[1]} />}
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
