@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 const DeleteTrackComponent = ({ showModal }) => {
-    console.log('THIS IS SETSHOWMODAL'. showModal)
+    // console.log('THIS IS SETSHOWMODAL'. showModal)
     const { trackId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -21,10 +21,10 @@ const DeleteTrackComponent = ({ showModal }) => {
         // setShowModal(false);
     }
 
-    const cancelClick = (e) => {
-        console.log('CLIKED THIS')
-        // setShowModal(false);
-    }
+    // const cancelClick = (e) => {
+    //     console.log('CLIKED THIS')
+    //     // setShowModal(false);
+    // }
 
     return (
         <>

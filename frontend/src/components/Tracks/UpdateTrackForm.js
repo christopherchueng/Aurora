@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { getTracks, updateTrack } from '../../store/trackReducer';
 import { genres } from "../../utils/genreData";
-import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../FormTemplate/ErrorMessage'
 import { useEditTrackContext } from '../../context/EditTrackContext';
 import './UpdateTrackForm.css';
 
 const UpdateTrackForm = ({tracks}) => {
-    const { openEdit, setOpenEdit, saveChanges, setSaveChanges } = useEditTrackContext();
+    const { openEdit, setOpenEdit } = useEditTrackContext();
     const dispatch = useDispatch();
-    const history = useHistory()
     const { trackId } = useParams();
     const track = tracks[+trackId];
 
@@ -21,29 +19,11 @@ const UpdateTrackForm = ({tracks}) => {
     const [trackPath, setTrackPath] = useState(track.trackPath)
     const [imagePath, setImagePath] = useState(track.imagePath)
     const [errors, setErrors] = useState([]);
-    const [cancelled, setCancelled] = useState(false);
-    // const [value, setValue] = useState();
     const [isPlaying, setIsPlaying] = useState(true)
 
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
-
-    // useEffect(() => {
-    //     if (saveChanges) {
-    //         setCancelled(false)
-    //     };
-    // }, [])
-
-    // useEffect(() => {
-    //     if (sa) {
-
-    //     }
-    // }, [])
-
-    // useEffect(() => {
-    //     setSaveChanges(false);
-    // }, [saveChanges])
 
     // Validator errors
     useEffect(() => {
@@ -59,12 +39,6 @@ const UpdateTrackForm = ({tracks}) => {
 
     }, [title, genre])
 
-    // const cancelOnClick = () => {
-    //     setCancelled(true)
-    //     setSaveChanges(false)
-    //     setOpenEdit(false);
-    // }
-
     // onSubmit function
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,38 +50,23 @@ const UpdateTrackForm = ({tracks}) => {
             genre,
             trackPath,
             imagePath,
-            // userId: track[User].id
         }
-        console.log('this is what were sending to thunk', payload.id)
 
         // When form is submitted, track will be updated through payload
         const updatedTrack = await dispatch(updateTrack(payload, trackId))
         if (updatedTrack) {
             setOpenEdit(false);
-            // setSaveChanges(true);
-            // history.push(`/tracks/${updatedTrack.id}`)
         }
-
-        // setTitle(track?.title);
-        // setDescription(track?.description);
-        // setGenre(track?.genre);
-        // setTrackPath(track?.trackPath)
-        // setImagePath(track?.imagePath);
-        // setErrors({});
     }
 
     return (
         <>
-            {/* IF THE EDIT BUTTON IS PRESSED, BRING UP FORM */}
-            {/* {openEdit ?  */}
             <div className='music-player-ctn'>
                 <div className='music-player-content'>
                     <form onSubmit={handleSubmit}>
                         <div className='track-bar'>
                             {/* ------------------ IMAGEPATH ------------------ */}
                             <div className='cover-photo-ctn'>
-                                {/* If edit button is clicked, form will appear.
-                                Otherwise, display cover photo */}
                                 <input
                                     name='imagePath'
                                     type='text'
@@ -124,8 +83,6 @@ const UpdateTrackForm = ({tracks}) => {
                                 {/* ------------------ TITLE ------------------ */}
                                 <div className='track-title'>
                                     <h1>
-                                        {/* If edit button is clicked, form will appear.
-                                        Otherwise, display title */}
                                         <input
                                             type='text'
                                             aria-label='Title'
@@ -185,19 +142,11 @@ const UpdateTrackForm = ({tracks}) => {
                             </div>
                         </div>
                         <div className='edit-save-ctn'>
-                            {/* ------------------ EDIT AND SAVE CHANGES BUTTONS ------------------ */}
+                            {/* ------------------ SAVE CHANGES AND CANCEL BUTTONS ------------------ */}
                             <div className='edit-ctn'>
-                                {/* If edit button is clicked, openEdit will be set to true and
-                                will display save changes button. This will allow form to appear.
-                                Conversely, if edit button is not clicked, the edit button will be displayed.
-                                Edit button has a 'submit' type because when openEdit is false, that means we are NOT
-                                making any changes. Thus, the edits are made and locked in.*/}
-
                                 {<button
                                     type='submit'
                                     className='saveChanges'
-                                    // When Save Changes button is CLICKED, Editing will NOT be allowed and
-                                    // Edit button WILL BE DISPLAYED.
                                     disabled={errors.length !== 0}
                                     >
                                     Save Changes
@@ -210,24 +159,16 @@ const UpdateTrackForm = ({tracks}) => {
                             <div className='track-info-ctn'>
                                 {/* ------------------ DESCRIPTION ------------------ */}
                                 <div className='description'>
-                                    {/* If edit button is clicked, form will appear.
-                                    Otherwise, display description */}
                                         <textarea
                                             name='description'
                                             value={description}
                                             placeholder='Description'
                                             onChange={e => setDescription(e.target.value)}
                                         />
-                                        {/* :(saveChanges && track?.description) */}
                                 </div>
-                                {/* <div>
-                                    {saveChanges && <ErrorMessage error={errors.description} />}
-                                </div> */}
                                 {/* ------------------ GENRE ------------------ */}
                                 <div className='genre-ctn'>
                                     <div className='genre'>
-                                        {/* If edit button is clicked, form will appear.
-                                        Otherwise, display genre dropdown */}
                                         <select
                                             type='text'
                                             aria-label='Title'
@@ -238,7 +179,6 @@ const UpdateTrackForm = ({tracks}) => {
                                                 <option key={genre}>{genre}</option>
                                             ))}
                                         </select>
-                                        {/* :<span>{saveChanges && track?.genre}</span> */}
                                     </div>
                                     {/* <div>
                                         {errors.length > 0 && <ErrorMessage error={errors[1]} />}

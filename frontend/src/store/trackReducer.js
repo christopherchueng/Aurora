@@ -6,7 +6,6 @@ const LOAD_GENRES = 'track/loadGenres'
 const ADD_TRACK = 'track/addTrack'
 const UPDATE_TRACK = 'track/updateTrack'
 const DELETE_TRACK = 'track/deleteTrack'
-const FETCH_USER = 'user/fetchUser'
 
 // Action creators
 export const loadTrack = (track) => {
@@ -45,17 +44,9 @@ export const editTrack = (track) => {
 }
 
 export const deleteTrack = (track) => {
-    // console.log('we about to dispatch this track. we in deleteTrack action creator', track)
     return {
         type: DELETE_TRACK,
         track
-    }
-}
-
-export const fetchUser = (userId) => {
-    return {
-        type: FETCH_USER,
-        userId
     }
 }
 
@@ -109,26 +100,14 @@ export const updateTrack = (payload, trackId) => async (dispatch) => {
 }
 
 export const removeTrack = (track) => async (dispatch) => {
-    // console.log('sending this id in removeTrack thunk', track.id)
-    // console.log('we grabbed the id above from this ----->', track)
     const response = await csrfFetch(`/api/tracks/${track.id}`, {
         method: 'DELETE'
     })
 
     if (response.ok) {
         const track = await response.json();
-        // console.log('this is the track we got back from backend', track)
         dispatch(deleteTrack(track))
-        // console.log('not returning anything. This log is after dispatching')
         return track;
-    }
-}
-
-export const getUser = (userId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/users/${userId}`)
-    if (response.ok) {
-        const user = await response.json();
-        dispatch(fetchUser(user));
     }
 }
 
@@ -137,20 +116,6 @@ const initialState = { entries: {}, isLoading: true };
 const trackReducer = (state = initialState, action) => {
     let newState = {};
     switch (action.type) {
-        // case LOAD_GENRES:
-        //     return {
-        //         ...state,
-        //         genres: action.genres
-        //     }
-        // case LOAD_TRACK:
-        //     /* Returns {
-        //         track
-        //         |- entries: { trackId: { backend data } }
-        //     } */
-        //     return {
-        //         ...state,
-        //         entries: {...state.entries, [action.track.id]: action.track}
-        //     }
         case LOAD_TRACKS:
             newState = { ...state, entries: {...state.entries} };
             action.tracks.forEach(track => (newState.entries[track.id] = track))
@@ -166,18 +131,9 @@ const trackReducer = (state = initialState, action) => {
                 [action.track.id]: action.track
             }
         case DELETE_TRACK:
-            // newState = { ...state, entries: {...state.entries} };
-            // console.log('here in reducer', newState)
-            // console.log('im trying to delete this', newState.entries[action.trackId])
-            // delete newState.entries[action.trackId]
-            // return newState;
             newState = { ...state }
-            console.log('REDUCER CONSOLE LOG---------------', newState.entries[action.track.id])
             delete newState.entries[action.track.id]
             return newState;
-
-        case FETCH_USER:
-            newState = { ...state };
         default:
             return state;
     }
