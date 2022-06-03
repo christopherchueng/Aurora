@@ -86,7 +86,7 @@ router.put('/:trackId', asyncHandler(async (req, res) => {
         userId
     } = req.body
 
-    console.log('What are we getting from the frontend?', req.body)
+    // console.log('What are we getting from the frontend?', req.body)
 
     await track.update({
         title,
@@ -104,9 +104,10 @@ router.put('/:trackId', asyncHandler(async (req, res) => {
 router.delete('/:trackId', asyncHandler(async (req, res) => {
     const trackId = parseInt(req.params.trackId, 10);
     const track = await Track.findByPk(trackId);
+
     if (track) {
         await track.destroy();
-        return res.json({ trackId });
+        return res.json(track);
     } else {
         throw new Error('Cannot find track.');
     }
