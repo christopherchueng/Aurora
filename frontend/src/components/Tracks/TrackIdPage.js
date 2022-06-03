@@ -179,7 +179,12 @@ const TrackIdPage = ({tracks}) => {
                         </div>
                         {/* END CENTER OF MEDIA CONTROLS */}
                         <div className='control-right'>
-                            {/* Dead space */}
+                        {/* ------------------ GENRE ------------------ */}
+                        <div className='genre-ctn'>
+                            <div className='genre'>
+                                <span>{track?.genre}</span>
+                            </div>
+                        </div>
                         </div>
                     </div>
                     {/* END MEDIA CONTROLS */}
@@ -209,13 +214,6 @@ const TrackIdPage = ({tracks}) => {
                     <div className='track-info-ctn'>
                         <div className='description'>
                             {track?.description}
-                        </div>
-
-                        {/* ------------------ GENRE ------------------ */}
-                        <div className='genre-ctn'>
-                            <div className='genre'>
-                                <span>{track?.genre}</span>
-                            </div>
                         </div>
                     </div>
                 </div>

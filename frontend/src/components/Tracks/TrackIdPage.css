@@ -31,6 +31,13 @@
     align-items: center;
     flex-direction: column;
     width: 100vw;
+    height: 150px;
+}
+
+.description {
+    height: 100px;
+    width: 600px;
+    display: flex;
 }
 
 .track-title,
@@ -104,4 +111,12 @@
 .shuffle-ctn {
     width: 30px;
     padding: 0 50px;
+}
+
+.control-right {
+    justify-content: center;
+}
+
+.track-info-ctn {
+
 }
