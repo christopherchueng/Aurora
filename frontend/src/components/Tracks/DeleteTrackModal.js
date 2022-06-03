@@ -13,7 +13,7 @@ const DeleteTrackModal = ({ track }) => {
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <DeleteTrackComponent />
+                    <DeleteTrackComponent showModal={showModal}/>
                 </Modal>
             )}
         </>

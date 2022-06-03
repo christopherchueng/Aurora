@@ -109,8 +109,8 @@ export const updateTrack = (payload, trackId) => async (dispatch) => {
 }
 
 export const removeTrack = (track) => async (dispatch) => {
-    console.log('sending this id in removeTrack thunk', track.id)
-    console.log('we grabbed the id above from this ----->', track)
+    // console.log('sending this id in removeTrack thunk', track.id)
+    // console.log('we grabbed the id above from this ----->', track)
     const response = await csrfFetch(`/api/tracks/${track.id}`, {
         method: 'DELETE'
     })
@@ -172,8 +172,8 @@ const trackReducer = (state = initialState, action) => {
             // delete newState.entries[action.trackId]
             // return newState;
             newState = { ...state }
-            // console.log('this is the id that were trying to delete', newState)
-            delete newState[action.track.id]
+            console.log('REDUCER CONSOLE LOG---------------', newState.entries[action.track.id])
+            delete newState.entries[action.track.id]
             return newState;
 
         case FETCH_USER:
