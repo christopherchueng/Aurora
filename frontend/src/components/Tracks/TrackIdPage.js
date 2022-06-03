@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
 import { useEditTrackContext } from '../../context/EditTrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
@@ -8,19 +8,15 @@ import DeleteTrackModal from './DeleteTrackModal';
 import './TrackIdPage.css';
 
 const TrackIdPage = ({tracks}) => {
-    const { openEdit, setOpenEdit } = useEditTrackContext();
     const dispatch = useDispatch();
+    const history = useHistory();
     const { trackId } = useParams();
     const track = tracks[+trackId];
 
     // States
-    // const [title, setTitle] = useState('')
-    // const [description, setDescription] = useState('')
-    // const [genre, setGenre] = useState('')
-    // const [trackPath, setTrackPath] = useState('')
-    // const [imagePath, setImagePath] = useState('')
-    // const [errors, setErrors] = useState({});
+    const { openEdit, setOpenEdit } = useEditTrackContext();
     const [isPlaying, setIsPlaying] = useState(false)
+    const [currentSong, setCurrentSong] = useState(track)
 
     // References
     const audioPlayer = useRef();
@@ -30,12 +26,34 @@ const TrackIdPage = ({tracks}) => {
     }, [dispatch])
 
     const playPauseTrack = () => {
-        const prevState = isPlaying;
-        setIsPlaying(!prevState)
+        // Work around for useState asynchronous behavior.
+        const prevState = isPlaying; // Grab the previous value (false on mount)
+        setIsPlaying(!prevState) // Negating the value runs and executes that function
+        // If isPlaying is false, pause the track. Otherwise, play.
         if (prevState) {
             audioPlayer.current.pause();
         } else {
             audioPlayer.current.play();
+        }
+    }
+
+    const backBtn = () => {
+        for (let trackId in tracks) {
+            if (tracks[trackId] === track && (trackId > 1)) {
+                --trackId
+                setCurrentSong(tracks[+trackId])
+                history.push(`/tracks/${trackId}`)
+            }
+        }
+    }
+    console.log(Object.values(tracks).length)
+    const nextBtn = () => {
+        for (let trackId in tracks) {
+            if (tracks[trackId] === track && trackId < (Object.values(tracks).length)) {
+                ++trackId
+                setCurrentSong(tracks[+trackId])
+                history.push(`/tracks/${trackId}`)
+            }
         }
     }
 
@@ -44,7 +62,7 @@ const TrackIdPage = ({tracks}) => {
             <div className='music-player-ctn'>
                 <div className='music-player-content'>
                     <div className='track-bar'>
-                        <audio ref={audioPlayer} src={track?.trackPath}></audio>
+                        <audio ref={audioPlayer} src={track?.trackPath} autoplay></audio>
 
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
@@ -78,6 +96,7 @@ const TrackIdPage = ({tracks}) => {
                                 <button
                                     type='button'
                                     className='back'
+                                    onClick={backBtn}
                                 >
                                     <i className="fa-solid fa-backward-step fa-3x"></i>
                                 </button>
@@ -112,6 +131,7 @@ const TrackIdPage = ({tracks}) => {
                                 <button
                                     type='button'
                                     className='next'
+                                    onClick={nextBtn}
                                 >
                                     <i className="fa-solid fa-forward-step fa-3x"></i>
                                 </button>
