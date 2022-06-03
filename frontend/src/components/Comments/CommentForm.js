@@ -4,12 +4,12 @@ import { useHistory } from "react-router-dom";
 import { postComment } from "../../store/commentReducer";
 
 
-const CommentForm = ({trackId, userId}) => {
+const CommentForm = ({trackId, user}) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
     // States
-    const [message, setMessage] = useState()
+    const [message, setMessage] = useState('')
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -17,10 +17,12 @@ const CommentForm = ({trackId, userId}) => {
         const payload = {
             message,
             trackId,
-            userId
+            userId: user.id
         }
 
-        const comment = await dispatch(postComment(payload))
+        await dispatch(postComment(payload))
+        setMessage('')
+        history.push(`/tracks/${trackId}`)
     }
     return (
         <div className='comment-textbox'>
@@ -31,7 +33,7 @@ const CommentForm = ({trackId, userId}) => {
                     placeholder='Add a comment'
                     onChange={e => setMessage(e.target.value)}
                 />
-                <submit>Add Comment</submit>
+                <button>Add Comment</button>
             </form>
 
         </div>

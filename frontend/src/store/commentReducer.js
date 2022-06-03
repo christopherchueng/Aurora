@@ -46,6 +46,13 @@ const commentReducer = (state = initialState, action) => {
             newState = { entries: {} };
             action.comments.forEach(comment => {newState.entries[comment.id] = comment})
             return newState;
+
+        case ADD_COMMENT:
+            newState = {
+                ...state,
+                entries: { ...state.entries, [action.comment.id]: action.comment }
+            }
+            return newState;
         default:
             return state;
     }
