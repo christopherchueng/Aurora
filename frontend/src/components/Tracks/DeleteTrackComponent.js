@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeTrack} from "../../store/trackReducer";
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 const DeleteTrackComponent = ({ showModal }) => {
-    // console.log('THIS IS SETSHOWMODAL'. showModal)
     const { trackId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -17,13 +16,10 @@ const DeleteTrackComponent = ({ showModal }) => {
     const onDelete = (e) => {
         dispatch(removeTrack(track))
         history.push('/')
-        // console.log('what does dispatch(removeTrack(track)) return idk', dispatch(removeTrack(track)));
-        // setShowModal(false);
     }
 
     // const cancelClick = (e) => {
-    //     console.log('CLIKED THIS')
-    //     // setShowModal(false);
+        // setShowModal(false);
     // }
 
     return (
