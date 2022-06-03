@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
@@ -13,23 +13,38 @@ const TrackIdPage = ({tracks}) => {
     const { trackId } = useParams();
     const track = tracks[+trackId];
 
+    // States
     // const [title, setTitle] = useState('')
     // const [description, setDescription] = useState('')
     // const [genre, setGenre] = useState('')
     // const [trackPath, setTrackPath] = useState('')
     // const [imagePath, setImagePath] = useState('')
     // const [errors, setErrors] = useState({});
-    const [isPlaying, setIsPlaying] = useState(true)
+    const [isPlaying, setIsPlaying] = useState(false)
+
+    // References
+    const audioPlayer = useRef();
 
     useEffect(() => {
         dispatch(getTracks())
     }, [dispatch])
+
+    const playPauseTrack = () => {
+        const prevState = isPlaying;
+        setIsPlaying(!prevState)
+        if (prevState) {
+            audioPlayer.current.pause();
+        } else {
+            audioPlayer.current.play();
+        }
+    }
 
     return (
         <>
             <div className='music-player-ctn'>
                 <div className='music-player-content'>
                     <div className='track-bar'>
+                        <audio ref={audioPlayer} src={track?.trackPath}></audio>
 
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
@@ -75,7 +90,7 @@ const TrackIdPage = ({tracks}) => {
                                 (<button
                                     type='button'
                                     className='play'
-                                    onClick={() => setIsPlaying(!isPlaying)}
+                                    onClick={playPauseTrack}
                                 >
                                     <i className="fa-solid fa-circle-play fa-7x"></i>
                                 </button>
@@ -85,7 +100,7 @@ const TrackIdPage = ({tracks}) => {
                                 (<button
                                     type='button'
                                     className='pause'
-                                    onClick={() => setIsPlaying(!isPlaying)}
+                                    onClick={playPauseTrack}
                                 >
                                     <i className="fa-solid fa-circle-pause fa-7x"></i>
                                 </button>
