@@ -23,10 +23,14 @@ const initialState = { entries: {}, isLoading: true };
 
 const commentReducer = (state = initialState, action) => {
     let newState = {};
-    return (
-        <>
-        </>
-    )
+    switch (action.type) {
+        case LOAD_COMMENTS:
+            newState = { ...state, entries: {...state.entries} };
+            action.comments.forEach(comment => {newState.entries[comment.id] = comment})
+            return newState;
+        default:
+            return state;
+    }
 }
 
 export default commentReducer;
