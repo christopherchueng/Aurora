@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { createTrack, getGenres } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
 import ErrorMessage from '../FormTemplate/ErrorMessage'
-// import './CreateTrackForm.css'
+import './CreateTrackForm.css'
 
 const CreateTrackForm = () => {
     const user = useSelector(state => state.session.user)
