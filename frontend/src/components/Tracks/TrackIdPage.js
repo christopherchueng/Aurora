@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
+import { getComments } from '../../store/commentReducer';
 import { useEditTrackContext } from '../../context/EditTrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
 
@@ -12,7 +13,8 @@ const TrackIdPage = ({tracks}) => {
     const history = useHistory();
     const { trackId } = useParams();
     const track = tracks[+trackId];
-    // console.log(track);
+    const comments = useSelector(state => state.comment.entries)
+    const commentsArr = Object.values(comments);
 
     // States
     const { openEdit, setOpenEdit } = useEditTrackContext();
@@ -25,6 +27,10 @@ const TrackIdPage = ({tracks}) => {
 
     useEffect(() => {
         dispatch(getTracks())
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(getComments(+trackId))
     }, [dispatch])
 
     const playPauseTrack = () => {
@@ -219,7 +225,15 @@ const TrackIdPage = ({tracks}) => {
                     </div>
                 </div>
                 <div className='comment-section-ctn'>
-                    <h1>Comments down below</h1>
+                    <ul>
+                        {commentsArr.map(comment => (
+                            <div className='track-comment-item'>
+                                <li key={comment.id}>
+                                    {comment.message}
+                                </li>
+                            </div>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </>

@@ -10,10 +10,8 @@ export const loadComments = (comments) => {
     }
 }
 
-export const getComments = (track) => async (dispatch) => {
-    const response = await csrfFetch('api/comments', {
-        body: JSON.stringify(track)
-    })
+export const getComments = (trackId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/tracks/${trackId}/comments`)
 
     const comments = await response.json();
     dispatch(loadComments(comments))
