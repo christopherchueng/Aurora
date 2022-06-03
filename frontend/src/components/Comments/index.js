@@ -9,6 +9,7 @@ const Comments = ({tracks}) => {
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
+    const user = useSelector(state => state.session.user)
     const comments = useSelector(state => state.comment.entries)
     const commentsArr = Object.values(comments);
 
@@ -19,7 +20,7 @@ const Comments = ({tracks}) => {
     return (
         <div className='comment-section-ctn'>
             <div className='comment-textbox-ctn'>
-                <CommentForm />
+                <CommentForm trackId={+trackId} userId={user.id} />
             </div>
             <div className='track-comments'>
                 <ul>
