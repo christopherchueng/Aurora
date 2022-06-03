@@ -1,5 +1,5 @@
 const express = require('express');
-const { Track, User, Comment } = require('../../db/models');
+const { Track, User, Comment} = require('../../db/models');
 const { check } = require('express-validator');
 const { genres } = require('../../db/models/genres')
 
@@ -27,7 +27,9 @@ const trackValidators = [
 // Find a track
 router.get('/:trackId', asyncHandler(async (req, res) => {
     const trackId = parseInt(req.params.trackId, 10);
-    const track = await Track.findByPk(trackId);
+    const track = await Track.findByPk(trackId, {
+        include: Comment
+    });
 
     return res.json(track);
 }))
