@@ -46,3 +46,5 @@ router.delete('/:commentId', asyncHandler(async (req, res) => {
     await comment.destroy()
     return res.json(comment)
 }))
+
+module.exports = router;
