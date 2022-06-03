@@ -1,5 +1,5 @@
 const express = require('express');
-const { Track, User } = require('../../db/models');
+const { Track, User, Comment } = require('../../db/models');
 const { check } = require('express-validator');
 const { genres } = require('../../db/models/genres')
 
