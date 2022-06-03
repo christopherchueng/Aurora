@@ -16,6 +16,7 @@ const TrackIdPage = ({tracks}) => {
     // States
     const { openEdit, setOpenEdit } = useEditTrackContext();
     const [isPlaying, setIsPlaying] = useState(false)
+    const [isShuffled, setIsShuffled] = useState(false)
     const [currentSong, setCurrentSong] = useState(track)
 
     // References
@@ -38,23 +39,40 @@ const TrackIdPage = ({tracks}) => {
     }
 
     const backBtn = () => {
+        if (isShuffled) return shuffleTracks;
         for (let trackId in tracks) {
             if (tracks[trackId] === track && (trackId > 1)) {
                 --trackId
-                setCurrentSong(tracks[+trackId])
+                // setCurrentSong(tracks[+trackId])
+                audioPlayer.current.back();
                 history.push(`/tracks/${trackId}`)
             }
         }
     }
-    console.log(Object.values(tracks).length)
+
     const nextBtn = () => {
+        if (isShuffled) return shuffleTracks;
         for (let trackId in tracks) {
             if (tracks[trackId] === track && trackId < (Object.values(tracks).length)) {
                 ++trackId
-                setCurrentSong(tracks[+trackId])
+                // setCurrentSong(tracks[+trackId])
+                audioPlayer.current.next();
                 history.push(`/tracks/${trackId}`)
             }
         }
+    }
+
+    const shuffleTracks = () => {
+        const tracksArr = Object.values(tracks);
+        for (let i = tracksArr.length - 1; i > 1; i--) {
+            const randomIdx = Math.floor(Math.random() * tracksArr.length + 1)
+            const temp = tracksArr[i]
+            tracksArr[i] = tracksArr[randomIdx]
+            tracksArr[randomIdx] = temp;
+        }
+        tracks = tracksArr;
+        setIsShuffled(true);
+        return tracks;
     }
 
     return (
@@ -62,7 +80,7 @@ const TrackIdPage = ({tracks}) => {
             <div className='music-player-ctn'>
                 <div className='music-player-content'>
                     <div className='track-bar'>
-                        <audio ref={audioPlayer} src={track?.trackPath} autoplay></audio>
+                        <audio ref={audioPlayer} src={track?.trackPath}></audio>
 
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
@@ -90,6 +108,17 @@ const TrackIdPage = ({tracks}) => {
                         {/* START CENTER OF CONTROLS */}
                         {/* ------------------ MEDIA CONTROLS ------------------ */}
                         <div className='control-center'>
+
+                            {/* ------------------ SHUFFLE BUTTON ------------------ */}
+                            <div className='shuffle-ctn'>
+                                <button
+                                    type='button'
+                                    className='shuffle'
+                                    onClick={shuffleTracks}
+                                >
+                                    <i className="fa-solid fa-shuffle fa-xl"></i>
+                                </button>
+                            </div>
 
                             {/* ------------------ BACK BUTTON ------------------ */}
                             <div className='back-ctn'>
@@ -136,13 +165,22 @@ const TrackIdPage = ({tracks}) => {
                                     <i className="fa-solid fa-forward-step fa-3x"></i>
                                 </button>
                             </div>
-                        </div>
 
-                        {/* ------------------ VOLUME ------------------ */}
-                        <div className='volume-ctn'>
-                            Volume line here
+                            {/* ------------------ VOLUME ------------------ */}
+                            <div className='volume-ctn'>
+                                <button
+                                    type='button'
+                                    className='volume'
+                                    // onClick={}
+                                >
+                                    <i className="fa-solid fa-volume-high fa-xl"></i>
+                                </button>
+                            </div>
                         </div>
                         {/* END CENTER OF MEDIA CONTROLS */}
+                        <div className='control-right'>
+                            {/* Dead space */}
+                        </div>
                     </div>
                     {/* END MEDIA CONTROLS */}
 

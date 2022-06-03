@@ -76,7 +76,9 @@
 .back,
 .play,
 .pause,
-.next {
+.next,
+.shuffle,
+.volume {
     border: none;
     background-color: transparent;
     color: white;
@@ -88,7 +90,7 @@
 }
 
 .control-left,
-.volume-ctn {
+.control-right {
     display: flex;
     flex-direction: column;
     /* justify-content: flex-end; */
@@ -98,6 +100,8 @@
     height: 100px;
 }
 
-.volume-ctn {
-    justify-content: center;
+.volume-ctn,
+.shuffle-ctn {
+    width: 30px;
+    padding: 0 50px;
 }
