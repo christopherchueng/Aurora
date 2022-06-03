@@ -5,6 +5,7 @@ import { getTracks } from '../../store/trackReducer';
 import { getComments } from '../../store/commentReducer';
 import { useEditTrackContext } from '../../context/EditTrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
+import Comments from '../Comments';
 
 import './TrackIdPage.css';
 
@@ -224,17 +225,7 @@ const TrackIdPage = ({tracks}) => {
                         </div>
                     </div>
                 </div>
-                <div className='comment-section-ctn'>
-                    <ul>
-                        {commentsArr.map(comment => (
-                            <div className='track-comment-item'>
-                                <li key={comment.id}>
-                                    {comment.message}
-                                </li>
-                            </div>
-                        ))}
-                    </ul>
-                </div>
+                <Comments tracks={tracks}/>
             </div>
         </>
     )
