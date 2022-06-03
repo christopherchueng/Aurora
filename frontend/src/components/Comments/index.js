@@ -25,11 +25,22 @@ const Comments = ({tracks}) => {
             <div className='track-comments'>
                 <ul>
                     {commentsArr.map(comment => (
-                        <div className='track-comment-item'>
-                            <li key={comment.id}>
-                                {comment.message}
-                            </li>
-                        </div>
+                        <>
+                            <div className='track-comment-item'>
+                                <li key={comment.id}>
+                                    {comment.message}
+                                </li>
+                            </div>
+                            <div className='comment-manip-ctn'>
+                                <div className='edit-comment-ctn'>
+                                    <button><i className="fa-solid fa-pen"></i></button>
+                                </div>
+                                <div className='delete-comment-ctn'>
+                                    <button><i className="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+
+                        </>
                     ))}
                 </ul>
             </div>
