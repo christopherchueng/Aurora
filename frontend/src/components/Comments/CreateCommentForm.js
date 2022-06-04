@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { postComment } from "../../store/commentReducer";
-import './CommentForm.css'
+import './CreateCommentForm.css'
 
 
 const CommentForm = ({trackId, user}) => {
