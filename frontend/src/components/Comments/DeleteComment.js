@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 
-const DeleteComment = () => {
+const DeleteComment = ({comment}) => {
 
     const onDelete = e => {
 

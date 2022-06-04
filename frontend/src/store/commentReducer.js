@@ -2,7 +2,8 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_COMMENTS = 'comment/loadComments';
 const ADD_COMMENT = 'comment/addComment';
-const UPDATE_COMMENT = 'comment/updateComment'
+const UPDATE_COMMENT = 'comment/updateComment';
+const DELETE_COMMENT = 'comment/deleteComment';
 
 // Action creators
 export const loadComments = (comments) => {
@@ -22,6 +23,13 @@ export const addComment = (comment) => {
 export const editComment = (comment) => {
     return {
         type: UPDATE_COMMENT,
+        comment
+    }
+}
+
+export const removeTrack = (comment) => {
+    return {
+        type: DELETE_COMMENT,
         comment
     }
 }
@@ -58,6 +66,18 @@ export const updateComment = (payload) => async (dispatch) => {
     return comment;
 }
 
+export const deleteComment = (comment) => async (dispatch) => {
+    const response = await csrfFetch(`/api/comments/${comment.id}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const comment = await response.json();
+        dispatch(removeComment(comment))
+        return comment;
+    }
+}
+
 const initialState = { entries: {}, isLoading: true };
 
 const commentReducer = (state = initialState, action) => {
@@ -79,6 +99,10 @@ const commentReducer = (state = initialState, action) => {
                 ...state,
                 [action.comment.id]: action.comment
             }
+            return newState;
+        case DELETE_COMMENT:
+            newState = { ...state }
+            delete newState.entries[action.comment.id]
             return newState;
         default:
             return state;
