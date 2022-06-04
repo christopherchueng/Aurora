@@ -11,24 +11,25 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
     const dispatch = useDispatch();
     const { commentId } = useParams();
     // const user = useSelector(state => state.session.user)
-    const commentsArr = Object.values(comments).reverse();
+    const commentsArr = Object.values(comments);
 
     // States
     const [className, setClassName] = useState('');
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();
 
     useEffect(() => {
-        dispatch(getTracks())
+        dispatch(getComments(+trackId))
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(getComments(+trackId))
+        dispatch(getTracks())
     }, [dispatch])
+
 
     return (
         <>
             <ul>
-                {commentsArr.map(comment => (
+                {commentsArr.reverse().map(comment => (
                     <>
                         <div className='track-comment-item'>
                             <div className='comment-username-ctn'>
