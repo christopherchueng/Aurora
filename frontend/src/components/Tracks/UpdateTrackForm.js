@@ -149,7 +149,7 @@ const UpdateTrackForm = ({tracks}) => {
                                     className='saveChanges'
                                     disabled={errors.length !== 0}
                                     >
-                                    Save Changes
+                                    Save
                                 </button>}
                                 <button
                                     type='button'

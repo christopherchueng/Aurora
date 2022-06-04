@@ -11,8 +11,30 @@
     display: flex;
 }
 
-.comment-item {
+.comment-item,
+.track-comment-item,
+.comment-action-ctn {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.track-comment-item {
+    background-color: green
+}
+
+.username-ctn {
+    background-color: yellow;
+}
+
+.comment-ctn {
+    background-color: lightcoral;
+}
+
+.date-ctn {
+    background-color: orange;
+}
+
+.comment-action-ctn {
+    background-color: lightblue ;
 }

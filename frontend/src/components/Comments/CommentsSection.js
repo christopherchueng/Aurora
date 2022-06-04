@@ -12,6 +12,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
     const { commentId } = useParams();
     // const user = useSelector(state => state.session.user)
     const commentsArr = Object.values(comments).reverse();
+    // const comments = useSelector(state => state.comment.entries)
 
     // States
     const [className, setClassName] = useState('');
@@ -22,64 +23,61 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(getComments(+trackId))
+        dispatch(getComments())
     }, [dispatch])
+
+    // className === `comment-${comment.id}-user-${user?.id}`
 
     return (
         <>
             <ul>
                 {commentsArr.map(comment => (
-                    <>
-                        <div className='track-comment-item'>
-                            <div className='comment-username-ctn'>
-                                <span className='comment-username'>{comment.User?.username}</span>
+                    <div className='track-comment-item'>
+                        {/* Need a unique key. Come back to this later. */}
+                        <li key={`comment: ${comment.id}`}>
+                            <div className='user-comment-ctn'>
+
+                                {/* ------------------ USERNAME ------------------ */}
+                                <div className='username-ctn'>
+                                    <span>{comment.User?.username}</span>
+                                </div>
+
+                                {/* ------------------ COMMENT ------------------ */}
+                                <div className='comment-ctn' hidden={openEditCmt}>
+                                    <p>{comment.message}</p>
+                                </div>
+
+                                {/* ------------------ UPDATE FORM ------------------ */}
+                                <div className='edit-comment-form' hidden={!openEditCmt}>
+                                    <UpdateCommentForm comment={comment} user={user} trackId={+trackId} />
+                                </div>
+
+
                             </div>
-                            <div className='comment-body'>
-                                <div className='comment-section-ctn'>
-                                    <li
-                                        key={comment.id}
-                                        // Created a unique class to compare to when making conditional ternary below
-                                        className={`comment-${comment.id}-user-${comment.userId}`}
-                                        // When cursor hovers over a specific comment, the className will be set to have a unique name
-                                        onMouseEnter={(e) => setClassName(e.target.className)}
-                                        // When cursor is not on the comment, don't do anything
-                                        onMouseLeave={() => setClassName('')}
-                                    >
-                                        {/* the comment body */}
-                                        {openEditCmt && className === `comment-${comment.id}-user-${user?.id}`
-                                        ?   <UpdateCommentForm comment={comment} user={user} trackId={+trackId} />
-                                        :   comment.message}
 
-                                        {/* Ternary is checking to see if the state variable className matches with the li className */}
-                                        {className === `comment-${comment.id}-user-${user?.id}`
-                                        // If matches, show edit and delete buttons. Otherwise, don't do anything.
-                                        ?
-                                            <div className='comment-manip-ctn'>
-                                                {!openEditCmt
-                                                ?   <>
-                                                        <div className='edit-comment-ctn'>
-                                                            <button
-                                                                type='button'
-                                                                className={`comment-${comment.id}-user-${comment.userId}`}
-                                                                onClick={(e) => e.currentTarget.className === `comment-${comment.id}-user-${comment.userId}` ? setOpenEditCmt(true) : setOpenEditCmt(false)
+                            <div className='date-actionBtn-ctn' hidden={openEditCmt}>
 
-                                                                }
-                                                            >
-                                                                <i className="fa-solid fa-pen"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div className='delete-comment-ctn'>
-                                                            <button><i className="fa-solid fa-trash"></i></button>
-                                                        </div>
-                                                    </>
-                                                : ""}
-                                            </div>
-                                        : ""}
-                                    </li>
+                                {/* ------------------ DATE ------------------ */}
+                                <div className='date-ctn'>
+                                    <span>{comment.createdAt}</span>
+                                </div>
+
+                                {/* ------------------ EDIT/DELETE ------------------ */}
+                                <div className='comment-action-ctn'>
+                                    <div className='comment-edit-ctn'>
+                                        <button
+                                            onClick={() => setOpenEditCmt(true)}>
+                                            <i className="fa-solid fa-pen"></i>
+                                        </button>
+                                    </div>
+                                    <div className='comment-delete-ctn'>
+                                        <button><i className="fa-solid fa-trash"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </>
+
+                        </li>
+                    </div>
                 ))}
             </ul>
         </>

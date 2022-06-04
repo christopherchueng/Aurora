@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
@@ -10,12 +10,8 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
     const history = useHistory();
 
     const [message, setMessage] = useState(comment.message)
-    const [className, setClassName] = useState('');
+    // const [className, setClassName] = useState('');
     const { openEditCmt, setOpenEditCmt } = useUpdateContext()
-
-    useEffect(() => {
-        dispatch(getComments(+trackId))
-    }, [dispatch])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -27,11 +23,11 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
             userId: user.id
         }
 
-        const updatedCmt = await dispatch(updateComment(payload))
-        if (updatedCmt) {
+        await dispatch(updateComment(payload))
+        // if (updatedCmt) {
             setMessage(message);
-            setOpenEditCmt(false);
-        }
+            // setOpenEditCmt(false);
+        // }
 
     }
 
@@ -49,11 +45,11 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
                             type='submit'
                             disabled={!message}
                         >
-                            Save changes
+                            Save
                         </button>
                         <button
                             type='button'
-                            onClick={(e) => setOpenEditCmt(false)}
+                            onClick={() => setOpenEditCmt(false)}
                         >
                             Cancel
                         </button>
