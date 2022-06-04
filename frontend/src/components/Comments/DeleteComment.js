@@ -5,8 +5,22 @@ import { useState } from "react";
 
 
 const DeleteComment = () => {
+
+    const onDelete = e => {
+
+    }
+
     return (
-        <h1>Hi from DELETE</h1>
+        <>
+            <div className='delete-ctn'>
+                <div className='delete-confirm'>
+                    <p>Are you sure you want to delete this track?</p>
+                </div>
+                <div className='delete-btn-ctn'>
+                    <button onClick={onDelete}>Delete</button>
+                </div>
+            </div>
+        </>
     )
 }
 

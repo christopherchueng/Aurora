@@ -5,6 +5,7 @@ import { getTracks } from '../../store/trackReducer'
 import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
 import UpdateCommentForm from "./UpdateCommentForm";
+import DeleteCommentModal from "./DeleteCommentModal";
 import './CreateCommentForm';
 
 const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
@@ -70,7 +71,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
                                                             </button>
                                                         </div>
                                                         <div className='delete-comment-ctn'>
-                                                            <button><i className="fa-solid fa-trash"></i></button>
+                                                            <DeleteCommentModal />
                                                         </div>
                                                     </>
                                                 : ""}
