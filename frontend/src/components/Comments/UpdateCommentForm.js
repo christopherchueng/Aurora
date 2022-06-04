@@ -24,6 +24,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
         }
 
         await dispatch(updateComment(payload))
+        history.push(`/`)
         history.push(`/tracks/${trackId}`)
 
     }
