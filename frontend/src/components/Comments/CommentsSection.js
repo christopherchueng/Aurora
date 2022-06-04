@@ -24,7 +24,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
 
     useEffect(() => {
         dispatch(getComments())
-    }, [dispatch])
+    }, [dispatch, trackId])
 
     // className === `comment-${comment.id}-user-${user?.id}`
 

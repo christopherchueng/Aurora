@@ -24,10 +24,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
         }
 
         await dispatch(updateComment(payload))
-        // if (updatedCmt) {
-            setMessage(message);
-            // setOpenEditCmt(false);
-        // }
+        history.push(`/tracks/${trackId}`)
 
     }
 
