@@ -25,6 +25,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
             trackId: +trackId,
             userId: user.id
         }
+        console.log('in onSubmit', payload)
 
         await dispatch(updateComment(payload))
         setOpenEditCmt(false);
@@ -34,7 +35,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
 
     return (
         <>
-            <form>
+            <form onSubmit={onSubmit}>
                 <div>
                     <textarea
                         name='comment'
@@ -45,7 +46,6 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
                         <button
                             type='submit'
                             disabled={!message}
-                            onSubmit={onSubmit}
                         >
                             Save changes
                         </button>
