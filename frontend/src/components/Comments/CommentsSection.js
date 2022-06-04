@@ -46,7 +46,7 @@ const CommentsSection = ({ user, comments, trackId}) => {
                                         {/* the comment body */}
                                         {openEditCmt && className === `comment-${comment.id}-user-${user?.id}`
                                         ?   <UpdateCommentForm comment={comment} user={user} trackId={+trackId} />
-                                        : comment.message}
+                                        :   comment.message}
                                         {/* Ternary is checking to see if the state variable className matches with the li className */}
                                         {className === `comment-${comment.id}-user-${user?.id}`
                                         // If matches, show edit and delete buttons. Otherwise, don't do anything.

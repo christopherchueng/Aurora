@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
@@ -7,14 +7,15 @@ import './UpdateCommentForm.css';
 
 const UpdateCommentForm = ({ comment, user, trackId }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
-    const [message, setMessage] = useState()
+    const [message, setMessage] = useState(comment.message)
     const [className, setClassName] = useState('');
     const { openEditCmt, setOpenEditCmt } = useUpdateContext()
 
-    // useEffect(() => {
-    //     dispatch(getComments(+trackId))
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(getComments(+trackId))
+    }, [dispatch])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +28,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
 
         await dispatch(updateComment(payload))
         setOpenEditCmt(false);
-
+        history.push(`/tracks/${trackId}`)
 
     }
 

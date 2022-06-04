@@ -77,7 +77,7 @@ const commentReducer = (state = initialState, action) => {
         case UPDATE_COMMENT:
             return {
                 ...state,
-                [action.track.id]: action.track
+                [action.comment.id]: action.comment
             }
         default:
             return state;

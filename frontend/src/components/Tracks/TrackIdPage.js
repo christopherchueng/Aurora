@@ -30,9 +30,9 @@ const TrackIdPage = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
-    useEffect(() => {
-        dispatch(getComments(+trackId))
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getComments(+trackId))
+    // }, [dispatch])
 
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.
