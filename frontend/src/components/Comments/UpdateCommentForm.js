@@ -21,11 +21,11 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
         e.preventDefault();
 
         const payload = {
+            commentId: comment.id,
             message,
             trackId: +trackId,
             userId: user.id
         }
-        console.log('in onSubmit', payload)
 
         await dispatch(updateComment(payload))
         setOpenEditCmt(false);
