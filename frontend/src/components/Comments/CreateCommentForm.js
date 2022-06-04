@@ -5,7 +5,7 @@ import { postComment } from "../../store/commentReducer";
 import './CreateCommentForm.css'
 
 
-const CommentForm = ({trackId, user}) => {
+const CreateCommentForm = ({trackId, user}) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -66,4 +66,4 @@ const CommentForm = ({trackId, user}) => {
     )
 }
 
-export default CommentForm;
+export default CreateCommentForm;

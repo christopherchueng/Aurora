@@ -5,9 +5,10 @@ import { getComments } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
 import './UpdateCommentForm.css';
 
-const UpdateCommentForm = ({ comments, user, className, setClassName }) => {
-    const [message, setMessage] = useState('')
-    const commentsArr = Object.values(comments).reverse();
+const UpdateCommentForm = ({ comments, user }) => {
+    const [message, setMessage] = useState()
+    const [className, setClassName] = useState('');
+    const commentsArray = Object.values(comments).reverse();
     const { openEditCmt, setOpenEditCmt } = useUpdateContext()
 
     const onSubmit = (e) => {
@@ -17,31 +18,26 @@ const UpdateCommentForm = ({ comments, user, className, setClassName }) => {
     return (
         <>
             <ul>
-                {commentsArr.map(comment => (
+                {commentsArray.map(comment => (
                     <>
                         <div className='track-comment-item'>
                             <div className='comment-username-ctn'>
-                                <span className='comment-username'>{comment.User.username}</span>
+                                {/* <span className='comment-username'>{comment.User.username}</span> */}
                             </div>
                             <div className='comment-body'>
                                 <div className='comment-section-ctn'>
                                     <li
-                                        key={comment.id}
+                                        key={`update-${comment.id}`}
                                         // Created a unique class to compare to when making conditional ternary below
-                                        className={`comment-${comment.id}-user-${comment.userId}`}
-                                        // When cursor hovers over a specific comment, the className will be set to have a unique name
-                                        onMouseEnter={(e) => setClassName(e.target.className)}
-                                        // When cursor is not on the comment, don't do anything
-                                        onMouseLeave={() => setClassName('')}
+                                        className={`update-comment-${comment.id}-user-${comment.userId}`}
                                     >
-                                        {className === `comment-${comment.id}-user-${user?.id}`
+                                        {className === `update-comment-${comment.id}-user-${user?.id}`
                                         ?
-                                            {/* the comment body */}
                                             (<form onSubmit={onSubmit}>
                                                 <div>
                                                     <textarea
                                                         name='comment'
-                                                        value={message}
+                                                        value={comment.message}
                                                         placeholder='Add a comment'
                                                         onChange={e => setMessage(e.target.value)}
                                                         />
@@ -60,24 +56,6 @@ const UpdateCommentForm = ({ comments, user, className, setClassName }) => {
                                                         </button>
                                                 </div>
                                             </form>)
-                                        : ""}
-                                        {/* Ternary is checking to see if the state variable className matches with the li className  */}
-                                        {className === `comment-${comment.id}-user-${user?.id}`
-                                        // If matches, show edit and delete buttons. Otherwise, don't do anything.
-                                        ? <div className='comment-manip-ctn'>
-                                            <div className='edit-comment-ctn'>
-                                                <button
-                                                    type='button'
-                                                    className='inline-edit-comp'
-                                                    onClick={() => setOpenEditCmt(true)}
-                                                >
-                                                    <i className="fa-solid fa-pen"></i>
-                                                </button>
-                                            </div>
-                                            <div className='delete-comment-ctn'>
-                                                <button><i className="fa-solid fa-trash"></i></button>
-                                            </div>
-                                        </div>
                                         : ""}
                                     </li>
                                 </div>
