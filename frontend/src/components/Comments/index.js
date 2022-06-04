@@ -30,7 +30,7 @@ const Comments = ({tracks}) => {
             </div>
             <div className='track-comments'>
                 {openEditCmt
-                    ? <UpdateCommentForm  />
+                    ? <UpdateCommentForm comments={comments} user={user} />
                     : <CommentsSection comments={comments} user={user}/>
                 }
             </div>
