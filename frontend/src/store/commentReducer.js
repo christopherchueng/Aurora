@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_COMMENTS = 'comment/loadComments';
 const ADD_COMMENT = 'comment/addComment';
+const UPDATE_COMMENT = 'comment/updateComment'
 
 // Action creators
 export const loadComments = (comments) => {
@@ -18,6 +19,14 @@ export const addComment = (comment) => {
     }
 }
 
+export const editComment = (comment) => {
+    return {
+        type: UPDATE_COMMENT,
+        comment
+    }
+}
+
+// Thunks
 export const getComments = (trackId) => async (dispatch) => {
     const response = await csrfFetch(`/api/tracks/${trackId}/comments`)
 
@@ -37,6 +46,18 @@ export const postComment = (payload) => async (dispatch) => {
     return comment;
 }
 
+export const updateComment = (payload) => async (dispatch) => {
+    const response = await csrfFetch(`/api/comments/${payload.message}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+
+    const comment = await response.json();
+    dispatch(editComment(comment));
+    return comment;
+}
+
 const initialState = { entries: {}, isLoading: true };
 
 const commentReducer = (state = initialState, action) => {
@@ -53,6 +74,11 @@ const commentReducer = (state = initialState, action) => {
                 entries: { ...state.entries, [action.comment.id]: action.comment }
             }
             return newState;
+        case UPDATE_COMMENT:
+            return {
+                ...state,
+                [action.track.id]: action.track
+            }
         default:
             return state;
     }

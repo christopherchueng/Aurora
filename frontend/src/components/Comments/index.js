@@ -33,7 +33,7 @@ const Comments = ({tracks}) => {
                     ? <UpdateCommentForm
                         comments={comments}
                         user={user} /> */}
-                    <CommentsSection comments={comments} user={user}/>
+                    <CommentsSection comments={comments} user={user} trackId={+trackId} />
                 {/* } */}
             </div>
         </div>

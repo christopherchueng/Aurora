@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getComments } from "../../store/commentReducer";
+import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
+import UpdateCommentForm from "./UpdateCommentForm";
 import './CreateCommentForm';
 
-const CommentsSection = ({tracks, comments}) => {
+const CommentsSection = ({ user, comments, trackId}) => {
     const dispatch = useDispatch();
-    const { trackId } = useParams();
-    const user = useSelector(state => state.session.user)
+    const { commentId } = useParams();
+    // const user = useSelector(state => state.session.user)
     const commentsArr = Object.values(comments).reverse();
 
 
@@ -44,29 +45,7 @@ const CommentsSection = ({tracks, comments}) => {
                                     >
                                         {/* the comment body */}
                                         {openEditCmt && className === `comment-${comment.id}-user-${user?.id}`
-                                        ?   <form>
-                                                <div>
-                                                    <textarea
-                                                        name='comment'
-                                                        value={comment.message}
-                                                        placeholder='Add a comment'
-                                                        onChange={e => setMessage(e.target.value)}
-                                                    />
-                                                        <button
-                                                            type='submit'
-                                                            disabled={!message}
-                                                            // onClick={onSubmit}
-                                                        >
-                                                            Save changes
-                                                        </button>
-                                                        <button
-                                                            type='button'
-                                                            onClick={(e) => setOpenEditCmt(false)}
-                                                        >
-                                                            Cancel
-                                                        </button>
-                                                </div>
-                                            </form>
+                                        ?   <UpdateCommentForm comment={comment} user={user} trackId={+trackId} />
                                         : comment.message}
                                         {/* Ternary is checking to see if the state variable className matches with the li className */}
                                         {className === `comment-${comment.id}-user-${user?.id}`
