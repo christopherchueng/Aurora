@@ -16,7 +16,6 @@ const Comments = ({tracks}) => {
 
     // States
     const [className, setClassName] = useState('');
-    console.log(className);
 
     useEffect(() => {
         dispatch(getComments(+trackId))
