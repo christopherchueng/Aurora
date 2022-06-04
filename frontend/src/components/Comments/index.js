@@ -16,6 +16,8 @@ const Comments = ({tracks}) => {
 
     // States
     const [isHovered, setIsHovered] = useState(false);
+    const [className, setClassName] = useState('');
+    console.log(className);
 
     useEffect(() => {
         dispatch(getComments(+trackId))
@@ -35,14 +37,12 @@ const Comments = ({tracks}) => {
                             >
                                 <li
                                 key={comment.id}
-                                className='comment-item'
-                                onMouseEnter={
-                                    (e) => (comment.userId === user.id)
-                                    ? setIsHovered(!isHovered)
-                                    : setIsHovered(false)}
+                                className={`comment-${comment.id}-user-${comment.userId}`}
+                                onMouseEnter={(e) => setClassName(e.target.className)}
+                                onMouseLeave={() => setClassName('')}
                                 >
                                     {comment.message}
-                                    {isHovered && (comment.userId === user.id)
+                                    {className === `comment-${comment.id}-user-${user.id}`
                                     ? <div className='comment-manip-ctn'>
                                         <div className='edit-comment-ctn'>
                                             <button><i className="fa-solid fa-pen"></i></button>
