@@ -3,14 +3,14 @@ import { EditFormModal } from '../../context/EditFormModal';
 import './EditTrackModal.css';
 
 function EditTrackModal() {
-  const [openEdit, setOpenEdit] = useState(false);
+  const [openEditTrack, setOpenEditTrack] = useState(false);
   const [value, setValue] = useState()
   const onChange = e => setValue(e.target.value)
 
   return (
     <>
-      <button className='editTrack-modal' onClick={() => setOpenEdit(true)}>Edit</button>
-      {openEdit && (
+      <button className='editTrack-modal' onClick={() => setOpenEditTrack(true)}>Edit</button>
+      {openEditTrack && (
         <EditFormModal onClose={() => setValue()}>
 
         </EditFormModal>

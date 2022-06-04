@@ -8,7 +8,7 @@ import { useUpdateContext } from '../../context/UpdateContext';
 import './UpdateTrackForm.css';
 
 const UpdateTrackForm = ({tracks}) => {
-    const { openEdit, setOpenEdit } = useUpdateContext();
+    const { openEditTrack, setOpenEditTrack } = useUpdateContext();
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
@@ -55,7 +55,7 @@ const UpdateTrackForm = ({tracks}) => {
         // When form is submitted, track will be updated through payload
         const updatedTrack = await dispatch(updateTrack(payload, trackId))
         if (updatedTrack) {
-            setOpenEdit(false);
+            setOpenEditTrack(false);
         }
     }
 
@@ -92,7 +92,7 @@ const UpdateTrackForm = ({tracks}) => {
                                     </h1>
                                 </div>
                                 <div>
-                                    {openEdit && <ErrorMessage error={errors[0]} />}
+                                    {openEditTrack && <ErrorMessage error={errors[0]} />}
                                 </div>
 
                                 {/* ------------------ ARTIST ------------------ */}
@@ -153,7 +153,7 @@ const UpdateTrackForm = ({tracks}) => {
                                 </button>}
                                 <button
                                     type='button'
-                                    onClick={() => setOpenEdit(false)}
+                                    onClick={() => setOpenEditTrack(false)}
                                     >Cancel</button>
                             </div>
                             <div className='track-info-ctn'>

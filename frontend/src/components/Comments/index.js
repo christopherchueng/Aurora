@@ -14,11 +14,9 @@ const Comments = ({tracks}) => {
     const track = tracks[+trackId];
     const user = useSelector(state => state.session.user)
     const comments = useSelector(state => state.comment.entries)
-    const commentsArr = Object.values(comments).reverse();
-
 
     // States
-    const { openEdit, setOpenEdit } = useUpdateContext();
+    const { openEditCmt, setOpenEditCmt } = useUpdateContext();
     const [className, setClassName] = useState('');
 
     useEffect(() => {
@@ -31,24 +29,10 @@ const Comments = ({tracks}) => {
                 <CreateCommentForm trackId={+trackId} user={user} />
             </div>
             <div className='track-comments'>
-                <ul>
-                    {commentsArr.map(comment => (
-                        <>
-                            <div className='track-comment-item'>
-                                <div className='comment-username-ctn'>
-                                    <span className='comment-username'>{comment.User.username}</span>
-                                </div>
-                                <div className='comment-body'>
-                                    {openEdit
-                                        ? <UpdateCommentForm  />
-                                        : <CommentsSection comments={comments} user={user}/>
-                                    }
-                                </div>
-                            </div>
-
-                        </>
-                    ))}
-                </ul>
+                {openEditCmt
+                    ? <UpdateCommentForm  />
+                    : <CommentsSection comments={comments} user={user}/>
+                }
             </div>
         </div>
     );

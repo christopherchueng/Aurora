@@ -8,7 +8,7 @@ import { useUpdateContext } from "../../context/UpdateContext";
 
 const Tracks = () => {
     const tracks = useSelector(state => state.track.entries)
-    const { openEdit } = useUpdateContext();
+    const { openEditTrack } = useUpdateContext();
 
     return (
         <>
@@ -19,7 +19,7 @@ const Tracks = () => {
                 <Route path='/tracks/:trackId'>
                     {/* If edit button is clicked: 2 options:
                     If save changes is clicked, Update the track. Otherwise, */}
-                    {openEdit
+                    {openEditTrack
                         ? <UpdateTrackForm tracks={tracks} />
                         : <TrackIdPage tracks={tracks} />
                     }

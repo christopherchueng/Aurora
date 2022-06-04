@@ -18,7 +18,7 @@ const TrackIdPage = ({tracks}) => {
     const commentsArr = Object.values(comments);
 
     // States
-    const { openEdit, setOpenEdit } = useUpdateContext();
+    const { openEditTrack, setOpenEditTrack } = useUpdateContext();
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
     const [currentSong, setCurrentSong] = useState(track)
@@ -206,7 +206,7 @@ const TrackIdPage = ({tracks}) => {
                                 className='inline-edit-Track'
                                 // When Edit button is CLICKED, Editing will be allowed by rendering UpdateTrackForm component.
                                 // Save Changes button WILL BE DISPLAYED.
-                                onClick={() => setOpenEdit(true)}
+                                onClick={() => setOpenEditTrack(true)}
                                 >
                                 Edit
                             </button>

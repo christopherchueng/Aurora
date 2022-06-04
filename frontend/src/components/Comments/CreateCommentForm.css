@@ -1,0 +1,18 @@
+.comment-section-ctn > li {
+    width: 500px;
+    height: 50px;
+    background-color: red;
+    border: 1px solid black;
+    list-style: none;
+}
+
+.comment-manip-ctn {
+    flex-direction: row;;
+    display: flex;
+}
+
+.comment-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
