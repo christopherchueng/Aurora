@@ -17,6 +17,7 @@ const TrackIdPage = ({tracks}) => {
     const comments = useSelector(state => state.comment.entries)
     const commentsArr = Object.values(comments);
 
+
     // States
     const { openEditTrack, setOpenEditTrack } = useUpdateContext();
     const [isPlaying, setIsPlaying] = useState(false)
@@ -30,9 +31,9 @@ const TrackIdPage = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
-    // useEffect(() => {
-    //     dispatch(getComments(+trackId))
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(getComments(+trackId))
+    }, [dispatch])
 
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.

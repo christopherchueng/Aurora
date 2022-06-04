@@ -75,10 +75,11 @@ const commentReducer = (state = initialState, action) => {
             }
             return newState;
         case UPDATE_COMMENT:
-            return {
+            newState = {
                 ...state,
                 [action.comment.id]: action.comment
             }
+            return newState;
         default:
             return state;
     }

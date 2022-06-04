@@ -18,6 +18,8 @@ const Comments = ({tracks}) => {
     // States
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();
     const [className, setClassName] = useState('');
+    const [message, setMessage] = useState('')
+
 
     useEffect(() => {
         dispatch(getComments(+trackId))
@@ -33,7 +35,12 @@ const Comments = ({tracks}) => {
                     ? <UpdateCommentForm
                         comments={comments}
                         user={user} /> */}
-                    <CommentsSection comments={comments} user={user} trackId={+trackId} />
+                    <CommentsSection
+                        comments={comments}
+                        user={user}
+                        trackId={+trackId}
+                        message={message}
+                        setMessage={setMessage} />
                 {/* } */}
             </div>
         </div>

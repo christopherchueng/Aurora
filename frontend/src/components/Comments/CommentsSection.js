@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { getTracks } from '../../store/trackReducer'
 import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
 import UpdateCommentForm from "./UpdateCommentForm";
 import './CreateCommentForm';
 
-const CommentsSection = ({ user, comments, trackId}) => {
+const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
     const dispatch = useDispatch();
     const { commentId } = useParams();
     // const user = useSelector(state => state.session.user)
     const commentsArr = Object.values(comments).reverse();
 
-
     // States
     const [className, setClassName] = useState('');
-    const [message, setMessage] = useState()
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();
 
+    useEffect(() => {
+        dispatch(getTracks())
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(getComments(+trackId))
@@ -30,7 +32,7 @@ const CommentsSection = ({ user, comments, trackId}) => {
                     <>
                         <div className='track-comment-item'>
                             <div className='comment-username-ctn'>
-                                <span className='comment-username'>{comment.User.username}</span>
+                                <span className='comment-username'>{comment.User?.username}</span>
                             </div>
                             <div className='comment-body'>
                                 <div className='comment-section-ctn'>
