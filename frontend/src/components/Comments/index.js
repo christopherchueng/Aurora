@@ -11,7 +11,7 @@ const Comments = ({tracks}) => {
     const track = tracks[+trackId];
     const user = useSelector(state => state.session.user)
     const comments = useSelector(state => state.comment.entries)
-    const commentsArr = Object.values(comments);
+    const commentsArr = Object.values(comments).reverse();
 
 
     // States
