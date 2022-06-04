@@ -39,7 +39,8 @@ router.get('/:trackId/comments', asyncHandler(async (req, res) => {
     const comments = await Comment.findAll({
         where: {
             trackId
-        }
+        },
+        include: User
     })
 
     return res.json(comments);
