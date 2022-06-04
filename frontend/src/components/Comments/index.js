@@ -36,12 +36,18 @@ const Comments = ({tracks}) => {
                             >
                                 <li
                                 key={comment.id}
+                                // Created a unique class to compare to when making conditional ternary below
                                 className={`comment-${comment.id}-user-${comment.userId}`}
+                                // When cursor hovers over a specific comment, the className will be set to have a unique name
                                 onMouseEnter={(e) => setClassName(e.target.className)}
+                                // When cursor is not on the comment, don't do anything
                                 onMouseLeave={() => setClassName('')}
                                 >
+                                    {/* the comment body */}
                                     {comment.message}
+                                    {/* Ternary is checking to see if the state variable className matches with the li className  */}
                                     {className === `comment-${comment.id}-user-${user?.id}`
+                                    // If matches, show edit and delete buttons. Otherwise, don't do anything.
                                     ? <div className='comment-manip-ctn'>
                                         <div className='edit-comment-ctn'>
                                             <button><i className="fa-solid fa-pen"></i></button>
