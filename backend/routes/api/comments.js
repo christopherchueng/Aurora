@@ -20,6 +20,7 @@ router.post('/', asyncHandler(async (req, res) => {
 
 router.put('/:commentId', asyncHandler(async (req, res) => {
     const commentId = parseInt(req.params.commentId, 10);
+    // console.log('are we hitting backened', commentId)
     const comment = await Comment.findByPk(commentId)
 
     const { message, trackId, userId } = req.body;
