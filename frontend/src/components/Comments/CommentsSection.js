@@ -34,7 +34,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
                 {commentsArr.map(comment => (
                     <div className='track-comment-item'>
                         {/* Need a unique key. Come back to this later. */}
-                        <li key={`comment: ${comment.id}`}>
+                        <li key={`commentId: ${comment.id}`}>
                             <div className='user-comment-ctn'>
 
                                 {/* ------------------ USERNAME ------------------ */}
@@ -63,7 +63,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
                                 </div>
 
                                 {/* ------------------ EDIT/DELETE ------------------ */}
-                                <div className='comment-action-ctn'>
+                                <div className='comment-action-ctn' hidden={comment.User?.id !== user?.id}>
                                     <div className='comment-edit-ctn'>
                                         <button
                                             onClick={() => setOpenEditCmt(true)}>
