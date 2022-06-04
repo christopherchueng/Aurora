@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import UpdateCommentForm from './UpdateCommentForm';
 
-function UpdateCommentFormModal () {
+function UpdateCommentFormModal ({ comment, user, trackId }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className='updateCmtModal-btn' onClick={() => setShowModal(true)}>Log in</button>
+      <button
+        className='updateCmtModal-btn'
+        onClick={() => setShowModal(true)}>
+            <i className="fa-solid fa-pen"></i>
+        </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <UpdateCommentForm />
+          <UpdateCommentForm comment={comment} user={user} trackId={trackId} setShowModal={setShowModal}/>
         </Modal>
       )}
     </>

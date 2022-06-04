@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../store/commentReducer";
 import CreateCommentForm from "./CreateCommentForm";
-import UpdateCommentForm from "./UpdateCommentForm";
+// import UpdateCommentForm from "../UpdateCommentFormModal";
 import CommentsSection from "./CommentsSection";
 import { useUpdateContext } from "../../context/UpdateContext";
 import './index.css';
@@ -12,8 +12,8 @@ const Comments = ({tracks}) => {
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
-    const user = useSelector(state => state.session.user)
-    const comments = useSelector(state => state.comment.entries)
+    const user = useSelector(state => state?.session.user)
+    const comments = useSelector(state => state?.comment.entries)
 
     // States
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();

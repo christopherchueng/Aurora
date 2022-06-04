@@ -5,7 +5,7 @@ import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
 // import './UpdateCommentForm.css';
 
-const UpdateCommentForm = ({ comment, user, trackId }) => {
+const UpdateCommentForm = ({ comment, user, trackId, setShowModal }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -15,7 +15,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
 
     useEffect(() => {
         dispatch(getComments(+trackId))
-    }, [dispatch, message])
+    }, [dispatch])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -28,7 +28,9 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
         }
 
         await dispatch(updateComment(payload))
-        setOpenEditCmt(false);
+        history.push(`/tracks/${trackId}`)
+        setShowModal(false)
+
 
     }
 
@@ -47,12 +49,6 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
                             disabled={!message}
                         >
                             Save changes
-                        </button>
-                        <button
-                            type='button'
-                            onClick={(e) => setOpenEditCmt(false)}
-                        >
-                            Cancel
                         </button>
                 </div>
             </form>
