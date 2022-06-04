@@ -29,12 +29,12 @@ const Comments = ({tracks}) => {
                 <CreateCommentForm trackId={+trackId} user={user} />
             </div>
             <div className='track-comments'>
-                {openEditCmt
+                {/* {openEditCmt
                     ? <UpdateCommentForm
                         comments={comments}
-                        user={user} />
-                    : <CommentsSection comments={comments} user={user}/>
-                }
+                        user={user} /> */}
+                    <CommentsSection comments={comments} user={user}/>
+                {/* } */}
             </div>
         </div>
     );

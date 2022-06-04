@@ -14,6 +14,7 @@ const CommentsSection = ({tracks, comments}) => {
 
     // States
     const [className, setClassName] = useState('');
+    const [message, setMessage] = useState()
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();
 
 
@@ -42,24 +43,50 @@ const CommentsSection = ({tracks, comments}) => {
                                         onMouseLeave={() => setClassName('')}
                                     >
                                         {/* the comment body */}
-                                        {comment.message}
-                                        {/* Ternary is checking to see if the state variable className matches with the li className  */}
+                                        {openEditCmt && className === `comment-${comment.id}-user-${user?.id}`
+                                        ?   <form>
+                                                <div>
+                                                    <textarea
+                                                        name='comment'
+                                                        value={comment.message}
+                                                        placeholder='Add a comment'
+                                                        onChange={e => setMessage(e.target.value)}
+                                                    />
+                                                        <button
+                                                            type='submit'
+                                                            disabled={!message}
+                                                            // onClick={onSubmit}
+                                                        >
+                                                            Save changes
+                                                        </button>
+                                                        <button
+                                                            type='button'
+                                                            onClick={(e) => setOpenEditCmt(false)}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                </div>
+                                            </form>
+                                        : comment.message}
+                                        {/* Ternary is checking to see if the state variable className matches with the li className */}
                                         {className === `comment-${comment.id}-user-${user?.id}`
                                         // If matches, show edit and delete buttons. Otherwise, don't do anything.
-                                        ? <div className='comment-manip-ctn'>
-                                            <div className='edit-comment-ctn'>
-                                                <button
-                                                    type='button'
-                                                    className='inline-edit-comp'
-                                                    onClick={() => setOpenEditCmt(true)}
-                                                >
-                                                    <i className="fa-solid fa-pen"></i>
-                                                </button>
+                                        ?   <div className='comment-manip-ctn'>
+                                                <div className='edit-comment-ctn'>
+                                                    <button
+                                                        type='button'
+                                                        className={`comment-${comment.id}-user-${comment.userId}`}
+                                                        onClick={(e) => e.currentTarget.className === `comment-${comment.id}-user-${comment.userId}` ? setOpenEditCmt(true) : setOpenEditCmt(false)
+
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-pen"></i>
+                                                    </button>
+                                                </div>
+                                                <div className='delete-comment-ctn'>
+                                                    <button><i className="fa-solid fa-trash"></i></button>
+                                                </div>
                                             </div>
-                                            <div className='delete-comment-ctn'>
-                                                <button><i className="fa-solid fa-trash"></i></button>
-                                            </div>
-                                        </div>
                                         : ""}
                                     </li>
                                 </div>
