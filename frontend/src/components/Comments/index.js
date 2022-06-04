@@ -15,7 +15,6 @@ const Comments = ({tracks}) => {
 
 
     // States
-    const [isHovered, setIsHovered] = useState(false);
     const [className, setClassName] = useState('');
     console.log(className);
 
@@ -42,7 +41,7 @@ const Comments = ({tracks}) => {
                                 onMouseLeave={() => setClassName('')}
                                 >
                                     {comment.message}
-                                    {className === `comment-${comment.id}-user-${user.id}`
+                                    {className === `comment-${comment.id}-user-${user?.id}`
                                     ? <div className='comment-manip-ctn'>
                                         <div className='edit-comment-ctn'>
                                             <button><i className="fa-solid fa-pen"></i></button>
