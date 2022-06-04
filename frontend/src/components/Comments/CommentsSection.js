@@ -24,7 +24,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
 
     useEffect(() => {
         dispatch(getComments())
-    }, [dispatch, trackId])
+    }, [dispatch])
 
     // className === `comment-${comment.id}-user-${user?.id}`
 
@@ -63,7 +63,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
                                 </div>
 
                                 {/* ------------------ EDIT/DELETE ------------------ */}
-                                <div className='comment-action-ctn' hidden={comment.User?.id !== user?.id}>
+                                <div className='comment-action-ctn' hidden={comment.userId !== user?.id}>
                                     <div className='comment-edit-ctn'>
                                         <button
                                             onClick={() => setOpenEditCmt(true)}>
