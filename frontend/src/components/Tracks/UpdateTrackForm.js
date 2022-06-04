@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom';
 import { getTracks, updateTrack } from '../../store/trackReducer';
 import { genres } from "../../utils/genreData";
 import ErrorMessage from '../FormTemplate/ErrorMessage'
-import { useEditTrackContext } from '../../context/EditTrackContext';
+import { useUpdateContext } from '../../context/UpdateContext';
 import './UpdateTrackForm.css';
 
 const UpdateTrackForm = ({tracks}) => {
-    const { openEdit, setOpenEdit } = useEditTrackContext();
+    const { openEdit, setOpenEdit } = useUpdateContext();
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];

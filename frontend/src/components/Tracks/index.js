@@ -4,11 +4,11 @@ import CreateTrackForm from "./CreateTrackForm";
 import UpdateTrackForm from "./UpdateTrackForm";
 import TrackIdPage from "./TrackIdPage";
 import { useSelector } from "react-redux";
-import { useEditTrackContext } from "../../context/EditTrackContext";
+import { useUpdateContext } from "../../context/UpdateContext";
 
 const Tracks = () => {
     const tracks = useSelector(state => state.track.entries)
-    const { openEdit } = useEditTrackContext();
+    const { openEdit } = useUpdateContext();
 
     return (
         <>

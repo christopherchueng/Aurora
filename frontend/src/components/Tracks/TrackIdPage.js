@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
 import { getComments } from '../../store/commentReducer';
-import { useEditTrackContext } from '../../context/EditTrackContext';
+import { useUpdateContext } from '../../context/UpdateContext';
 import DeleteTrackModal from './DeleteTrackModal';
 import Comments from '../Comments';
 
@@ -18,7 +18,7 @@ const TrackIdPage = ({tracks}) => {
     const commentsArr = Object.values(comments);
 
     // States
-    const { openEdit, setOpenEdit } = useEditTrackContext();
+    const { openEdit, setOpenEdit } = useUpdateContext();
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
     const [currentSong, setCurrentSong] = useState(track)

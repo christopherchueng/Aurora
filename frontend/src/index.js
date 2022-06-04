@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ModalProvider } from "./context/Modal";
-import EditTrackProvider from "./context/EditTrackContext";
+import UpdateProvider from "./context/UpdateContext";
 
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
@@ -25,11 +25,11 @@ function Root() {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <EditTrackProvider>
+        <UpdateProvider>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </EditTrackProvider>
+        </UpdateProvider>
       </ModalProvider>
     </Provider>
   );
