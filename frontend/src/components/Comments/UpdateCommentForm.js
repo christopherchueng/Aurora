@@ -15,7 +15,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
 
     useEffect(() => {
         dispatch(getComments(+trackId))
-    }, [dispatch])
+    }, [dispatch, message])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -27,11 +27,8 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
             userId: user.id
         }
 
-        const updatedCmt = await dispatch(updateComment(payload))
-        if (updatedCmt) {
-            setMessage(message);
-            setOpenEditCmt(false);
-        }
+        await dispatch(updateComment(payload))
+        setOpenEditCmt(false);
 
     }
 

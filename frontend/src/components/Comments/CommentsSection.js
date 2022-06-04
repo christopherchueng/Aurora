@@ -23,7 +23,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
 
     useEffect(() => {
         dispatch(getComments(+trackId))
-    }, [dispatch])
+    }, [dispatch, message])
 
     return (
         <>
