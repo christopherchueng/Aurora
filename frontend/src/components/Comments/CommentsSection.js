@@ -47,24 +47,30 @@ const CommentsSection = ({ user, comments, trackId}) => {
                                         {openEditCmt && className === `comment-${comment.id}-user-${user?.id}`
                                         ?   <UpdateCommentForm comment={comment} user={user} trackId={+trackId} />
                                         :   comment.message}
+
                                         {/* Ternary is checking to see if the state variable className matches with the li className */}
                                         {className === `comment-${comment.id}-user-${user?.id}`
                                         // If matches, show edit and delete buttons. Otherwise, don't do anything.
-                                        ?   <div className='comment-manip-ctn'>
-                                                <div className='edit-comment-ctn'>
-                                                    <button
-                                                        type='button'
-                                                        className={`comment-${comment.id}-user-${comment.userId}`}
-                                                        onClick={(e) => e.currentTarget.className === `comment-${comment.id}-user-${comment.userId}` ? setOpenEditCmt(true) : setOpenEditCmt(false)
+                                        ?
+                                            <div className='comment-manip-ctn'>
+                                                {!openEditCmt
+                                                ?   <>
+                                                        <div className='edit-comment-ctn'>
+                                                            <button
+                                                                type='button'
+                                                                className={`comment-${comment.id}-user-${comment.userId}`}
+                                                                onClick={(e) => e.currentTarget.className === `comment-${comment.id}-user-${comment.userId}` ? setOpenEditCmt(true) : setOpenEditCmt(false)
 
-                                                        }
-                                                    >
-                                                        <i className="fa-solid fa-pen"></i>
-                                                    </button>
-                                                </div>
-                                                <div className='delete-comment-ctn'>
-                                                    <button><i className="fa-solid fa-trash"></i></button>
-                                                </div>
+                                                                }
+                                                            >
+                                                                <i className="fa-solid fa-pen"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div className='delete-comment-ctn'>
+                                                            <button><i className="fa-solid fa-trash"></i></button>
+                                                        </div>
+                                                    </>
+                                                : ""}
                                             </div>
                                         : ""}
                                     </li>

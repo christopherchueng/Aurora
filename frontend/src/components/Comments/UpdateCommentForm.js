@@ -29,7 +29,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
 
         await dispatch(updateComment(payload))
         setOpenEditCmt(false);
-        history.push(`/tracks/${trackId}`)
+        // history.push(`/tracks/${trackId}`)
 
     }
 
