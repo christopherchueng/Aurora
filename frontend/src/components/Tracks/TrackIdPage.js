@@ -39,28 +39,28 @@ const TrackIdPage = ({tracks}) => {
 
     useEffect(() => {
         setIsPlaying(true)
-    }, [])
+    })
 
-    useEffect(() => {
-        const seconds = Math.floor(audioPlayer.current.duration)
-        setDuration(seconds)
-    }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+    // useEffect(() => {
+    //     const seconds = Math.floor(audioPlayer.current.duration)
+    //     setDuration(seconds)
+    // }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
 
-    const durationFormula = (seconds) => {
-        const minutes = Math.floor(seconds / 60)
-        const trackMin = minutes < 10 ? `0${minutes}` : `${minutes}`
-        const sec = Math.floor(seconds % 60)
-        const trackSec = seconds < 10 ? `0${sec}` : `${sec}`
-        return `${trackMin}:${trackSec}`
-    }
+    // const durationFormula = (seconds) => {
+    //     const minutes = Math.floor(seconds / 60)
+    //     const trackMin = minutes < 10 ? `0${minutes}` : `${minutes}`
+    //     const sec = Math.floor(seconds % 60)
+    //     const trackSec = seconds < 10 ? `0${sec}` : `${sec}`
+    //     return `${trackMin}:${trackSec}`
+    // }
 
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.
         const prevState = isPlaying; // Grab the previous value (false on mount)
         setIsPlaying(!prevState) // Negating the value runs and executes that function
         // If isPlaying is false, pause the track. Otherwise, play.
-        if (prevState) {
+        if (!isPlaying) {
             audioPlayer.current.pause();
         } else {
             audioPlayer.current.play();
