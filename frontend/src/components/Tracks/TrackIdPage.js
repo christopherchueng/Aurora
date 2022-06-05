@@ -190,7 +190,7 @@ const TrackIdPage = ({tracks}) => {
                         {/* ------------------ GENRE ------------------ */}
                         <div className='genre-ctn'>
                             <div className='genre'>
-                                <span>{track?.genre}</span>
+                                <span>#{track?.genre}</span>
                             </div>
                         </div>
                         </div>
