@@ -53,6 +53,7 @@ const TrackIdPage = ({tracks}) => {
         for (let trackId in tracks) {
             if (tracks[trackId] === track && (trackId > 1)) {
                 --trackId
+                setIsPlaying(true)
                 // setCurrentSong(tracks[+trackId])
                 history.push(`/tracks/${trackId}`)
             }
@@ -65,6 +66,7 @@ const TrackIdPage = ({tracks}) => {
             if (tracks[trackId] === track && trackId < (Object.values(tracks).length)) {
                 ++trackId
                 // setCurrentSong(tracks[+trackId])
+                setIsPlaying(true)
                 history.push(`/tracks/${trackId}`)
             }
         }
