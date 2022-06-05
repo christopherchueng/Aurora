@@ -10,7 +10,7 @@ const asyncHandler = require('express-async-handler');
 const router = express.Router();
 
 
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const { message, trackId, userId } = req.body;
 
     const comment = await Comment.create({ message, trackId, userId })
@@ -18,7 +18,7 @@ router.post('/', asyncHandler(async (req, res) => {
     return res.json(comment)
 }))
 
-router.put('/:commentId', asyncHandler(async (req, res) => {
+router.put('/:commentId', requireAuth, asyncHandler(async (req, res) => {
     const commentId = parseInt(req.params.commentId, 10);
     // console.log('are we hitting backened', commentId)
     const comment = await Comment.findByPk(commentId)
@@ -30,12 +30,16 @@ router.put('/:commentId', asyncHandler(async (req, res) => {
     return res.json(comment)
 }))
 
-router.delete('/:commentId', asyncHandler(async (req, res) => {
-    const commentId = parseInt(req.params.commentId, 10);
+router.delete('/', requireAuth, asyncHandler(async (req, res) => {
+    const { commentId } = req.body
     const comment = await Comment.findByPk(commentId)
 
-    await comment.destroy()
-    return res.json(comment)
+    if (comment) {
+        await comment.destroy()
+        return res.json(comment);
+    } else {
+        throw new Error('Cannot find comment.')
+    }
 }))
 
 module.exports = router;

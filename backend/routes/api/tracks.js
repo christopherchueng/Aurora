@@ -46,7 +46,7 @@ router.get('/:trackId/comments', asyncHandler(async (req, res) => {
     return res.json(comments);
 }))
 
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const {
         title,
         description,
@@ -69,7 +69,7 @@ router.post('/', asyncHandler(async (req, res) => {
 }))
 
 // Update a track
-router.put('/:trackId', asyncHandler(async (req, res) => {
+router.put('/:trackId', requireAuth, asyncHandler(async (req, res) => {
     const trackId = parseInt(req.params.trackId, 10);
     const track = await Track.findByPk(trackId);
 
@@ -97,7 +97,7 @@ router.put('/:trackId', asyncHandler(async (req, res) => {
 }))
 
 // Delete a track
-router.delete('/:trackId', asyncHandler(async (req, res) => {
+router.delete('/:trackId', requireAuth, asyncHandler(async (req, res) => {
     const trackId = parseInt(req.params.trackId, 10);
     const track = await Track.findByPk(trackId);
 
