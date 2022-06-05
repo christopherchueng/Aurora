@@ -14,16 +14,11 @@ const CreateCommentForm = ({trackId, user}) => {
 
     // States
     const [message, setMessage] = useState('')
-    const [boxClicked, setBoxClicked] = useState(false)
-    const { isNewComment, setIsNewComment } = useUpdateContext();
+    const { isNewComment, setIsNewComment, boxClicked, setBoxClicked } = useUpdateContext();
 
     useEffect(() => {
-        if (!boxClicked) {
-            setIsNewComment(false)
-        } else {
-            setIsNewComment(true)
-        }
-    }, [boxClicked])
+        setIsNewComment(true)
+    }, [])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -37,7 +32,7 @@ const CreateCommentForm = ({trackId, user}) => {
         const comment = await dispatch(postComment(payload))
         setMessage('')
         setBoxClicked(false)
-        setIsNewComment(false);
+
         history.push(`/tracks/${comment.trackId}`)
     }
 
@@ -59,7 +54,7 @@ const CreateCommentForm = ({trackId, user}) => {
                                     <button
                                         type='submit'
                                         disabled={!message}
-                                        onClick={onSubmit}
+                                        onClick={() => setIsNewComment(false)}
                                     >
                                         Add Comment
                                     </button>

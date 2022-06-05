@@ -13,7 +13,7 @@ const Comments = ({tracks}) => {
     const { trackId } = useParams();
     const track = tracks[+trackId];
     const user = useSelector(state => state.session.user)
-    const comments = useSelector(state => state.comment.entries)
+    const comments = useSelector(state => state?.comment.entries)
 
     // States
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();

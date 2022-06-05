@@ -18,15 +18,11 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
 
     // States
     const [className, setClassName] = useState('');
-    const { openEditCmt, setOpenEditCmt, isNewComment, setIsNewComment } = useUpdateContext();
+    const { openEditCmt, setOpenEditCmt, isNewComment, setIsNewComment, boxClicked } = useUpdateContext();
 
-    // useEffect(() => {
-    //     dispatch(getComments(+trackId))
-    // }, [dispatch])
-
-    // useEffect(() => {
-    //     dispatch(getTracks())
-    // }, [dispatch])
+    useEffect(() => {
+        setIsNewComment(false)
+    })
 
 
     return (
@@ -36,7 +32,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                     <div key={`comment: ${comment.id}`}>
                         <div className='user-comment-ctn'>
                             <div className='user-ctn'>
-                                <span>{comment.User?.username}</span>
+                                <span>{comment?.User?.username}</span>
                             </div>
                             <div className='comment-ctn'>
                                 <p>{comment?.message}</p>
@@ -51,8 +47,8 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                                     {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
                                 <div className='delete-btn-ctn'>
-                                    {comment?.User?.id === user?.id && !isNewComment
-                                    ? <DeleteCommentModal commentId={comment?.id} isNewComment={isNewComment} setIsNewComment={setIsNewComment} />
+                                    {comment?.User?.id === user?.id
+                                    ? <DeleteCommentModal commentId={comment?.id} />
                                     : ""}
                                 </div>
                             </div>

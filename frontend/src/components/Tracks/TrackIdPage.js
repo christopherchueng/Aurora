@@ -19,7 +19,7 @@ const TrackIdPage = ({tracks}) => {
 
 
     // States
-    const { openEditTrack, setOpenEditTrack } = useUpdateContext();
+    const { openEditTrack, setOpenEditTrack, setIsNewComment, boxClicked } = useUpdateContext();
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
     const [currentSong, setCurrentSong] = useState(track)
