@@ -14,7 +14,7 @@ const Tracks = () => {
         <>
             <Switch>
                 <Route path='/upload'>
-                    <CreateTrackForm />
+                    <CreateTrackForm tracks={tracks}/>
                 </Route>
                 <Route path='/tracks/:trackId'>
                     {/* If edit button is clicked: 2 options:

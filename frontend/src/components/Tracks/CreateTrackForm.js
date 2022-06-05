@@ -6,7 +6,7 @@ import { genres } from "../../utils/genreData";
 import ErrorMessage from '../FormTemplate/ErrorMessage'
 import './CreateTrackForm.css'
 
-const CreateTrackForm = () => {
+const CreateTrackForm = ({tracks}) => {
     const user = useSelector(state => state.session.user)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')

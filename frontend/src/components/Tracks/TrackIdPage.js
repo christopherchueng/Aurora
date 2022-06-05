@@ -35,11 +35,12 @@ const TrackIdPage = ({tracks}) => {
 
     useEffect(() => {
         dispatch(getTracks())
+        audioPlayer.current.play();
     }, [dispatch])
 
     useEffect(() => {
         setIsPlaying(true)
-    })
+    }, [])
 
     // useEffect(() => {
     //     const seconds = Math.floor(audioPlayer.current.duration)
@@ -57,10 +58,10 @@ const TrackIdPage = ({tracks}) => {
 
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.
-        const prevState = isPlaying; // Grab the previous value (false on mount)
-        setIsPlaying(!prevState) // Negating the value runs and executes that function
+        const prevState = isPlaying; // Grab the previous value (false on mount) //false SHOW PAUSE
+        setIsPlaying(!prevState) // Negating the value runs and executes that function true SHOW PLAY
         // If isPlaying is false, pause the track. Otherwise, play.
-        if (!isPlaying) {
+        if (prevState) {
             audioPlayer.current.pause();
         } else {
             audioPlayer.current.play();
@@ -69,10 +70,12 @@ const TrackIdPage = ({tracks}) => {
 
     const backBtn = () => {
         // if (isShuffled) return shuffleTracks;
+        const prevState = isPlaying;
         for (let trackId in tracks) {
             if (tracks[trackId] === track && (trackId > 1)) {
                 --trackId
-                setIsPlaying(true)
+                setIsPlaying(prevState)
+                dispatch(getComments(+trackId))
                 // setCurrentSong(tracks[+trackId])
                 history.push(`/tracks/${trackId}`)
             }
@@ -80,12 +83,14 @@ const TrackIdPage = ({tracks}) => {
     }
 
     const nextBtn = () => {
+        const prevState = isPlaying;
         // if (isShuffled) return shuffleTracks;
         for (let trackId in tracks) {
             if (tracks[trackId] === track && trackId < (Object.values(tracks).length)) {
                 ++trackId
                 // setCurrentSong(tracks[+trackId])
-                setIsPlaying(true)
+                setIsPlaying(prevState)
+                dispatch(getComments(+trackId))
                 history.push(`/tracks/${trackId}`)
             }
         }
@@ -125,7 +130,7 @@ const TrackIdPage = ({tracks}) => {
                             <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
                         <div className='track-bar-ctn'>
-                            <audio ref={audioPlayer} src={track?.trackPath} onEnded={nextBtn} autoPlay></audio>
+                            <audio ref={audioPlayer} src={track?.trackPath} onEnded={nextBtn}></audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
                     </div>
@@ -182,7 +187,7 @@ const TrackIdPage = ({tracks}) => {
                                 </button>
                             </div>
 
-                            {/* ------------------ PLAY BUTTON ------------------ */}
+                            {/* ------------------ PLAY/PAUSE BUTTON ------------------ */}
                             <div className='play-ctn'>
                                 {/* If not playing, play button will display */}
                                 {/* If playing, pause button will display */}
@@ -191,7 +196,7 @@ const TrackIdPage = ({tracks}) => {
                                     className='play-pause'
                                     onClick={playPauseTrack}
                                 >
-                                    {isPlaying
+                                    {isPlaying && audioPlayer.current.play()
                                     ? <i className="fa-solid fa-circle-pause fa-7x"></i>
                                     : <i className="fa-solid fa-circle-play fa-7x"></i>
                                     }
