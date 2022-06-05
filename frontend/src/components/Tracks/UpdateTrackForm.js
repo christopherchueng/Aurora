@@ -137,8 +137,23 @@ const UpdateTrackForm = ({tracks}) => {
                                     </button>
                                 </div>
                             </div>
-                            <div className='volume-ctn'>
-                                Volume line here
+                            {/* ------------------ GENRE ------------------ */}
+                            <div className='genre-ctn'>
+                                <div className='genre'>
+                                    <select
+                                        type='text'
+                                        aria-label='Title'
+                                        value={genre}
+                                        onChange={e => setGenre(e.target.value)}
+                                    >
+                                        {genres.map(genre => (
+                                            <option key={genre}>{genre}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                {/* <div>
+                                    {errors.length > 0 && <ErrorMessage error={errors[1]} />}
+                                </div> */}
                             </div>
                         </div>
                         <div className='edit-save-ctn'>
@@ -166,24 +181,7 @@ const UpdateTrackForm = ({tracks}) => {
                                             onChange={e => setDescription(e.target.value)}
                                         />
                                 </div>
-                                {/* ------------------ GENRE ------------------ */}
-                                <div className='genre-ctn'>
-                                    <div className='genre'>
-                                        <select
-                                            type='text'
-                                            aria-label='Title'
-                                            value={genre}
-                                            onChange={e => setGenre(e.target.value)}
-                                        >
-                                            {genres.map(genre => (
-                                                <option key={genre}>{genre}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    {/* <div>
-                                        {errors.length > 0 && <ErrorMessage error={errors[1]} />}
-                                    </div> */}
-                                </div>
+
                             </div>
                         </div>
                     </form>
