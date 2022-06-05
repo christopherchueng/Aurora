@@ -73,6 +73,10 @@
     /* width: 100%; */
 }
 
+.fa-xmark {
+    color: rgb(249, 105, 105);
+}
+
 .back,
 .play,
 .pause,
@@ -99,14 +103,10 @@
     height: 100px;
 }
 
-.genre-ctn {
-    justify-content: center;
-}
-
-.fa-xmark {
-    color: rgb(249, 105, 105);
-}
-
 .fa-check {
     color: lightgreen;
+}
+
+.genre-ctn {
+    justify-content: center;
 }
