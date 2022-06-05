@@ -45,7 +45,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                             <div className='date-ctn'>
                                 <span>{comment?.createdAt}</span>
                             </div>
-                            <div className='actionBtn-ctn' hidden={comment?.userId !== user?.id}>
+                            <div className='actionBtn-ctn'>
                                 <div className='edit-btn-ctn'>
                                     {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
