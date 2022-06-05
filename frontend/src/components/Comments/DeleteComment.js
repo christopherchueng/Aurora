@@ -2,12 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import { deleteComment } from "../../store/commentReducer";
 
 
-const DeleteComment = ({comment}) => {
+const DeleteComment = ({commentId}) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    const onDelete = e => {
-
+    const onDelete = async e => {
+        await dispatch(deleteComment(commentId))
+        history.push('/')
     }
 
     return (

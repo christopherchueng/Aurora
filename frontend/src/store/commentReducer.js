@@ -27,10 +27,10 @@ export const editComment = (comment) => {
     }
 }
 
-export const removeTrack = (comment) => {
+export const removeComment = (commentId) => {
     return {
         type: DELETE_COMMENT,
-        comment
+        commentId
     }
 }
 
@@ -66,15 +66,15 @@ export const updateComment = (payload) => async (dispatch) => {
     return comment;
 }
 
-export const deleteComment = (comment) => async (dispatch) => {
-    const response = await csrfFetch(`/api/comments/${comment.id}`, {
-        method: 'DELETE'
+export const deleteComment = (commentId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/comments`, {
+        method: 'DELETE',
+        body: JSON.stringify(commentId)
     })
 
     if (response.ok) {
         const comment = await response.json();
-        dispatch(removeComment(comment))
-        return comment;
+        dispatch(removeComment(commentId))
     }
 }
 
@@ -102,7 +102,7 @@ const commentReducer = (state = initialState, action) => {
             return newState;
         case DELETE_COMMENT:
             newState = { ...state }
-            delete newState.entries[action.comment.id]
+            delete newState.entries[action.commentId]
             return newState;
         default:
             return state;

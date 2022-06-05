@@ -3,7 +3,7 @@ import DeleteComment from "./DeleteComment";
 import { Modal } from '../../context/Modal'
 // import './Modal.css'
 
-const DeleteCommentModal = () => {
+const DeleteCommentModal = ({ commentId }) => {
     const [showModal, setShowModal] = useState(false)
 
     return (
@@ -13,7 +13,7 @@ const DeleteCommentModal = () => {
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <DeleteComment showModal={showModal}/>
+                    <DeleteComment showModal={showModal} commentId={commentId}/>
                 </Modal>
             )}
         </>
