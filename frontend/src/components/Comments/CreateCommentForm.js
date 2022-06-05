@@ -40,31 +40,36 @@ const CreateCommentForm = ({trackId, user}) => {
         <>
             <div className='comment-textbox'>
                 <form onSubmit={onSubmit}>
-                    <div>
+                    <div className='add-comment-ctn'>
                         <textarea
                             name='comment'
                             value={message}
                             placeholder='Add a comment'
+                            className='add-comment-box'
                             onChange={e => setMessage(e.target.value)}
                             onClick={() => setBoxClicked(true)}
                             />
                             {boxClicked
                             ?
-                                <>
-                                    <button
-                                        type='submit'
-                                        disabled={!message}
-                                        onClick={() => setIsNewComment(false)}
-                                    >
-                                        Add Comment
-                                    </button>
-                                    <button
-                                        type='button'
-                                        onClick={() => setBoxClicked(!boxClicked)}
-                                    >
-                                        Cancel
-                                    </button>
-                                </>
+                                <div className='comment-action-ctn'>
+                                    <div className='cancel-comment'>
+                                        <button
+                                            type='button'
+                                            onClick={() => setBoxClicked(!boxClicked)}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                    <div className='submit-comment'>
+                                        <button
+                                            type='submit'
+                                            disabled={!message}
+                                            onClick={() => setIsNewComment(false)}
+                                        >
+                                            Add Comment
+                                        </button>
+                                    </div>
+                                </div>
                             :   ''}
                     </div>
                 </form>

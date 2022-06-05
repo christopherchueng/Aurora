@@ -6,6 +6,16 @@
     list-style: none;
 }
 
+.add-comment-ctn {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-comment-box {
+    width: 600px;
+    height: 50px;
+}
+
 .comment-manip-ctn {
     flex-direction: row;;
     display: flex;
@@ -16,7 +26,27 @@
 .comment-action-ctn {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
+}
+
+.comment-action-ctn {
+    padding: 20px 0;
+}
+
+.cancel-comment {
+    padding-right: 10px;
+}
+
+.cancel-comment > button,
+.submit-comment > button {
+    border: 1px solid white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 8pt;
 }
 
 .track-comment-item {
@@ -33,8 +63,4 @@
 
 .date-ctn {
     background-color: orange;
-}
-
-.comment-action-ctn {
-    background-color: lightblue ;
 }
