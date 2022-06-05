@@ -71,7 +71,7 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
                                                             </button>
                                                         </div>
                                                         <div className='delete-comment-ctn'>
-                                                            <DeleteCommentModal commentId={comment.id} />
+                                                            <DeleteCommentModal commentId={comment?.id} />
                                                         </div>
                                                     </>
                                                 : ""}

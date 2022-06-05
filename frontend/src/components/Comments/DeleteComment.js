@@ -5,13 +5,14 @@ import { useState } from "react";
 import { deleteComment } from "../../store/commentReducer";
 
 
-const DeleteComment = ({commentId}) => {
+const DeleteComment = ({commentId, setShowModal}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const onDelete = async e => {
+        e.preventDefault()
         await dispatch(deleteComment(commentId))
-        history.push('/')
+        setShowModal(false)
     }
 
     return (
