@@ -2,6 +2,11 @@
     width: 800px;
 }
 
+.user-comment-ctn {
+    inline-size: 600px;
+    overflow-wrap: break-word;
+}
+
 .comment-content {
     display: flex;
     flex-direction: row;

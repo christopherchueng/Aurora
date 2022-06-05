@@ -4,6 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import { postComment } from "../../store/commentReducer";
 import DeleteTrackModal from "../Tracks/DeleteTrackModal";
 import { useUpdateContext } from "../../context/UpdateContext";
+import ErrorMessage from "../FormTemplate/ErrorMessage";
 import './CreateCommentForm.css'
 
 
@@ -14,11 +15,16 @@ const CreateCommentForm = ({trackId, user}) => {
 
     // States
     const [message, setMessage] = useState('')
+    const [messageCount, setMessageCount] = useState(0);
     const { isNewComment, setIsNewComment, boxClicked, setBoxClicked } = useUpdateContext();
 
     useEffect(() => {
         setIsNewComment(true)
     }, [])
+
+    useEffect(() => {
+        setMessageCount(message.length)
+    }, [message])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -52,6 +58,13 @@ const CreateCommentForm = ({trackId, user}) => {
                             {boxClicked
                             ?
                                 <div className='comment-action-ctn'>
+                                    {messageCount > 280
+                                    ?   <div className='char-count-cmt' style={{color: 'red'}}>
+                                            <span>{messageCount} / 280</span>
+                                        </div>
+                                    :   <div className='char-count-cmt'>
+                                            <span>{messageCount} / 280</span>
+                                        </div>}
                                     <div className='cancel-comment'>
                                         <button
                                             type='button'
