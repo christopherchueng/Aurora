@@ -24,6 +24,14 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
         setIsNewComment(false)
     })
 
+    const datePosted = (date) => {
+        const dateCreated = new Date(date)
+        const month = dateCreated.getMonth() + 1
+        const day = dateCreated.getDate() + 1
+        const year = dateCreated.getFullYear();
+        return `${month}/${day}/${year}`
+    }
+
 
     return (
         <>
@@ -40,7 +48,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                         </div>
                         <div className='date-actionBtns-ctn'>
                             <div className='date-ctn'>
-                                <span>{comment?.createdAt}</span>
+                                <span>{datePosted(comment?.createdAt)}</span>
                             </div>
                             <div className='actionBtn-ctn'>
                                 <div className='edit-btn-ctn'>

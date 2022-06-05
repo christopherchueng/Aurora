@@ -1,0 +1,30 @@
+.comment-list {
+    width: 800px;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+}
+
+.user-ctn {
+    font-size: 10pt;
+}
+
+.delete-btn-ctn > button {
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 10px 0;
+
+}
+
+.date-actionBtns-ctn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

@@ -30,7 +30,7 @@
 }
 
 .comment-action-ctn {
-    padding: 20px 0;
+    padding-top: 20px;
 }
 
 .cancel-comment {
@@ -47,20 +47,4 @@
     padding: 10px;
     cursor: pointer;
     font-size: 8pt;
-}
-
-.track-comment-item {
-    background-color: green
-}
-
-.username-ctn {
-    background-color: yellow;
-}
-
-.comment-ctn {
-    background-color: lightcoral;
-}
-
-.date-ctn {
-    background-color: orange;
 }

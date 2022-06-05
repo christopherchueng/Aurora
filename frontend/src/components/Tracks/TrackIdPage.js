@@ -125,7 +125,7 @@ const TrackIdPage = ({tracks}) => {
                             <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
                         <div className='track-bar-ctn'>
-                            <audio ref={audioPlayer} src={track?.trackPath} autoPlay></audio>
+                            <audio ref={audioPlayer} src={track?.trackPath} onEnded={nextBtn} autoPlay></audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
                     </div>
