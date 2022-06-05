@@ -30,16 +30,10 @@ router.put('/:commentId', requireAuth, asyncHandler(async (req, res) => {
     return res.json(comment)
 }))
 
-router.delete('/', requireAuth, asyncHandler(async (req, res) => {
-    const { commentId } = req.body
-    const comment = await Comment.findByPk(commentId)
-
-    if (comment) {
-        await comment.destroy()
-        return res.json(comment);
-    } else {
-        throw new Error('Cannot find comment.')
-    }
+router.delete('/:commentId', requireAuth, asyncHandler(async (req, res) => {
+    const comment = await Comment.findByPk(req.params.commentId)
+    await comment.destroy()
+    return res.json(comment);
 }))
 
 module.exports = router;
