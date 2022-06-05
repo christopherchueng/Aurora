@@ -18,10 +18,6 @@ const CreateCommentForm = ({trackId, user}) => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        if (!user) {
-            history.push('/')
-        }
-
         const payload = {
             message,
             trackId,
