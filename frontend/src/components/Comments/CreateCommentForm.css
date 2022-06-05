@@ -9,6 +9,7 @@
 .add-comment-ctn {
     display: flex;
     flex-direction: column;
+    padding-bottom: 30px;
 }
 
 .add-comment-box {
