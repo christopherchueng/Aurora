@@ -27,13 +27,13 @@ function SignupForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className='signup-form'>
         <span>Sign Up</span>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
+      <div className='signup-form'>
         <div className='signup-email-ctn'>
-          <span>Email</span>
+          <p>Email</p>
           <input
             type="text"
             value={email}
@@ -42,7 +42,7 @@ function SignupForm() {
           />
         </div>
         <div className='signup-username-ctn'>
-          <span>Username</span>
+          <p>Username</p>
           <input
             type="text"
             value={username}
@@ -51,7 +51,7 @@ function SignupForm() {
           />
         </div>
         <div className='signup-password-ctn'>
-          <span>Password</span>
+          <p>Password</p>
           <input
             type="password"
             value={password}
@@ -59,8 +59,8 @@ function SignupForm() {
             required
           />
         </div>
-        <div className='signup-email-ctn'>
-          <span>Confirm Password</span>
+        <div className='signup-cpassword-ctn'>
+          <p>Confirm Password</p>
           <input
             type="password"
             value={confirmPassword}

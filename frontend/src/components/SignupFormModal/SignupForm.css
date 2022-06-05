@@ -1,18 +1,46 @@
+form > span {
+    font-size: 36pt;
+    font-weight: bold;
+}
+
 .signup-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 500px;
+    width: 700px;
 }
 
-.signup-form > span {
+.signup-email-ctn,
+.signup-username-ctn,
+.signup-password-ctn,
+.signup-cpassword-ctn {
+    display: flex;
+    flex-direction: row;
+}
+
+.signup-email-ctn p,
+.signup-username-ctn p,
+.signup-password-ctn p,
+.signup-cpassword-ctn p {
+    display: flex;
+    justify-content: flex-end;
+    width: 175px;
+}
+
+.signup-form > p {
     font-size: 36pt;
     font-weight: bold;
 }
 
-.signup-form div {
-    padding: 20px 0;
+.signup-email-ctn input,
+.signup-username-ctn input,
+.signup-password-ctn input,
+.signup-cpassword-ctn input {
+    border-radius: 5px;
+    width: 200px;
+    display: flex;
+    margin: 20px;
 }
 
 
