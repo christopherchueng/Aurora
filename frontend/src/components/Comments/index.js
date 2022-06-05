@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../store/commentReducer";
@@ -31,17 +31,12 @@ const Comments = ({tracks}) => {
                 <CreateCommentForm trackId={+trackId} user={user} />
             </div>
             <div className='track-comments'>
-                {/* {openEditCmt
-                    ? <UpdateCommentForm
-                        comments={comments}
-                        user={user} /> */}
-                    <CommentsSection
-                        comments={comments}
-                        user={user}
-                        trackId={+trackId}
-                        message={message}
-                        setMessage={setMessage} />
-                {/* } */}
+                <CommentsSection
+                    comments={comments}
+                    user={user}
+                    trackId={+trackId}
+                    message={message}
+                    setMessage={setMessage} />
             </div>
         </div>
     );

@@ -15,11 +15,15 @@ module.exports = {
       trackId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        hooks: true,
         references: { model: 'Tracks' }
       },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        hooks: true,
         references: { model: 'Users' }
       },
       createdAt: {

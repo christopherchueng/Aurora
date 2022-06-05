@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { postComment } from "../../store/commentReducer";
+import DeleteTrackModal from "../Tracks/DeleteTrackModal";
 import './CreateCommentForm.css'
 
 
 const CreateCommentForm = ({trackId, user}) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.session.user)
 
     // States
     const [message, setMessage] = useState('')
@@ -22,11 +24,12 @@ const CreateCommentForm = ({trackId, user}) => {
             userId: user.id
         }
 
-        await dispatch(postComment(payload))
+        const comment = await dispatch(postComment(payload))
         setMessage('')
         setBoxClicked(false)
-        history.push(`/tracks/${trackId}`)
+        history.push(`/tracks/${comment.trackId}`)
     }
+
     return (
         <>
             <div className='comment-textbox'>

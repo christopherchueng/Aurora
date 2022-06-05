@@ -5,11 +5,13 @@ import { getTracks } from '../../store/trackReducer'
 import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
 import UpdateCommentForm from "./UpdateCommentForm";
+import DeleteCommentModal from "./DeleteCommentModal";
 import './CreateCommentForm';
 
-const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
+const CommentsSection = ({ comments, trackId, message, setMessage }) => {
     const dispatch = useDispatch();
     const { commentId } = useParams();
+    const user = useSelector(state => state.session.user);
     // const user = useSelector(state => state.session.user)
     const commentsArr = Object.values(comments).reverse();
     // const comments = useSelector(state => state.comment.entries)
@@ -19,67 +21,45 @@ const CommentsSection = ({ user, comments, trackId, message, setMessage}) => {
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();
 
     useEffect(() => {
-        dispatch(getTracks())
+        dispatch(getComments(+trackId))
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(getComments())
+        dispatch(getTracks())
     }, [dispatch])
 
-    // className === `comment-${comment.id}-user-${user?.id}`
 
     return (
         <>
-            <ul>
+            <div className='comment-list'>
                 {commentsArr.map(comment => (
-                    <div className='track-comment-item'>
-                        {/* Need a unique key. Come back to this later. */}
-                        <li key={`commentId: ${comment.id}`}>
-                            <div className='user-comment-ctn'>
-
-                                {/* ------------------ USERNAME ------------------ */}
-                                <div className='username-ctn'>
-                                    <span>{comment.User?.username}</span>
-                                </div>
-
-                                {/* ------------------ COMMENT ------------------ */}
-                                <div className='comment-ctn' hidden={openEditCmt}>
-                                    <p>{comment.message}</p>
-                                </div>
-
-                                {/* ------------------ UPDATE FORM ------------------ */}
-                                <div className='edit-comment-form' hidden={!openEditCmt}>
-                                    <UpdateCommentForm comment={comment} user={user} trackId={+trackId} />
-                                </div>
-
-
+                    <div key={`comment: ${comment.id}`}>
+                        <div className='user-comment-ctn'>
+                            <div className='user-ctn'>
+                                <span>{comment.User?.username}</span>
                             </div>
-
-                            <div className='date-actionBtn-ctn' hidden={openEditCmt}>
-
-                                {/* ------------------ DATE ------------------ */}
-                                <div className='date-ctn'>
-                                    <span>{comment.createdAt}</span>
+                            <div className='comment-ctn'>
+                                <p>{comment?.message}</p>
+                            </div>
+                        </div>
+                        <div className='date-actionBtns-ctn'>
+                            <div className='date-ctn'>
+                                <span>{comment?.createdAt}</span>
+                            </div>
+                            <div className='actionBtn-ctn'>
+                                <div className='edit-btn-ctn'>
+                                    {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
-
-                                {/* ------------------ EDIT/DELETE ------------------ */}
-                                <div className='comment-action-ctn' hidden={comment.userId !== user?.id}>
-                                    <div className='comment-edit-ctn'>
-                                        <button
-                                            onClick={() => setOpenEditCmt(true)}>
-                                            <i className="fa-solid fa-pen"></i>
-                                        </button>
-                                    </div>
-                                    <div className='comment-delete-ctn'>
-                                        <button><i className="fa-solid fa-trash"></i></button>
-                                    </div>
+                                <div className='delete-btn-ctn'>
+                                    {comment?.User?.id === user?.id
+                                    ? <DeleteCommentModal commentId={comment?.id} />
+                                    : ""}
                                 </div>
                             </div>
-
-                        </li>
+                        </div>
                     </div>
                 ))}
-            </ul>
+            </div>
         </>
     );
 }
