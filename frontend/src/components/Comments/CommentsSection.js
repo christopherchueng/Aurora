@@ -8,7 +8,7 @@ import UpdateCommentForm from "./UpdateCommentForm";
 import DeleteCommentModal from "./DeleteCommentModal";
 import './CreateCommentForm';
 
-const CommentsSection = ({ comments, trackId, message, setMessage }) => {
+const CommentsSection = ({ comments, trackId, message, setMessage, isNewComment, setIsNewComment }) => {
     const dispatch = useDispatch();
     const { commentId } = useParams();
     const user = useSelector(state => state.session.user);
@@ -51,8 +51,8 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                                     {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
                                 <div className='delete-btn-ctn'>
-                                    {comment?.User?.id === user?.id
-                                    ? <DeleteCommentModal commentId={comment?.id} />
+                                    {comment?.User?.id === user?.id || !isNewComment
+                                    ? <DeleteCommentModal commentId={comment?.id} isNewComment={isNewComment} setIsNewComment={setIsNewComment} />
                                     : ""}
                                 </div>
                             </div>

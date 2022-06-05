@@ -6,7 +6,7 @@ import DeleteTrackModal from "../Tracks/DeleteTrackModal";
 import './CreateCommentForm.css'
 
 
-const CreateCommentForm = ({trackId, user}) => {
+const CreateCommentForm = ({trackId, user, isNewComment, setIsNewComment}) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user)
@@ -14,6 +14,10 @@ const CreateCommentForm = ({trackId, user}) => {
     // States
     const [message, setMessage] = useState('')
     const [boxClicked, setBoxClicked] = useState(false)
+
+    useEffect(() => {
+        setIsNewComment(false)
+    }, [isNewComment])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -27,6 +31,7 @@ const CreateCommentForm = ({trackId, user}) => {
         const comment = await dispatch(postComment(payload))
         setMessage('')
         setBoxClicked(false)
+        setIsNewComment(true);
         history.push(`/tracks/${comment.trackId}`)
     }
 
