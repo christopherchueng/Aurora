@@ -22,6 +22,8 @@ const TrackIdPage = ({tracks}) => {
     const { openEditTrack, setOpenEditTrack, setIsNewComment, boxClicked } = useUpdateContext();
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
+    const [duration, setDuration] = useState(0)
+    const [currentTime, setCurrentTime] = useState(0)
     const [currentSong, setCurrentSong] = useState(track)
 
     // References
@@ -39,6 +41,19 @@ const TrackIdPage = ({tracks}) => {
         setIsPlaying(true)
     }, [])
 
+    useEffect(() => {
+        const seconds = Math.floor(audioPlayer.current.duration)
+        setDuration(seconds)
+    }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+
+
+    const durationFormula = (seconds) => {
+        const minutes = Math.floor(seconds / 60)
+        const trackMin = minutes < 10 ? `0${minutes}` : `${minutes}`
+        const sec = Math.floor(seconds % 60)
+        const trackSec = seconds < 10 ? `0${sec}` : `${sec}`
+        return `${trackMin}:${trackSec}`
+    }
 
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.
@@ -103,21 +118,21 @@ const TrackIdPage = ({tracks}) => {
         <>
             <div className='music-player-ctn'>
                 <div className='music-player-content'>
-                    <div className='track-bar'>
-                        <audio ref={audioPlayer} src={track?.trackPath} autoPlay></audio>
-                        <div>
-                            <input type='range' />
-                        </div>
+                    <div className='track-bar-content'>
 
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
                             <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
+                        <div className='track-bar-ctn'>
+                            <audio ref={audioPlayer} src={track?.trackPath} autoPlay></audio>
+                            {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
+                        </div>
                     </div>
-                    <div className='duration-ctn'>
-                        <div className='start-time'>0:00</div>
-                        <div className='end-time'>2:49</div>
-                    </div>
+                    {/* <div className='duration-ctn'>
+                        <div className='start-time'>{durationFormula(currentTime)}</div>
+                        <div className='end-time'>{(duration && !isNaN(duration)) && durationFormula(duration)}</div>
+                    </div> */}
 
                     {/* START MEDIA CONTROLS */}
                     <div className='media-controls'>
@@ -139,6 +154,19 @@ const TrackIdPage = ({tracks}) => {
                         {/* START CENTER OF CONTROLS */}
                         {/* ------------------ MEDIA CONTROLS ------------------ */}
                         <div className='control-center'>
+
+                            {/* ------------------ EDIT ------------------ */}
+                            <div className='edit-ctn'>
+                                <button
+                                    type='button'
+                                    className='inline-edit-Track'
+                                    // When Edit button is CLICKED, Editing will be allowed by rendering UpdateTrackForm component.
+                                    // Save Changes button WILL BE DISPLAYED.
+                                    onClick={() => setOpenEditTrack(true)}
+                                    >
+                                    <i className="fa-solid fa-pen fa-2x comment"></i>
+                                </button>
+                            </div>
 
                             {/* ------------------ SHUFFLE BUTTON ------------------ */}
                             {/* <div className='shuffle-ctn'>
@@ -189,6 +217,11 @@ const TrackIdPage = ({tracks}) => {
                                 </button>
                             </div>
 
+                            {/* ------------------ DELETE ------------------ */}
+                            <div className='delete-ctn'>
+                                <DeleteTrackModal />
+                            </div>
+
                             {/* ------------------ VOLUME ------------------ */}
                             {/* <div className='volume-ctn'>
                                 <button
@@ -211,27 +244,6 @@ const TrackIdPage = ({tracks}) => {
                         </div>
                     </div>
                     {/* END MEDIA CONTROLS */}
-
-                    {  /* START EDIT/DELETE */}
-                    {/* ------------------ EDIT AND DELETE BUTTONS ------------------ */}
-                    <div className='edit-save-ctn'>
-                        <div className='edit-ctn'>
-                            <button
-                                type='button'
-                                className='inline-edit-Track'
-                                // When Edit button is CLICKED, Editing will be allowed by rendering UpdateTrackForm component.
-                                // Save Changes button WILL BE DISPLAYED.
-                                onClick={() => setOpenEditTrack(true)}
-                                >
-                                Edit
-                            </button>
-
-                            {/* ------------------ DELETE ------------------ */}
-                            <div className='delete-ctn'>
-                                <DeleteTrackModal />
-                            </div>
-                        </div>
-                    </div>
 
                     {/* ------------------ DESCRIPTION ------------------ */}
                     <div className='track-info-ctn'>

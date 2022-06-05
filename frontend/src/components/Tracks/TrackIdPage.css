@@ -11,14 +11,28 @@
     flex-direction: row;
 }
 
-.track-bar {
+.track-bar-content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: lightblue;
     width: 100vw;
     height: 60vh;
-    background-color: lightblue;
+
 }
+
+/* .input-tracker {
+    appearance: none;
+    background: var(--track-background);
+    outline: none;
+    width: 100vw;
+    z-index: 4;
+} */
+
+/* .cover-photo-ctn {
+    z-index: 3;
+} */
 
 .cover-photo {
     width: 200px;
@@ -90,7 +104,9 @@
 .play-pause,
 .next,
 .shuffle,
-.volume {
+.volume,
+.inline-edit-Track,
+.track-delete-btn {
     border: none;
     background-color: transparent;
     color: white;
@@ -113,7 +129,9 @@
 }
 
 .volume-ctn,
-.shuffle-ctn {
+.shuffle-ctn,
+.delete-ctn,
+.edit-ctn {
     width: 30px;
     padding: 0 50px;
 }

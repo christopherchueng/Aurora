@@ -8,8 +8,8 @@ const DeleteTrackModal = ({ track }) => {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>
-                Delete
+            <button className='track-delete-btn' onClick={() => setShowModal(true)}>
+                <i className="fa-solid fa-trash fa-2x"></i>
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>

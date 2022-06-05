@@ -18,6 +18,11 @@
     align-items: center;
 }
 
+.navbar,
+.navbar-list {
+    z-index: 2;
+}
+
 .home-logo-click > a,
 .github-logo-click > a {
     height: auto;
