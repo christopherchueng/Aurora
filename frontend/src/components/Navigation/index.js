@@ -46,11 +46,11 @@ function Navigation({ isLoaded }){
             </div>
             <div className='navbar-right'>
               <div className='add-track-ctn'>
-                <div className='add-track-click'>
+                {sessionUser && <div className='add-track-click'>
                   <NavLink to='/upload'>
                     <img className='add-track-icon' title='Upload' src='/images/add-track-icon.png'></img>
                   </NavLink>
-                </div>
+                </div>}
               </div>
               {isLoaded && sessionLinks}
             </div>
