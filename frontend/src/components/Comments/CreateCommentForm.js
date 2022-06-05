@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { postComment } from "../../store/commentReducer";
 import DeleteTrackModal from "../Tracks/DeleteTrackModal";
+import { useUpdateContext } from "../../context/UpdateContext";
 import './CreateCommentForm.css'
 
 
-const CreateCommentForm = ({trackId, user, isNewComment, setIsNewComment}) => {
+const CreateCommentForm = ({trackId, user}) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user)
@@ -14,10 +15,15 @@ const CreateCommentForm = ({trackId, user, isNewComment, setIsNewComment}) => {
     // States
     const [message, setMessage] = useState('')
     const [boxClicked, setBoxClicked] = useState(false)
+    const { isNewComment, setIsNewComment } = useUpdateContext();
 
     useEffect(() => {
-        setIsNewComment(false)
-    }, [isNewComment])
+        if (!boxClicked) {
+            setIsNewComment(false)
+        } else {
+            setIsNewComment(true)
+        }
+    }, [boxClicked])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -31,7 +37,7 @@ const CreateCommentForm = ({trackId, user, isNewComment, setIsNewComment}) => {
         const comment = await dispatch(postComment(payload))
         setMessage('')
         setBoxClicked(false)
-        setIsNewComment(true);
+        setIsNewComment(false);
         history.push(`/tracks/${comment.trackId}`)
     }
 

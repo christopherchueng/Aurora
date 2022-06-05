@@ -19,7 +19,6 @@ const Comments = ({tracks}) => {
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();
     const [className, setClassName] = useState('');
     const [message, setMessage] = useState('')
-    const [isNewComment, setIsNewComment] = useState(false)
 
 
     // useEffect(() => {
@@ -29,7 +28,7 @@ const Comments = ({tracks}) => {
     return (
         <div className='comment-section-ctn'>
             <div className='comment-textbox-ctn'>
-                <CreateCommentForm trackId={+trackId} user={user} isNewComment={isNewComment} setIsNewComment={setIsNewComment} />
+                <CreateCommentForm trackId={+trackId} user={user} />
             </div>
             <div className='track-comments'>
                 <CommentsSection

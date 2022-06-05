@@ -8,6 +8,10 @@ export default function UpdateProvider({ children }) {
     const [openEditTrack, setOpenEditTrack] = useState(false);
     const [openEditCmt, setOpenEditCmt] = useState(false);
     const [saveChanges, setSaveChanges] = useState(false);
+    const [boxClicked, setBoxClicked] = useState(false)
+    const [isNewComment, setIsNewComment] = useState(false)
+
+
 
     return (
         <updateContext.Provider value={{
@@ -16,7 +20,11 @@ export default function UpdateProvider({ children }) {
             saveChanges,
             setSaveChanges,
             openEditCmt,
-            setOpenEditCmt
+            setOpenEditCmt,
+            boxClicked,
+            setBoxClicked,
+            isNewComment,
+            setIsNewComment
         }}>
             { children }
         </updateContext.Provider>

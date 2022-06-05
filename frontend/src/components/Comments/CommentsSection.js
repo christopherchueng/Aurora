@@ -8,7 +8,7 @@ import UpdateCommentForm from "./UpdateCommentForm";
 import DeleteCommentModal from "./DeleteCommentModal";
 import './CreateCommentForm';
 
-const CommentsSection = ({ comments, trackId, message, setMessage, isNewComment, setIsNewComment }) => {
+const CommentsSection = ({ comments, trackId, message, setMessage }) => {
     const dispatch = useDispatch();
     const { commentId } = useParams();
     const user = useSelector(state => state.session.user);
@@ -18,7 +18,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage, isNewComment,
 
     // States
     const [className, setClassName] = useState('');
-    const { openEditCmt, setOpenEditCmt } = useUpdateContext();
+    const { openEditCmt, setOpenEditCmt, isNewComment, setIsNewComment } = useUpdateContext();
 
     // useEffect(() => {
     //     dispatch(getComments(+trackId))
@@ -51,7 +51,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage, isNewComment,
                                     {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
                                 <div className='delete-btn-ctn'>
-                                    {comment?.User?.id === user?.id || !isNewComment
+                                    {comment?.User?.id === user?.id && !isNewComment
                                     ? <DeleteCommentModal commentId={comment?.id} isNewComment={isNewComment} setIsNewComment={setIsNewComment} />
                                     : ""}
                                 </div>
