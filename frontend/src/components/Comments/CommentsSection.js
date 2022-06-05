@@ -6,7 +6,7 @@ import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
 import UpdateCommentForm from "./UpdateCommentForm";
 import DeleteCommentModal from "./DeleteCommentModal";
-import './CreateCommentForm';
+import './CommentsSection.css';
 
 const CommentsSection = ({ comments, trackId, message, setMessage }) => {
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
         <>
             <div className='comment-list'>
                 {commentsArr.map(comment => (
-                    <div key={`comment: ${comment.id}`}>
+                    <div className='comment-content' key={`comment: ${comment.id}`}>
                         <div className='user-comment-ctn'>
                             <div className='user-ctn'>
                                 <span>{comment?.User?.username}</span>
