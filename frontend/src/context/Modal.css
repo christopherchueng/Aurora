@@ -25,8 +25,8 @@
     justify-content: center;
     align-items: center;
     background-color:rgba(255, 255, 255, 0.3);
-    width: 600px;
-    height: 400px;
+    width: 700px;
+    height: 500px;
     border-radius: 10px;
     z-index: 2;
 }
@@ -39,40 +39,4 @@ form > .login-form {
     flex-direction: column;
     /* padding: px; */
     font-size: 14pt;
-}
-
-form > span {
-    font-size: 36pt;
-    font-weight: bold;
-}
-
-.user-email-ctn input,
-.password-ctn input {
-    border-radius: 5px;
-    width: 200px;
-    display: flex;
-    margin: 20px;
-}
-
-.user-email-ctn span {
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-
-}
-
-.login-form button {
-    margin: 10px 0;
-    border: 1px solid white;
-    background-color: transparent;
-    border-radius: 5px;
-    color: white;
-    width: 70px;
-    height: 33px;
-    cursor: pointer;
-}
-
-.password-ctn span {
-    display: flex;
-    justify-content: center;
 }

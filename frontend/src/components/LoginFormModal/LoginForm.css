@@ -1,6 +1,60 @@
+form > span {
+    font-size: 36pt;
+    font-weight: bold;
+}
+
 .login-form {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 700px;
+}
+
+.user-email-ctn,
+.password-ctn {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-label p,
+.pw-label p {
+    display: flex;
+    /* align-items: center; */
+    justify-content: flex-end;
+    width: 175px;
+}
+
+.user-label {
+    justify-content: center;
+}
+
+.user-email-ctn input,
+.password-ctn input {
+    border-radius: 5px;
+    width: 200px;
+    display: flex;
+    margin: 20px;
+}
+
+/* .user-email-ctn span {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+
+} */
+
+.login-form button {
+    margin: 10px 0;
+    border: 1px solid white;
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+    width: 70px;
+    height: 33px;
+    cursor: pointer;
+}
+
+.password-ctn span {
+    display: flex;
+    justify-content: center;
 }

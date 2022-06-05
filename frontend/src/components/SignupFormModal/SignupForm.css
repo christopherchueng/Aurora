@@ -1,0 +1,28 @@
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+}
+
+.signup-form > span {
+    font-size: 36pt;
+    font-weight: bold;
+}
+
+.signup-form div {
+    padding: 20px 0;
+}
+
+
+.signup-form button {
+    margin: 10px 0;
+    border: 1px solid white;
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+    width: 70px;
+    height: 33px;
+    cursor: pointer;
+}

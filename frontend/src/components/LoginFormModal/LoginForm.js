@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import './LoginForm.css'
 
 function LoginForm() {
     const dispatch = useDispatch();
@@ -29,7 +30,9 @@ function LoginForm() {
             ))}
           </ul>
           <div className='user-email-ctn'>
-            <span>Username or Email</span>
+            <div className='user-label'>
+              <p>Username or Email</p>
+            </div>
             <input
               type="text"
               value={credential}
@@ -38,7 +41,9 @@ function LoginForm() {
             />
           </div>
           <div className='password-ctn'>
-            <span>Password</span>
+            <div className='pw-label'>
+              <p>Password</p>
+            </div>
             <input
               type="password"
               value={password}
