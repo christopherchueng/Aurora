@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   Comment.associate = function(models) {
     // associations can be defined here
     Comment.belongsTo(models.User, { foreignKey: 'userId' })
-    Comment.belongsTo(models.Track, { foreignKey: 'trackId', onDelete: 'CASCADE', hooks: true })
+    Comment.belongsTo(models.Track, { foreignKey: 'trackId' })
   };
   return Comment;
 };
