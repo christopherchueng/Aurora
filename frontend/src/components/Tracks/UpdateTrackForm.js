@@ -188,9 +188,6 @@ const UpdateTrackForm = ({tracks}) => {
                         </div>
                     </form>
                 </div>
-                <div className='comment-section-ctn'>
-                    <h1>Comments down below</h1>
-                </div>
             </div>
         </>
     )

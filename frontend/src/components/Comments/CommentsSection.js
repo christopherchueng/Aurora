@@ -20,13 +20,13 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
     const [className, setClassName] = useState('');
     const { openEditCmt, setOpenEditCmt } = useUpdateContext();
 
-    useEffect(() => {
-        dispatch(getComments(+trackId))
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getComments(+trackId))
+    // }, [dispatch])
 
-    useEffect(() => {
-        dispatch(getTracks())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getTracks())
+    // }, [dispatch])
 
 
     return (

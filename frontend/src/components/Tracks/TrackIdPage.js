@@ -28,12 +28,13 @@ const TrackIdPage = ({tracks}) => {
     const audioPlayer = useRef();
 
     useEffect(() => {
-        dispatch(getTracks())
+        dispatch(getComments(+trackId))
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(getComments(+trackId))
+        dispatch(getTracks())
     }, [dispatch])
+
 
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.
