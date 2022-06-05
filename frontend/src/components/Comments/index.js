@@ -27,9 +27,10 @@ const Comments = ({tracks}) => {
 
     return (
         <div className='comment-section-ctn'>
-            <div className='comment-textbox-ctn'>
+            {user && <div className='comment-textbox-ctn'>
                 <CreateCommentForm trackId={+trackId} user={user} />
             </div>
+            }
             <div className='track-comments'>
                 <CommentsSection
                     comments={comments}
