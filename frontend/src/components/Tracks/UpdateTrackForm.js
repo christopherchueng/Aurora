@@ -8,11 +8,11 @@ import { useUpdateContext } from '../../context/UpdateContext';
 import './UpdateTrackForm.css';
 
 const UpdateTrackForm = ({tracks}) => {
-    const { openEditTrack, setOpenEditTrack } = useUpdateContext();
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
 
+    const { openEditTrack, setOpenEditTrack } = useUpdateContext();
     const [title, setTitle] = useState(track.title)
     const [description, setDescription] = useState(track.description)
     const [genre, setGenre] = useState(track.genre)

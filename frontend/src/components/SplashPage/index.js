@@ -53,9 +53,9 @@ const SplashPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className='splash-upload-btn'>
-                    <Link to='/tracks/upload' title='Upload your own'>Upload your own</Link>
-                </div>
+                {/* <div className='splash-upload-btn'>
+                    <Link to='/upload' title='Upload your own'>Upload your own</Link>
+                </div> */}
                 <div className='track-content'>
                     <div className='splash-track-header'>
                         <span>
