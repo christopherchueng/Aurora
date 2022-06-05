@@ -25,6 +25,12 @@
     height: 200px;
 }
 
+.duration-ctn {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16pt;
+}
+
 .track-info-ctn {
     display: flex;
     justify-content: center;

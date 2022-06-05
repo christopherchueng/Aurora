@@ -35,6 +35,10 @@ const TrackIdPage = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
+    useEffect(() => {
+        setIsPlaying(true)
+    }, [])
+
 
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.
@@ -72,6 +76,16 @@ const TrackIdPage = ({tracks}) => {
         }
     }
 
+    // const autoPlay = e => {
+    //     if (e.currentTarget.className === 'play') {
+    //         setIsPlaying(true)
+    //         return true
+    //     } else if (e.currentTarget.className === 'pause') {
+    //         setIsPlaying(false)
+    //         return false
+    //     }
+    // }
+
     // const shuffleTracks = () => {
     //     const tracksArr = Object.values(tracks);
     //     for (let i = tracksArr.length - 1; i > 1; i--) {
@@ -91,11 +105,18 @@ const TrackIdPage = ({tracks}) => {
                 <div className='music-player-content'>
                     <div className='track-bar'>
                         <audio ref={audioPlayer} src={track?.trackPath} autoPlay></audio>
+                        <div>
+                            <input type='range' />
+                        </div>
 
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
                             <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
+                    </div>
+                    <div className='duration-ctn'>
+                        <div className='start-time'>0:00</div>
+                        <div className='end-time'>2:49</div>
                     </div>
 
                     {/* START MEDIA CONTROLS */}
