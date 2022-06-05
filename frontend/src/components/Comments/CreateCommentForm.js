@@ -9,6 +9,7 @@ import './CreateCommentForm.css'
 const CreateCommentForm = ({trackId, user}) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.session.user)
 
     // States
     const [message, setMessage] = useState('')
@@ -16,6 +17,10 @@ const CreateCommentForm = ({trackId, user}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+
+        if (!user) {
+            history.push('/')
+        }
 
         const payload = {
             message,
