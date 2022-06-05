@@ -88,7 +88,7 @@ const TrackIdPage = ({tracks}) => {
             <div className='music-player-ctn'>
                 <div className='music-player-content'>
                     <div className='track-bar'>
-                        <audio ref={audioPlayer} src={track?.trackPath}></audio>
+                        <audio ref={audioPlayer} src={track?.trackPath} autoPlay></audio>
 
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
