@@ -40,6 +40,7 @@
 }
 
 .navbar-right > .loginModal-btn,
+.navbar-right > .demo-btn,
 .navbar-right > .signupModal-btn {
     margin: 0 10px;
     background-color: transparent;
@@ -53,6 +54,7 @@
 }
 
 .navbar-right > .signupModal-btn:hover,
+.navbar-right > .demo-btn:hover,
 .navbar-right .loginModal-btn:hover {
     background-color: white;
     color: black;
