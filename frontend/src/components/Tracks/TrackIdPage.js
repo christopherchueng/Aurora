@@ -31,6 +31,10 @@ const TrackIdPage = ({tracks}) => {
         dispatch(getTracks())
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(getComments(+trackId))
+    }, [dispatch])
+
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.
         const prevState = isPlaying; // Grab the previous value (false on mount)

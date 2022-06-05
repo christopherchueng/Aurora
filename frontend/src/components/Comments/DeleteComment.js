@@ -8,9 +8,11 @@ import { deleteComment } from "../../store/commentReducer";
 const DeleteComment = ({commentId, setShowModal}) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    console.log('are we getting the correct commentId', commentId)
 
     const onDelete = async e => {
         e.preventDefault()
+        console.log('in onDelete func')
         await dispatch(deleteComment(commentId))
         setShowModal(false)
     }

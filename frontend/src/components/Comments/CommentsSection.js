@@ -11,7 +11,7 @@ import './CreateCommentForm';
 const CommentsSection = ({ comments, trackId, message, setMessage }) => {
     const dispatch = useDispatch();
     const { commentId } = useParams();
-    const user = useSelector(state => state?.session.user);
+    const user = useSelector(state => state.session.user);
     // const user = useSelector(state => state.session.user)
     const commentsArr = Object.values(comments);
 
@@ -21,7 +21,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
 
     useEffect(() => {
         dispatch(getComments(+trackId))
-    }, [dispatch, trackId])
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(getTracks())
@@ -45,12 +45,12 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                             <div className='date-ctn'>
                                 <span>{comment?.createdAt}</span>
                             </div>
-                            <div className='actionBtn-ctn' hidden={comment.userId !== user?.id}>
+                            <div className='actionBtn-ctn' hidden={comment?.userId !== user?.id}>
                                 <div className='edit-btn-ctn'>
                                     {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
                                 <div className='delete-btn-ctn'>
-                                    {comment.User.id === user.id
+                                    {comment?.User?.id === user?.id
                                     ? <DeleteCommentModal commentId={comment?.id} />
                                     : ""}
                                 </div>
