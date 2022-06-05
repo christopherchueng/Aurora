@@ -35,7 +35,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                     <div key={`comment: ${comment.id}`}>
                         <div className='user-comment-ctn'>
                             <div className='user-ctn'>
-                                <span>{user?.username}</span>
+                                <span>{comment.User?.username}</span>
                             </div>
                             <div className='comment-ctn'>
                                 <p>{comment?.message}</p>
