@@ -154,19 +154,11 @@ const TrackIdPage = ({tracks}) => {
                         {/* START CENTER OF CONTROLS */}
                         {/* ------------------ MEDIA CONTROLS ------------------ */}
                         <div className='control-center'>
-
-                            {/* ------------------ EDIT ------------------ */}
-                            <div className='edit-ctn'>
-                                <button
-                                    type='button'
-                                    className='inline-edit-Track'
-                                    // When Edit button is CLICKED, Editing will be allowed by rendering UpdateTrackForm component.
-                                    // Save Changes button WILL BE DISPLAYED.
-                                    onClick={() => setOpenEditTrack(true)}
-                                    >
-                                    <i className="fa-solid fa-pen fa-2x comment"></i>
-                                </button>
+                            {/* ------------------ DELETE ------------------ */}
+                            <div className='delete-cancel-ctn'>
+                                <DeleteTrackModal />
                             </div>
+
 
                             {/* ------------------ SHUFFLE BUTTON ------------------ */}
                             {/* <div className='shuffle-ctn'>
@@ -217,9 +209,17 @@ const TrackIdPage = ({tracks}) => {
                                 </button>
                             </div>
 
-                            {/* ------------------ DELETE ------------------ */}
-                            <div className='delete-ctn'>
-                                <DeleteTrackModal />
+                            {/* ------------------ EDIT ------------------ */}
+                            <div className='edit-save-ctn'>
+                                <button
+                                    type='button'
+                                    className='inline-edit-Track'
+                                    // When Edit button is CLICKED, Editing will be allowed by rendering UpdateTrackForm component.
+                                    // Save Changes button WILL BE DISPLAYED.
+                                    onClick={() => setOpenEditTrack(true)}
+                                    >
+                                    <i className="fa-solid fa-pen fa-2x comment"></i>
+                                </button>
                             </div>
 
                             {/* ------------------ VOLUME ------------------ */}

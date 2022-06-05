@@ -76,7 +76,8 @@
 .back,
 .play,
 .pause,
-.next {
+.next,
+.saveChanges {
     border: none;
     background-color: transparent;
     color: white;
@@ -100,4 +101,12 @@
 
 .genre-ctn {
     justify-content: center;
+}
+
+.fa-xmark {
+    color: rgb(249, 105, 105);
+}
+
+.fa-check {
+    color: lightgreen;
 }

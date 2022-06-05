@@ -77,6 +77,7 @@ const UpdateTrackForm = ({tracks}) => {
                                 />
                             </div>
                         </div>
+                        {/* START MEDIA CONTROLS */}
                         <div className='media-controls'>
                             <div className='control-left'>
 
@@ -101,33 +102,47 @@ const UpdateTrackForm = ({tracks}) => {
                                 </div>
                             </div>
 
+                            {/* START CENTER OF CONTROLS */}
                             {/* ------------------ MEDIA CONTROLS ------------------ */}
                             <div className='control-center'>
-                                <div className='back-ctn'>
-                                    <button type='button' className='back'><i className="fa-solid fa-backward-step fa-3x"></i></button>
+
+                                {/* ------------------ CANCEL ------------------ */}
+                                <div className='delete-cancel-ctn'>
+                                    <button
+                                        className='track-delete-btn'
+                                        type='button'
+                                        onClick={() => setOpenEditTrack(false)}
+                                        >
+                                        <i class="fa-solid fa-xmark fa-2x"></i>
+                                    </button>
                                 </div>
+
+                                {/* ------------------ BACK ------------------ */}
+                                <div className='back-ctn'>
+                                    <button
+                                        type='button'
+                                        className='back'
+                                    >
+                                        <i className="fa-solid fa-backward-step fa-3x"></i>
+                                    </button>
+                                </div>
+
+                                {/* ------------------ PLAY ------------------ */}
                                 <div className='play-ctn'>
                                     {/* If not playing, play button will display */}
-                                    {!isPlaying &&
-                                    (<button
-                                        type='button'
-                                        className='play'
-                                        onClick={() => setIsPlaying(!isPlaying)}
-                                    >
-                                        <i className="fa-solid fa-circle-play fa-7x"></i>
-                                    </button>
-                                    )}
                                     {/* If playing, pause button will display */}
-                                    {isPlaying &&
-                                    (<button
+                                    <button
                                         type='button'
-                                        className='pause'
-                                        onClick={() => setIsPlaying(!isPlaying)}
+                                        className='play-pause'
                                     >
-                                        <i className="fa-solid fa-circle-pause fa-7x"></i>
+                                        {isPlaying
+                                        ? <i className="fa-solid fa-circle-pause fa-7x"></i>
+                                        : <i className="fa-solid fa-circle-play fa-7x"></i>
+                                        }
                                     </button>
-                                    )}
                                 </div>
+
+                                {/* ------------------ NEXT ------------------ */}
                                 <div className='next-ctn'>
                                     <button
                                         type='button'
@@ -136,7 +151,19 @@ const UpdateTrackForm = ({tracks}) => {
                                         <i className="fa-solid fa-forward-step fa-3x"></i>
                                     </button>
                                 </div>
+
+                                {/* ------------------ SAVE ------------------ */}
+                                <div className='edit-save-ctn'>
+                                    <button
+                                        type='submit'
+                                        className='saveChanges'
+                                        disabled={errors.length !== 0}
+                                    >
+                                        <i class="fa-solid fa-check fa-2x"></i>
+                                    </button>
+                                </div>
                             </div>
+
                             {/* ------------------ GENRE ------------------ */}
                             <div className='genre-ctn'>
                                 <div className='genre'>
@@ -151,39 +178,20 @@ const UpdateTrackForm = ({tracks}) => {
                                         ))}
                                     </select>
                                 </div>
-                                {/* <div>
-                                    {errors.length > 0 && <ErrorMessage error={errors[1]} />}
-                                </div> */}
                             </div>
                         </div>
-                        <div className='edit-save-ctn'>
-                            {/* ------------------ SAVE CHANGES AND CANCEL BUTTONS ------------------ */}
-                            <div className='edit-ctn'>
-                                {<button
-                                    type='submit'
-                                    className='saveChanges'
-                                    disabled={errors.length !== 0}
-                                    >
-                                    Save
-                                </button>}
-                                <button
-                                    type='button'
-                                    onClick={() => setOpenEditTrack(false)}
-                                    >Cancel</button>
-                            </div>
                             <div className='track-info-ctn'>
+
                                 {/* ------------------ DESCRIPTION ------------------ */}
                                 <div className='description'>
-                                        <textarea
-                                            name='description'
-                                            value={description}
-                                            placeholder='Description'
-                                            onChange={e => setDescription(e.target.value)}
-                                        />
+                                    <textarea
+                                        name='description'
+                                        value={description}
+                                        placeholder='Description'
+                                        onChange={e => setDescription(e.target.value)}
+                                    />
                                 </div>
-
                             </div>
-                        </div>
                     </form>
                 </div>
             </div>
