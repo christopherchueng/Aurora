@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { getTracks } from '../../store/trackReducer';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import DemoUser from '../DemoUser';
 import './SplashPage.css'
 
 const SplashPage = () => {
@@ -83,7 +84,7 @@ const SplashPage = () => {
                         <h2>Get on track with Aurora now.</h2>
                         <div className='remarks-btns'>
                             <SignupFormModal />
-                            <button className='signupModal-btn' type='submit'>Demo</button>
+                            <DemoUser />
                         </div>
                         <div className='bottom-sign-in'></div>
                             <div className='account-inquiry-span'>

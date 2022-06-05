@@ -252,7 +252,8 @@
     font-size: 48pt;
 }
 
-.remarks-btns > .signupModal-btn {
+.remarks-btns > .signupModal-btn,
+.remarks-btns > .demo-btn {
     background-color: transparent;
     font-size: 12pt;
     /* font-weight: bold; */
@@ -266,6 +267,7 @@
 }
 
 .remarks-btns > .signupModal-btn:hover,
+.remarks-btns > .demo-btn:hover,
 .account-inquiry-span .loginModal-btn:hover {
     background-color: white;
     color: black;
