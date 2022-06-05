@@ -165,25 +165,17 @@ const TrackIdPage = ({tracks}) => {
                             {/* ------------------ PLAY BUTTON ------------------ */}
                             <div className='play-ctn'>
                                 {/* If not playing, play button will display */}
-                                {!isPlaying &&
-                                (<button
-                                    type='button'
-                                    className='play'
-                                    onClick={playPauseTrack}
-                                >
-                                    <i className="fa-solid fa-circle-play fa-7x"></i>
-                                </button>
-                                )}
                                 {/* If playing, pause button will display */}
-                                {isPlaying &&
-                                (<button
+                                <button
                                     type='button'
-                                    className='pause'
+                                    className='play-pause'
                                     onClick={playPauseTrack}
                                 >
-                                    <i className="fa-solid fa-circle-pause fa-7x"></i>
+                                    {isPlaying
+                                    ? <i className="fa-solid fa-circle-pause fa-7x"></i>
+                                    : <i className="fa-solid fa-circle-play fa-7x"></i>
+                                    }
                                 </button>
-                                )}
                             </div>
 
                             {/* ------------------ NEXT BUTTON ------------------ */}
