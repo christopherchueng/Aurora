@@ -16,7 +16,9 @@ const TrackIdPage = ({tracks}) => {
     const track = tracks[+trackId];
     const comments = useSelector(state => state.comment.entries)
     const commentsArr = Object.values(comments);
-
+    const sessionUser = useSelector(state => state.session.user);
+    console.log('session', typeof sessionUser.id)
+    console.log('track', typeof track.User.id)
 
     // States
     const { openEditTrack, setOpenEditTrack, setIsNewComment, boxClicked } = useUpdateContext();
@@ -160,9 +162,11 @@ const TrackIdPage = ({tracks}) => {
                         {/* ------------------ MEDIA CONTROLS ------------------ */}
                         <div className='control-center'>
                             {/* ------------------ DELETE ------------------ */}
-                            <div className='delete-cancel-ctn'>
+                            {sessionUser?.id === track?.User?.id
+                            ? <div className='delete-cancel-ctn'>
                                 <DeleteTrackModal />
                             </div>
+                            : ""}
 
 
                             {/* ------------------ SHUFFLE BUTTON ------------------ */}
@@ -215,7 +219,8 @@ const TrackIdPage = ({tracks}) => {
                             </div>
 
                             {/* ------------------ EDIT ------------------ */}
-                            <div className='edit-save-ctn'>
+                            {sessionUser?.id === track?.User?.id
+                            ? <div className='edit-save-ctn'>
                                 <button
                                     type='button'
                                     className='inline-edit-Track'
@@ -226,6 +231,7 @@ const TrackIdPage = ({tracks}) => {
                                     <i className="fa-solid fa-pen fa-2x comment"></i>
                                 </button>
                             </div>
+                            : ""}
 
                             {/* ------------------ VOLUME ------------------ */}
                             {/* <div className='volume-ctn'>
