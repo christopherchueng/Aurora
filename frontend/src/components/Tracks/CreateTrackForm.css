@@ -81,6 +81,7 @@
     height: 40px;
     border-radius: 5px;
     color: white;
+    padding-left: 10px;
 }
 
 .genre-div > select {
@@ -89,10 +90,8 @@
 
 .title-div > input::placeholder,
 .trackPath-div > input::placeholder,
-.imagePath-div > input::placeholder,
-.description-div > textarea::placeholder {
+.imagePath-div > input::placeholder {
     color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
     font-size: 10pt;
 }
 
@@ -115,6 +114,7 @@
 
 .description-div > textarea {
     height: 150px;
+    padding: 15px 0 0 15px;
 }
 
 .create-track-btn {

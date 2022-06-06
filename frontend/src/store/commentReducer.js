@@ -28,7 +28,6 @@ export const editComment = (comment) => {
 }
 
 export const removeComment = (commentId) => {
-    console.log('in removeComment action creator')
     return {
         type: DELETE_COMMENT,
         commentId
@@ -68,7 +67,6 @@ export const updateComment = (payload) => async (dispatch) => {
 }
 
 export const deleteComment = (commentId) => async (dispatch) => {
-    console.log('in deleteComment Thunk', commentId)
     const response = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'DELETE',
     })
@@ -102,7 +100,6 @@ const commentReducer = (state = initialState, action) => {
             return newState;
         case DELETE_COMMENT:
             newState = { ...state, entries: {...state.entries} }
-            console.log('here in reducer action.commentId', action.commentId)
             delete newState.entries[action.commentId];
             return newState;
         default:
