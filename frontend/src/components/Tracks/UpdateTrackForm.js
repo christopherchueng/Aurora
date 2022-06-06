@@ -31,6 +31,9 @@ const UpdateTrackForm = ({tracks}) => {
         if (!title) {
             validationErrors.push('Please provide a title.')
         }
+        if (title.length > 100) {
+            validationErrors.push('Please provide a title under 100 characters.')
+        }
         // if (!genre) {
         //     validationErrors.push('Please select a genre.')
         // }
@@ -92,7 +95,7 @@ const UpdateTrackForm = ({tracks}) => {
                                         />
                                     </h1>
                                 </div>
-                                <div>
+                                <div className='edit-error-msg'>
                                     {openEditTrack && <ErrorMessage error={errors[0]} />}
                                 </div>
 

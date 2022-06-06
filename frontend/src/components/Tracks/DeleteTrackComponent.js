@@ -32,7 +32,7 @@ const DeleteTrackComponent = ({ showModal }) => {
                 {/* <div className='cancel-btn-ctn'>
                     <button className='cancel-btn' onClick={cancelClick}>Cancel</button>
                 </div> */}
-                <div className='delete-btn-ctn'>
+                <div className='delete-track-ctn'>
                     <button onClick={onDelete}>Delete</button>
 
                 </div>

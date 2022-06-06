@@ -77,7 +77,7 @@
 .track-title > h1 {
     margin: 0;
     font-size: 24pt;
-    width: 500px;
+    width: 365px;
 }
 
 .track-artist > p {
@@ -102,12 +102,20 @@
     height: 150px;
 }
 
+.error-message {
+    padding-left: 50px;
+}
+
 .control-center {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     /* width: 100%; */
+}
+
+.genre-ctn {
+    padding-right: 50px;
 }
 
 .fa-xmark {

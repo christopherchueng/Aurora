@@ -10,7 +10,7 @@
     width: 400px;
 }
 
-.delete-btn-ctn > button {
+.delete-track-ctn > button {
     margin: 10px 0;
     border: 1px solid white;
     background-color: transparent;
@@ -21,7 +21,7 @@
     cursor: pointer;
 }
 
-.delete-btn-ctn > button:hover {
+.delete-track-ctn > button:hover {
     background-color: white;
     color: black;
     transition: color 0.15 ease-in;

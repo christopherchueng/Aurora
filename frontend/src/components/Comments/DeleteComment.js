@@ -20,10 +20,10 @@ const DeleteComment = ({commentId, setShowModal}) => {
     return (
         <>
             <div className='delete-ctn'>
-                <div className='delete-confirm'>
-                    <p>Are you sure you want to delete this track?</p>
+                <div className='delete-cmt-confirm'>
+                    <p>Are you sure you want to delete this comment?</p>
                 </div>
-                <div className='delete-button-ctn'>
+                <div className='delete-cmt-ctn'>
                     <button onClick={onDelete}>Delete</button>
                 </div>
             </div>
