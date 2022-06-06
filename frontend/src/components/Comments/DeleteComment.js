@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { deleteComment } from "../../store/commentReducer";
+import './DeleteComment.css'
 
 
 const DeleteComment = ({commentId, setShowModal}) => {
@@ -22,7 +23,7 @@ const DeleteComment = ({commentId, setShowModal}) => {
                 <div className='delete-confirm'>
                     <p>Are you sure you want to delete this track?</p>
                 </div>
-                <div className='delete-btn-ctn'>
+                <div className='delete-button-ctn'>
                     <button onClick={onDelete}>Delete</button>
                 </div>
             </div>

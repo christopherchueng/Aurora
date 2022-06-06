@@ -1,0 +1,29 @@
+.delete-ctn,
+.delete-button-ctn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-ctn {
+    width: 400px;
+}
+
+.delete-button-ctn > button {
+    margin: 10px 0;
+    border: 1px solid white;
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+    width: 70px;
+    height: 37px;
+    cursor: pointer;
+}
+
+.delete-button-ctn > button:hover {
+    background-color: white;
+    color: black;
+    transition: color 0.15 ease-in;
+    transition: background-color 0.15s ease-in;
+}
