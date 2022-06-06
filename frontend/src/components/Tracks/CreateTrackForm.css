@@ -1,12 +1,143 @@
 .create-track-form-ctn {
-    background-color: lightblue;
-    width: 100vw;
+    background-color: transparent;
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 75px;
+}
+
+.create-track-form-ctn > h1 {
+    width: auto;
+    border-bottom: 1px solid white;
+}
+
+.track-form-content,
+.description-div {
+    width: 900px;
     display: flex;
     flex-direction: column;
 }
 
-.track-form-content {
-    width: 500px;
+#top-row,
+#middle-row {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+}
+
+.title-div,
+.trackPath-div,
+.imagePath-div,
+#right-middle {
+    width: 400px;
+    padding-top: 50px;
+}
+
+.imagePath-div {
     display: flex;
     flex-direction: column;
+}
+.title-div {
+    padding-right: 100px;
+}
+
+.title-div > span,
+.trackPath-div > span,
+.imagePath-div > span,
+.genre-div > span,
+.description-div > span {
+    padding-bottom: 20px;
+    font-size: 16pt;
+}
+
+.left-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 400px;
+    height: 400px;
+    padding-right: 100px;
+}
+
+
+#right-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-div > input,
+.trackPath-div > input,
+.genre-div > select,
+.imagePath-div > input,
+.description-div > textarea {
+    border: 1px solid white;
+    background-color: transparent;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+}
+
+.genre-div > select {
+    color: white;
+}
+
+.title-div > input::placeholder,
+.trackPath-div > input::placeholder,
+.imagePath-div > input::placeholder,
+.description-div > textarea::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    font-size: 10pt;
+}
+
+.title-div,
+.genre-div,
+.trackPath-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-div {
+    width: 400px;
+    height: 50px;
+
+}
+
+.description-div {
+    padding-top: 50px;
+}
+
+.description-div > textarea {
+    height: 150px;
+}
+
+.create-track-btn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 50px 0 50px 0;
+}
+
+.create-track-btn > button {
+    background-color: transparent;
+    font-size: 12pt;
+    /* font-weight: bold; */
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 125px;
+    height: 50px;
+    /* margin: 20px 10px; */
+    cursor: pointer;
+}
+
+.create-track-btn > button:hover {
+    background-color: white;
+    color: black;
+    transition: color 0.15 ease-in;
+    transition: background-color 0.15s ease-in;
+}
+
+.req {
+    color:rgb(246, 94, 94);
 }
