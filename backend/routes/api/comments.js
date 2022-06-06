@@ -31,9 +31,7 @@ router.put('/:commentId', requireAuth, asyncHandler(async (req, res) => {
 }))
 
 router.delete('/:commentId', requireAuth, asyncHandler(async (req, res) => {
-    console.log('we are in backend route', req.params.commentId)
     const comment = await Comment.findByPk(req.params.commentId)
-    console.log('COMMENT FROM BACKEND', comment)
     await comment.destroy()
     return res.json(comment);
 }))
