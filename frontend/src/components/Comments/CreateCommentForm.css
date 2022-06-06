@@ -17,12 +17,12 @@
     height: 50px;
     border: 1px solid black;
     border-radius: 5px;
-    padding: 5px 0 0 10px;
+    padding: 10px 0 0 10px;
 }
 
-.add-comment-box::placeholder {
+/* .add-comment-box::placeholder {
     padding: 5px 0 0 10px;
-}
+} */
 
 .comment-manip-ctn {
     flex-direction: row;;
@@ -41,7 +41,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
+    width: 70px;
     height: 20px;
     padding: 5px;
     font-size: 10pt;
