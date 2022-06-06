@@ -83,7 +83,7 @@ const UpdateTrackForm = ({tracks}) => {
 
                                 {/* ------------------ TITLE ------------------ */}
                                 <div className='track-title'>
-                                    <h1>
+                                    <h1 className='title-input'>
                                         <input
                                             type='text'
                                             aria-label='Title'

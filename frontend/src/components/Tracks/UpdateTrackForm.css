@@ -25,6 +25,42 @@
     height: 200px;
 }
 
+.cover-photo-ctn > input {
+    border: 1px solid black;
+    background-color: transparent;
+    height: 40px;
+    border-radius: 5px;
+    width: 300px;
+    color: white;
+}
+
+.title-input > input,
+.genre > select {
+    border: 1px solid white;
+    background-color: transparent;
+    height: 40px;
+    border-radius: 5px;
+    width: 200px;
+    color: white;
+}
+
+.description > textarea {
+    height: 150px;
+    width: 600px;
+    border: 1px solid white;
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+}
+
+.title-input > input::placeholder,
+.genre > select::placeholder,
+.description > textarea::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    font-size: 10pt;
+}
+
 .track-info-ctn {
     display: flex;
     justify-content: center;
@@ -35,7 +71,7 @@
 
 .track-title,
 .track-artist {
-    width: 150px;
+    width: 200px;
 }
 
 .track-title > h1 {
@@ -51,7 +87,7 @@
 }
 
 .media-controls {
-    height: 100px;
+    height: 200px;
     width: 100vw;
     padding-top: 60px;
     display: flex;
@@ -63,6 +99,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 150px;
 }
 
 .control-center {
@@ -99,7 +136,7 @@
     /* justify-content: flex-end; */
     align-items: center;
     /* padding-right: 80px; */
-    width: 250px;
+    width: 200px;
     height: 100px;
 }
 

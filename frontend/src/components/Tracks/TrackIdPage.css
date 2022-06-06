@@ -51,8 +51,9 @@
     align-items: center;
     flex-direction: column;
     width: 100vw;
-    height: 150px;
-    padding: 30px 0;
+    height: auto;
+    padding: 40px 0;
+
 }
 
 .description {
