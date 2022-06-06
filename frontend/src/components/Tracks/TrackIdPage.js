@@ -17,6 +17,7 @@ const TrackIdPage = ({tracks}) => {
     const comments = useSelector(state => state.comment.entries)
     const commentsArr = Object.values(comments);
     const sessionUser = useSelector(state => state.session.user);
+    const allTracks = Object.values(tracks)
 
     // States
     const { openEditTrack, setOpenEditTrack, setIsNewComment, boxClicked } = useUpdateContext();
@@ -80,6 +81,19 @@ const TrackIdPage = ({tracks}) => {
                 history.push(`/tracks/${trackId}`)
             }
         }
+
+
+
+        // for (let i = allTracks.length - 1; i > 0; i--) {
+        //     let track = allTracks[i];
+        //     console.log(track);
+        //     if (i > 0) {
+        //         --i;
+        //         dispatch(getComments(track.id))
+        //         history.push(`/tracks/${track.id}`)
+
+        //     }
+        // }
     }
 
     const nextBtn = () => {
