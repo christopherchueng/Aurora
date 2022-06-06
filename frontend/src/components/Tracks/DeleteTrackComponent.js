@@ -3,6 +3,7 @@ import { removeTrack} from "../../store/trackReducer";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import './DeleteTrackComponent.css'
 
 const DeleteTrackComponent = ({ showModal }) => {
     const { trackId } = useParams();
