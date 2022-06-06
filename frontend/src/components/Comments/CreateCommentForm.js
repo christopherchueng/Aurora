@@ -59,7 +59,7 @@ const CreateCommentForm = ({trackId, user}) => {
                             ?
                                 <div className='comment-action-ctn'>
                                     {messageCount > 280
-                                    ?   <div className='char-count-cmt' style={{color: 'red'}}>
+                                    ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
                                             <span>{messageCount} / 280</span>
                                         </div>
                                     :   <div className='char-count-cmt'>

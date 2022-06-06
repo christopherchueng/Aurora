@@ -143,6 +143,10 @@
     transition: background-color 0.15s ease-in;
 }
 
+.char-count-cmt {
+    width: 100px;
+}
+
 .req {
     color:rgb(246, 94, 94);
 }
