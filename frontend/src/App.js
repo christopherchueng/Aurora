@@ -8,6 +8,7 @@ import DiscoverPage from "./components/DiscoverPage";
 // import CreateTrackForm from "./components/Tracks/CreateTrackForm";
 // import TrackIdPage from './components/Tracks/TrackIdPage'
 import Tracks from "./components/Tracks";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,8 +28,12 @@ function App() {
         <Route path='/discover'>
           <DiscoverPage />
         </Route>
-        <Tracks />
-
+        <Route path='/tracks/:trackId'>
+          <Tracks />
+        </Route>
+        <Route>
+          <ErrorPage />
+        </Route>
       </Switch>
     </div>
   );
