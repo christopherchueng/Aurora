@@ -144,7 +144,17 @@ const CreateTrackForm = ({tracks}) => {
 
                         {/* -------------------- PHOTO PREVIEW -------------------- */}
                         <div id='right-middle' className='cover-photo-ctn'>
-                            <img className='cover-photo' src={track?.imagePath}></img>
+                            {imagePath
+                            ? <img className='cover-photo' src={imagePath}></img>
+                            : <div style={{
+                                border: '1px solid white',
+                                width: '200px',
+                                height: '200px',
+                                display: "flex",
+                                justifyContent: 'center',
+                                alignItems: 'center' }} >
+                                    Preview
+                                </div>}
                         </div>
                     </div>
 

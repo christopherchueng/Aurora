@@ -66,6 +66,11 @@
     align-items: center;
 }
 
+.cover-photo-ctn > img {
+    width: 200px;
+    height: 200px;
+}
+
 .title-div > input,
 .trackPath-div > input,
 .genre-div > select,
