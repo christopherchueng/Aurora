@@ -55,7 +55,9 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                                     {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
                                 <div className='delete-btn-ctn'>
-                                    {!isNewComment && <DeleteCommentModal commentId={comment?.id} />}
+                                    {comment.User?.id === user?.id && !isNewComment
+                                    ? <DeleteCommentModal commentId={comment?.id} />
+                                    : ''}
                                 </div>
                             </div>
                         </div>
