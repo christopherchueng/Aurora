@@ -5,10 +5,10 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/DiscoverPage";
-// import CreateTrackForm from "./components/Tracks/CreateTrackForm";
+import CreateTrackForm from "./components/Tracks/CreateTrackForm";
 // import TrackIdPage from './components/Tracks/TrackIdPage'
 import Tracks from "./components/Tracks";
-import ErrorPage from "./components/ErrorPage";
+import ErrorPage from "./components/ErrorPage";;
 
 function App() {
   const dispatch = useDispatch();
@@ -25,8 +25,8 @@ function App() {
         <Route exact path='/'>
           <SplashPage />
         </Route>
-        <Route path='/discover'>
-          <DiscoverPage />
+        <Route path='/upload'>
+          <CreateTrackForm />
         </Route>
         <Route path='/tracks/:trackId'>
           <Tracks />

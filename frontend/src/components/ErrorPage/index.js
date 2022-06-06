@@ -4,7 +4,7 @@ import './index.css'
 const ErrorPage = () => {
     return (
         <div className='error-page'>
-            <div className='error-div'>
+            <div className='error-container'>
                 <div className='error-img-ctn'>
                     <img src={process.env.PUBLIC_URL + '/images/error-img.png'}></img>
                 </div>
