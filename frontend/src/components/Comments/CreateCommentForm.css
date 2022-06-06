@@ -17,7 +17,7 @@
     height: 50px;
     border: 1px solid black;
     border-radius: 5px;
-    color: white;
+    padding: 5px 0 0 10px;
 }
 
 .add-comment-box::placeholder {

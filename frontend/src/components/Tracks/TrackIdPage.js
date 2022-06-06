@@ -17,8 +17,6 @@ const TrackIdPage = ({tracks}) => {
     const comments = useSelector(state => state.comment.entries)
     const commentsArr = Object.values(comments);
     const sessionUser = useSelector(state => state.session.user);
-    console.log('session', typeof sessionUser.id)
-    console.log('track', typeof track.User.id)
 
     // States
     const { openEditTrack, setOpenEditTrack, setIsNewComment, boxClicked } = useUpdateContext();
