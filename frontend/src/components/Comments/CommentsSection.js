@@ -40,7 +40,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                     <div className='comment-content' key={`comment: ${comment.id}`}>
                         <div className='user-comment-ctn'>
                             <div className='user-ctn'>
-                                <span>{comment?.User?.username}</span>
+                                {!isNewComment && <span>{comment.User?.username}</span>}
                             </div>
                             <div className='comment-ctn'>
                                 <p>{comment?.message}</p>
@@ -55,9 +55,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                                     {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
                                 <div className='delete-btn-ctn'>
-                                    {comment?.User?.id === user?.id
-                                    ? <DeleteCommentModal commentId={comment?.id} />
-                                    : ""}
+                                    {!isNewComment && <DeleteCommentModal commentId={comment?.id} />}
                                 </div>
                             </div>
                         </div>
