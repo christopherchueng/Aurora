@@ -108,6 +108,10 @@
 
 }
 
+.error-div > .error-message {
+    padding: 0;
+}
+
 .description-div {
     padding-top: 50px;
 }
