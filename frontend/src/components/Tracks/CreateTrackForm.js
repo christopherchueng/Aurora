@@ -169,7 +169,9 @@ const CreateTrackForm = ({tracks}) => {
                         />
                     </div>
                     <div className='create-track-btn'>
-                        <button type='submit'>Upload</button>
+                        <button
+                        type='submit'
+                        disabled={!title && !imagePath && !genre}>Upload</button>
                     </div>
                 </form>
             </div>
