@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import trackReducer from './trackReducer';
 import commentReducer from './commentReducer';
+import userReducer from './user'
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   track: trackReducer,
-  comment: commentReducer
+  comment: commentReducer,
+  user: userReducer
 });
 
 

@@ -34,6 +34,12 @@ router.get('/:userId', asyncHandler(async (req, res) => {
   return res.json(user);
 }))
 
+// Get all users
+router.get('/', asyncHandler(async (req, res) => {
+  const users = await User.findAll()
+  return res.json(users);
+}))
+
 // Sign up
 router.post('/', validateSignup, asyncHandler(async (req, res) => {
     const { email, password, username } = req.body;
