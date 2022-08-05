@@ -47,13 +47,13 @@ const TrackIdPage = ({tracks}) => {
     // }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
 
-    // const durationFormula = (seconds) => {
-    //     const minutes = Math.floor(seconds / 60)
-    //     const trackMin = minutes < 10 ? `0${minutes}` : `${minutes}`
-    //     const sec = Math.floor(seconds % 60)
-    //     const trackSec = seconds < 10 ? `0${sec}` : `${sec}`
-    //     return `${trackMin}:${trackSec}`
-    // }
+    const durationFormula = (seconds) => {
+        const minutes = Math.floor(seconds / 60)
+        const trackMin = minutes < 10 ? `0${minutes}` : `${minutes}`
+        const sec = Math.floor(seconds % 60)
+        const trackSec = seconds < 10 ? `0${sec}` : `${sec}`
+        return `${trackMin}:${trackSec}`
+    }
 
     const playPauseTrack = () => {
         // Work around for useState asynchronous behavior.
@@ -107,18 +107,18 @@ const TrackIdPage = ({tracks}) => {
     //     }
     // }
 
-    // const shuffleTracks = () => {
-    //     const tracksArr = Object.values(tracks);
-    //     for (let i = tracksArr.length - 1; i > 1; i--) {
-    //         const randomIdx = Math.floor(Math.random() * tracksArr.length + 1)
-    //         const temp = tracksArr[i]
-    //         tracksArr[i] = tracksArr[randomIdx]
-    //         tracksArr[randomIdx] = temp;
-    //     }
-    //     tracks = tracksArr;
-    //     setIsShuffled(true);
-    //     return tracks;
-    // }
+    const shuffleTracks = () => {
+        const tracksArr = Object.values(tracks);
+        for (let i = tracksArr.length - 1; i > 1; i--) {
+            const randomIdx = Math.floor(Math.random() * tracksArr.length + 1)
+            const temp = tracksArr[i]
+            tracksArr[i] = tracksArr[randomIdx]
+            tracksArr[randomIdx] = temp;
+        }
+        tracks = tracksArr;
+        setIsShuffled(true);
+        return tracks;
+    }
 
     return (
         <>
@@ -135,10 +135,10 @@ const TrackIdPage = ({tracks}) => {
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
                     </div>
-                    {/* <div className='duration-ctn'>
+                    <div className='duration-ctn'>
                         <div className='start-time'>{durationFormula(currentTime)}</div>
                         <div className='end-time'>{(duration && !isNaN(duration)) && durationFormula(duration)}</div>
-                    </div> */}
+                    </div>
 
                     {/* START MEDIA CONTROLS */}
                     <div className='media-controls'>
@@ -169,7 +169,7 @@ const TrackIdPage = ({tracks}) => {
 
 
                             {/* ------------------ SHUFFLE BUTTON ------------------ */}
-                            {/* <div className='shuffle-ctn'>
+                            <div className='shuffle-ctn'>
                                 <button
                                     type='button'
                                     className='shuffle'
@@ -177,7 +177,7 @@ const TrackIdPage = ({tracks}) => {
                                 >
                                     <i className="fa-solid fa-shuffle fa-xl"></i>
                                 </button>
-                            </div> */}
+                            </div>
 
                             {/* ------------------ BACK BUTTON ------------------ */}
                             <div className='back-ctn'>
@@ -233,7 +233,7 @@ const TrackIdPage = ({tracks}) => {
                             : ""}
 
                             {/* ------------------ VOLUME ------------------ */}
-                            {/* <div className='volume-ctn'>
+                            <div className='volume-ctn'>
                                 <button
                                     type='button'
                                     className='volume'
@@ -241,7 +241,7 @@ const TrackIdPage = ({tracks}) => {
                                 >
                                     <i className="fa-solid fa-volume-high fa-xl"></i>
                                 </button>
-                            </div> */}
+                            </div>
                         </div>
                         {/* END CENTER OF MEDIA CONTROLS */}
                         <div className='control-right'>
