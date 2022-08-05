@@ -16,6 +16,8 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
     const commentsArr = Object.values(comments).reverse();
     // const comments = useSelector(state => state.comment.entries)
 
+    console.log('here is commentsArr', commentsArr)
+
     // States
     const [className, setClassName] = useState('');
     const { openEditCmt, setOpenEditCmt, isNewComment, setIsNewComment, boxClicked } = useUpdateContext();
@@ -40,7 +42,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                     <div className='comment-content' key={`comment: ${comment.id}`}>
                         <div className='user-comment-ctn'>
                             <div className='user-ctn'>
-                                {!isNewComment && <span>{comment.User?.username}</span>}
+                                {<span>{comment.userId === user?.id && user.username}</span>}
                             </div>
                             <div className='comment-ctn'>
                                 <p>{comment?.message}</p>
@@ -55,9 +57,7 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
                                     {/* <UpdateCommentFormModal comment={comment} user={user} trackId={trackId} /> */}
                                 </div>
                                 <div className='delete-btn-ctn'>
-                                    {comment.User?.id === user?.id && !isNewComment
-                                    ? <DeleteCommentModal commentId={comment?.id} />
-                                    : ''}
+                                    {comment.userId === user?.id && <DeleteCommentModal commentId={comment?.id} />}
                                 </div>
                             </div>
                         </div>
