@@ -27,7 +27,7 @@ const TrackIdPage = ({tracks}) => {
     const [currentSong, setCurrentSong] = useState(track)
 
     // References
-    const audioPlayer = useRef();
+    // const audioPlayer = useRef();
 
     useEffect(() => {
         dispatch(getComments(+trackId))
@@ -35,11 +35,12 @@ const TrackIdPage = ({tracks}) => {
 
     useEffect(() => {
         dispatch(getTracks())
-        audioPlayer.current.play();
+        // audioPlayer.current.play();
     }, [dispatch])
 
     useEffect(() => {
-        setIsPlaying(true)
+        setIsPlaying(false)
+        window.scrollTo(0, 0)
     }, [])
 
     // useEffect(() => {
@@ -61,11 +62,11 @@ const TrackIdPage = ({tracks}) => {
         const prevState = isPlaying; // Grab the previous value (false on mount) //false SHOW PAUSE
         setIsPlaying(!prevState) // Negating the value runs and executes that function true SHOW PLAY
         // If isPlaying is false, pause the track. Otherwise, play.
-        if (prevState) {
-            audioPlayer.current.pause();
-        } else {
-            audioPlayer.current.play();
-        }
+        // if (prevState) {
+        //     audioPlayer.current.pause();
+        // } else {
+        //     audioPlayer.current.play();
+        // }
     }
 
     const backBtn = () => {
@@ -130,7 +131,7 @@ const TrackIdPage = ({tracks}) => {
                             <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
                         <div className='track-bar-ctn'>
-                            <audio ref={audioPlayer} src={track?.trackPath} onEnded={nextBtn} autoPlay></audio>
+                            <audio src={track?.trackPath} onEnded={nextBtn}></audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
                     </div>
