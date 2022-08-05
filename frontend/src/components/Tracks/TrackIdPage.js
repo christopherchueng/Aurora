@@ -4,6 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
 import { getComments } from '../../store/commentReducer';
 import { useUpdateContext } from '../../context/UpdateContext';
+import { useTrackContext } from '../../context/TrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
 import Comments from '../Comments';
 
@@ -20,14 +21,11 @@ const TrackIdPage = ({tracks}) => {
 
     // States
     const { openEditTrack, setOpenEditTrack, boxClicked } = useUpdateContext();
-    const [isPlaying, setIsPlaying] = useState(false)
-    const [isShuffled, setIsShuffled] = useState(false)
-    const [duration, setDuration] = useState(0)
-    const [currentTime, setCurrentTime] = useState(0)
+    const { isPlaying, setIsPlaying, isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
     const [currentSong, setCurrentSong] = useState(track)
 
     // References
-    // const audioPlayer = useRef();
+    const audioPlayer = useRef();
 
     useEffect(() => {
         dispatch(getComments(+trackId))
@@ -62,11 +60,11 @@ const TrackIdPage = ({tracks}) => {
         const prevState = isPlaying; // Grab the previous value (false on mount) //false SHOW PAUSE
         setIsPlaying(!prevState) // Negating the value runs and executes that function true SHOW PLAY
         // If isPlaying is false, pause the track. Otherwise, play.
-        // if (prevState) {
-        //     audioPlayer.current.pause();
-        // } else {
-        //     audioPlayer.current.play();
-        // }
+        if (prevState) {
+            audioPlayer.current.pause();
+        } else {
+            audioPlayer.current.play();
+        }
     }
 
     const backBtn = () => {
@@ -77,6 +75,7 @@ const TrackIdPage = ({tracks}) => {
                 --trackId
                 setIsPlaying(prevState)
                 dispatch(getComments(+trackId))
+                audioPlayer.current.play();
                 // setCurrentSong(tracks[+trackId])
                 history.push(`/tracks/${trackId}`)
             }
@@ -92,6 +91,7 @@ const TrackIdPage = ({tracks}) => {
                 // setCurrentSong(tracks[+trackId])
                 setIsPlaying(prevState)
                 dispatch(getComments(+trackId))
+                audioPlayer.current.play();
                 history.push(`/tracks/${trackId}`)
             }
         }
@@ -131,7 +131,7 @@ const TrackIdPage = ({tracks}) => {
                             <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
                         <div className='track-bar-ctn'>
-                            <audio src={track?.trackPath} onEnded={nextBtn}></audio>
+                            <audio ref={audioPlayer} src={track?.trackPath} onEnded={nextBtn}></audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
                     </div>
