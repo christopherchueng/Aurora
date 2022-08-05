@@ -10,8 +10,6 @@ export default function UpdateProvider({ children }) {
     const [saveChanges, setSaveChanges] = useState(false);
     const [boxClicked, setBoxClicked] = useState(false)
 
-
-
     return (
         <updateContext.Provider value={{
             openEditTrack,

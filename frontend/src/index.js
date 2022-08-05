@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ModalProvider } from "./context/Modal";
 import UpdateProvider from "./context/UpdateContext";
+import TrackProvider from "./context/TrackContext";
 
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
@@ -25,11 +26,13 @@ function Root() {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <UpdateProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </UpdateProvider>
+        <TrackProvider>
+          <UpdateProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </UpdateProvider>
+        </TrackProvider>
       </ModalProvider>
     </Provider>
   );
