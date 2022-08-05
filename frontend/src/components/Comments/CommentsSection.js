@@ -16,15 +16,8 @@ const CommentsSection = ({ comments, trackId, message, setMessage }) => {
     const commentsArr = Object.values(comments).reverse();
     // const comments = useSelector(state => state.comment.entries)
 
-    console.log('here is commentsArr', commentsArr)
-
     // States
     const [className, setClassName] = useState('');
-    const { openEditCmt, setOpenEditCmt, isNewComment, setIsNewComment, boxClicked } = useUpdateContext();
-
-    useEffect(() => {
-        setIsNewComment(false)
-    })
 
     const datePosted = (date) => {
         const dateCreated = new Date(date)

@@ -16,11 +16,7 @@ const CreateCommentForm = ({trackId, user}) => {
     // States
     const [message, setMessage] = useState('')
     const [messageCount, setMessageCount] = useState(0);
-    const { isNewComment, setIsNewComment, boxClicked, setBoxClicked } = useUpdateContext();
-
-    useEffect(() => {
-        setIsNewComment(true)
-    }, [])
+    const { boxClicked, setBoxClicked } = useUpdateContext();
 
     useEffect(() => {
         setMessageCount(message.length)
@@ -77,7 +73,6 @@ const CreateCommentForm = ({trackId, user}) => {
                                         <button
                                             type='submit'
                                             disabled={!message}
-                                            onClick={() => setIsNewComment(false)}
                                         >
                                             Add Comment
                                         </button>

@@ -19,7 +19,7 @@ const TrackIdPage = ({tracks}) => {
     const sessionUser = useSelector(state => state.session.user);
 
     // States
-    const { openEditTrack, setOpenEditTrack, setIsNewComment, boxClicked } = useUpdateContext();
+    const { openEditTrack, setOpenEditTrack, boxClicked } = useUpdateContext();
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
     const [duration, setDuration] = useState(0)

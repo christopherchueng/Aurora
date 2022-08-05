@@ -9,7 +9,6 @@ export default function UpdateProvider({ children }) {
     const [openEditCmt, setOpenEditCmt] = useState(false);
     const [saveChanges, setSaveChanges] = useState(false);
     const [boxClicked, setBoxClicked] = useState(false)
-    const [isNewComment, setIsNewComment] = useState(false)
 
 
 
@@ -22,9 +21,7 @@ export default function UpdateProvider({ children }) {
             openEditCmt,
             setOpenEditCmt,
             boxClicked,
-            setBoxClicked,
-            isNewComment,
-            setIsNewComment
+            setBoxClicked
         }}>
             { children }
         </updateContext.Provider>
