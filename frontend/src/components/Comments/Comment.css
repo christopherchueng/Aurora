@@ -1,0 +1,12 @@
+.actionBtn-ctn {
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-btn-ctn > button {
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 10px 10px;
+}

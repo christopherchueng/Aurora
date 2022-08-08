@@ -9,6 +9,13 @@ const asyncHandler = require('express-async-handler');
 
 const router = express.Router();
 
+router.get('/:commentId', asyncHandler(async (req, res) => {
+    const commentId = parseInt(req.params.commentId, 10)
+
+    const comment = await Comment.findByPk(commentId)
+
+    return res.json(comment)
+}))
 
 router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const { message, trackId, userId } = req.body;

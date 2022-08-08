@@ -5,13 +5,17 @@ import { getComments, updateComment } from "../../store/commentReducer";
 import { useUpdateContext } from "../../context/UpdateContext";
 import './UpdateCommentForm.css';
 
-const UpdateCommentForm = ({ comment, user, trackId }) => {
+const UpdateCommentForm = ({ comment, setIsEditing }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const [message, setMessage] = useState(comment.message)
     // const [className, setClassName] = useState('');
-    const { openEditCmt, setOpenEditCmt } = useUpdateContext()
+    // const { openEditCmt, setOpenEditCmt } = useUpdateContext()
+
+    useEffect(() => {
+        setMessage(comment?.message)
+    }, [])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -19,13 +23,13 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
         const payload = {
             commentId: comment.id,
             message,
-            trackId: +trackId,
-            userId: user.id
+            trackId: comment?.trackId,
+            userId: comment?.userId
         }
 
         await dispatch(updateComment(payload))
-        setOpenEditCmt(false);
-        history.push('/')
+        setIsEditing(false);
+        // history.push('/')
         // history.push(`/tracks/${trackId}`)
 
     }
@@ -48,7 +52,7 @@ const UpdateCommentForm = ({ comment, user, trackId }) => {
                         </button>
                         <button
                             type='button'
-                            onClick={() => setOpenEditCmt(false)}
+                            onClick={() => setIsEditing(false)}
                         >
                             Cancel
                         </button>
