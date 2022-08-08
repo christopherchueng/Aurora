@@ -8,6 +8,7 @@ import './UpdateCommentForm.css';
 const UpdateCommentForm = ({ comment, setIsEditing }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { trackId } = useParams();
 
     const [message, setMessage] = useState(comment.message)
     // const [className, setClassName] = useState('');
@@ -28,6 +29,7 @@ const UpdateCommentForm = ({ comment, setIsEditing }) => {
         }
 
         await dispatch(updateComment(payload))
+        await dispatch(getComments(+trackId))
         setIsEditing(false);
         // history.push('/')
         // history.push(`/tracks/${trackId}`)

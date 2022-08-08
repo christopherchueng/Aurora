@@ -20,6 +20,9 @@ const Comments = ({tracks}) => {
     const [className, setClassName] = useState('');
     const [message, setMessage] = useState('')
 
+    useEffect(() => {
+        dispatch(getComments(+trackId))
+    }, [dispatch])
 
     // useEffect(() => {
     //     dispatch(getComments(+trackId))

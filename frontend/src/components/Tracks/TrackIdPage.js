@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
-import { getComments } from '../../store/commentReducer';
 import { useUpdateContext } from '../../context/UpdateContext';
 import { useTrackContext } from '../../context/TrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
@@ -15,8 +14,6 @@ const TrackIdPage = ({tracks}) => {
     const history = useHistory();
     const { trackId } = useParams();
     const track = tracks[+trackId];
-    const comments = useSelector(state => state.comment.entries)
-    const commentsArr = Object.values(comments);
     const sessionUser = useSelector(state => state.session.user);
 
     // States
@@ -26,10 +23,6 @@ const TrackIdPage = ({tracks}) => {
 
     // References
     const audioPlayer = useRef();
-
-    useEffect(() => {
-        dispatch(getComments(+trackId))
-    }, [dispatch])
 
     useEffect(() => {
         dispatch(getTracks())
