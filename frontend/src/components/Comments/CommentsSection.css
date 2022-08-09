@@ -3,7 +3,7 @@
 }
 
 .user-comment-ctn {
-    inline-size: 600px;
+    inline-size: 700px;
     overflow-wrap: break-word;
 }
 
@@ -24,7 +24,7 @@
     background-color: transparent;
     color: white;
     cursor: pointer;
-    padding: 10px 0;
+    padding: 15px 0;
 
 }
 
