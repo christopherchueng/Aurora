@@ -11,12 +11,17 @@ const UpdateCommentForm = ({ comment, setIsEditing }) => {
     const { trackId } = useParams();
 
     const [message, setMessage] = useState(comment.message)
+    const [messageCount, setMessageCount] = useState(0);
     // const [className, setClassName] = useState('');
     // const { openEditCmt, setOpenEditCmt } = useUpdateContext()
 
     useEffect(() => {
         setMessage(comment?.message)
     }, [])
+
+    useEffect(() => {
+        setMessageCount(message.length)
+    }, [message])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -44,20 +49,34 @@ const UpdateCommentForm = ({ comment, setIsEditing }) => {
                         name='comment'
                         value={message}
                         placeholder='Add a comment'
+                        className="edit-comment-input"
                         onChange={e => setMessage(e.target.value)}
                     />
-                        <button
-                            type='submit'
-                            disabled={!message}
-                        >
-                            Save
-                        </button>
-                        <button
-                            type='button'
-                            onClick={() => setIsEditing(false)}
-                        >
-                            Cancel
-                        </button>
+                    <div className="comment-action-ctn">
+                        {messageCount > 280
+                        ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
+                                <span>{messageCount} / 280</span>
+                            </div>
+                        :   <div className='char-count-cmt'>
+                                <span>{messageCount} / 280</span>
+                            </div>}
+                        <div className='cancel-comment'>
+                            <button
+                                type='button'
+                                onClick={() => setIsEditing(false)}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                        <div className='submit-comment'>
+                            <button
+                                type='submit'
+                                disabled={!message}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </>
