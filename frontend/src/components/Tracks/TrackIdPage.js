@@ -17,7 +17,7 @@ const TrackIdPage = ({tracks}) => {
     const sessionUser = useSelector(state => state.session.user);
 
     // States
-    const { openEditTrack, setOpenEditTrack, boxClicked } = useUpdateContext();
+    const { openEditTrack, setOpenEditTrack } = useUpdateContext();
     const { isPlaying, setIsPlaying, isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
     const [currentSong, setCurrentSong] = useState(track)
 

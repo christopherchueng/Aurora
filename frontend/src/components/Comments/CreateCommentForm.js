@@ -16,7 +16,7 @@ const CreateCommentForm = ({trackId, user}) => {
     // States
     const [message, setMessage] = useState('')
     const [messageCount, setMessageCount] = useState(0);
-    const { boxClicked, setBoxClicked } = useUpdateContext();
+    const [boxClicked, setBoxClicked] = useState(false);
 
     useEffect(() => {
         setMessageCount(message.length)
