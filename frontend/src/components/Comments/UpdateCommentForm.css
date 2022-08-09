@@ -1,3 +1,7 @@
+#update-comment-ctn {
+    padding: 10px 0;
+}
+
 .edit-comment-input {
     width: 800px;
     height: 50px;
@@ -7,6 +11,8 @@
     background-color: transparent;
     color: white;
     transition: 0.5s;
+    padding: 0;
+    font-size: 12pt;
 }
 
 .edit-comment-input:focus {

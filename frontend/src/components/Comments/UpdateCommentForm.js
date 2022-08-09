@@ -44,13 +44,15 @@ const UpdateCommentForm = ({ comment, setIsEditing }) => {
     return (
         <>
             <form onSubmit={onSubmit}>
-                <div>
+                <div id='update-comment-ctn'>
                     <textarea
                         name='comment'
                         value={message}
                         placeholder='Add a comment'
                         className="edit-comment-input"
                         onChange={e => setMessage(e.target.value)}
+                        autoFocus
+                        onFocus={e => e.target.setSelectionRange(message.length, message.length)}
                     />
                     <div className="comment-action-ctn">
                         {messageCount > 280
