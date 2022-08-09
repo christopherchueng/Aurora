@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../store/commentReducer";
 import CreateCommentForm from "./CreateCommentForm";
-import UpdateCommentForm from "./UpdateCommentForm";
-import CommentsSection from "./CommentsSection";
 import { useUpdateContext } from "../../context/UpdateContext";
+import { getUsers } from "../../store/user";
+import Comment from "./Comment";
 import './index.css';
 
 const Comments = ({tracks}) => {
@@ -20,13 +20,12 @@ const Comments = ({tracks}) => {
     const [className, setClassName] = useState('');
     const [message, setMessage] = useState('')
 
+    const commentsArr = Object.values(comments).reverse();
+
     useEffect(() => {
+        dispatch(getUsers())
         dispatch(getComments(+trackId))
     }, [dispatch])
-
-    // useEffect(() => {
-    //     dispatch(getComments(+trackId))
-    // }, [dispatch])
 
     return (
         <div className='comment-section-ctn'>
@@ -35,12 +34,13 @@ const Comments = ({tracks}) => {
             </div>
             }
             <div className='track-comments'>
-                <CommentsSection
-                    comments={comments}
-                    user={user}
-                    trackId={+trackId}
-                    message={message}
-                    setMessage={setMessage} />
+                <div className='comment-list'>
+                    {commentsArr.map(comment => (
+                        <div className='comment-content' key={comment.id}>
+                            <Comment comment={comment} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
