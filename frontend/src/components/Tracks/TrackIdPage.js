@@ -18,8 +18,9 @@ const TrackIdPage = ({tracks}) => {
 
     // States
     const { openEditTrack, setOpenEditTrack } = useUpdateContext();
-    const { isPlaying, setIsPlaying, isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
+    const { isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
     const [currentSong, setCurrentSong] = useState(track)
+    const [isPlaying, setIsPlaying] = useState(false)
 
     // References
     const audioPlayer = useRef();
@@ -34,12 +35,14 @@ const TrackIdPage = ({tracks}) => {
         window.scrollTo(0, 0)
     }, [])
 
-    console.log('here is is playing', isPlaying)
-
     // useEffect(() => {
     //     const seconds = Math.floor(audioPlayer.current.duration)
     //     setDuration(seconds)
     // }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+
+    useEffect(() => {
+        isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
+    }, [isPlaying, trackId])
 
 
     const durationFormula = (seconds) => {
@@ -123,12 +126,12 @@ const TrackIdPage = ({tracks}) => {
                         </div>
                         <div className='track-bar-ctn'>
                             <audio
-                                // ref={audioPlayer}
+                                ref={audioPlayer}
                                 src={track?.trackPath}
                                 onEnded={nextBtn}
                                 play={isPlaying === true}
                                 pause={isPlaying === false}
-                                // onChange={isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()}
+                                onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
                             >
                             </audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
