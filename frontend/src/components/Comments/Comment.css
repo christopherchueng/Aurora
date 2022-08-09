@@ -1,6 +1,18 @@
+.comment-ctn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.comment-ctn > p {
+    word-break: break-all;
+}
+
 .actionBtn-ctn {
     display: flex;
     flex-direction: row;
+    height: 35px;
 }
 
 .edit-btn-ctn > button {

@@ -14,6 +14,7 @@ const Comment = ({ comment }) => {
     const [className, setClassName] = useState('');
     const [messageCount, setMessageCount] = useState(0);
     const [isEditing, setIsEditing] = useState(false)
+    const [showActions, setShowActions] = useState(false)
 
     useEffect(() => {
         setMessageCount(comment?.message?.length)
@@ -28,7 +29,7 @@ const Comment = ({ comment }) => {
     }
 
     return (
-        <>
+        <div className='comment-ctn' onMouseEnter={() => setShowActions(true)} onMouseLeave={() => setShowActions(false)}>
             {isEditing ?
             <UpdateCommentForm comment={comment} setIsEditing={setIsEditing} />
             :
@@ -47,20 +48,23 @@ const Comment = ({ comment }) => {
                     </div>
                     {comment.userId === user?.id &&
                         <div className='actionBtn-ctn'>
-                            <div className='edit-btn-ctn'>
-                                <button onClick={() => setIsEditing(!isEditing)}>
-                                    <span className="fa-solid fa-pen"></span>
-                                </button>
-                            </div>
-                            <div className='delete-btn-ctn'>
-                                <DeleteCommentModal commentId={comment?.id} />
-                            </div>
+                            {showActions &&
+                            <>
+                                <div className='edit-btn-ctn'>
+                                    <button onClick={() => setIsEditing(!isEditing)}>
+                                        <span className="fa-solid fa-pen"></span>
+                                    </button>
+                                </div>
+                                <div className='delete-btn-ctn'>
+                                    <DeleteCommentModal commentId={comment?.id} />
+                                </div>
+                            </>}
                         </div>
                     }
                 </div>
             </>
             }
-        </>
+        </div>
     )
 
 }
