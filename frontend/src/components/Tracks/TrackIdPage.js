@@ -53,18 +53,6 @@ const TrackIdPage = ({tracks}) => {
         return `${trackMin}:${trackSec}`
     }
 
-    const playPauseTrack = () => {
-        // Work around for useState asynchronous behavior.
-        const prevState = isPlaying; // Grab the previous value (false on mount) //false SHOW PAUSE
-        setIsPlaying(!prevState) // Negating the value runs and executes that function true SHOW PLAY
-        // If isPlaying is false, pause the track. Otherwise, play.
-        if (prevState) {
-            audioPlayer.current.pause();
-        } else {
-            audioPlayer.current.play();
-        }
-    }
-
     const backBtn = () => {
         // if (isShuffled) return shuffleTracks;
         for (let trackId in tracks) {
@@ -75,6 +63,11 @@ const TrackIdPage = ({tracks}) => {
                 // setCurrentSong(tracks[+trackId])
                 history.push(`/tracks/${trackId}`)
             }
+        }
+
+        if (+trackId === 1) {
+            setIsPlaying(true)
+            history.push(`/tracks/${Object.values(tracks).length}`)
         }
     }
 
@@ -87,7 +80,13 @@ const TrackIdPage = ({tracks}) => {
                 setIsPlaying(true)
                 // audioPlayer.current.play();
                 history.push(`/tracks/${trackId}`)
+            // If at the end of the playlist, then restart at 1
             }
+        }
+
+        if (+trackId === Object.values(tracks).length) {
+            setIsPlaying(true)
+            history.push(`/tracks/1`)
         }
     }
 
@@ -220,6 +219,17 @@ const TrackIdPage = ({tracks}) => {
                                 </button>
                             </div>
 
+                            {/* ------------------ VOLUME ------------------ */}
+                            <div className='volume-ctn'>
+                                <button
+                                    type='button'
+                                    className='volume'
+                                    // onClick={}
+                                >
+                                    <i className="fa-solid fa-volume-high fa-xl"></i>
+                                </button>
+                            </div>
+
                             {/* ------------------ EDIT ------------------ */}
                             {sessionUser?.id === track?.User?.id
                             ? <div className='edit-save-ctn'>
@@ -234,17 +244,6 @@ const TrackIdPage = ({tracks}) => {
                                 </button>
                             </div>
                             : ""}
-
-                            {/* ------------------ VOLUME ------------------ */}
-                            <div className='volume-ctn'>
-                                <button
-                                    type='button'
-                                    className='volume'
-                                    // onClick={}
-                                >
-                                    <i className="fa-solid fa-volume-high fa-xl"></i>
-                                </button>
-                            </div>
                         </div>
                         {/* END CENTER OF MEDIA CONTROLS */}
                         <div className='control-right'>
