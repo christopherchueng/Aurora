@@ -22,7 +22,7 @@ const UpdateCommentForm = ({ comment, setIsEditing }) => {
     }, [message])
 
     const onSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         const payload = {
             commentId: comment.id,
@@ -32,11 +32,7 @@ const UpdateCommentForm = ({ comment, setIsEditing }) => {
         }
 
         await dispatch(updateComment(payload))
-        await dispatch(getComments(+trackId))
-        setIsEditing(false);
-        // history.push('/')
-        // history.push(`/tracks/${trackId}`)
-
+        setIsEditing(false)
     }
 
     return (

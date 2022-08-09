@@ -24,7 +24,7 @@ const Comments = ({tracks}) => {
     useEffect(() => {
         dispatch(getUsers())
         dispatch(getComments(+trackId))
-    }, [dispatch])
+    }, [dispatch, trackId])
 
     return (
         <div className='comment-section-ctn'>
