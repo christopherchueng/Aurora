@@ -30,9 +30,11 @@ const TrackIdPage = ({tracks}) => {
     }, [dispatch])
 
     useEffect(() => {
-        setIsPlaying(false)
+        // setIsPlaying(false)
         window.scrollTo(0, 0)
     }, [])
+
+    console.log('here is is playing', isPlaying)
 
     // useEffect(() => {
     //     const seconds = Math.floor(audioPlayer.current.duration)
@@ -63,10 +65,10 @@ const TrackIdPage = ({tracks}) => {
     const backBtn = () => {
         // if (isShuffled) return shuffleTracks;
         for (let trackId in tracks) {
-            if (tracks[trackId] === track && (trackId > 1)) {
+            if (+trackId === track?.id && (trackId > 1)) {
                 --trackId
                 setIsPlaying(true)
-                audioPlayer.current.play();
+                // audioPlayer.current.play();
                 // setCurrentSong(tracks[+trackId])
                 history.push(`/tracks/${trackId}`)
             }
@@ -76,11 +78,11 @@ const TrackIdPage = ({tracks}) => {
     const nextBtn = () => {
         // if (isShuffled) return shuffleTracks;
         for (let trackId in tracks) {
-            if (tracks[trackId] === track && trackId < (Object.values(tracks).length)) {
+            if (+trackId === track?.id && +trackId < (Object.values(tracks).length)) {
                 ++trackId
                 // setCurrentSong(tracks[+trackId])
                 setIsPlaying(true)
-                audioPlayer.current.play();
+                // audioPlayer.current.play();
                 history.push(`/tracks/${trackId}`)
             }
         }
@@ -120,7 +122,15 @@ const TrackIdPage = ({tracks}) => {
                             <img className='cover-photo' src={track?.imagePath}></img>
                         </div>
                         <div className='track-bar-ctn'>
-                            <audio ref={audioPlayer} src={track?.trackPath} onEnded={nextBtn} onChange={isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()}></audio>
+                            <audio
+                                // ref={audioPlayer}
+                                src={track?.trackPath}
+                                onEnded={nextBtn}
+                                play={isPlaying === true}
+                                pause={isPlaying === false}
+                                // onChange={isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()}
+                            >
+                            </audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
                     </div>
