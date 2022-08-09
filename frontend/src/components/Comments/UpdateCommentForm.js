@@ -12,8 +12,6 @@ const UpdateCommentForm = ({ comment, setIsEditing }) => {
 
     const [message, setMessage] = useState(comment.message)
     const [messageCount, setMessageCount] = useState(0);
-    // const [className, setClassName] = useState('');
-    // const { openEditCmt, setOpenEditCmt } = useUpdateContext()
 
     useEffect(() => {
         setMessage(comment?.message)

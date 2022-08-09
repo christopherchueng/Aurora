@@ -12,11 +12,10 @@ const Comments = ({tracks}) => {
     const dispatch = useDispatch();
     const { trackId } = useParams();
     const track = tracks[+trackId];
-    const user = useSelector(state => state.session.user)
-    const comments = useSelector(state => state?.comment.entries)
+    const user = useSelector(state => state?.session?.user)
+    const comments = useSelector(state => state?.comment?.entries)
 
     // States
-    const { openEditCmt, setOpenEditCmt } = useUpdateContext();
     const [className, setClassName] = useState('');
     const [message, setMessage] = useState('')
 
