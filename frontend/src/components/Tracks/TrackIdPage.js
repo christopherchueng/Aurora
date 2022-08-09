@@ -134,10 +134,10 @@ const TrackIdPage = ({tracks}) => {
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
                     </div>
-                    <div className='duration-ctn'>
+                    {/* <div className='duration-ctn'>
                         <div className='start-time'>{durationFormula(currentTime)}</div>
                         <div className='end-time'>{(duration && !isNaN(duration)) && durationFormula(duration)}</div>
-                    </div>
+                    </div> */}
 
                     {/* START MEDIA CONTROLS */}
                     <div className='media-controls'>
