@@ -22,6 +22,9 @@ const TrackIdPage = ({tracks}) => {
     const [currentSong, setCurrentSong] = useState(track)
     const [isPlaying, setIsPlaying] = useState(false)
 
+    let tracksArr = Object.values(tracks);
+    let shuffledArr = []
+
     // References
     const audioPlayer = useRef();
 
@@ -54,37 +57,35 @@ const TrackIdPage = ({tracks}) => {
     }
 
     const backBtn = () => {
-        // if (isShuffled) return shuffleTracks;
-        for (let trackId in tracks) {
+        for (let i = 0; i < tracksArr.length; i++) {
+            let track = tracksArr[i]
             if (+trackId === track?.id && (trackId > 1)) {
-                --trackId
                 setIsPlaying(true)
                 // audioPlayer.current.play();
                 // setCurrentSong(tracks[+trackId])
-                history.push(`/tracks/${trackId}`)
+                history.push(`/tracks/${track.id - 1}`)
             }
         }
 
         if (+trackId === 1) {
             setIsPlaying(true)
-            history.push(`/tracks/${Object.values(tracks).length}`)
+            history.push(`/tracks/${tracksArr.length}`)
         }
     }
 
     const nextBtn = () => {
-        // if (isShuffled) return shuffleTracks;
-        for (let trackId in tracks) {
-            if (+trackId === track?.id && +trackId < (Object.values(tracks).length)) {
-                ++trackId
+        for (let i = 0; i < tracksArr.length; i++) {
+            let track = tracksArr[i]
+            if (+trackId === track.id && +trackId < (tracksArr.length)) {
                 // setCurrentSong(tracks[+trackId])
                 setIsPlaying(true)
                 // audioPlayer.current.play();
-                history.push(`/tracks/${trackId}`)
-            // If at the end of the playlist, then restart at 1
+                history.push(`/tracks/${track.id + 1}`)
             }
         }
 
-        if (+trackId === Object.values(tracks).length) {
+        // If at the end of the playlist, then restart at 1
+        if (+trackId === tracksArr.length) {
             setIsPlaying(true)
             history.push(`/tracks/1`)
         }
@@ -101,16 +102,16 @@ const TrackIdPage = ({tracks}) => {
     // }
 
     const shuffleTracks = () => {
-        const tracksArr = Object.values(tracks);
-        for (let i = tracksArr.length - 1; i > 1; i--) {
-            const randomIdx = Math.floor(Math.random() * tracksArr.length + 1)
-            const temp = tracksArr[i]
-            tracksArr[i] = tracksArr[randomIdx]
-            tracksArr[randomIdx] = temp;
-        }
-        tracks = tracksArr;
-        setIsShuffled(true);
-        return tracks;
+        console.log('tracksArr BEFOREEEE', tracksArr)
+        // for (let i = tracksArr.length - 1; i > 1; i--) {
+        //     const randomIdx = Math.floor(Math.random() * tracksArr.length + 1)
+        //     const temp = tracksArr[i]
+        //     tracksArr[i] = tracksArr[randomIdx]
+        //     tracksArr[randomIdx] = temp;
+        // }
+        // tracks = tracksArr;
+        setIsShuffled(!isShuffled);
+        console.log('SHUFFLED ARR AFTER', shuffledArr)
     }
 
     return (
@@ -128,8 +129,8 @@ const TrackIdPage = ({tracks}) => {
                                 ref={audioPlayer}
                                 src={track?.trackPath}
                                 onEnded={nextBtn}
-                                play={isPlaying === true}
-                                pause={isPlaying === false}
+                                // play={isPlaying === true}
+                                // pause={isPlaying === false}
                                 onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
                             >
                             </audio>
@@ -170,15 +171,16 @@ const TrackIdPage = ({tracks}) => {
 
 
                             {/* ------------------ SHUFFLE BUTTON ------------------ */}
-                            <div className='shuffle-ctn'>
+                            {/* <div className='shuffle-ctn'>
                                 <button
                                     type='button'
                                     className='shuffle'
                                     onClick={shuffleTracks}
+                                    style={{ color: isShuffled ? 'lightgreen' : ''}}
                                 >
                                     <i className="fa-solid fa-shuffle fa-xl"></i>
                                 </button>
-                            </div>
+                            </div> */}
 
                             {/* ------------------ BACK BUTTON ------------------ */}
                             <div className='back-ctn'>
@@ -220,7 +222,7 @@ const TrackIdPage = ({tracks}) => {
                             </div>
 
                             {/* ------------------ VOLUME ------------------ */}
-                            <div className='volume-ctn'>
+                            {/* <div className='volume-ctn'>
                                 <button
                                     type='button'
                                     className='volume'
@@ -228,7 +230,7 @@ const TrackIdPage = ({tracks}) => {
                                 >
                                     <i className="fa-solid fa-volume-high fa-xl"></i>
                                 </button>
-                            </div>
+                            </div> */}
 
                             {/* ------------------ EDIT ------------------ */}
                             {sessionUser?.id === track?.User?.id
