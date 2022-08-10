@@ -76,10 +76,20 @@ export const getTracks = () => async (dispatch) => {
 }
 
 export const createTrack = (payload) => async (dispatch) => {
+    const { title, description, imagePath, trackPath, genre, userId } = payload
+
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('genre', genre)
+    formData.append('userId', userId)
+    if (imagePath) formData.append('image', imagePath)
+    if (trackPath) formData.append('track', trackPath)
+
     const response = await csrfFetch('/api/tracks', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
+        headers: { 'Content-Type': "multipart/form-data" },
+        body: formData
     })
 
     const track = await response.json();
@@ -88,10 +98,20 @@ export const createTrack = (payload) => async (dispatch) => {
 }
 
 export const updateTrack = (payload, trackId) => async (dispatch) => {
+    const { title, description, imagePath, trackPath, genre, userId } = payload
+
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('genre', genre)
+    formData.append('userId', userId)
+    if (imagePath) formData.append('image', imagePath)
+    if (trackPath) formData.append('track', trackPath)
+
     const response = await csrfFetch(`/api/tracks/${trackId}`, {
         method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
+        headers: { 'Content-Type': "multipart/form-data" },
+        body: formData
     })
 
     const track = await response.json();

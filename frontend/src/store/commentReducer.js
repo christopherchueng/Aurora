@@ -60,7 +60,7 @@ export const getComment = (id) => async (dispatch) => {
 export const postComment = (payload) => async (dispatch) => {
     const response = await csrfFetch('/api/comments', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
 
@@ -72,7 +72,7 @@ export const postComment = (payload) => async (dispatch) => {
 export const updateComment = (payload) => async (dispatch) => {
     const response = await csrfFetch(`/api/comments/${payload.commentId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
 

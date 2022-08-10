@@ -12,7 +12,7 @@ const CreateTrackForm = ({tracks}) => {
     const [description, setDescription] = useState('')
     const [genre, setGenre] = useState('')
     const [trackPath, setTrackPath] = useState('')
-    const [imagePath, setImagePath] = useState()
+    const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [track, setTrack] = useState()
@@ -68,6 +68,19 @@ const CreateTrackForm = ({tracks}) => {
         setErrors({})
     }
 
+    const updateTrackFile = (e) => {
+        const file = e.target.files[0];
+        if (Object.values(file).length) setTrackPath(file);
+    }
+    console.log('track path here', trackPath)
+
+    const updateImageFile = (e) => {
+        const file = e.target.files[0];
+        console.log('here is the file', file.type)
+        if (Object.values(file).length) setImagePath(file);
+    }
+    console.log('image path here', imagePath)
+
     return (
         <div className='create-track-form-ctn'>
             <h1>Upload</h1>
@@ -92,13 +105,14 @@ const CreateTrackForm = ({tracks}) => {
                         {/* -------------------- TRACK PATH -------------------- */}
                         <div className='trackPath-div'>
                             <span>Track<span className='req'>*</span></span>
-                            <input
-                                name='trackPath'
-                                type='text'
-                                value={trackPath}
-                                placeholder='Insert a track link'
-                                onChange={e => setTrackPath(e.target.value)}
-                            />
+                            <label>
+                                <input
+                                    name='trackPath'
+                                    type='file'
+                                    placeholder='Insert a track link'
+                                    onChange={updateTrackFile}
+                                />
+                            </label>
                             <div className='error-div'>
                                 {hasSubmitted && <ErrorMessage error={errors.trackPath}/>}
                             </div>
@@ -110,14 +124,15 @@ const CreateTrackForm = ({tracks}) => {
                             {/* -------------------- IMAGE PATH -------------------- */}
                             <div className="imagePath-div">
                                 <span>Cover photo</span>
-                                <input
-                                    name='imagePath'
-                                    type='text'
-                                    alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
-                                    value={imagePath}
-                                    placeholder='Insert an image link'
-                                    onChange={e => setImagePath(e.target.value)}
-                                />
+                                <label>
+                                    <input
+                                        name='imagePath'
+                                        type='file'
+                                        // alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
+                                        placeholder='Insert an image link'
+                                        onChange={updateImageFile}
+                                    />
+                                </label>
                             </div>
 
                             {/* -------------------- GENRE -------------------- */}
