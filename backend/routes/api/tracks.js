@@ -7,6 +7,7 @@ const { requireAuth } = require('../../utils/auth');
 const asyncHandler = require('express-async-handler');
 const { validationResult } = require('express-validator')
 const { handleValidationErrors } = require('../../utils/validation');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 
 const router = express.Router();
 
@@ -46,17 +47,29 @@ router.get('/:trackId/comments', asyncHandler(async (req, res) => {
     return res.json(comments);
 }))
 
-router.post('/', requireAuth, asyncHandler(async (req, res) => {
+router.post('/', requireAuth, singleMulterUpload('image'), singleMulterUpload('track'), asyncHandler(async (req, res) => {
     const {
         title,
         description,
         genre,
-        trackPath,
-        imagePath,
         userId
     } = req.body
+    let imagePath
+    let trackPath
+    let { image, track } = req.body
 
-    const track = await Track.create({
+    if (req.file) {
+        const imagePath = await singlePublicFileUpload(req.file)
+        const trackPath = await singlePublicFileUpload(req.file)
+    } else {
+        imagePath = image
+        trackPath = track
+    }
+
+    console.log('here is image path', imagePath)
+    // console.log('here is track path', trackPath)
+
+    const newTrack = await Track.create({
         title,
         description,
         genre,
@@ -65,11 +78,11 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
         userId
     });
 
-    return res.json(track);
+    return res.json(newTrack);
 }))
 
 // Update a track
-router.put('/:trackId', requireAuth, asyncHandler(async (req, res) => {
+router.put('/:trackId', requireAuth, singleMulterUpload('image'), singleMulterUpload('track'), asyncHandler(async (req, res) => {
     const trackId = parseInt(req.params.trackId, 10);
     const track = await Track.findByPk(trackId);
 
@@ -77,10 +90,11 @@ router.put('/:trackId', requireAuth, asyncHandler(async (req, res) => {
         title,
         description,
         genre,
-        trackPath,
-        imagePath,
         userId
     } = req.body
+
+    const imagePath = await singlePublicFileUpload(req.file)
+    const trackPath = await singlePublicFileUpload(req.file)
 
     // console.log('What are we getting from the frontend?', req.body)
 
