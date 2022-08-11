@@ -13,6 +13,7 @@ const CreateTrackForm = ({tracks}) => {
     const [genre, setGenre] = useState('')
     const [trackPath, setTrackPath] = useState('')
     const [imagePath, setImagePath] = useState('')
+    const [files, setFiles] = useState([])
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [track, setTrack] = useState()
@@ -48,7 +49,6 @@ const CreateTrackForm = ({tracks}) => {
             description,
             genre,
             trackPath,
-            imagePath,
             userId: user.id
         }
 
@@ -70,16 +70,13 @@ const CreateTrackForm = ({tracks}) => {
 
     const updateTrackFile = (e) => {
         const file = e.target.files[0];
-        if (Object.values(file).length) setTrackPath(file);
+        if (file) setTrackPath(file)
     }
-    console.log('track path here', trackPath)
 
     const updateImageFile = (e) => {
         const file = e.target.files[0];
-        console.log('here is the file', file.type)
-        if (Object.values(file).length) setImagePath(file);
+        if (file) setImagePath(file)
     }
-    console.log('image path here', imagePath)
 
     return (
         <div className='create-track-form-ctn'>
@@ -160,7 +157,7 @@ const CreateTrackForm = ({tracks}) => {
                         {/* -------------------- PHOTO PREVIEW -------------------- */}
                         <div id='right-middle' className='cover-photo-ctn'>
                             {imagePath
-                            ? <img className='cover-photo' src={imagePath}></img>
+                            ? <img className='cover-photo' src={imagePath.webkitRelativePath}></img>
                             : <div style={{
                                 border: '1px solid white',
                                 width: '200px',

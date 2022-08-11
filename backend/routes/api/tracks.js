@@ -47,26 +47,21 @@ router.get('/:trackId/comments', asyncHandler(async (req, res) => {
     return res.json(comments);
 }))
 
-router.post('/', requireAuth, singleMulterUpload('image'), singleMulterUpload('track'), asyncHandler(async (req, res) => {
+router.post('/', requireAuth, singleMulterUpload('track'), asyncHandler(async (req, res) => {
     const {
         title,
         description,
         genre,
         userId
     } = req.body
-    let imagePath
-    let trackPath
-    let { image, track } = req.body
+    // let { image, track } = req.body
 
-    if (req.file) {
-        const imagePath = await singlePublicFileUpload(req.file)
-        const trackPath = await singlePublicFileUpload(req.file)
-    } else {
-        imagePath = image
-        trackPath = track
-    }
+    // const imagePath = await singlePublicFileUpload(req.file)
+    // console.log('--------------------- here is IMAGEPATH ---------------------', imagePath)
+    const trackPath = await singlePublicFileUpload(req.file)
+    console.log('--------------------- here is TRACKPATH ---------------------', trackPath)
 
-    console.log('here is image path', imagePath)
+    // console.log('here is image path', imagePath)
     // console.log('here is track path', trackPath)
 
     const newTrack = await Track.create({
@@ -74,7 +69,7 @@ router.post('/', requireAuth, singleMulterUpload('image'), singleMulterUpload('t
         description,
         genre,
         trackPath,
-        imagePath,
+        // imagePath,
         userId
     });
 
