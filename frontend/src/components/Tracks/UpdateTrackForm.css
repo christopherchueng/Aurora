@@ -179,12 +179,20 @@
     resize: none;
 }
 
+.update-track-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.cancel-track-btn,
 .create-track-btn {
     display: flex;
     justify-content: flex-end;
     padding: 50px 0 50px 0;
 }
 
+.cancel-track-btn > button,
 .create-track-btn > button {
     background-color: transparent;
     font-size: 12pt;
@@ -198,6 +206,11 @@
     cursor: pointer;
 }
 
+.cancel-track-btn {
+    padding-right: 50px;
+}
+
+.cancel-track-btn > button:hover,
 .create-track-btn > button:hover {
     background-color: white;
     color: black;

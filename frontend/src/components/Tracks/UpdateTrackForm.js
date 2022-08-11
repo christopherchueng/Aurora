@@ -187,8 +187,13 @@ const UpdateTrackForm = () => {
                                 onChange={e => setDescription(e.target.value)}
                             />
                         </div>
-                        <div className='create-track-btn'>
-                            <button type='submit'>Upload</button>
+                        <div className="update-track-btns">
+                            <div className='cancel-track-btn'>
+                                <button onClick={() => history.push(`/tracks/${trackId}`)}>Cancel</button>
+                            </div>
+                            <div className='create-track-btn'>
+                                <button type='submit'>Upload</button>
+                            </div>
                         </div>
                     </form>
                 </div>
