@@ -34,11 +34,13 @@ const Comments = ({tracks}) => {
             }
             <div className='track-comments'>
                 <div className='comment-list'>
-                    {commentsArr.map(comment => (
+                    {commentsArr.length !== 0
+                    ? commentsArr.map(comment => (
                         <div className='comment-content' key={comment.id}>
                             <Comment comment={comment} />
                         </div>
-                    ))}
+                    ))
+                    : <p className="no-comments">{`There are no comments under '${track?.title}.' Be the first to add a comment!`}</p>}
                 </div>
             </div>
         </div>
