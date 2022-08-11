@@ -141,6 +141,10 @@ const initialState = { entries: {}, isLoading: true };
 const trackReducer = (state = initialState, action) => {
     let newState = {};
     switch (action.type) {
+        case LOAD_TRACK:
+            newState = { ...state, entries: {} }
+            newState.entries[action.track.id] = action.track
+            return newState
         case LOAD_TRACKS:
             newState = { ...state, entries: {...state.entries} };
             action.tracks.forEach(track => (newState.entries[track.id] = track))

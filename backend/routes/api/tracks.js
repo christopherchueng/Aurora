@@ -25,6 +25,13 @@ const trackValidators = [
         .isURL({ protocols: false })
 ];
 
+router.get('/:trackId', asyncHandler(async (req, res) => {
+    const trackId = parseInt(req.params.trackId, 10)
+    const track = await Track.findByPk(trackId)
+
+    return res.json(track)
+}))
+
 // Get tracks
 router.get('/', asyncHandler(async (req, res) => {
     const tracks = await Track.findAll({

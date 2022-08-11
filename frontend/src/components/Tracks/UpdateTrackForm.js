@@ -1,204 +1,199 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getTracks, updateTrack } from '../../store/trackReducer';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { createTrack, getOneTrack } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
 import ErrorMessage from '../FormTemplate/ErrorMessage'
-import { useUpdateContext } from '../../context/UpdateContext';
-import './UpdateTrackForm.css';
+import './UpdateTrackForm.css'
 
-const UpdateTrackForm = ({tracks}) => {
+const UpdateTrackForm = () => {
+    const user = useSelector(state => state?.session?.user)
+    const track = useSelector(state => state?.track?.entries)
+
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [genre, setGenre] = useState('')
+    const [trackPath, setTrackPath] = useState('')
+    const [imagePath, setImagePath] = useState('')
+    const [errors, setErrors] = useState({});
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+    const { trackId } = useParams()
+
+    const history = useHistory();
     const dispatch = useDispatch();
-    const { trackId } = useParams();
-    const track = tracks[+trackId];
-
-    const { openEditTrack, setOpenEditTrack } = useUpdateContext();
-    const [title, setTitle] = useState(track.title)
-    const [description, setDescription] = useState(track.description)
-    const [genre, setGenre] = useState(track.genre)
-    const [trackPath, setTrackPath] = useState(track.trackPath)
-    const [imagePath, setImagePath] = useState(track.imagePath)
-    const [errors, setErrors] = useState([]);
-    const [isPlaying, setIsPlaying] = useState(true)
 
     useEffect(() => {
-        dispatch(getTracks())
+        dispatch(getOneTrack(trackId))
     }, [dispatch])
 
-    // Validator errors
     useEffect(() => {
-        const validationErrors = [];
+        setTitle(track[trackId]?.title)
+        setDescription(track[trackId]?.description)
+        setGenre(track[trackId]?.genre)
+        setTrackPath(track[trackId]?.trackPath)
+        setImagePath(track[trackId]?.imagePath)
+    }, [trackId])
+
+    useEffect(() => {
+        const validationErrors = {};
         if (!title) {
-            validationErrors.push('Please provide a title.')
+            validationErrors.title = 'Please provide a title.'
         }
-        if (title.length > 100) {
-            validationErrors.push('Please provide a title under 100 characters.')
+        if (title?.length > 100) {
+            validationErrors.title = 'Please provide a title under 100 characters.'
         }
-        // if (!genre) {
-        //     validationErrors.push('Please select a genre.')
-        // }
+        if (!genre) {
+            validationErrors.genre = 'Please select a genre.'
+        }
+        if (!trackPath) {
+            validationErrors.trackPath = 'Please provide a track.'
+        }
 
         setErrors(validationErrors);
 
-    }, [title, genre])
+    }, [title, genre, trackPath])
 
-    // onSubmit function
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setHasSubmitted(true);
 
-        // Payload to be delivered to thunk
         const payload = {
             title,
             description,
             genre,
             trackPath,
             imagePath,
+            userId: user.id
         }
 
-        // When form is submitted, track will be updated through payload
-        const updatedTrack = await dispatch(updateTrack(payload, trackId))
-        if (updatedTrack) {
-            setOpenEditTrack(false);
+        const track = await dispatch(createTrack(payload))
+        if (track) {
+            setErrors({});
+            setHasSubmitted(false)
+            history.push(`/tracks/${track.id}`)
         }
+
+        setTitle('');
+        setDescription('');
+        setGenre('');
+        setTrackPath('');
+        setImagePath('');
+        setErrors({})
+    }
+
+    const updateTrackFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setTrackPath(file)
+    }
+
+    const updateImageFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setImagePath(file)
     }
 
     return (
-        <>
-            <div className='music-player-ctn'>
-                <div className='music-player-content'>
+        <div className='create-track-form-ctn'>
+            <div className='create-track-content'>
+                <h1>Edit Track</h1>
+                <span className="asterisk-required"><span className='req'>*</span>All required fields are marked with an asterisk.</span>
+                <div className='track-form-content'>
                     <form onSubmit={handleSubmit}>
-                        <div className='track-bar'>
-                            {/* ------------------ IMAGEPATH ------------------ */}
-                            <div className='cover-photo-ctn'>
-                                <input
-                                    name='imagePath'
-                                    type='text'
-                                    alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
-                                    value={imagePath}
-                                    placeholder='Insert an image link'
-                                    onChange={e => setImagePath(e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        {/* START MEDIA CONTROLS */}
-                        <div className='media-controls'>
-                            <div className='control-left'>
-
-                                {/* ------------------ TITLE ------------------ */}
-                                <div className='track-title'>
-                                    <h1 className='title-input'>
-                                        <input
-                                            type='text'
-                                            aria-label='Title'
-                                            value={title}
-                                            onChange={e => setTitle(e.target.value)}
-                                        />
-                                    </h1>
-                                </div>
-                                <div className='edit-error-msg'>
-                                    {openEditTrack && <ErrorMessage error={errors[0]} />}
-                                </div>
-
-                                {/* ------------------ ARTIST ------------------ */}
-                                <div className='track-artist'>
-                                    <p>{track?.User?.username}</p>
-                                </div>
-                            </div>
-
-                            {/* START CENTER OF CONTROLS */}
-                            {/* ------------------ MEDIA CONTROLS ------------------ */}
-                            <div className='control-center'>
-
-                                {/* ------------------ CANCEL ------------------ */}
-                                <div className='delete-cancel-ctn'>
-                                    <button
-                                        className='track-delete-btn'
-                                        type='button'
-                                        onClick={() => setOpenEditTrack(false)}
-                                        >
-                                        <i class="fa-solid fa-xmark fa-2x"></i>
-                                    </button>
-                                </div>
-
-                                {/* ------------------ BACK ------------------ */}
-                                <div className='back-ctn'>
-                                    <button
-                                        type='button'
-                                        className='back'
-                                    >
-                                        <i className="fa-solid fa-backward-step fa-3x"></i>
-                                    </button>
-                                </div>
-
-                                {/* ------------------ PLAY ------------------ */}
-                                <div className='play-ctn'>
-                                    {/* If not playing, play button will display */}
-                                    {/* If playing, pause button will display */}
-                                    <button
-                                        type='button'
-                                        className='play-pause'
-                                    >
-                                        {isPlaying
-                                        ? <i className="fa-solid fa-circle-pause fa-7x"></i>
-                                        : <i className="fa-solid fa-circle-play fa-7x"></i>
-                                        }
-                                    </button>
-                                </div>
-
-                                {/* ------------------ NEXT ------------------ */}
-                                <div className='next-ctn'>
-                                    <button
-                                        type='button'
-                                        className='next'
-                                    >
-                                        <i className="fa-solid fa-forward-step fa-3x"></i>
-                                    </button>
-                                </div>
-
-                                {/* ------------------ SAVE ------------------ */}
-                                <div className='edit-save-ctn'>
-                                    <button
-                                        type='submit'
-                                        className='saveChanges'
-                                        disabled={errors.length !== 0}
-                                    >
-                                        <i class="fa-solid fa-check fa-2x"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* ------------------ GENRE ------------------ */}
-                            <div className='genre-ctn'>
-                                <div className='genre'>
-                                    <select
+                        <div id='form-top'>
+                            <div id='form-left'>
+                                {/* -------------------- TITLE -------------------- */}
+                                <div className='title-div'>
+                                    <span>Title<span className='req'>*</span></span>
+                                    <input
+                                        name='title'
                                         type='text'
-                                        aria-label='Title'
-                                        value={genre}
-                                        onChange={e => setGenre(e.target.value)}
-                                    >
-                                        {genres.map(genre => (
-                                            <option key={genre}>{genre}</option>
-                                        ))}
-                                    </select>
+                                        value={title}
+                                        placeholder='Title'
+                                        onChange={e => setTitle(e.target.value)}
+                                    />
+                                    <div className='error-div'>
+                                        {hasSubmitted && <ErrorMessage error={errors.title} />}
+                                    </div>
+                                </div>
+
+                                {/* -------------------- TRACK PATH -------------------- */}
+                                <div className='trackPath-div'>
+                                    <span>Track<span className='req'>*</span></span>
+                                    <label className='trackPath-input-label'>
+                                        {trackPath ? `https://aa-aurora.herokuapp.com/tracks/${track[trackId]?.id}` : 'No track chosen'}
+                                        <input
+                                            name='trackPath'
+                                            type='file'
+                                            placeholder='Insert a track link'
+                                            onChange={updateTrackFile}
+                                            hidden
+                                        />
+                                    </label>
+                                    <div className='error-div'>
+                                        {hasSubmitted && <ErrorMessage error={errors.trackPath}/>}
+                                    </div>
+                                </div>
+                                {/* -------------------- GENRE -------------------- */}
+                                <div className='genre-div-ctn'>
+                                    <div className='genre-div'>
+                                        <span>Genre<span className='req'>*</span></span>
+                                        <select
+                                            name='genre'
+                                            value={genre}
+                                            onChange={e => setGenre(e.target.value)}
+                                            defaultValue='Pick a genre...'
+                                        >
+                                            <option value='' disabled>Select a genre...</option>
+                                            {genres.map(genre => (
+                                                <option key={genre}>{genre}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className='error-div'>
+                                        {hasSubmitted && <ErrorMessage error={errors.genre} />}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id='form-right'>
+                                {/* -------------------- PHOTO PREVIEW -------------------- */}
+                                <div id='right-middle' className='cover-photo-ctn'>
+                                    <div className='preview-ctn'>
+                                        <img className='photo-preview' src={imagePath}></img>
+                                        <label className="imagePath-input-label">
+                                            {/* {imagePath ? imagePath : 'No image chosen'} */}
+                                            <div>
+                                                <i className="fa-solid fa-camera"></i>
+                                                Replace image
+                                            </div>
+                                            <input
+                                                name='imagePath'
+                                                type='file'
+                                                // alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
+                                                placeholder='Insert an image link'
+                                                onChange={updateImageFile}
+                                                hidden
+                                            />
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                            <div className='track-info-ctn'>
-
-                                {/* ------------------ DESCRIPTION ------------------ */}
-                                <div className='description'>
-                                    <textarea
-                                        name='description'
-                                        value={description}
-                                        placeholder='Description'
-                                        onChange={e => setDescription(e.target.value)}
-                                    />
-                                </div>
-                            </div>
+                        {/* -------------------- DESCRIPTION -------------------- */}
+                        <div className='description-div'>
+                            <span>Description</span>
+                            <textarea
+                                name='description'
+                                value={description}
+                                placeholder='Description'
+                                onChange={e => setDescription(e.target.value)}
+                            />
+                        </div>
+                        <div className='create-track-btn'>
+                            <button type='submit'>Upload</button>
+                        </div>
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

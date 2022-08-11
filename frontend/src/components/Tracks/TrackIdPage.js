@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
 import { useUpdateContext } from '../../context/UpdateContext';
 import { useTrackContext } from '../../context/TrackContext';
@@ -8,6 +8,7 @@ import DeleteTrackModal from './DeleteTrackModal';
 import Comments from '../Comments';
 
 import './TrackIdPage.css';
+import UpdateTrackForm from './UpdateTrackForm';
 
 const TrackIdPage = ({tracks}) => {
     const dispatch = useDispatch();
@@ -235,15 +236,9 @@ const TrackIdPage = ({tracks}) => {
                             {/* ------------------ EDIT ------------------ */}
                             {sessionUser?.id === track?.User?.id
                             ? <div className='edit-save-ctn'>
-                                <button
-                                    type='button'
-                                    className='inline-edit-Track'
-                                    // When Edit button is CLICKED, Editing will be allowed by rendering UpdateTrackForm component.
-                                    // Save Changes button WILL BE DISPLAYED.
-                                    onClick={() => setOpenEditTrack(true)}
-                                    >
+                                <Link to={`/tracks/${track?.id}/edit`}>
                                     <i className="fa-solid fa-pen fa-2x comment"></i>
-                                </button>
+                                </Link>
                             </div>
                             : ""}
                         </div>

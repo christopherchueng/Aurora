@@ -1,157 +1,214 @@
-.music-player-ctn {
+.create-track-form-ctn {
     width: 100vw;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(44, 44, 44);
+    padding-top: 75px;
 }
 
-.media-controls {
+.create-track-content > h1 {
+    width: 900px;
+    border-bottom: 1px solid white;
+}
+
+.asterisk-required {
+    width: 100%;
+    font-size: 10pt;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.75)
+}
+
+.track-form-content,
+.description-div {
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+}
+
+#form-top {
     display: flex;
     flex-direction: row;
 }
 
-.track-bar {
+#top-row,
+#middle-row {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+}
+
+.title-div,
+.trackPath-div,
+.imagePath-div,
+.genre-div-ctn,
+#right-middle {
+    width: 400px;
+    padding-top: 35px;
+}
+
+.imagePath-div {
+    display: flex;
+    flex-direction: column;
+}
+.title-div {
+    padding-right: 100px;
+}
+
+.title-div > span,
+.trackPath-div > span,
+.imagePath-div > span,
+.genre-div > span,
+.description-div > span {
+    padding-bottom: 20px;
+    font-size: 16pt;
+}
+
+.left-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 400px;
+    height: 400px;
+    padding-right: 100px;
+}
+
+
+#right-middle {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 44px;
+}
+
+.preview-ctn {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 60vh;
-    background-color: lightblue;
+    border: 1px solid white;
+    width: 382px;
+    height: 382px;
 }
 
-.cover-photo {
-    width: 200px;
-    height: 200px;
+.photo-preview {
+    width: 382px;
+    height: 382px;
 }
 
-.cover-photo-ctn > input {
+.fa-camera {
+    padding-right: 10px;
+}
+
+.imagePath-input-label {
+    justify-content: center;
+    position: absolute;
     border: 1px solid black;
-    background-color: transparent;
-    height: 40px;
+    background-color: rgba(211, 211, 211, 0.8);
+    height: 30px;
+    width: 125px;
     border-radius: 5px;
-    width: 300px;
-    color: white;
+    color: black;
+    font-weight: 700;
 }
 
-.title-input > input,
-.genre > select {
+.imagePath-input-label:hover {
+    transition: 0.2s;
+    background-color: white;
+}
+
+.title-div > input,
+.trackPath-div > input,
+.genre-div > select,
+.imagePath-div > input,
+.description-div > textarea,
+.trackPath-input-label {
     border: 1px solid white;
     background-color: transparent;
     height: 40px;
     border-radius: 5px;
-    width: 200px;
     color: white;
+    padding: 0 10px;
 }
 
-.description > textarea {
-    height: 150px;
-    width: 600px;
-    border: 1px solid white;
-    background-color: transparent;
-    border-radius: 5px;
+.genre-div > select {
     color: white;
+    cursor: pointer;
+    appearance: none;
 }
 
-.title-input > input::placeholder,
-.genre > select::placeholder,
-.description > textarea::placeholder {
+.title-div > input::placeholder,
+.trackPath-div > input::placeholder,
+.imagePath-div > input::placeholder {
     color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
     font-size: 10pt;
 }
 
-.track-info-ctn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100vw;
-}
-
-.track-title,
-.track-artist {
-    width: 200px;
-}
-
-.track-title > h1 {
-    margin: 0;
-    font-size: 24pt;
-    width: 365px;
-}
-
-.track-artist > p {
-    font-size: 12pt;
-    margin: 0;
-
-}
-
-.media-controls {
-    height: 200px;
-    width: 100vw;
-    padding-top: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.control-left {
+.title-div,
+.genre-div,
+.trackPath-div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 150px;
 }
 
-.error-message {
-    padding-left: 50px;
-}
-
-.control-center {
+.trackPath-input-label,
+.imagePath-input-label {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    /* width: 100%; */
-}
-
-.genre-ctn {
-    padding-right: 50px;
-}
-
-.fa-xmark {
-    color: rgb(249, 105, 105);
-}
-
-.back,
-.play,
-.pause,
-.next,
-.saveChanges {
-    border: none;
-    background-color: transparent;
-    color: white;
+    font-size: 10pt;
     cursor: pointer;
 }
 
-.play-ctn {
-    padding: 0 40px;
+.error-div {
+    width: 400px;
+    height: 50px;
+
 }
 
-.control-left,
-.genre-ctn {
+.error-div > .error-message {
+    padding: 0;
+}
+
+.description-div {
+    padding-top: 50px;
+}
+
+.description-div > textarea {
+    height: 150px;
+    padding: 15px 0 0 15px;
+    resize: none;
+}
+
+.create-track-btn {
     display: flex;
-    flex-direction: column;
-    /* justify-content: flex-end; */
-    align-items: center;
-    /* padding-right: 80px; */
-    width: 200px;
-    height: 100px;
+    justify-content: flex-end;
+    padding: 50px 0 50px 0;
 }
 
-.fa-check {
-    color: lightgreen;
+.create-track-btn > button {
+    background-color: transparent;
+    font-size: 12pt;
+    /* font-weight: bold; */
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 125px;
+    height: 50px;
+    /* margin: 20px 10px; */
+    cursor: pointer;
 }
 
-.genre-ctn {
-    justify-content: center;
+.create-track-btn > button:hover {
+    background-color: white;
+    color: black;
+    transition: color 0.15 ease-in;
+    transition: background-color 0.15s ease-in;
+}
+
+.char-count-cmt {
+    width: 100px;
+}
+
+.req {
+    color:rgb(246, 94, 94);
 }

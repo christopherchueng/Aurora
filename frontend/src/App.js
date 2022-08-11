@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/DiscoverPage";
 import CreateTrackForm from "./components/Tracks/CreateTrackForm";
+import UpdateTrackForm from "./components/Tracks/UpdateTrackForm";
 // import TrackIdPage from './components/Tracks/TrackIdPage'
 import Tracks from "./components/Tracks";
 import ErrorPage from "./components/ErrorPage";;
@@ -28,8 +29,11 @@ function App() {
         <Route path='/upload'>
           <CreateTrackForm />
         </Route>
-        <Route path='/tracks/:trackId'>
+        <Route exact path='/tracks/:trackId'>
           <Tracks />
+        </Route>
+        <Route exact path='/tracks/:trackId/edit'>
+          <UpdateTrackForm />
         </Route>
         <Route>
           <ErrorPage />
