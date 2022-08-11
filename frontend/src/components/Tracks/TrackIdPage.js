@@ -59,7 +59,7 @@ const TrackIdPage = ({tracks}) => {
     const backBtn = () => {
         for (let i = 0; i < tracksArr.length; i++) {
             let track = tracksArr[i]
-            if (+trackId === track?.id && (trackId > 1)) {
+            if (+trackId === track?.id) {
                 setIsPlaying(true)
                 // audioPlayer.current.play();
                 // setCurrentSong(tracks[+trackId])
@@ -67,16 +67,16 @@ const TrackIdPage = ({tracks}) => {
             }
         }
 
-        if (+trackId === 1) {
+        if (+trackId === tracksArr[0]?.id) {
             setIsPlaying(true)
-            history.push(`/tracks/${tracksArr.length}`)
+            history.push(`/tracks/${tracksArr[tracksArr.length - 1]?.id}`)
         }
     }
 
     const nextBtn = () => {
         for (let i = 0; i < tracksArr.length; i++) {
             let track = tracksArr[i]
-            if (+trackId === track.id && +trackId < (tracksArr.length)) {
+            if (+trackId === track.id) {
                 // setCurrentSong(tracks[+trackId])
                 setIsPlaying(true)
                 // audioPlayer.current.play();
@@ -85,9 +85,9 @@ const TrackIdPage = ({tracks}) => {
         }
 
         // If at the end of the playlist, then restart at 1
-        if (+trackId === tracksArr.length) {
+        if (+trackId === tracksArr[tracksArr.length - 1]?.id) {
             setIsPlaying(true)
-            history.push(`/tracks/1`)
+            history.push(`/tracks/${tracksArr[0]?.id}`)
         }
     }
 
