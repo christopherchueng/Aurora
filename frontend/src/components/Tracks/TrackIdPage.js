@@ -63,7 +63,7 @@ const TrackIdPage = ({tracks}) => {
                 setIsPlaying(true)
                 // audioPlayer.current.play();
                 // setCurrentSong(tracks[+trackId])
-                history.push(`/tracks/${track.id - 1}`)
+                history.push(`/tracks/${tracksArr[i - 1]?.id}`)
             }
         }
 
@@ -80,7 +80,7 @@ const TrackIdPage = ({tracks}) => {
                 // setCurrentSong(tracks[+trackId])
                 setIsPlaying(true)
                 // audioPlayer.current.play();
-                history.push(`/tracks/${track.id + 1}`)
+                history.push(`/tracks/${tracksArr[i + 1]?.id}`)
             }
         }
 
