@@ -8,9 +8,16 @@
     padding-top: 75px;
 }
 
-.create-track-form-ctn > h1 {
+.create-track-content > h1 {
     width: 900px;
     border-bottom: 1px solid white;
+}
+
+.asterisk-required {
+    width: 100%;
+    font-size: 10pt;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.75)
 }
 
 .track-form-content,
