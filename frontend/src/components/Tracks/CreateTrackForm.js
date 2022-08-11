@@ -78,8 +78,6 @@ const CreateTrackForm = ({tracks}) => {
         if (file) setImagePath(file)
     }
 
-    console.log('here is image path', imagePath)
-
     return (
         <div className='create-track-form-ctn'>
             <div className='create-track-content'>
