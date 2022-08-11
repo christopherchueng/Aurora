@@ -7,7 +7,7 @@ const { requireAuth } = require('../../utils/auth');
 const asyncHandler = require('express-async-handler');
 const { validationResult } = require('express-validator')
 const { handleValidationErrors } = require('../../utils/validation');
-const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
+const { singleMulterUpload, singlePublicFileUpload, multipleMulterUpload, multiplePublicFileUpload } = require('../../awsS3');
 
 const router = express.Router();
 
@@ -47,29 +47,25 @@ router.get('/:trackId/comments', asyncHandler(async (req, res) => {
     return res.json(comments);
 }))
 
-router.post('/', requireAuth, singleMulterUpload('track'), asyncHandler(async (req, res) => {
+router.post('/', requireAuth, multipleMulterUpload('files'), asyncHandler(async (req, res) => {
     const {
         title,
         description,
         genre,
         userId
     } = req.body
-    // let { image, track } = req.body
 
-    // const imagePath = await singlePublicFileUpload(req.file)
-    // console.log('--------------------- here is IMAGEPATH ---------------------', imagePath)
-    const trackPath = await singlePublicFileUpload(req.file)
-    console.log('--------------------- here is TRACKPATH ---------------------', trackPath)
+    const mediaFiles = await multiplePublicFileUpload(req.files)
 
-    // console.log('here is image path', imagePath)
-    // console.log('here is track path', trackPath)
+    const trackPath = mediaFiles[0]
+    const imagePath = mediaFiles[1]
 
     const newTrack = await Track.create({
         title,
         description,
         genre,
         trackPath,
-        // imagePath,
+        imagePath,
         userId
     });
 

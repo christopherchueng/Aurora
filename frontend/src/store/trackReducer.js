@@ -83,8 +83,14 @@ export const createTrack = (payload) => async (dispatch) => {
     formData.append('description', description)
     formData.append('genre', genre)
     formData.append('userId', userId)
-    if (imagePath) formData.append('image', imagePath)
-    if (trackPath) formData.append('track', trackPath)
+    const files = [trackPath, imagePath]
+
+    if (trackPath && imagePath) {
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files', files[i])
+        }
+    }
+    // if (trackPath) formData.append('track', trackPath)
 
     const response = await csrfFetch('/api/tracks', {
         method: 'POST',
@@ -105,8 +111,7 @@ export const updateTrack = (payload, trackId) => async (dispatch) => {
     formData.append('description', description)
     formData.append('genre', genre)
     formData.append('userId', userId)
-    if (imagePath) formData.append('image', imagePath)
-    if (trackPath) formData.append('track', trackPath)
+    if (trackPath && imagePath) formData.append('files', [trackPath, imagePath])
 
     const response = await csrfFetch(`/api/tracks/${trackId}`, {
         method: 'PUT',

@@ -13,7 +13,6 @@ const CreateTrackForm = ({tracks}) => {
     const [genre, setGenre] = useState('')
     const [trackPath, setTrackPath] = useState('')
     const [imagePath, setImagePath] = useState('')
-    const [files, setFiles] = useState([])
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [track, setTrack] = useState()
@@ -49,6 +48,7 @@ const CreateTrackForm = ({tracks}) => {
             description,
             genre,
             trackPath,
+            imagePath,
             userId: user.id
         }
 
