@@ -1,13 +1,15 @@
 .create-track-form-ctn {
-    background-color: transparent;
-    width: 900px;
+    width: 100vw;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(44, 44, 44);
     padding-top: 75px;
 }
 
 .create-track-form-ctn > h1 {
-    width: auto;
+    width: 900px;
     border-bottom: 1px solid white;
 }
 
@@ -66,6 +68,15 @@
     align-items: center;
 }
 
+.preview-ctn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    width: 200px;
+    height: 200px;
+}
+
 .cover-photo-ctn > img {
     width: 200px;
     height: 200px;
@@ -75,17 +86,21 @@
 .trackPath-div > input,
 .genre-div > select,
 .imagePath-div > input,
-.description-div > textarea {
+.description-div > textarea,
+.trackPath-input-label,
+.imagePath-input-label {
     border: 1px solid white;
     background-color: transparent;
     height: 40px;
     border-radius: 5px;
     color: white;
-    padding-left: 10px;
+    padding: 0 10px;
 }
 
 .genre-div > select {
     color: white;
+    cursor: pointer;
+    appearance: none;
 }
 
 .title-div > input::placeholder,
@@ -100,6 +115,14 @@
 .trackPath-div {
     display: flex;
     flex-direction: column;
+}
+
+.trackPath-input-label,
+.imagePath-input-label {
+    display: flex;
+    align-items: center;
+    font-size: 10pt;
+    cursor: pointer;
 }
 
 .error-div {
@@ -119,6 +142,7 @@
 .description-div > textarea {
     height: 150px;
     padding: 15px 0 0 15px;
+    resize: none;
 }
 
 .create-track-btn {

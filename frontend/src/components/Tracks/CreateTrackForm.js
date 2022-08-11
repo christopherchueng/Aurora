@@ -78,6 +78,8 @@ const CreateTrackForm = ({tracks}) => {
         if (file) setImagePath(file)
     }
 
+    console.log('here is image path', imagePath)
+
     return (
         <div className='create-track-form-ctn'>
             <h1>Upload</h1>
@@ -102,12 +104,14 @@ const CreateTrackForm = ({tracks}) => {
                         {/* -------------------- TRACK PATH -------------------- */}
                         <div className='trackPath-div'>
                             <span>Track<span className='req'>*</span></span>
-                            <label>
+                            <label className='trackPath-input-label'>
+                                {trackPath ? trackPath.name : 'No track chosen'}
                                 <input
                                     name='trackPath'
                                     type='file'
                                     placeholder='Insert a track link'
                                     onChange={updateTrackFile}
+                                    hidden
                                 />
                             </label>
                             <div className='error-div'>
@@ -121,13 +125,15 @@ const CreateTrackForm = ({tracks}) => {
                             {/* -------------------- IMAGE PATH -------------------- */}
                             <div className="imagePath-div">
                                 <span>Cover photo</span>
-                                <label>
+                                <label className="imagePath-input-label">
+                                    {imagePath ? imagePath.name : 'No image chosen'}
                                     <input
                                         name='imagePath'
                                         type='file'
                                         // alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
                                         placeholder='Insert an image link'
                                         onChange={updateImageFile}
+                                        hidden
                                     />
                                 </label>
                             </div>
@@ -136,13 +142,13 @@ const CreateTrackForm = ({tracks}) => {
                             <div className='genre-div-ctn'>
                                 <div className='genre-div'>
                                     <span>Genre<span className='req'>*</span></span>
-
                                     <select
-                                        name='genre'
-                                        value={genre}
-                                        onChange={e => setGenre(e.target.value)}
+                                    name='genre'
+                                    value={genre}
+                                    onChange={e => setGenre(e.target.value)}
+                                    defaultValue='Pick a genre...'
                                     >
-                                        <option value='' disabled></option>
+                                        <option value='' disabled>Select a genre...</option>
                                         {genres.map(genre => (
                                             <option key={genre}>{genre}</option>
                                         ))}
@@ -156,17 +162,9 @@ const CreateTrackForm = ({tracks}) => {
 
                         {/* -------------------- PHOTO PREVIEW -------------------- */}
                         <div id='right-middle' className='cover-photo-ctn'>
-                            {imagePath
-                            ? <img className='cover-photo' src={imagePath.webkitRelativePath}></img>
-                            : <div style={{
-                                border: '1px solid white',
-                                width: '200px',
-                                height: '200px',
-                                display: "flex",
-                                justifyContent: 'center',
-                                alignItems: 'center' }} >
-                                    Preview
-                                </div>}
+                            <div className='preview-ctn'>
+                                {imagePath ? imagePath.name : 'Image name here'}
+                            </div>
                         </div>
                     </div>
 
