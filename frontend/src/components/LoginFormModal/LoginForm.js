@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import DemoUser from "../DemoUser";
 import './LoginForm.css'
 
 function LoginForm() {
@@ -21,39 +22,42 @@ function LoginForm() {
     };
 
     return (
-      <form onSubmit={handleSubmit}>
-        <span>Login</span>
-        <div className='login-form'>
-          <ul>
-            {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
-            ))}
-          </ul>
-          <div className='user-email-ctn'>
-            <div className='user-label'>
-              <p>Username or Email</p>
+      <div className="login-modal">
+        <form onSubmit={handleSubmit} className='login-form'>
+          <h1>Login</h1>
+          <div className='login-form'>
+            <span className="login-error">{errors[0]}</span>
+            <div className='user-email-ctn'>
+              <input
+                type="text"
+                value={credential}
+                placeholder='Email or Username'
+                onChange={(e) => setCredential(e.target.value)}
+                style={{border: errors.length ? '1px solid rgb(246, 94, 94)' : ''}}
+                required
+              />
             </div>
-            <input
-              type="text"
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
-              required
-            />
-          </div>
-          <div className='password-ctn'>
-            <div className='pw-label'>
-              <p>Password</p>
+            <div className='password-ctn'>
+              <input
+                type="password"
+                value={password}
+                placeholder='Password'
+                onChange={(e) => setPassword(e.target.value)}
+                style={{border: errors.length ? '1px solid rgb(246, 94, 94)' : ''}}
+                required
+              />
             </div>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="login-btns">
+              <div className='login-btn'>
+                <button type="submit">Log In</button>
+              </div>
+              <div className='login-demo'>
+                <DemoUser />
+              </div>
+            </div>
           </div>
-          <button type="submit">Log In</button>
-        </div>
-      </form>
+        </form>
+      </div>
     );
 }
 

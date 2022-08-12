@@ -1,39 +1,48 @@
-form > span {
+.login-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    height: 450px;
+}
+
+.login-form > h1 {
     font-size: 36pt;
     font-weight: bold;
+    text-align: center;
+    width: 100%;
+    margin: 20px 0;
+    color: rgb(50, 50, 200);
 }
 
 .login-form {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 700px;
+    width: 350px;
+}
+
+.login-error {
+    color: rgb(246, 94, 94);
 }
 
 .user-email-ctn,
 .password-ctn {
     display: flex;
-    flex-direction: row;
-}
-
-.user-label p,
-.pw-label p {
-    display: flex;
-    /* align-items: center; */
-    justify-content: flex-end;
-    width: 175px;
-}
-
-.user-label {
-    justify-content: center;
+    flex-direction: column;
+    width: 100%;
 }
 
 .user-email-ctn input,
 .password-ctn input {
     border-radius: 5px;
-    width: 200px;
     display: flex;
-    margin: 20px;
+    height: 30px;
+    border: 1px solid #999999;
+    margin: 20px 0;
+    padding: 0 10px;
 }
 
 /* .user-email-ctn span {
@@ -43,15 +52,36 @@ form > span {
 
 } */
 
-.login-form button {
+.login-btn,
+.login-demo {
+    width: 100%;
+}
+
+.login-btn button,
+.login-demo button {
     margin: 10px 0;
-    border: 1px solid white;
-    background-color: transparent;
+    border: 1px solid rgb(50, 50, 200);
+    background-color: rgb(50, 50, 200);
     border-radius: 5px;
     color: white;
-    width: 70px;
-    height: 33px;
+    width: 100%;
+    height: 35px;
     cursor: pointer;
+    padding: 0;
+}
+
+.login-form button:hover {
+    transition: 0.2s;
+    background-color: rgb(90, 90, 197);
+}
+
+.login-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .password-ctn span {
