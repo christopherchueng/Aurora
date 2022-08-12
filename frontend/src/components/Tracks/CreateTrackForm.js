@@ -82,6 +82,9 @@ const CreateTrackForm = ({tracks}) => {
         if (file) setImagePath(file)
     }
 
+    console.log('here is trackPath', typeof trackPath)
+    console.log('here is imagePath', typeof imagePath)
+
     return (
         <div className='create-track-form-ctn'>
             <div className='create-track-content'>
@@ -100,6 +103,7 @@ const CreateTrackForm = ({tracks}) => {
                                         value={title}
                                         placeholder='Title'
                                         onChange={e => setTitle(e.target.value)}
+                                        style={{border: errors.title && hasSubmitted ? '1px solid rgb(246, 94, 94)' : ''}}
                                     />
                                     <div className='error-div'>
                                         {hasSubmitted && <ErrorMessage error={errors.title} />}
@@ -108,7 +112,10 @@ const CreateTrackForm = ({tracks}) => {
                                 {/* -------------------- TRACK PATH -------------------- */}
                                 <div className='trackPath-div'>
                                     <span>Track<span className='req'>*</span></span>
-                                    <label className='trackPath-input-label'>
+                                    <label
+                                        className='trackPath-input-label'
+                                        style={{border: errors.trackPath && hasSubmitted ? '1px solid rgb(246, 94, 94)' : ''}}
+                                    >
                                         {trackPath ? trackPath.name : 'No track chosen'}
                                         <input
                                             name='trackPath'
@@ -130,6 +137,7 @@ const CreateTrackForm = ({tracks}) => {
                                             name='genre'
                                             value={genre}
                                             onChange={e => setGenre(e.target.value)}
+                                            style={{border: errors.genre && hasSubmitted ? '1px solid rgb(246, 94, 94)' : ''}}
                                         >
                                             <option value='' disabled>Select a genre...</option>
                                             {genres.map(genre => (

@@ -78,6 +78,9 @@ export const getTracks = () => async (dispatch) => {
 export const createTrack = (payload) => async (dispatch) => {
     const { title, description, imagePath, trackPath, genre, userId } = payload
 
+    console.log('what is trackPath', trackPath)
+    console.log('what is imagePath', imagePath)
+
     const formData = new FormData()
     formData.append('title', title)
     formData.append('description', description)
@@ -85,10 +88,8 @@ export const createTrack = (payload) => async (dispatch) => {
     formData.append('userId', userId)
     const files = [trackPath, imagePath]
 
-    if (trackPath && imagePath) {
-        for (let i = 0; i < files.length; i++) {
-            formData.append('files', files[i])
-        }
+    for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i])
     }
     // if (trackPath) formData.append('track', trackPath)
 
@@ -111,7 +112,7 @@ export const updateTrack = (payload, trackId) => async (dispatch) => {
     formData.append('description', description)
     formData.append('genre', genre)
     formData.append('userId', userId)
-    if (trackPath && imagePath) formData.append('files', [trackPath, imagePath])
+    formData.append('files', [trackPath, imagePath])
 
     const response = await csrfFetch(`/api/tracks/${trackId}`, {
         method: 'PUT',

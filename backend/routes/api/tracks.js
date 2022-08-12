@@ -61,11 +61,17 @@ router.post('/', requireAuth, multipleMulterUpload('files'), asyncHandler(async 
         genre,
         userId
     } = req.body
+    let imagePath
 
     const mediaFiles = await multiplePublicFileUpload(req.files)
 
     const trackPath = mediaFiles[0]
-    const imagePath = mediaFiles[1]
+
+    if (!mediaFiles[1]) {
+        imagePath = 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
+    } else {
+        imagePath = mediaFiles[1]
+    }
 
     const newTrack = await Track.create({
         title,
@@ -80,9 +86,15 @@ router.post('/', requireAuth, multipleMulterUpload('files'), asyncHandler(async 
 }))
 
 // Update a track
-router.put('/:trackId', requireAuth, singleMulterUpload('image'), singleMulterUpload('track'), asyncHandler(async (req, res) => {
+router.put('/:trackId',
+    requireAuth,
+    singleMulterUpload('image'),
+    singleMulterUpload('track'),
+    multipleMulterUpload('files'),
+    asyncHandler(async (req, res) => {
+
     const trackId = parseInt(req.params.trackId, 10);
-    const track = await Track.findByPk(trackId);
+    const currTrack = await Track.findByPk(trackId);
 
     const {
         title,
@@ -90,13 +102,35 @@ router.put('/:trackId', requireAuth, singleMulterUpload('image'), singleMulterUp
         genre,
         userId
     } = req.body
+    let imagePath
+    let trackPath
+    const {image, track} = req.body
 
-    const imagePath = await singlePublicFileUpload(req.file)
-    const trackPath = await singlePublicFileUpload(req.file)
+    /* Cases:
+    - User replaces both image and track
+    - User replaces track, but image remains the same
+    - User replaces image, but track remains the same
+    */
+
+    console.log('req.file here', req.file)
+
+    if (req.files) {
+        const mediaFiles = await multiplePublicFileUpload(req.files)
+        trackPath = mediaFiles[0]
+        imagePath = mediaFiles[1]
+    }
+    if (req.file && req.file.filename === 'image') {
+        imagePath = await singlePublicFileUpload(req.file)
+        trackPath = track
+    }
+    if (req.file && req.file.filename === 'audio') {
+        trackPath = await singlePublicFileUpload(req.file)
+        imagePath = image
+    }
 
     // console.log('What are we getting from the frontend?', req.body)
 
-    await track.update({
+    await currTrack.update({
         title,
         description,
         genre,
@@ -105,7 +139,7 @@ router.put('/:trackId', requireAuth, singleMulterUpload('image'), singleMulterUp
         userId
     });
 
-    return res.json(track);
+    return res.json(currTrack);
 }))
 
 // Delete a track

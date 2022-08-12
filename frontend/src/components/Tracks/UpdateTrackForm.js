@@ -97,6 +97,9 @@ const UpdateTrackForm = () => {
         if (file) setImagePath(file)
     }
 
+    console.log('track path', trackPath)
+    console.log('imagex path', imagePath)
+
     return (
         <div className='create-track-form-ctn'>
             <div className='create-track-content'>
@@ -115,6 +118,7 @@ const UpdateTrackForm = () => {
                                         value={title}
                                         placeholder='Title'
                                         onChange={e => setTitle(e.target.value)}
+                                        style={{border: errors.title && hasSubmitted ? '1px solid rgb(246, 94, 94)' : ''}}
                                     />
                                     <div className='error-div'>
                                         {hasSubmitted && <ErrorMessage error={errors.title} />}
@@ -124,8 +128,11 @@ const UpdateTrackForm = () => {
                                 {/* -------------------- TRACK PATH -------------------- */}
                                 <div className='trackPath-div'>
                                     <span>Track<span className='req'>*</span></span>
-                                    <label className='trackPath-input-label'>
-                                        {trackPath ? `https://aa-aurora.herokuapp.com/tracks/${track[trackId]?.id}` : 'No track chosen'}
+                                    <label
+                                        className='trackPath-input-label'
+                                        style={{border: errors.trackPath && hasSubmitted ? '1px solid rgb(246, 94, 94)' : ''}}
+                                    >
+                                        {typeof trackPath === 'object' ? trackPath.name : trackPath.length === 0 ? 'No track chosen' : `https://aa-aurora.herokuapp.com/tracks/${track[trackId]?.id}`}
                                         <input
                                             name='trackPath'
                                             type='file'
@@ -146,6 +153,7 @@ const UpdateTrackForm = () => {
                                             name='genre'
                                             value={genre}
                                             onChange={e => setGenre(e.target.value)}
+                                            style={{border: errors.genre && hasSubmitted ? '1px solid rgb(246, 94, 94)' : ''}}
                                         >
                                             <option value='' disabled>Select a genre...</option>
                                             {genres.map(genre => (
