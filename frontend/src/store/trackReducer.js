@@ -78,9 +78,6 @@ export const getTracks = () => async (dispatch) => {
 export const createTrack = (payload) => async (dispatch) => {
     const { title, description, imagePath, trackPath, genre, userId } = payload
 
-    console.log('what is trackPath', trackPath)
-    console.log('what is imagePath', imagePath)
-
     const formData = new FormData()
     formData.append('title', title)
     formData.append('description', description)
@@ -106,8 +103,6 @@ export const createTrack = (payload) => async (dispatch) => {
 
 export const updateTrack = (payload) => async (dispatch) => {
     const { trackId, title, description, imagePath, trackPath, genre, userId } = payload
-
-    console.log('here is trackPath in thunk', trackPath)
 
     const formData = new FormData()
     formData.append('title', title)

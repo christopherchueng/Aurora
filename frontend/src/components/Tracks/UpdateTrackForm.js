@@ -93,9 +93,6 @@ const UpdateTrackForm = () => {
         if (file) setImagePath(file)
     }
 
-    console.log('track path', trackPath)
-    console.log('imagex path', imagePath)
-
     return (
         <div className='edit-track-form-ctn'>
             <div className='edit-track-content'>
