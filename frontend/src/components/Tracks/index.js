@@ -232,7 +232,7 @@ const Tracks = () => {
                             {sessionUser?.id === track?.User?.id
                             ? <div className='edit-save-ctn'>
                                 <Link to={`/tracks/${track?.id}/edit`}>
-                                    <i className="fa-solid fa-pen fa-2x comment"></i>
+                                    <i className="fa-solid fa-pen fa-xl comment"></i>
                                 </Link>
                             </div>
                             : ""}
