@@ -21,6 +21,10 @@ const CreateTrackForm = ({tracks}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+    useEffect(() => {
         const validationErrors = {};
         if (!title) {
             validationErrors.title = 'Please provide a title.'

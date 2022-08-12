@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
-import { useUpdateContext } from '../../context/UpdateContext';
 import { useTrackContext } from '../../context/TrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
 import Comments from '../Comments';
@@ -18,7 +17,6 @@ const TrackIdPage = ({tracks}) => {
     const sessionUser = useSelector(state => state.session.user);
 
     // States
-    const { openEditTrack, setOpenEditTrack } = useUpdateContext();
     const { isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
     const [currentSong, setCurrentSong] = useState(track)
     const [isPlaying, setIsPlaying] = useState(false)

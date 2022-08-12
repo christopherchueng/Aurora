@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams, useHistory, Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getComments, updateComment } from "../../store/commentReducer";
-import { useUpdateContext } from "../../context/UpdateContext";
+import { useParams, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateComment } from "../../store/commentReducer";
 import './UpdateCommentForm.css';
 
 const UpdateCommentForm = ({ comment, setIsEditing }) => {

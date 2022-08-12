@@ -18,6 +18,10 @@ const SplashPage = () => {
         dispatch(getTracks())
     }, [dispatch]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <>
             <div className='splash-ctn'>

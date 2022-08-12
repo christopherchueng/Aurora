@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { postComment } from "../../store/commentReducer";
-import DeleteTrackModal from "../Tracks/DeleteTrackModal";
-import { useUpdateContext } from "../../context/UpdateContext";
 import ErrorMessage from "../FormTemplate/ErrorMessage";
 import './CreateCommentForm.css'
 

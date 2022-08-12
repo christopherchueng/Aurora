@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../store/commentReducer";
 import CreateCommentForm from "./CreateCommentForm";
-import { useUpdateContext } from "../../context/UpdateContext";
 import { getUsers } from "../../store/user";
 import Comment from "./Comment";
 import './index.css';

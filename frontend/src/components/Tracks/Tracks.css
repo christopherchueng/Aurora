@@ -1,0 +1,144 @@
+.music-player-ctn {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.media-controls {
+    display: flex;
+    flex-direction: row;
+}
+
+.track-bar-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+    width: 100vw;
+    height: 60vh;
+
+}
+
+/* .input-tracker {
+    appearance: none;
+    background: var(--track-background);
+    outline: none;
+    width: 100vw;
+    z-index: 4;
+} */
+
+/* .cover-photo-ctn {
+    z-index: 3;
+} */
+
+.cover-photo {
+    width: 200px;
+    height: 200px;
+}
+
+.duration-ctn {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16pt;
+}
+
+.track-info-ctn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    padding: 40px 0;
+
+}
+
+.description {
+    height: auto;
+    width: 600px;
+    inline-size: 600px;
+    overflow-wrap: break-word;
+}
+
+.track-title,
+.track-artist {
+    width: 150px;
+}
+
+.track-title > h1 {
+    margin: 0;
+    font-size: 24pt;
+    width: 365px;
+}
+
+.track-artist > p {
+    font-size: 12pt;
+    margin: 0;
+
+}
+
+.media-controls {
+    height: 100px;
+    width: 100vw;
+    padding-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.control-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+}
+
+.back,
+.play-pause,
+.next,
+.shuffle,
+.volume,
+.inline-edit-Track,
+.track-delete-btn {
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.play-ctn {
+    padding: 0 40px;
+}
+
+.control-left,
+.control-right {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-end; */
+    align-items: center;
+    /* padding-right: 80px; */
+    width: 250px;
+    height: 100px;
+}
+
+.volume-ctn,
+.shuffle-ctn,
+.delete-cancel-ctn,
+.edit-save-ctn {
+    width: 30px;
+    padding: 0 50px;
+}
+
+.control-right {
+    justify-content: center;
+}

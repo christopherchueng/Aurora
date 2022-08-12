@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ModalProvider } from "./context/Modal";
-import UpdateProvider from "./context/UpdateContext";
 import TrackProvider from "./context/TrackContext";
 
 import configureStore from "./store";
@@ -27,11 +26,9 @@ function Root() {
     <Provider store={store}>
       <ModalProvider>
         <TrackProvider>
-          <UpdateProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </UpdateProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </TrackProvider>
       </ModalProvider>
     </Provider>
