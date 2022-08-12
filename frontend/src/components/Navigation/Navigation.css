@@ -142,6 +142,7 @@
     width: auto;
 }
 
+.profile-dropdown > a,
 .profile-dropdown > li {
     padding: 5px;
     cursor: pointer;
@@ -151,6 +152,7 @@
 
 }
 
+.profile-dropdown > a:hover,
 .profile-dropdown > li:hover {
     background-color: black;
 }

@@ -36,12 +36,12 @@ function ProfileButton({ user }) {
       {showMenu && (
         <div className='profile-dropdown-menu'>
           <ul className="profile-dropdown">
-            <li><a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'>Github</a></li>
-            <li><a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'>Github</a></li>
-            <li><a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'>Github</a></li>
-            <li><a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'>Github</a></li>
-            <li><a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'>Github</a></li>
-            <li><a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'>Github</a></li>
+            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
+            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
+            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
+            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
+            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
+            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
             <li className='dropdown-nav' onClick={logout}>Logout</li>
           </ul>
         </div>
