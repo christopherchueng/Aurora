@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { createTrack, getOneTrack } from "../../store/trackReducer";
+import { getOneTrack, updateTrack } from "../../store/trackReducer";
 import { genres } from "../../utils/genreData";
 import ErrorMessage from '../FormTemplate/ErrorMessage'
 import './UpdateTrackForm.css'
@@ -64,6 +64,7 @@ const UpdateTrackForm = () => {
         setHasSubmitted(true);
 
         const payload = {
+            trackId,
             title,
             description,
             genre,
@@ -72,7 +73,7 @@ const UpdateTrackForm = () => {
             userId: user.id
         }
 
-        const track = await dispatch(createTrack(payload))
+        const track = await dispatch(updateTrack(payload))
         if (track) {
             setErrors({});
             setHasSubmitted(false)
@@ -85,11 +86,6 @@ const UpdateTrackForm = () => {
         setTrackPath('');
         setImagePath('');
         setErrors({})
-    }
-
-    const updateTrackFile = (e) => {
-        const file = e.target.files[0];
-        if (file) setTrackPath(file)
     }
 
     const updateImageFile = (e) => {
@@ -149,7 +145,7 @@ const UpdateTrackForm = () => {
                                 {/* -------------------- PHOTO PREVIEW -------------------- */}
                                 <div id='edit-right-middle' className='cover-photo-ctn'>
                                     <div className='edit-preview-ctn'>
-                                        <img className='edit-photo-preview' src={imagePath}></img>
+                                        {typeof imagePath === 'object' ? <span className="name-ellipsis">{imagePath.name}</span> : <img className='edit-photo-preview' src={imagePath}></img>}
                                         <label className="imagePath-input-label">
                                             {/* {imagePath ? imagePath : 'No image chosen'} */}
                                             <div>

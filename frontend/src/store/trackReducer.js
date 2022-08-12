@@ -104,15 +104,18 @@ export const createTrack = (payload) => async (dispatch) => {
     return track;
 }
 
-export const updateTrack = (payload, trackId) => async (dispatch) => {
-    const { title, description, imagePath, trackPath, genre, userId } = payload
+export const updateTrack = (payload) => async (dispatch) => {
+    const { trackId, title, description, imagePath, trackPath, genre, userId } = payload
+
+    console.log('here is trackPath in thunk', trackPath)
 
     const formData = new FormData()
     formData.append('title', title)
     formData.append('description', description)
     formData.append('genre', genre)
+    formData.append('trackPath', trackPath)
     formData.append('userId', userId)
-    formData.append('files', [trackPath, imagePath])
+    formData.append('image', imagePath)
 
     const response = await csrfFetch(`/api/tracks/${trackId}`, {
         method: 'PUT',

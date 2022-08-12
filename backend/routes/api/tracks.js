@@ -86,12 +86,7 @@ router.post('/', requireAuth, multipleMulterUpload('files'), asyncHandler(async 
 }))
 
 // Update a track
-router.put('/:trackId',
-    requireAuth,
-    singleMulterUpload('image'),
-    singleMulterUpload('track'),
-    multipleMulterUpload('files'),
-    asyncHandler(async (req, res) => {
+router.put('/:trackId', requireAuth, singleMulterUpload('image'), asyncHandler(async (req, res) => {
 
     const trackId = parseInt(req.params.trackId, 10);
     const currTrack = await Track.findByPk(trackId);
@@ -100,11 +95,14 @@ router.put('/:trackId',
         title,
         description,
         genre,
+        trackPath,
         userId
     } = req.body
+    const { image } = req.body
+
+    console.log('here is the tradckPath why are you empty', trackPath)
+
     let imagePath
-    let trackPath
-    const {image, track} = req.body
 
     /* Cases:
     - User replaces both image and track
@@ -112,19 +110,9 @@ router.put('/:trackId',
     - User replaces image, but track remains the same
     */
 
-    console.log('req.file here', req.file)
-
-    if (req.files) {
-        const mediaFiles = await multiplePublicFileUpload(req.files)
-        trackPath = mediaFiles[0]
-        imagePath = mediaFiles[1]
-    }
-    if (req.file && req.file.filename === 'image') {
+    if (req.file) {
         imagePath = await singlePublicFileUpload(req.file)
-        trackPath = track
-    }
-    if (req.file && req.file.filename === 'audio') {
-        trackPath = await singlePublicFileUpload(req.file)
+    } else {
         imagePath = image
     }
 

@@ -91,6 +91,15 @@
     border-radius: 5px;
 }
 
+.create-name-ellipsis {
+    text-align: center;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+}
+
 .title-div > input,
 .trackPath-div > input,
 .genre-div > select,

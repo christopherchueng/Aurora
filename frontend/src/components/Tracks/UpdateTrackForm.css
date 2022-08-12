@@ -100,6 +100,15 @@
     border-radius: 5px;
 }
 
+.name-ellipsis {
+    text-align: center;
+    width: 147px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+}
+
 .fa-camera {
     padding-right: 10px;
 }
