@@ -152,7 +152,7 @@ const CreateTrackForm = ({tracks}) => {
                             </div>
                             <div id='form-right'>
                                 {/* -------------------- PHOTO PREVIEW -------------------- */}
-                                <div id='right-middle' className='cover-photo-ctn'>
+                                <div id='right-middle' className='create-cover-photo-ctn'>
                                     <div className='preview-ctn'>
                                         {imagePath ? imagePath.name : 'No image chosen'}
                                         <label className="imagePath-input-label">

@@ -85,7 +85,7 @@
 }
 
 .preview-ctn,
-.cover-photo-ctn > img {
+.create-cover-photo-ctn > img {
     width: 395px;
     height: 395px;
     border-radius: 5px;
