@@ -101,11 +101,11 @@ const UpdateTrackForm = () => {
     console.log('imagex path', imagePath)
 
     return (
-        <div className='create-track-form-ctn'>
-            <div className='create-track-content'>
+        <div className='edit-track-form-ctn'>
+            <div className='edit-track-content'>
                 <h1>Edit Track</h1>
                 <span className="asterisk-required"><span className='req'>*</span>All required fields are marked with an asterisk.</span>
-                <div className='track-form-content'>
+                <div className='edit-track-form-content'>
                     <form onSubmit={handleSubmit}>
                         <div id='form-top'>
                             <div id='form-left'>
@@ -122,27 +122,6 @@ const UpdateTrackForm = () => {
                                     />
                                     <div className='error-div'>
                                         {hasSubmitted && <ErrorMessage error={errors.title} />}
-                                    </div>
-                                </div>
-
-                                {/* -------------------- TRACK PATH -------------------- */}
-                                <div className='trackPath-div'>
-                                    <span>Track<span className='req'>*</span></span>
-                                    <label
-                                        className='trackPath-input-label'
-                                        style={{border: errors.trackPath && hasSubmitted ? '1px solid rgb(246, 94, 94)' : ''}}
-                                    >
-                                        {typeof trackPath === 'object' ? trackPath.name : trackPath.length === 0 ? 'No track chosen' : `https://aa-aurora.herokuapp.com/tracks/${track[trackId]?.id}`}
-                                        <input
-                                            name='trackPath'
-                                            type='file'
-                                            placeholder='Insert a track link'
-                                            onChange={updateTrackFile}
-                                            hidden
-                                        />
-                                    </label>
-                                    <div className='error-div'>
-                                        {hasSubmitted && <ErrorMessage error={errors.trackPath}/>}
                                     </div>
                                 </div>
                                 {/* -------------------- GENRE -------------------- */}
@@ -168,9 +147,9 @@ const UpdateTrackForm = () => {
                             </div>
                             <div id='form-right'>
                                 {/* -------------------- PHOTO PREVIEW -------------------- */}
-                                <div id='right-middle' className='cover-photo-ctn'>
-                                    <div className='preview-ctn'>
-                                        <img className='photo-preview' src={imagePath}></img>
+                                <div id='edit-right-middle' className='cover-photo-ctn'>
+                                    <div className='edit-preview-ctn'>
+                                        <img className='edit-photo-preview' src={imagePath}></img>
                                         <label className="imagePath-input-label">
                                             {/* {imagePath ? imagePath : 'No image chosen'} */}
                                             <div>
@@ -191,7 +170,7 @@ const UpdateTrackForm = () => {
                             </div>
                         </div>
                         {/* -------------------- DESCRIPTION -------------------- */}
-                        <div className='description-div'>
+                        <div className='edit-description-div'>
                             <span>Description</span>
                             <textarea
                                 name='description'

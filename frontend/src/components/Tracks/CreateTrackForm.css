@@ -71,8 +71,9 @@
 
 #right-middle {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    margin-top: 30px;
 }
 
 .preview-ctn {
@@ -81,13 +82,13 @@
     align-items: center;
     position: relative;
     border: 1px solid white;
-    width: 200px;
-    height: 200px;
 }
 
+.preview-ctn,
 .cover-photo-ctn > img {
-    width: 200px;
-    height: 200px;
+    width: 395px;
+    height: 395px;
+    border-radius: 5px;
 }
 
 .title-div > input,

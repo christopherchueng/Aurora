@@ -1,4 +1,4 @@
-.create-track-form-ctn {
+.edit-track-form-ctn {
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -8,8 +8,8 @@
     padding-top: 75px;
 }
 
-.create-track-content > h1 {
-    width: 900px;
+.edit-track-content > h1 {
+    width: 718px;
     border-bottom: 1px solid white;
 }
 
@@ -20,9 +20,9 @@
     color: rgba(255, 255, 255, 0.75)
 }
 
-.track-form-content,
-.description-div {
-    width: 900px;
+.edit-track-form-content,
+.edit-description-div {
+    width: 718px;
     display: flex;
     flex-direction: column;
 }
@@ -30,21 +30,25 @@
 #form-top {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 #top-row,
 #middle-row {
     display: flex;
     flex-direction: row;
-    width: 900px;
+    width: 718px;
 }
 
 .title-div,
-.trackPath-div,
 .imagePath-div,
-.genre-div-ctn,
-#right-middle {
+.genre-div-ctn {
     width: 400px;
+    padding-top: 35px;
+}
+
+#edit-right-middle {
+    width: 100%;
     padding-top: 35px;
 }
 
@@ -52,15 +56,14 @@
     display: flex;
     flex-direction: column;
 }
-.title-div {
-    padding-right: 100px;
-}
+/* .title-div {
+    padding-right: 35px;
+} */
 
 .title-div > span,
-.trackPath-div > span,
 .imagePath-div > span,
 .genre-div > span,
-.description-div > span {
+.edit-description-div > span {
     padding-bottom: 20px;
     font-size: 16pt;
 }
@@ -71,29 +74,30 @@
     justify-content: space-around;
     width: 400px;
     height: 400px;
-    padding-right: 100px;
+    /* padding-right: 100px; */
 }
 
 
-#right-middle {
+#edit-right-middle {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-top: 44px;
 }
 
-.preview-ctn {
+.edit-preview-ctn {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     border: 1px solid white;
-    width: 382px;
-    height: 382px;
 }
 
-.photo-preview {
-    width: 382px;
-    height: 382px;
+.edit-preview-ctn,
+.edit-photo-preview {
+    width: 212px;
+    height: 212px;
+    border-radius: 5px;
 }
 
 .fa-camera {
@@ -118,11 +122,9 @@
 }
 
 .title-div > input,
-.trackPath-div > input,
 .genre-div > select,
 .imagePath-div > input,
-.description-div > textarea,
-.trackPath-input-label {
+.edit-description-div > textarea {
     border: 1px solid white;
     background-color: transparent;
     height: 40px;
@@ -138,20 +140,17 @@
 }
 
 .title-div > input::placeholder,
-.trackPath-div > input::placeholder,
 .imagePath-div > input::placeholder {
     color: rgba(255, 255, 255, 0.8);
     font-size: 10pt;
 }
 
 .title-div,
-.genre-div,
-.trackPath-div {
+.genre-div {
     display: flex;
     flex-direction: column;
 }
 
-.trackPath-input-label,
 .imagePath-input-label {
     display: flex;
     align-items: center;
@@ -169,11 +168,11 @@
     padding: 0;
 }
 
-.description-div {
+.edit-description-div {
     padding-top: 50px;
 }
 
-.description-div > textarea {
+.edit-description-div > textarea {
     height: 150px;
     padding: 15px 0 0 15px;
     resize: none;
