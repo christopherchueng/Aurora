@@ -85,68 +85,47 @@ const CreateTrackForm = ({tracks}) => {
                 <span className="asterisk-required"><span className='req'>*</span>All required fields are marked with an asterisk.</span>
                 <div className='track-form-content'>
                     <form onSubmit={handleSubmit}>
-                        <div id='top-row'>
-                            {/* -------------------- TITLE -------------------- */}
-                            <div className='title-div'>
-                                <span>Title<span className='req'>*</span></span>
-                                <input
-                                    name='title'
-                                    type='text'
-                                    value={title}
-                                    placeholder='Title'
-                                    onChange={e => setTitle(e.target.value)}
-                                />
-                                <div className='error-div'>
-                                    {hasSubmitted && <ErrorMessage error={errors.title} />}
-                                </div>
-                            </div>
-
-                            {/* -------------------- TRACK PATH -------------------- */}
-                            <div className='trackPath-div'>
-                                <span>Track<span className='req'>*</span></span>
-                                <label className='trackPath-input-label'>
-                                    {trackPath ? trackPath.name : 'No track chosen'}
+                        <div id='form-top'>
+                            <div id='form-left'>
+                                {/* -------------------- TITLE -------------------- */}
+                                <div className='title-div'>
+                                    <span>Title<span className='req'>*</span></span>
                                     <input
-                                        name='trackPath'
-                                        type='file'
-                                        placeholder='Insert a track link'
-                                        onChange={updateTrackFile}
-                                        hidden
+                                        name='title'
+                                        type='text'
+                                        value={title}
+                                        placeholder='Title'
+                                        onChange={e => setTitle(e.target.value)}
                                     />
-                                </label>
-                                <div className='error-div'>
-                                    {hasSubmitted && <ErrorMessage error={errors.trackPath}/>}
+                                    <div className='error-div'>
+                                        {hasSubmitted && <ErrorMessage error={errors.title} />}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div id='middle-row'>
-                            <div className='left-middle'>
-                                {/* -------------------- IMAGE PATH -------------------- */}
-                                <div className="imagePath-div">
-                                    <span>Cover photo</span>
-                                    <label className="imagePath-input-label">
-                                        {imagePath ? imagePath.name : 'No image chosen'}
+                                {/* -------------------- TRACK PATH -------------------- */}
+                                <div className='trackPath-div'>
+                                    <span>Track<span className='req'>*</span></span>
+                                    <label className='trackPath-input-label'>
+                                        {trackPath ? trackPath.name : 'No track chosen'}
                                         <input
-                                            name='imagePath'
+                                            name='trackPath'
                                             type='file'
-                                            // alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
-                                            placeholder='Insert an image link'
-                                            onChange={updateImageFile}
+                                            placeholder='Insert a track link'
+                                            onChange={updateTrackFile}
                                             hidden
                                         />
                                     </label>
+                                    <div className='error-div'>
+                                        {hasSubmitted && <ErrorMessage error={errors.trackPath}/>}
+                                    </div>
                                 </div>
-
                                 {/* -------------------- GENRE -------------------- */}
                                 <div className='genre-div-ctn'>
                                     <div className='genre-div'>
                                         <span>Genre<span className='req'>*</span></span>
                                         <select
-                                        name='genre'
-                                        value={genre}
-                                        onChange={e => setGenre(e.target.value)}
-                                        defaultValue='Pick a genre...'
+                                            name='genre'
+                                            value={genre}
+                                            onChange={e => setGenre(e.target.value)}
                                         >
                                             <option value='' disabled>Select a genre...</option>
                                             {genres.map(genre => (
@@ -159,15 +138,30 @@ const CreateTrackForm = ({tracks}) => {
                                     </div>
                                 </div>
                             </div>
-
-                            {/* -------------------- PHOTO PREVIEW -------------------- */}
-                            <div id='right-middle' className='cover-photo-ctn'>
-                                <div className='preview-ctn'>
-                                    {imagePath ? imagePath.name : 'Image name here'}
+                            <div id='form-right'>
+                                {/* -------------------- PHOTO PREVIEW -------------------- */}
+                                <div id='right-middle' className='cover-photo-ctn'>
+                                    <div className='preview-ctn'>
+                                        {imagePath ? imagePath.name : 'No image chosen'}
+                                        <label className="imagePath-input-label">
+                                            {/* {imagePath ? imagePath : 'No image chosen'} */}
+                                            <div>
+                                                <i className="fa-solid fa-camera"></i>
+                                                Upload image
+                                            </div>
+                                            <input
+                                                name='imagePath'
+                                                type='file'
+                                                // alt='https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
+                                                placeholder='Insert an image link'
+                                                onChange={updateImageFile}
+                                                hidden
+                                            />
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         {/* -------------------- DESCRIPTION -------------------- */}
                         <div className='description-div'>
                             <span>Description</span>
@@ -178,10 +172,13 @@ const CreateTrackForm = ({tracks}) => {
                                 onChange={e => setDescription(e.target.value)}
                             />
                         </div>
-                        <div className='create-track-btn'>
-                            <button
-                            type='submit'
-                            >Upload</button>
+                        <div className="update-track-btns">
+                            <div className='cancel-track-btn'>
+                                <button onClick={() => history.push(`/`)}>Cancel</button>
+                            </div>
+                            <div className='create-track-btn'>
+                                <button type='submit'>Upload</button>
+                            </div>
                         </div>
                     </form>
                 </div>

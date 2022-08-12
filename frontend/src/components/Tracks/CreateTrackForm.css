@@ -79,6 +79,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     border: 1px solid white;
     width: 200px;
     height: 200px;
@@ -130,6 +131,11 @@
     align-items: center;
     font-size: 10pt;
     cursor: pointer;
+}
+
+.imagePath-input-label {
+    position: absolute;
+    bottom: 25px;
 }
 
 .error-div {

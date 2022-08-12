@@ -27,12 +27,14 @@ const UpdateTrackForm = () => {
     }, [dispatch])
 
     useEffect(() => {
-        setTitle(track[trackId]?.title)
-        setDescription(track[trackId]?.description)
-        setGenre(track[trackId]?.genre)
-        setTrackPath(track[trackId]?.trackPath)
-        setImagePath(track[trackId]?.imagePath)
-    }, [trackId])
+        if (track[trackId]) {
+            setTitle(track[trackId]?.title)
+            setDescription(track[trackId]?.description)
+            setGenre(track[trackId]?.genre)
+            setTrackPath(track[trackId]?.trackPath)
+            setImagePath(track[trackId]?.imagePath)
+        }
+    }, [track[trackId]])
 
     useEffect(() => {
         const validationErrors = {};
@@ -140,7 +142,6 @@ const UpdateTrackForm = () => {
                                             name='genre'
                                             value={genre}
                                             onChange={e => setGenre(e.target.value)}
-                                            defaultValue='Pick a genre...'
                                         >
                                             <option value='' disabled>Select a genre...</option>
                                             {genres.map(genre => (
