@@ -11,6 +11,14 @@ const { singleMulterUpload, singlePublicFileUpload, multipleMulterUpload, multip
 
 const router = express.Router();
 
+// const checkTrackFile = (track) => {
+//     const acceptedAudioFiles = ['.mp3', '.aac', '.wav', '.flac']
+//     const file_ext = track.slice(track.lastIndexOf('.'))
+//     if (!acceptedAudioFiles.includes(file_ext)) {
+//         return Promise.reject('Please select a valid file type.')
+//     }
+// }
+
 const trackValidators = [
     check('title')
         .exists({ checkFalsy: true })
@@ -21,8 +29,8 @@ const trackValidators = [
         .withMessage('Please select a genre.'),
     check('trackPath')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide a track.')
-        .isURL({ protocols: false })
+        .withMessage('Please provide a track.'),
+    handleValidationErrors
 ];
 
 router.get('/:trackId', asyncHandler(async (req, res) => {
@@ -54,7 +62,7 @@ router.get('/:trackId/comments', asyncHandler(async (req, res) => {
     return res.json(comments);
 }))
 
-router.post('/', requireAuth, multipleMulterUpload('files'), asyncHandler(async (req, res) => {
+router.post('/', requireAuth, multipleMulterUpload('files'), trackValidators, asyncHandler(async (req, res, next) => {
     const {
         title,
         description,
@@ -67,10 +75,31 @@ router.post('/', requireAuth, multipleMulterUpload('files'), asyncHandler(async 
 
     const trackPath = mediaFiles[0]
 
+    const acceptedAudioFiles = ['.mp3', '.aac', '.wav', '.flac']
+    const acceptedImageFiles = ['.jpg', '.jpeg', '.png', '.webp']
+
+    const trackFileExt = trackPath.slice(trackPath.lastIndexOf('.'))
+
+    if (!acceptedAudioFiles.includes(trackFileExt)) {
+        const err = new Error('Invalid audio file');
+        err.status = 401;
+        err.title = 'Invalid audio file';
+        err.errors = ['Please select a valid file type.'];
+        return next(err);
+    }
+
     if (!mediaFiles[1]) {
         imagePath = 'https://aurora-tracks.s3.amazonaws.com/Aurora-Tracks/default-imagePath.png'
     } else {
         imagePath = mediaFiles[1]
+        const imageFileExt = imagePath.slice(imagePath.lastIndexOf('.'))
+        if (!acceptedImageFiles.includes(imageFileExt)) {
+            const err = new Error('Invalid image file');
+            err.status = 401;
+            err.title = 'Invalid image file';
+            err.errors = ['Please select a valid file type.'];
+            return next(err);
+        }
     }
 
     const newTrack = await Track.create({
@@ -86,7 +115,7 @@ router.post('/', requireAuth, multipleMulterUpload('files'), asyncHandler(async 
 }))
 
 // Update a track
-router.put('/:trackId', requireAuth, singleMulterUpload('image'), asyncHandler(async (req, res) => {
+router.put('/:trackId', requireAuth, singleMulterUpload('image'), trackValidators, asyncHandler(async (req, res, next) => {
 
     const trackId = parseInt(req.params.trackId, 10);
     const currTrack = await Track.findByPk(trackId);
@@ -100,23 +129,23 @@ router.put('/:trackId', requireAuth, singleMulterUpload('image'), asyncHandler(a
     } = req.body
     const { image } = req.body
 
-    console.log('here is the tradckPath why are you empty', trackPath)
+    const acceptedImageFiles = ['.jpg', '.jpeg', '.png', '.webp']
 
     let imagePath
 
-    /* Cases:
-    - User replaces both image and track
-    - User replaces track, but image remains the same
-    - User replaces image, but track remains the same
-    */
-
     if (req.file) {
         imagePath = await singlePublicFileUpload(req.file)
+        const imageFileExt = imagePath.slice(imagePath.lastIndexOf('.'))
+        if (!acceptedImageFiles.includes(imageFileExt)) {
+            const err = new Error('Invalid image file');
+            err.status = 401;
+            err.title = 'Invalid image file';
+            err.errors = ['Please select a valid file type.'];
+            return next(err);
+        }
     } else {
         imagePath = image
     }
-
-    // console.log('What are we getting from the frontend?', req.body)
 
     await currTrack.update({
         title,

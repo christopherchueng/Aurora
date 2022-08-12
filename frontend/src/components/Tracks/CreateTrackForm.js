@@ -38,10 +38,13 @@ const CreateTrackForm = ({tracks}) => {
         if (!trackPath) {
             validationErrors.trackPath = 'Please provide a track.'
         }
+        if (imagePath.type && !imagePath.type.includes('image')) {
+            validationErrors.imagePath = 'Please select a valid file.'
+        }
 
         setErrors(validationErrors);
 
-    }, [title, genre, trackPath])
+    }, [title, genre, trackPath, imagePath])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,20 +59,19 @@ const CreateTrackForm = ({tracks}) => {
             userId: user.id
         }
 
-        const track = await dispatch(createTrack(payload))
-        if (track) {
+        const data = await dispatch(createTrack(payload))
+        if (data && data.errors) {
+            setErrors(data)
+        } else {
+            setTitle('')
+            setDescription('');
+            setGenre('');
+            setTrackPath('');
+            setImagePath('');
             setErrors({});
             setHasSubmitted(false)
-            setTrack(track);
             history.push(`/tracks/${track.id}`)
         }
-
-        setTitle('');
-        setDescription('');
-        setGenre('');
-        setTrackPath('');
-        setImagePath('');
-        setErrors({})
     }
 
     const updateTrackFile = (e) => {
@@ -150,7 +152,7 @@ const CreateTrackForm = ({tracks}) => {
                             <div id='form-right'>
                                 {/* -------------------- PHOTO PREVIEW -------------------- */}
                                 <div id='right-middle' className='create-cover-photo-ctn'>
-                                    <div className='preview-ctn'>
+                                    <div className='preview-ctn' style={{border: errors.imagePath && hasSubmitted ? '1px solid rgb(246, 94, 94)' : ''}}>
                                         {imagePath ? <span className="create-name-ellipsis">{imagePath.name}</span> : 'No image chosen'}
                                         <label className="imagePath-input-label">
                                             {/* {imagePath ? imagePath : 'No image chosen'} */}
@@ -167,6 +169,9 @@ const CreateTrackForm = ({tracks}) => {
                                                 hidden
                                             />
                                         </label>
+                                    </div>
+                                    <div className='error-div photo-preview-error'>
+                                        {hasSubmitted && <ErrorMessage error={errors.imagePath} />}
                                     </div>
                                 </div>
                             </div>

@@ -71,6 +71,7 @@
 
 #right-middle {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     margin-top: 30px;
@@ -157,6 +158,10 @@
 
 .error-div > .error-message {
     padding: 0;
+}
+
+.photo-preview-error {
+    text-align: center;
 }
 
 .description-div {

@@ -80,9 +80,14 @@
 
 #edit-right-middle {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
     margin-top: 44px;
+}
+
+#edit-right-middle .error-div {
+    width: 212px;
 }
 
 .edit-preview-ctn {

@@ -96,9 +96,15 @@ export const createTrack = (payload) => async (dispatch) => {
         body: formData
     })
 
-    const track = await response.json();
-    dispatch(addTrack(track))
-    return track;
+    if (response.ok) {
+        const track = await response.json();
+        dispatch(addTrack(track))
+    } else if (response.status < 500) {
+        const data = await response.json()
+        return data
+    } else {
+        return ['An error occurred. Please try again.']
+    }
 }
 
 export const updateTrack = (payload) => async (dispatch) => {
@@ -118,9 +124,15 @@ export const updateTrack = (payload) => async (dispatch) => {
         body: formData
     })
 
-    const track = await response.json();
-    dispatch(editTrack(track));
-    return track;
+    if (response.ok) {
+        const track = await response.json();
+        dispatch(editTrack(track));
+    } else if (response.status < 500) {
+        const data = await response.json()
+        return data
+    } else {
+        return ['An error occurred. Please try again.']
+    }
 }
 
 export const removeTrack = (track) => async (dispatch) => {
