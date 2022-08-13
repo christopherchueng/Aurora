@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
+import DemoUser from "../DemoUser";
 import './SignupForm.css';
 
 function SignupForm() {
@@ -22,56 +23,69 @@ function SignupForm() {
           if (data && data.errors) setErrors(data.errors);
         });
     }
-    return setErrors(['Confirm Password field and Password field must match']);
+    return setErrors(["'Confirm Password' and 'Password' field do not match."]);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <span>Sign Up</span>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-      <div className='signup-form'>
-        <div className='signup-email-ctn'>
-          <p>Email</p>
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className='signup-username-ctn'>
-          <p>Username</p>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div className='signup-password-ctn'>
-          <p>Password</p>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className='signup-cpassword-ctn'>
-          <p>Confirm Password</p>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Sign Up</button>
+    <div className="signup-modal">
+      <form onSubmit={handleSubmit} className='signup-form'>
+          <h1>Sign Up</h1>
+          <ul className="signup-error-list">
+            {errors.map((error, idx) => <li key={idx} className='signup-error'>{error}</li>)}
+          </ul>
+        <div className='signup-form'>
+          <div className='signup-email-ctn'>
+            {/* <p>Email</p> */}
+            <input
+              type="text"
+              value={email}
+              placeholder='Email'
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className='signup-username-ctn'>
+            {/* <p>Username</p> */}
+            <input
+              type="text"
+              value={username}
+              placeholder='Username'
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className='signup-password-ctn'>
+            {/* <p>Password</p> */}
+            <input
+              type="password"
+              value={password}
+              placeholder='Password'
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className='signup-cpassword-ctn'>
+            {/* <p>Confirm Password</p> */}
+            <input
+              type="password"
+              value={confirmPassword}
+              placeholder='Confirm password'
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="signup-btns">
+            <div className="signup-btn">
+              <button type="submit">Sign Up</button>
+            </div>
+            <div className='signup-demo'>
+                <DemoUser />
+              </div>
+          </div>
 
-      </div>
-    </form>
+        </div>
+      </form>
+    </div>
   );
 }
 

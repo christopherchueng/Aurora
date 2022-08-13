@@ -252,7 +252,12 @@
     font-size: 48pt;
 }
 
-.remarks-btns > .signupModal-btn,
+.remarks-btns {
+    display: flex;
+    flex-direction: row;
+}
+
+.remarks-btns > .signup-modal-ctn > .signupModal-btn,
 .remarks-btns > .demo-btn {
     background-color: transparent;
     font-size: 12pt;
@@ -266,9 +271,9 @@
     cursor: pointer;
 }
 
-.remarks-btns > .signupModal-btn:hover,
+.remarks-btns > .signup-modal-ctn > .signupModal-btn:hover,
 .remarks-btns > .demo-btn:hover,
-.account-inquiry-span .loginModal-btn:hover {
+.account-inquiry-span > .login-modal-ctn > .loginModal-btn:hover {
     background-color: white;
     color: black;
     transition: color 0.15 ease-in;
@@ -276,6 +281,9 @@
 }
 
 .account-inquiry-span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     font-size: 10pt;
 }
 
