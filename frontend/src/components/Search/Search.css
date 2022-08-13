@@ -1,0 +1,80 @@
+#search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100vw;
+    padding-top: 75px;
+}
+
+.search-text-color {
+    color: #999999;
+}
+
+.search-title-ctn {
+    width: 95%;
+}
+
+.search-title {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+}
+.search-string {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+}
+
+.search-ctn {
+    width: 75%;
+    height: 100%;
+    background-color: white;
+}
+
+.search-content {
+    padding: 10px 60px 20px 0;
+    color: #4E4E4E;
+    transition-duration: 0.3s;
+    transition-property: background-color;
+}
+
+.search-content:hover {
+    /* transition: 0.2 ease-in-out; */
+    background-color: lightgray;
+}
+
+.right-search {
+    width: 100%;
+}
+
+.search-track-info {
+    padding-left: 20px;
+}
+
+.search-content,
+.username-creation-ctn,
+.search-title-genre-ctn {
+    display: flex;
+    flex-direction: row;
+}
+
+.username-creation-ctn,
+.search-title-genre-ctn {
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.search-imagePath > a > img {
+    width: 150px;
+    height: 150px;
+}
+
+.search-track-user {
+    font-size: 10pt;
+}
+
+.search-track-title > a {
+    text-decoration: none;
+    color: black;
+}

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useLocation } from "react-router-dom"
 import { getSearchedTracks } from "../../store/search"
 import SearchResults from "./SearchResults"
+import './Search.css'
 
 const Search = () => {
     const history = useHistory()
@@ -19,10 +20,15 @@ const Search = () => {
 
     useEffect(() => {
         dispatch(getSearchedTracks({keyword}))
-    }, [dispatch])
+    }, [dispatch, search])
 
     return (
         <div id='search-results'>
+            <div className="search-title-ctn">
+                <div className="search-title">
+                    <h1 className="search-string">Search results for "{keyword}</h1><h1>"</h1>
+                </div>
+            </div>
             <div className='search-ctn'>
                 {tracksArr && tracksArr.map(track => (
                     <div key={track.id} className='search-content'>
