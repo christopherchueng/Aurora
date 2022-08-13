@@ -48,8 +48,25 @@
     width: 100%;
 }
 
+.top-right {
+    display: flex;
+    flex-direction: row;
+}
+
+.play-pause-search {
+    display: flex;
+    align-items: center;
+    padding: 5px 0 0 20px;
+}
+
+.search-pause,
+.search-play {
+    color: black;
+}
+
 .search-track-info {
-    padding-left: 20px;
+    width: 100%;
+    padding-left: 5px;
 }
 
 .search-content,
@@ -65,12 +82,17 @@
     margin-bottom: 5px;
 }
 
+.username-creation-ctn {
+    padding-top: 10px;
+}
+
 .search-imagePath > a > img {
     width: 150px;
     height: 150px;
 }
 
-.search-track-user {
+.search-track-user,
+.search-track-createDate {
     font-size: 10pt;
 }
 
