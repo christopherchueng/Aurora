@@ -6,24 +6,35 @@
     align-items: center;
 }
 
-.delete-confirm {
+.delete-ctn {
     width: 400px;
+    height: 150px;
 }
 
+.delete-confirm {
+    width: 400px;
+    color: #4E4E4E;
+}
+
+.delete-track-btns {
+    display: flex;
+    flex-direction: row;
+}
+
+.cancel-btn,
 .delete-track-ctn > button {
-    margin: 10px 0;
-    border: 1px solid white;
+    margin: 10px 10px;
+    border: 1px solid #999999;
     background-color: transparent;
     border-radius: 5px;
-    color: white;
+    color: #4E4E4E;
     width: 70px;
     height: 37px;
     cursor: pointer;
 }
 
+.cancel-btn:hover,
 .delete-track-ctn > button:hover {
-    background-color: white;
-    color: black;
-    transition: color 0.15 ease-in;
-    transition: background-color 0.15s ease-in;
+    border: 1px solid white;
+    transition: 0.2s ease;
 }

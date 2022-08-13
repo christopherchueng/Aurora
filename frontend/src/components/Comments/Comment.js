@@ -14,7 +14,6 @@ const Comment = ({ comment }) => {
     const [className, setClassName] = useState('');
     const [messageCount, setMessageCount] = useState(0);
     const [isEditing, setIsEditing] = useState(false)
-    const [showActions, setShowActions] = useState(false)
 
     useEffect(() => {
         setMessageCount(comment?.message?.length)
@@ -29,7 +28,7 @@ const Comment = ({ comment }) => {
     }
 
     return (
-        <div className='comment-ctn' onMouseEnter={() => setShowActions(true)} onMouseLeave={() => setShowActions(false)}>
+        <div className='comment-ctn'>
             {isEditing ?
             <UpdateCommentForm comment={comment} setIsEditing={setIsEditing} />
             :
@@ -48,17 +47,14 @@ const Comment = ({ comment }) => {
                     </div>
                     {comment.userId === user?.id &&
                         <div className='actionBtn-ctn'>
-                            {showActions &&
-                            <>
-                                <div className='edit-btn-ctn'>
-                                    <button onClick={() => setIsEditing(!isEditing)}>
-                                        <span className="fa-solid fa-pen"></span>
-                                    </button>
-                                </div>
-                                <div className='delete-btn-ctn'>
-                                    <DeleteCommentModal commentId={comment?.id} />
-                                </div>
-                            </>}
+                            <div className='edit-btn-ctn'>
+                                <button onClick={() => setIsEditing(!isEditing)}>
+                                    <span className="fa-solid fa-pen"></span>
+                                </button>
+                            </div>
+                            <div className='delete-btn-ctn'>
+                                <DeleteCommentModal commentId={comment?.id} />
+                            </div>
                         </div>
                     }
                 </div>

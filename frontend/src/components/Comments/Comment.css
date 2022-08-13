@@ -6,6 +6,7 @@
 }
 
 .comment-ctn > p {
+    text-align: left;
     word-break: break-all;
 }
 

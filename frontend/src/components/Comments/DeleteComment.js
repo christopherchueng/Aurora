@@ -23,8 +23,13 @@ const DeleteComment = ({commentId, setShowModal}) => {
                 <div className='delete-cmt-confirm'>
                     <p>Are you sure you want to delete this comment?</p>
                 </div>
-                <div className='delete-cmt-ctn'>
-                    <button onClick={onDelete}>Delete</button>
+                <div className="delete-cmt-btns">
+                    <div className='cancel-btn-ctn'>
+                        <button className='cancel-btn' onClick={() => setShowModal(false)}>Cancel</button>
+                    </div>
+                    <div className='delete-cmt-ctn'>
+                        <button onClick={onDelete}>Delete</button>
+                    </div>
                 </div>
             </div>
         </>

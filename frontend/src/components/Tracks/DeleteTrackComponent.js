@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import './DeleteTrackComponent.css'
 
-const DeleteTrackComponent = ({ showModal }) => {
+const DeleteTrackComponent = ({ showModal, setShowModal }) => {
     const { trackId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -19,22 +19,19 @@ const DeleteTrackComponent = ({ showModal }) => {
         history.push('/')
     }
 
-    // const cancelClick = (e) => {
-        // setShowModal(false);
-    // }
-
     return (
         <>
             <div className='delete-ctn'>
                 <div className='delete-confirm'>
                     <p>Are you sure you want to delete this track?</p>
                 </div>
-                {/* <div className='cancel-btn-ctn'>
-                    <button className='cancel-btn' onClick={cancelClick}>Cancel</button>
-                </div> */}
-                <div className='delete-track-ctn'>
-                    <button onClick={onDelete}>Delete</button>
-
+                <div className="delete-track-btns">
+                    <div className='cancel-btn-ctn'>
+                        <button className='cancel-btn' onClick={() => setShowModal(false)}>Cancel</button>
+                    </div>
+                    <div className='delete-track-ctn'>
+                        <button onClick={onDelete}>Delete</button>
+                    </div>
                 </div>
             </div>
         </>
