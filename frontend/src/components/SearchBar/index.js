@@ -12,8 +12,6 @@ const SearchBar = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-
-        await dispatch(getSearchedTracks({keyword}))
         history.push(`/search?q=${keyword}`)
     }
 

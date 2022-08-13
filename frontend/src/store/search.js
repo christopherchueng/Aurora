@@ -22,7 +22,7 @@ const searchReducer = (state = initialState, action) => {
     let newState = {}
     switch (action.type) {
         case LOAD_SEARCHED_TRACKS:
-            newState = { ...state, entries: { ...state.entries }}
+            newState = { ...state, entries: { }}
             action.tracks.forEach(track => newState.entries[track.id] = track)
             return newState
         default:
