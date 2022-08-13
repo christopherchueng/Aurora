@@ -8,7 +8,6 @@ const asyncHandler = require('express-async-handler');
 const { validationResult } = require('express-validator')
 const { handleValidationErrors } = require('../../utils/validation');
 const { singleMulterUpload, singlePublicFileUpload, multipleMulterUpload, multiplePublicFileUpload } = require('../../awsS3');
-const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -48,26 +47,6 @@ router.get('/', asyncHandler(async (req, res) => {
     });
 
     return res.json(tracks);
-}))
-
-// Get searched tracks
-router.get('/search', asyncHandler(async (req, res) => {
-    const tracks = await Track.findAll({
-        where: {
-            [Op.or]: [
-                {
-                    title: {
-                        [Op.iLike]: `%${req.query.searchedInput}%`
-                    }
-                }
-            ]
-        },
-        include: User
-    })
-
-    console.log('IS THIS THE RIGHT TRACKS?!')
-
-    return res.json(tracks)
 }))
 
 // Get all comments under a track

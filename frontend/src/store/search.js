@@ -9,8 +9,8 @@ export const loadSearchedTracks = (tracks) => {
     }
 }
 
-export const getSearchedTracks = () => async (dispatch) => {
-    const response = await csrfFetch('/api/tracks/search')
+export const getSearchedTracks = (payload) => async (dispatch) => {
+    const response = await csrfFetch(`/api/search/${payload.keyword}`)
 
     const tracks = await response.json()
     dispatch(loadSearchedTracks(tracks))
@@ -22,8 +22,8 @@ const searchReducer = (state = initialState, action) => {
     let newState = {}
     switch (action.type) {
         case LOAD_SEARCHED_TRACKS:
-            newState = { ...state, entries: {}}
-            action.tracks.forEach(track => newState.entries[action.track.id] = track)
+            newState = { ...state, entries: { ...state.entries }}
+            action.tracks.forEach(track => newState.entries[track.id] = track)
             return newState
         default:
             return state
