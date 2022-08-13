@@ -4,12 +4,14 @@ import sessionReducer from './session';
 import trackReducer from './trackReducer';
 import commentReducer from './commentReducer';
 import userReducer from './user'
+import searchReducer from './search';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   track: trackReducer,
   comment: commentReducer,
-  user: userReducer
+  user: userReducer,
+  search: searchReducer,
 });
 
 
