@@ -6,6 +6,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import DemoUser from '../DemoUser';
 import './Navigation.css';
+import SearchBar from '../SearchBar';
 
 function Navigation({ isLoaded }){
     const sessionUser = useSelector(state => state.session.user);
@@ -45,6 +46,9 @@ function Navigation({ isLoaded }){
               </div>
             </div>
             <div className='navbar-right'>
+              <div className='searchbar-ctn'>
+                <SearchBar />
+              </div>
               <div className='add-track-ctn'>
                 {sessionUser && <div className='add-track-click'>
                   <NavLink to='/upload'>
