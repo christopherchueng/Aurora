@@ -9,7 +9,8 @@ import CreateTrackForm from "./components/Tracks/CreateTrackForm";
 import UpdateTrackForm from "./components/Tracks/UpdateTrackForm";
 // import TrackIdPage from './components/Tracks/TrackIdPage'
 import Tracks from "./components/Tracks";
-import ErrorPage from "./components/ErrorPage";;
+import ErrorPage from "./components/ErrorPage";import Search from "./components/Search";
+;
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ function App() {
         </Route>
         <Route exact path='/tracks/:trackId/edit'>
           <UpdateTrackForm />
+        </Route>
+        <Route path='/search'>
+          <Search />
         </Route>
         <Route>
           <ErrorPage />
