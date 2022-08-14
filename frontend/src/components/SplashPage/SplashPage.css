@@ -8,7 +8,7 @@
     margin: auto;
     flex-direction: column;
     width: 100vw;
-    height: auto;
+    height: 100%;
     background-color: black;
     color: white;
 }
@@ -17,6 +17,7 @@
     width: 100vw;
     height: 100vh;
     background-image: url('../../../public/images/home-banner.jpg');
+    background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
     justify-content: center;
