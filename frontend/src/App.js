@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/DiscoverPage";
 import CreateTrackForm from "./components/Tracks/CreateTrackForm";
 import UpdateTrackForm from "./components/Tracks/UpdateTrackForm";
-// import TrackIdPage from './components/Tracks/TrackIdPage'
 import Tracks from "./components/Tracks";
 import ErrorPage from "./components/ErrorPage";import Search from "./components/Search";
 ;
@@ -15,6 +14,15 @@ import ErrorPage from "./components/ErrorPage";import Search from "./components/
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [color, setColor] = useState('')
+
+  const path = useLocation().pathname
+
+  useEffect(() => {
+    path === '/' ? setColor('black') : setColor('#272727')
+  }, [path])
+
+  document.body.style.backgroundColor = color
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
