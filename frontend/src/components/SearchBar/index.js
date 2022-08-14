@@ -8,6 +8,7 @@ const SearchBar = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
         history.push(`/search?q=${keyword}`)
+        setKeyword('')
     }
 
     return (
