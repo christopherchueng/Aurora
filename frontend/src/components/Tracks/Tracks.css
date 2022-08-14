@@ -9,6 +9,7 @@
 .media-controls {
     display: flex;
     flex-direction: row;
+    background-color: black;
 }
 
 .track-bar-content {
@@ -53,6 +54,7 @@
     width: 100vw;
     height: auto;
     padding: 40px 0;
+    background-color: black;
 
 }
 

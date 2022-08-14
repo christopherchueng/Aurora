@@ -4,6 +4,7 @@
     flex-direction: column;
     width: 100vw;
     height: auto;
+    background-color: black;
 }
 
 .track-comments {

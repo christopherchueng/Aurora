@@ -3,11 +3,13 @@
     font-family: sans-serif;
 }
 
-html {
+/* html {
     background-color: black;
     color: white;
-}
+} */
 
 body {
     margin: auto;
+    color: white;
+    background-color: black;
 }
