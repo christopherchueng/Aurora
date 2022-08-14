@@ -115,6 +115,10 @@
     width: 100%;
 }
 
+.artist-genre-ctn {
+    padding-top: 10px;
+}
+
 .title-date-ctn {
     padding-top: 30px;
 }
