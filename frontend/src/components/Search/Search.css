@@ -4,6 +4,7 @@
     align-items: flex-end;
     width: 100vw;
     padding-top: 75px;
+    background-color: rgb(44, 44, 44);
 }
 
 .search-text-color {
