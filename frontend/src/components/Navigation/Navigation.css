@@ -24,10 +24,15 @@
 }
 
 .home-logo-click > a,
-.github-logo-click > a {
+.github-logo-click > a,
+.linkedin-logo-click > a,
+.angellist-logo-click > a,
+.portfolio-logo-click > a {
     height: auto;
     display: flex;
     align-items: center;
+    color: white;
+    text-decoration: none;
 }
 
 .navbar-left,
@@ -68,10 +73,13 @@
 }
 
 .home-logo-ctn {
-    padding-right: 30px;
+    padding-right: 25px;
 }
 
-.github-logo-click {
+.github-logo-click,
+.linkedin-logo-click,
+.angellist-logo-click,
+.portfolio-logo-click {
     padding-right: 30px;
 }
 

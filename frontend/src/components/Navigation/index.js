@@ -37,10 +37,31 @@ function Navigation({ isLoaded }){
                   </NavLink>
                 </div>
               </div>
+              <div className='portfolio-logo-ctn'>
+                <div className='portfolio-logo-click'>
+                  <a href='https://christopherchueng.github.io/'>
+                    <i className="fa-solid fa-handshake fa-2xl"></i>
+                  </a>
+                </div>
+              </div>
               <div className='github-logo-ctn'>
                 <div className='github-logo-click'>
                   <a href='https://github.com/christopherchueng/Aurora'>
-                    <img className='github-logo' title='Github' src='/images/github-logo.png'></img>
+                    <i className="fa-brands fa-github fa-2x"></i>
+                  </a>
+                </div>
+              </div>
+              <div className='linkedin-logo-ctn'>
+                <div className='linkedin-logo-click'>
+                  <a href='https://www.linkedin.com/in/christopher-chueng/'>
+                    <i className="fa-brands fa-linkedin fa-2x"></i>
+                  </a>
+                </div>
+              </div>
+              <div className='angellist-logo-ctn'>
+                <div className='angellist-logo-click'>
+                  <a href='https://angel.co/u/christopher-chueng'>
+                    <i className="fab fa-angellist fa-2x"></i>
                   </a>
                 </div>
               </div>
