@@ -48,6 +48,10 @@ const DateConverter = ({date}) => {
             dateDifference(todaysDay, creationDay) !== 0) {
                 return `${dateDifference(todaysDay, creationDay)} days ago`
         }
+        // Same year, same month
+        if (todaysYear === creationYear && todaysMonth === creationMonth) {
+            return '1 month ago'
+        }
         // Same year, different month
         if (todaysYear === creationYear && (dateDifference(todaysMonth, creationMonth) !== 0)) {
             return `${dateDifference(todaysMonth, creationMonth)} months ago`

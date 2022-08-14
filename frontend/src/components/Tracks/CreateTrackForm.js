@@ -15,7 +15,6 @@ const CreateTrackForm = ({tracks}) => {
     const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    const [track, setTrack] = useState()
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -70,7 +69,7 @@ const CreateTrackForm = ({tracks}) => {
             setImagePath('');
             setErrors({});
             setHasSubmitted(false)
-            history.push(`/tracks/${track.id}`)
+            history.push(`/tracks/${data.id}`)
         }
     }
 
@@ -82,6 +81,7 @@ const CreateTrackForm = ({tracks}) => {
     const updateImageFile = (e) => {
         const file = e.target.files[0];
         if (file) setImagePath(file)
+
     }
 
     return (

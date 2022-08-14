@@ -27,9 +27,9 @@ const trackValidators = [
     check('genre')
         .exists({ checkFalsy: true })
         .withMessage('Please select a genre.'),
-    check('trackPath')
-        .exists({ checkFalsy: true })
-        .withMessage('Please provide a track.'),
+    // check('trackPath')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage('Please provide a track.'),
     handleValidationErrors
 ];
 
