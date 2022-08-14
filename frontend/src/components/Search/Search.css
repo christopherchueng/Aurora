@@ -33,7 +33,7 @@
 }
 
 .search-content {
-    padding: 10px 60px 20px 0;
+    padding: 20px 60px 20px 0;
     color: #4E4E4E;
     transition-duration: 0.3s;
     transition-property: background-color;
@@ -56,7 +56,7 @@
 .play-pause-search {
     display: flex;
     align-items: center;
-    padding: 5px 0 0 20px;
+    padding: 5px 0 0 10px;
 }
 
 .search-pause,
