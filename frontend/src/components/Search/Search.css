@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: flex-end;
     width: 100vw;
-    height: auto;
+    height: 90vh;
     padding-top: 75px;
     background-color: #272727;
 }
@@ -45,6 +45,24 @@
 .search-content:hover {
     /* transition: 0.2 ease-in-out; */
     background-color: lightgray;
+}
+
+.no-results-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #999999;
+}
+
+.zero-results-img > img {
+    width: 400px;
+    height: 400px;
+    color: gray;
+}
+
+.zero-results-msgs {
+    text-align: center;
+    padding-bottom: 50px;
 }
 
 .right-search {

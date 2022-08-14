@@ -30,11 +30,23 @@ const Search = () => {
                 </div>
             </div>
             <div className='search-ctn'>
-                {tracksArr && tracksArr.map(track => (
+                {tracksArr.length !== 0
+                ? (tracksArr && tracksArr.map(track => (
                     <div key={track.id} className='search-content'>
                         <SearchResults track={track} />
                     </div>
-                ))}
+                )))
+                :
+                <div className="no-results-content">
+                    <div className='zero-results-img'>
+                        <img src={process.env.PUBLIC_URL + '/images/error-img.png'}></img>
+                    </div>
+                    <div className='zero-results-msgs'>
+                        <p>{`Sorry we didn't find any results for “${keyword}”.`}</p>
+                        <p>Check the spelling, or try a different search.</p>
+                    </div>
+                </div>
+            }
             </div>
         </div>
     )
