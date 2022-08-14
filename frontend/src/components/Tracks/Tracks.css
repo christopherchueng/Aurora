@@ -6,12 +6,6 @@
     height: 100vh;
 }
 
-.media-controls {
-    display: flex;
-    flex-direction: row;
-    background-color: black;
-}
-
 .track-bar-content {
     display: flex;
     flex-direction: column;
@@ -46,6 +40,19 @@
     font-size: 16pt;
 }
 
+.top-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.title-ctn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: black;
+}
+
 .track-info-ctn {
     display: flex;
     justify-content: center;
@@ -65,15 +72,22 @@
     overflow-wrap: break-word;
 }
 
-.track-title,
-.track-artist {
-    width: 150px;
+.track-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
 }
 
-.track-title > h1 {
+.track-title,
+.track-artist {
+    margin-left: 50px;
+}
+
+.track-title > span {
     margin: 0;
-    font-size: 24pt;
-    width: 365px;
+    font-size: 18pt;
+    width: 600px;
 }
 
 .track-artist > p {
@@ -85,16 +99,24 @@
 .media-controls {
     height: 100px;
     width: 100vw;
-    padding-top: 60px;
+    padding-top: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    background-color: black;
 }
 
-.control-left {
+.title-date-ctn,
+.artist-genre-ctn {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.title-date-ctn {
+    padding-top: 30px;
 }
 
 .control-center {
@@ -102,7 +124,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* width: 100%; */
+    width: auto;
+    height: 100px;
+    margin: 0 auto;
 }
 
 .back,
@@ -122,15 +146,13 @@
     padding: 0 40px;
 }
 
-.control-left,
 .control-right {
     display: flex;
     flex-direction: column;
-    /* justify-content: flex-end; */
-    align-items: center;
-    /* padding-right: 80px; */
-    width: 250px;
-    height: 100px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 300px;
+    height: auto;
 }
 
 .volume-ctn,
@@ -141,10 +163,18 @@
     padding: 0 50px;
 }
 
+.delete-cancel-ctn {
+    margin-left: auto;
+}
+.edit-save-ctn {
+    margin-right: auto;
+
+}
+
 .edit-save-ctn > a {
     color: white;
 }
 
-.control-right {
-    justify-content: center;
+.genre-ctn {
+    width: 125px;
 }

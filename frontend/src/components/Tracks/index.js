@@ -138,23 +138,41 @@ const Tracks = () => {
                         <div className='end-time'>{(duration && !isNaN(duration)) && durationFormula(duration)}</div>
                     </div> */}
 
-                    {/* START MEDIA CONTROLS */}
-                    <div className='media-controls'>
-                        <div className='control-left'>
-
-                            {/* ------------------ TITLE ------------------ */}
-                            <div className='track-title'>
-                                <h1>
-                                    {track?.title}
-                                </h1>
+                    <div className='title-ctn'>
+                        <div className='top-info'>
+                            <div className='title-date-ctn'>
+                                {/* ------------------ TITLE ------------------ */}
+                                <div className='track-title'>
+                                    <span>
+                                        {track?.title}
+                                    </span>
+                                </div>
+                                <div className='control-right'>
+                                    {/* ------------------ DATE ------------------ */}
+                                    <div className='date-ctn'>
+                                        <div className='date'>
+                                            <span>{track?.createdAt}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            {/* ------------------ ARTIST ------------------ */}
-                            <div className='track-artist'>
-                                <p>{track?.User?.username}</p>
+                            <div className='artist-genre-ctn'>
+                                {/* ------------------ ARTIST ------------------ */}
+                                <div className='track-artist'>
+                                    <p>{track?.User?.username}</p>
+                                </div>
+                                {/* ------------------ GENRE ------------------ */}
+                                <div className='genre-ctn'>
+                                    <div className='genre'>
+                                        <span>#{track?.genre}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
+                    {/* START MEDIA CONTROLS */}
+                    <div className='media-controls'>
                         {/* START CENTER OF CONTROLS */}
                         {/* ------------------ MEDIA CONTROLS ------------------ */}
                         <div className='control-center'>
@@ -238,14 +256,6 @@ const Tracks = () => {
                             : ""}
                         </div>
                         {/* END CENTER OF MEDIA CONTROLS */}
-                        <div className='control-right'>
-                        {/* ------------------ GENRE ------------------ */}
-                        <div className='genre-ctn'>
-                            <div className='genre'>
-                                <span>#{track?.genre}</span>
-                            </div>
-                        </div>
-                        </div>
                     </div>
                     {/* END MEDIA CONTROLS */}
 
