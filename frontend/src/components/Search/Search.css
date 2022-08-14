@@ -57,12 +57,16 @@
 .zero-results-img > img {
     width: 400px;
     height: 400px;
-    color: gray;
 }
 
 .zero-results-msgs {
     text-align: center;
     padding-bottom: 50px;
+    width: 700px;
+}
+
+.zero-results-msgs > p {
+    word-break: break-word;
 }
 
 .right-search {
