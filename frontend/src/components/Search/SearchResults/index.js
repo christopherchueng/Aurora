@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import DateConverter from '../../DateConverter'
 import '../Search.css'
 
 const SearchResults = ({track}) => {
@@ -43,7 +44,7 @@ const SearchResults = ({track}) => {
                                 {track?.User?.username}
                             </div>
                             <div className="search-track-createDate search-text-color">
-                                {track.createdAt}
+                                <DateConverter date={track.createdAt} />
                             </div>
                         </div>
                         <div className="search-title-genre-ctn">
