@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: flex-end;
     width: 100vw;
+    height: 100%;
     padding-top: 75px;
     background-color: rgb(44, 44, 44);
 }
@@ -38,6 +39,7 @@
     color: #4E4E4E;
     transition-duration: 0.3s;
     transition-property: background-color;
+    height: 150px;
 }
 
 .search-content:hover {
@@ -47,6 +49,7 @@
 
 .right-search {
     width: 100%;
+    height: 100%;
 }
 
 .top-right {
@@ -84,7 +87,7 @@
 }
 
 .username-creation-ctn {
-    padding-top: 10px;
+    padding-top: 7px;
 }
 
 .search-imagePath > a > img {
