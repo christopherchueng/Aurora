@@ -75,6 +75,32 @@
     padding-right: 30px;
 }
 
+/* RIGHT */
+
+.searchbar-ctn {
+    padding-right: 20px;
+}
+
+.search-div {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.searchbar-input {
+    width: 350px;
+    height: 30px;
+    padding: 0 0 0 10px;
+    border: transparent;
+    border-radius: 5px 0 0 5px;
+    background-color: white;
+}
+
+.searchbar-input:focus {
+    outline: none;
+}
+
 .add-track-ctn {
     padding: 0 5px;
 }
@@ -84,6 +110,17 @@
     height: 31px;
     text-decoration: none;
     padding: 0 5px;
+}
+
+.search-btn {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    background-color: white;
+    color: #999999;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0 5px 5px 0;
 }
 
 .home-logo {

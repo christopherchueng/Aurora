@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import './SearchBar.css'
 
 const SearchBar = () => {
     const history = useHistory()
@@ -13,14 +12,19 @@ const SearchBar = () => {
 
     return (
         <div id='searchbar'>
-            <form onSubmit={onSubmit}>
-                <input
-                    type='text'
-                    value={keyword}
-                    placeholder='Search'
-                    onChange={e => setKeyword(e.target.value)}
-                    className='searchbar-input'
-                />
+            <form onSubmit={onSubmit} className='search-div'>
+                <div className='search-input-bar'>
+                    <input
+                        type='text'
+                        value={keyword}
+                        placeholder='Search'
+                        onChange={e => setKeyword(e.target.value)}
+                        className='searchbar-input'
+                    />
+                </div>
+                <button className='search-btn'>
+                    <i className="fa-solid fa-magnifying-glass fa-large"></i>
+                </button>
             </form>
         </div>
     )
