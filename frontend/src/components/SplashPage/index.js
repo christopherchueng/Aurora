@@ -74,10 +74,10 @@ const SplashPage = () => {
                                         <img src={imagePath} className='grid-image'></img>
                                     </NavLink>
                                         <div className='splash-track-title'>
-                                            <Link to={`/tracks/${id}`}>{title}</Link>
+                                            <Link to={`/tracks/${id}`}><span className='truncate-ellipsis'>{title}</span></Link>
                                         </div>
                                     <div className='splash-track-artist'>
-                                        {User?.username}
+                                        <span className='truncate-ellipsis'>{User?.username}</span>
                                     </div>
                                 </li>
                             ))}

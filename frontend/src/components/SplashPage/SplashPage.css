@@ -228,6 +228,23 @@
     opacity: 30%;
 }
 
+.splash-track-title,
+.splash-track-artist {
+    width: 175px;
+}
+
+.truncate-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+}
+
+.splash-track-title > a > span,
+.splash-track-artist > span {
+    display: block;
+}
+
 .splash-track-title > a,
 .splash-track-artist {
     color: lightgray;
