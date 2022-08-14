@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: flex-end;
     width: 100vw;
-    height: 90vh;
+    height: auto;
     padding-top: 75px;
     background-color: #272727;
 }
