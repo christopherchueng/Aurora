@@ -15,10 +15,22 @@
 .add-comment-box {
     width: 800px;
     height: 50px;
-    border: 1px solid black;
-    border-radius: 5px;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 1px solid gray;
     padding: 10px 0 0 10px;
     resize: none;
+    color: white;
+}
+
+.add-comment-box::placeholder {
+    color: white;
+}
+
+.add-comment-box:focus {
+    outline: none;
+    border-bottom: 1px solid white;
+    transition: 0.3s;
 }
 
 /* .add-comment-box::placeholder {

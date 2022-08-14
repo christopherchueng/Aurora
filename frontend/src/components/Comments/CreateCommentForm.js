@@ -47,7 +47,7 @@ const CreateCommentForm = ({trackId, user}) => {
                             placeholder='Add a comment'
                             className='add-comment-box'
                             onChange={e => setMessage(e.target.value)}
-                            onClick={() => setBoxClicked(true)}
+                            onMouseDown={() => setBoxClicked(true)}
                             />
                             {boxClicked
                             ?
