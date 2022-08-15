@@ -30,7 +30,7 @@ const Comment = ({ comment }) => {
     return (
         <div className='comment-ctn'>
             {isEditing ?
-            <UpdateCommentForm comment={comment} setIsEditing={setIsEditing} />
+            <UpdateCommentForm comment={comment} isEditing={isEditing} setIsEditing={setIsEditing} />
             :
             <>
                 <div className='user-comment-ctn'>

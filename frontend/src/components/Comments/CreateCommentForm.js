@@ -47,13 +47,14 @@ const CreateCommentForm = ({trackId, user}) => {
                             placeholder='Add a comment'
                             className='add-comment-box'
                             onChange={e => setMessage(e.target.value)}
-                            onMouseDown={() => setBoxClicked(true)}
+                            onClick={() => setBoxClicked(true)}
+                            style={{borderBottom: messageCount > 280 ? '1px solid rgb(246, 94, 94)' : '1px solid white'}}
                             />
                             {boxClicked
                             ?
                                 <div className='comment-action-ctn'>
                                     {messageCount > 280
-                                    ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
+                                    ?   <div className='char-count-cmt' style={{color: 'rgb(246, 94, 94)', width: '70px'}}>
                                             <span>{messageCount} / 280</span>
                                         </div>
                                     :   <div className='char-count-cmt'>
