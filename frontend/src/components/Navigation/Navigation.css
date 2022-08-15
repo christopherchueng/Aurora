@@ -136,27 +136,31 @@
     height: 31px;
     text-decoration: none;
     padding: 0 5px;
-    transition-duration: 0.3s;
-    transition-property: opacity;
 }
 
 .home-logo {
     width: 41px;
     height: 41px;
-    transition-duration: 0.3s;
-    transition-property: opacity;
 }
 
-.github-logo {
-    width: 33px;
-    height: 33px;
+.add-track-icon,
+.home-logo,
+.fa-handshake,
+.fa-github,
+.fa-linkedin,
+.fa-angellist,
+.profile-btn {
     transition-duration: 0.3s;
     transition-property: opacity;
 }
 
 .add-track-icon:hover,
 .home-logo:hover,
-.github-logo:hover {
+.fa-handshake:hover,
+.fa-github:hover,
+.fa-linkedin:hover,
+.fa-angellist:hover,
+.profile-btn:hover {
     opacity: 40%;
 }
 
@@ -166,8 +170,6 @@
     color: white;
     cursor: pointer;
     padding-left: 20px;
-    transition-duration: 0.3s;
-    transition-property: opacity;
 }
 
 .profile-dropdown-menu {
@@ -178,11 +180,6 @@
     background-color: rgba(0, 0, 0, 0.4);
     width: 150px;
     box-shadow: 10px 20px 50px rgba(0,0,0,0.5);
-}
-
-.profile-btn:hover {
-    opacity: 40%;
-    transition: opacity 0.15s ease-in;
 }
 
 .profile-btn:active,
