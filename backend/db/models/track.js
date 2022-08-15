@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
   Track.associate = function(models) {
-    // associations can be defined here
     Track.belongsTo(models.User, { foreignKey: 'userId' })
+    Track.hasMany(models.Like, { foreignKey: 'trackId', onDelete: 'CASCADE', hooks: true })
     Track.hasMany(models.Comment, { foreignKey: 'trackId', onDelete: 'CASCADE', hooks: true })
   };
   return Track;
