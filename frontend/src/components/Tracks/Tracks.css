@@ -80,7 +80,8 @@
 }
 
 .track-title,
-.track-artist {
+.track-artist,
+.track-like-icon {
     margin-left: 50px;
 }
 
@@ -88,7 +89,8 @@
     margin: 0;
     font-size: 18pt;
     word-break: break-word;
-    width: 480px;
+    min-width: auto;
+    max-width: 480px;
 }
 
 .track-artist > p {
@@ -101,6 +103,7 @@
     background-color: transparent;
     color: white;
     cursor: pointer;
+    padding: 0;
 }
 
 .media-controls {
@@ -122,7 +125,8 @@
     width: 100%;
 }
 
-.artist-genre-ctn {
+.artist-genre-ctn,
+.track-like-icon {
     padding-top: 10px;
 }
 

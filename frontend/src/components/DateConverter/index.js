@@ -36,8 +36,8 @@ const DateConverter = ({date}) => {
             todaysMonth === creationMonth &&
             todaysDay === creationDay &&
             dateDifference(todaysHour, creationHour) === 1) &&
-            creationMin > todaysMin) {
-                return `${60 + dateDifference(todaysMin, creationMin)} minutes ago`
+            (60 + dateDifference(todaysMin, creationMin) < 60 )) {
+                return `${dateDifference(todaysMin, creationMin)} minutes ago`
         }
         // Same year, same month, same day, different hour
         if (todaysYear === creationYear &&
@@ -55,8 +55,8 @@ const DateConverter = ({date}) => {
             todaysYear === creationYear &&
             todaysMonth === creationMonth &&
             dateDifference(todaysDay, creationDay) === 1 &&
-            dateDifference(todaysHour, creationHour) < 24) {
-                return `${24 + dateDifference(todaysHour, creationHour)} hours ago`
+            (24 + dateDifference(todaysHour, creationHour) < 24)) {
+                return `${dateDifference(todaysHour, creationHour)} hours ago`
         }
         // Same year, same month, different day
         if (todaysYear === creationYear &&
@@ -71,7 +71,7 @@ const DateConverter = ({date}) => {
             dateDifference(todaysDay, creationDay) > 1 ||
             todaysYear === creationYear &&
             dateDifference(todaysMonth, creationMonth) === 1 &&
-            dateDifference(todaysDay, creationDay) < 30) {
+            (30 + dateDifference(todaysDay, creationDay) < 30)) {
                 return `${dateDifference(todaysDay, creationDay)} days ago`
         }
         // Same year, same month OR
