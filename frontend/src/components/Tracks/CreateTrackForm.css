@@ -4,7 +4,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #272727;
+    background: linear-gradient(#272727, #1c1c1c, #272727);
+    /* background-color: #272727; */
     padding-top: 75px;
 }
 

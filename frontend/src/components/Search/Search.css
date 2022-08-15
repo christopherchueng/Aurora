@@ -5,7 +5,7 @@
     width: 100vw;
     height: auto;
     padding-top: 75px;
-    background-color: #272727;
+    background: linear-gradient(#272727, #1c1c1c, #272727);
 }
 
 .search-text-color {

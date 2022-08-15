@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background: linear-gradient(#272727 25%, black);
     width: 100vw;
     height: 565px;
 
