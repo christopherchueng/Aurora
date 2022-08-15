@@ -15,7 +15,6 @@ const CreateTrackForm = ({tracks}) => {
     const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    console.log('track', trackPath)
 
     const history = useHistory();
     const dispatch = useDispatch();
