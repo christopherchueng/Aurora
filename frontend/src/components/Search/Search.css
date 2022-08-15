@@ -126,6 +126,13 @@
 .search-imagePath > a > img {
     width: 150px;
     height: 150px;
+    transition-duration: 0.2s;
+    transition-property: opacity;
+}
+
+.search-imagePath > a > img:hover,
+.search-track-title > a:hover {
+    opacity: 40%;
 }
 
 .search-track-user,
@@ -136,4 +143,6 @@
 .search-track-title > a {
     text-decoration: none;
     color: black;
+    transition-duration: 0.2s;
+    transition-property: opacity;
 }
