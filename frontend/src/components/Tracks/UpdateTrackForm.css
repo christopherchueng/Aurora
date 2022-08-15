@@ -128,10 +128,11 @@
     border-radius: 5px;
     color: black;
     font-weight: 700;
+    transition-duration: 0.2s;
+    transition-property: background-color;
 }
 
 .imagePath-input-label:hover {
-    transition: 0.2s;
     background-color: white;
 }
 
@@ -139,12 +140,34 @@
 .genre-div > select,
 .imagePath-div > input,
 .edit-description-div > textarea {
-    border: 1px solid white;
+    border: 1px solid gray;
     background-color: transparent;
     height: 40px;
     border-radius: 5px;
     color: white;
     padding: 0 10px;
+    outline: none;
+}
+
+.title-div > input,
+.genre-div > select,
+.imagePath-div > input,
+.edit-preview-ctn,
+.edit-description-div > textarea {
+    transition-duration: 0.2s;
+    transition-property: border;
+}
+
+.edit-preview-ctn {
+    border: 1px solid gray;
+}
+
+.title-div > input:hover,
+.trackPath-input-label:hover,
+.genre-div > select:hover,
+.edit-preview-ctn:hover,
+.edit-description-div > textarea:hover {
+    border: 1px solid white;
 }
 
 .genre-div > select {
@@ -211,14 +234,14 @@
     font-size: 12pt;
     /* font-weight: bold; */
     color: white;
-    border: 1px solid white;
+    border: 1px solid gray;
     border-radius: 5px;
     width: 125px;
     height: 50px;
     /* margin: 20px 10px; */
     cursor: pointer;
     transition-duration: 0.3s;
-    transition-property: background-color, color;
+    transition-property: border;
 }
 
 .cancel-track-btn {
@@ -227,8 +250,7 @@
 
 .cancel-track-btn > button:hover,
 .create-track-btn > button:hover {
-    background-color: white;
-    color: black;
+    border: 1px solid white;
 }
 
 .char-count-cmt {

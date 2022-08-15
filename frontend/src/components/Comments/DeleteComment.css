@@ -30,8 +30,3 @@
     height: 37px;
     cursor: pointer;
 }
-
-.delete-cmt-ctn > button:hover {
-    border: 1px solid white;
-    transition: 0.2s ease;
-}

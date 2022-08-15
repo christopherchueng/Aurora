@@ -21,6 +21,8 @@
     padding: 10px 0 0 10px;
     resize: none;
     color: white;
+    transition-duration: 0.3s;
+    transition-property: color, border-bottom;
 }
 
 .add-comment-box::placeholder {
@@ -31,6 +33,10 @@
     outline: none;
     border-bottom: 1px solid white;
     transition: 0.3s;
+}
+
+.add-comment-box:hover {
+    border-bottom: 1px solid white;
 }
 
 /* .add-comment-box::placeholder {

@@ -146,6 +146,29 @@
     cursor: pointer;
 }
 
+.fa-backward-step,
+.fa-circle-pause,
+.fa-circle-play,
+.fa-forward-step,
+.shuffle,
+.fa-volume-high,
+.fa-pen,
+.fa-trash {
+    transition-duration: 0.2s;
+    transition-property: opacity;
+}
+
+.fa-backward-step:hover,
+.fa-circle-pause:hover,
+.fa-circle-play:hover,
+.fa-forward-step:hover,
+.shuffle:hover,
+.fa-volume-high:hover,
+.fa-pen:hover,
+.fa-trash:hover {
+    opacity: 40%;
+}
+
 .play-ctn {
     padding: 0 40px;
 }
