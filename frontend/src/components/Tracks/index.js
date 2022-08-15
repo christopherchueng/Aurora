@@ -147,6 +147,12 @@ const Tracks = () => {
                                     <span>
                                         {track?.title}
                                     </span>
+                                    <div className='track-like-icon'>
+                                        <button className='like-button'>
+                                            <i className="fa-regular fa-heart fa-xl"></i>
+                                            <i className="fa-solid fa-heart fa-xl"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className='control-right'>
                                     {/* ------------------ DATE ------------------ */}
