@@ -80,7 +80,7 @@ router.post('/', requireAuth, multipleMulterUpload('files'), trackValidators, as
 
     const trackFileExt = trackPath.slice(trackPath.lastIndexOf('.'))
 
-    if (!acceptedAudioFiles.includes(trackFileExt)) {
+    if (!acceptedAudioFiles.includes(trackFileExt.toLowerCase())) {
         const err = new Error('Invalid audio file');
         err.status = 401;
         err.title = 'Invalid audio file';
@@ -93,7 +93,7 @@ router.post('/', requireAuth, multipleMulterUpload('files'), trackValidators, as
     } else {
         imagePath = mediaFiles[1]
         const imageFileExt = imagePath.slice(imagePath.lastIndexOf('.'))
-        if (!acceptedImageFiles.includes(imageFileExt)) {
+        if (!acceptedImageFiles.includes(imageFileExt.toLowerCase())) {
             const err = new Error('Invalid image file');
             err.status = 401;
             err.title = 'Invalid image file';
@@ -136,7 +136,7 @@ router.put('/:trackId', requireAuth, singleMulterUpload('image'), trackValidator
     if (req.file) {
         imagePath = await singlePublicFileUpload(req.file)
         const imageFileExt = imagePath.slice(imagePath.lastIndexOf('.'))
-        if (!acceptedImageFiles.includes(imageFileExt)) {
+        if (!acceptedImageFiles.includes(imageFileExt.toLowerCase())) {
             const err = new Error('Invalid image file');
             err.status = 401;
             err.title = 'Invalid image file';

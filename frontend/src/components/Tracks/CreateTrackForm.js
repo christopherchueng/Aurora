@@ -15,6 +15,7 @@ const CreateTrackForm = ({tracks}) => {
     const [imagePath, setImagePath] = useState('')
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
+    console.log('track', trackPath)
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -25,6 +26,13 @@ const CreateTrackForm = ({tracks}) => {
 
     useEffect(() => {
         const validationErrors = {};
+        const acceptedAudioFiles = ['.mp3', '.aac', '.wav', '.flac', '.mpeg']
+        const acceptedImageFiles = ['.jpg', '.jpeg', '.png', '.webp']
+        const trackPathArr = trackPath.name.split('.')
+        const trackType = trackPath.type.split('/')
+        const imagePathArr = imagePath.name.split('.')
+        const imageType = imagePath.type.split('/')
+
         if (!title) {
             validationErrors.title = 'Please provide a title.'
         }
@@ -37,7 +45,17 @@ const CreateTrackForm = ({tracks}) => {
         if (!trackPath) {
             validationErrors.trackPath = 'Please provide a track.'
         }
+        if (trackPath.name &&
+            !acceptedAudioFiles.includes(`.${(trackPathArr[trackPathArr.length - 1]).toLowerCase()}`) &&
+            !acceptedAudioFiles.includes(`.${(trackType[trackType.length - 1]).toLowerCase()}`)) {
+            validationErrors.trackPath = 'Please select a valid file.'
+        }
         if (imagePath.type && !imagePath.type.includes('image')) {
+            validationErrors.imagePath = 'Please select a valid file.'
+        }
+        if (imagePath.name &&
+            !acceptedImageFiles.includes(`.${(imagePathArr[imagePathArr.length - 1]).toLowerCase()}`) &&
+            !acceptedImageFiles.includes(`.${(imageType[imageType.length - 1]).toLowerCase()}`)) {
             validationErrors.imagePath = 'Please select a valid file.'
         }
 

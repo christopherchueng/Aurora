@@ -18,6 +18,7 @@ const UpdateTrackForm = () => {
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { trackId } = useParams()
+    console.log('image', imagePath)
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -42,6 +43,8 @@ const UpdateTrackForm = () => {
 
     useEffect(() => {
         const validationErrors = {};
+        const acceptedImageFiles = ['.jpg', '.jpeg', '.png', '.webp']
+
         if (!title) {
             validationErrors.title = 'Please provide a title.'
         }
@@ -52,6 +55,11 @@ const UpdateTrackForm = () => {
             validationErrors.genre = 'Please select a genre.'
         }
         if (imagePath.type && !imagePath.type.includes('image')) {
+            validationErrors.imagePath = 'Please select a valid file.'
+        }
+        if (imagePath.name &&
+            !acceptedImageFiles.includes(`.${(imagePath.name.split('.')[1]).toLowerCase()}`) &&
+            !acceptedImageFiles.includes(`.${(imagePath.type.split('/')[1]).toLowerCase()}`)) {
             validationErrors.imagePath = 'Please select a valid file.'
         }
 
