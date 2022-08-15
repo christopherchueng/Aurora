@@ -120,15 +120,9 @@
     padding: 0 40px;
 }
 
-.control-left,
+.genre-ctn,
 .control-right {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: flex-end; */
-    align-items: center;
-    /* padding-right: 80px; */
-    width: 250px;
-    height: 100px;
+    width: 100px;
 }
 
 .volume-ctn,

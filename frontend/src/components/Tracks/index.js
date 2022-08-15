@@ -5,6 +5,7 @@ import { getTracks } from '../../store/trackReducer';
 import { useTrackContext } from '../../context/TrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
 import Comments from '../Comments';
+import DateConverter from '../DateConverter';
 import './Tracks.css';
 
 const Tracks = () => {
@@ -151,7 +152,7 @@ const Tracks = () => {
                                     {/* ------------------ DATE ------------------ */}
                                     <div className='date-ctn'>
                                         <div className='date'>
-                                            <span>{track?.createdAt}</span>
+                                            <span><DateConverter date={track?.createdAt} /></span>
                                         </div>
                                     </div>
                                 </div>

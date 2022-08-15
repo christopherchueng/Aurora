@@ -155,8 +155,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    width: 300px;
+    width: auto;
     height: auto;
+}
+
+.genre-ctn,
+.date-ctn {
+    width: 210px;
 }
 
 .volume-ctn,
@@ -177,8 +182,4 @@
 
 .edit-save-ctn > a {
     color: white;
-}
-
-.genre-ctn {
-    width: 125px;
 }
