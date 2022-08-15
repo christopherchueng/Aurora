@@ -56,6 +56,13 @@
     padding: 0 10px;
 }
 
+.signup-email-ctn input:focus,
+.signup-username-ctn input:focus,
+.signup-password-ctn input:focus,
+.signup-cpassword-ctn input:focus {
+    outline: none;
+}
+
 .signup-form button {
     margin: 10px 0;
     border: 1px solid #999999;
@@ -92,9 +99,11 @@
     height: 35px;
     cursor: pointer;
     padding: 0;
+    transition-duration: 0.3s;
+    transition-property: border;
 }
 
+
 .signup-form button:hover {
-    transition: 0.2s;
     border: 1px solid white;
 }

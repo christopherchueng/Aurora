@@ -45,6 +45,11 @@
     padding: 0 10px;
 }
 
+.user-email-ctn input:focus,
+.password-ctn input:focus {
+    outline: none;
+}
+
 /* .user-email-ctn span {
     margin: 20px;
     display: flex;
@@ -68,10 +73,11 @@
     height: 35px;
     cursor: pointer;
     padding: 0;
+    transition-duration: 0.3s;
+    transition-property: border;
 }
 
 .login-form button:hover {
-    transition: 0.2s;
     border: 1px solid white;
 }
 
