@@ -67,7 +67,7 @@ function Navigation({ isLoaded }){
               </div>
             </div>
             <div className='navbar-right'>
-              <div className='searchbar-ctn'>
+              <div className='searchbar-ctn' style={{ paddingRight: sessionUser ? '20px' : '1px'}}>
                 <SearchBar />
               </div>
               <div className='add-track-ctn'>
