@@ -51,8 +51,15 @@ const DateConverter = ({date}) => {
         if (todaysYear === creationYear &&
             todaysMonth === creationMonth &&
             todaysDay === creationDay &&
-            dateDifference(todaysHour, creationHour) !== 0) {
+            dateDifference(todaysHour, creationHour) > 1) {
                 return `${dateDifference(todaysHour, creationHour)} hours ago`
+        }
+        // Same year, same month, different day
+        if (todaysYear === creationYear &&
+            todaysMonth === creationMonth &&
+            dateDifference(todaysDay, creationDay) === 1 &&
+            creationHour > todaysHour) {
+                return `${dateDifference(todaysDay, creationDay)} day ago`
         }
         // Same year, same month, different day
         if (todaysYear === creationYear &&
