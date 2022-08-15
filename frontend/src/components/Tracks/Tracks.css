@@ -161,7 +161,10 @@
 
 .genre-ctn,
 .date-ctn {
+    display: flex;
+    justify-content: flex-end;
     width: 210px;
+    margin-right: 50px;
 }
 
 .volume-ctn,
