@@ -36,12 +36,10 @@ function ProfileButton({ user }) {
       {showMenu && (
         <div className='profile-dropdown-menu'>
           <ul className="profile-dropdown">
+            <a className='dropdown-nav' href='https://christopherchueng.github.io/'><li>Portfolio</li></a>
+            <a className='dropdown-nav' href='https://www.linkedin.com/in/christopher-chueng/'><li>LinkedIn</li></a>
             <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
-            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
-            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
-            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
-            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
-            <a className='dropdown-nav' href='https://github.com/christopherchueng/Aurora'><li>Github</li></a>
+            <a className='dropdown-nav' href='https://angel.co/u/christopher-chueng'><li>AngelList</li></a>
             <li className='dropdown-nav' onClick={logout}>Logout</li>
           </ul>
         </div>
