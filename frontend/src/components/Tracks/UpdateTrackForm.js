@@ -18,7 +18,6 @@ const UpdateTrackForm = () => {
     const [errors, setErrors] = useState({});
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { trackId } = useParams()
-    console.log('image', imagePath)
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -45,6 +44,9 @@ const UpdateTrackForm = () => {
         const validationErrors = {};
         const acceptedImageFiles = ['.jpg', '.jpeg', '.png', '.webp']
 
+        const imagePathArr = imagePath?.name?.split('.')
+        const imageType = imagePath?.type?.split('/')
+
         if (!title) {
             validationErrors.title = 'Please provide a title.'
         }
@@ -58,8 +60,8 @@ const UpdateTrackForm = () => {
             validationErrors.imagePath = 'Please select a valid file.'
         }
         if (imagePath.name &&
-            !acceptedImageFiles.includes(`.${(imagePath.name.split('.')[1]).toLowerCase()}`) &&
-            !acceptedImageFiles.includes(`.${(imagePath.type.split('/')[1]).toLowerCase()}`)) {
+            !acceptedImageFiles.includes(`.${(imagePathArr[imagePathArr.length - 1]).toLowerCase()}`) &&
+            !acceptedImageFiles.includes(`.${(imageType[imageType.length - 1]).toLowerCase()}`)) {
             validationErrors.imagePath = 'Please select a valid file.'
         }
 

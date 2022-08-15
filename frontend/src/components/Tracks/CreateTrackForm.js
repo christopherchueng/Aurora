@@ -27,10 +27,11 @@ const CreateTrackForm = ({tracks}) => {
         const validationErrors = {};
         const acceptedAudioFiles = ['.mp3', '.aac', '.wav', '.flac', '.mpeg']
         const acceptedImageFiles = ['.jpg', '.jpeg', '.png', '.webp']
-        const trackPathArr = trackPath.name.split('.')
-        const trackType = trackPath.type.split('/')
-        const imagePathArr = imagePath.name.split('.')
-        const imageType = imagePath.type.split('/')
+
+        const trackPathArr = trackPath?.name?.split('.')
+        const trackType = trackPath?.type?.split('/')
+        const imagePathArr = imagePath?.name?.split('.')
+        const imageType = imagePath?.type?.split('/')
 
         if (!title) {
             validationErrors.title = 'Please provide a title.'
