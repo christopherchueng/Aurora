@@ -96,6 +96,13 @@
     margin: 0;
 }
 
+.like-button {
+    border: 0;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
 .media-controls {
     height: 100px;
     width: 100vw;
