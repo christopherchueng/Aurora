@@ -25,6 +25,7 @@ const Tracks = () => {
     const { isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
     const [currentSong, setCurrentSong] = useState(track)
     const [isPlaying, setIsPlaying] = useState(false)
+    const [animate, setAnimate] = useState(false)
 
     let tracksArr = Object.values(tracks);
     let shuffledArr = []
@@ -120,17 +121,20 @@ const Tracks = () => {
         console.log('SHUFFLED ARR AFTER', shuffledArr)
     }
 
-    const updateLike = async (e) => {
+    const updateLike = (e) => {
         e.preventDefault()
         if (userLike) {
+            setAnimate(false)
             dispatch(deleteLike(userLike?.id))
         } else {
+            setAnimate(true)
             const payload = {
                 trackId,
                 userId: sessionUser?.id
             }
-            await dispatch(postLike(payload))
+            dispatch(postLike(payload))
         }
+        // setTimeout(() => setAnimate(false), 1000)
     }
 
     return (
@@ -192,8 +196,11 @@ const Tracks = () => {
                                 </div>
                             </div>
                             <div className='track-like-icon'>
-                                <button onClick={updateLike} className='like-button'>
-                                    {userLike ? <i className="fa-solid fa-heart fa-xl liked-icon"></i> : <i className="fa-regular fa-heart fa-xl"></i>
+                                <button
+                                    onClick={updateLike}
+                                    className={animate ? 'like-button' : 'unlike-button'}
+                                >
+                                    {userLike ? <i className="fa-solid fa-heart fa-xl liked-icon"></i> : <i className="fa-regular fa-heart fa-xl unliked-icon"></i>
                                     }
                                 </button>
                                 <span className='like-count'>{likesArr && likesArr.length === 1 ? `1 like` : `${likesArr.length} likes`}</span>

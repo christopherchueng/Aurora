@@ -101,12 +101,19 @@
     color: #F050ED;
 }
 
+.unlike-button,
 .like-button {
     border: 0;
     background-color: transparent;
     color: white;
     cursor: pointer;
     padding: 0;
+}
+
+.like-button {
+    animation-name: bounce;
+    animation-fill-mode: both;
+    animation-duration: 0.6s;
 }
 
 .like-count {
@@ -226,4 +233,22 @@
 
 .edit-save-ctn > a {
     color: white;
+}
+
+@keyframes bounce {
+    0% {
+      transform: translateY(0px);
+    }
+
+    25% {
+      transform: translateY(-25px);
+    }
+
+    35% {
+      transform: translateY(-25px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
 }
