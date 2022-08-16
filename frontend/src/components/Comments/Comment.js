@@ -42,7 +42,7 @@ const Comment = ({ comment }) => {
                     </div>
                 </div>
                 <div className='date-actionBtns-ctn'>
-                    <div className='date-ctn'>
+                    <div className='comment-date-ctn'>
                         <span>{datePosted(comment?.createdAt)}</span>
                     </div>
                     {comment.userId === user?.id &&
