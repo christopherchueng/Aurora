@@ -8,8 +8,23 @@
     background: linear-gradient(#272727, #1c1c1c, #272727);
 }
 
+.no-auth-span {
+    border: 0;
+    background-color: transparent;
+    color: white;
+    padding: 0;
+}
+
+.no-user-heart {
+    color: gray;
+}
+
 .search-text-color {
     color: #999999;
+}
+
+.search-padding {
+    padding-left: 10px;
 }
 
 .search-title-ctn {
@@ -92,8 +107,9 @@
 
 .play-pause-search {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     padding: 5px 0 0 10px;
+    height: auto;
 }
 
 .search-pause,
@@ -141,6 +157,11 @@
     font-size: 10pt;
 }
 
+.search-track-title {
+    max-width: 600px;
+    word-break: break-word;
+}
+
 .search-track-title > a {
     text-decoration: none;
     color: black;
@@ -152,6 +173,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    padding-top: 5px;
 }
 
 .search-like-button {

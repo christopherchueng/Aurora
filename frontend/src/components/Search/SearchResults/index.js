@@ -73,23 +73,23 @@ const SearchResults = ({track}) => {
                                 <Link to={`/tracks/${track?.id}`}>{track.title}</Link>
                             </div>
                             <div className="search-genre search-text-color">
-                                #{track.genre}
+                                <span>#{track.genre}</span>
+                                <div className='search-like-ctn'>
+                                    {sessionUser ?
+                                    <button
+                                        onClick={updateLike}
+                                        className='search-like-button'
+                                    >
+                                        {userLike ? <i className="fa-solid fa-heart fa-large search-like"></i> : <i className="fa-regular fa-heart fa-large search-unlike"></i>
+                                        }
+                                    </button>
+                                    : <button className='no-auth-span'><i className="fa-solid fa-heart fa-large no-user-heart"></i></button>
+                                    }
+                                    <span className='search-like-count search-text-color search-padding'>
+                                        {likesArr && (likesArr.length).toLocaleString()}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div className='search-like-ctn'>
-                            {sessionUser ?
-                            <button
-                                onClick={updateLike}
-                                className='search-like-button'
-                            >
-                                {userLike ? <i className="fa-solid fa-heart fa-large search-like"></i> : <i className="fa-regular fa-heart fa-large search-unlike"></i>
-                                }
-                            </button>
-                            : ''
-                            }
-                            <span className='search-like-count search-text-color' style={{paddingLeft: sessionUser ? '10px' : '0'}}>
-                                {likesArr && (likesArr.length).toLocaleString()}
-                            </span>
                         </div>
                     </div>
                 </div>

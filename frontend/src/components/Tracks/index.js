@@ -204,9 +204,9 @@ const Tracks = () => {
                                     {userLike ? <i className="fa-solid fa-heart fa-xl liked-icon"></i> : <i className="fa-regular fa-heart fa-xl unliked-icon"></i>
                                     }
                                 </button>
-                                : ''
+                                : <button className='no-auth-span'><i className="fa-solid fa-heart fa-xl no-user-heart"></i></button>
                                 }
-                                <span className='like-count' style={{paddingLeft: sessionUser ? '10px' : '0'}}>
+                                <span className='like-count'>
                                     {likesArr && likesArr.length === 1 ? `1 like` : `${(likesArr.length).toLocaleString()} likes`}
                                 </span>
                             </div>
