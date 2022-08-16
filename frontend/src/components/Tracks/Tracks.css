@@ -89,8 +89,7 @@
     margin: 0;
     font-size: 18pt;
     word-break: break-word;
-    min-width: auto;
-    max-width: 480px;
+    max-width: 675px;
 }
 
 .track-artist > p {
