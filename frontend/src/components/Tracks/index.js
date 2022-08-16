@@ -7,6 +7,7 @@ import DeleteTrackModal from './DeleteTrackModal';
 import Comments from '../Comments';
 import DateConverter from '../DateConverter';
 import './Tracks.css';
+import { getLikes } from '../../store/likes';
 
 const Tracks = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,8 @@ const Tracks = () => {
     const { trackId } = useParams();
     const tracks = useSelector(state => state?.track?.entries)
     const sessionUser = useSelector(state => state?.session?.user);
+    const likes = useSelector(state => state?.like?.entries)
+    const likesArr = Object.values(likes)
     const track = tracks[+trackId];
 
     // States
@@ -29,6 +32,7 @@ const Tracks = () => {
 
     useEffect(() => {
         dispatch(getTracks())
+        dispatch(getLikes(trackId))
     }, [dispatch])
 
     useEffect(() => {
@@ -174,6 +178,7 @@ const Tracks = () => {
                                     <i className="fa-regular fa-heart fa-xl"></i>
                                     <i className="fa-solid fa-heart fa-xl"></i>
                                 </button>
+                                <span className='like-count'>{likesArr && likesArr.length === 1 ? `1 like` : `${likesArr.length} likes`}</span>
                             </div>
                         </div>
                     </div>
