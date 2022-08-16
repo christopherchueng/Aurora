@@ -1,7 +1,7 @@
 const DateConverter = ({date}) => {
 
-    const dateDifference = (today, creation) => {
-        return +today - +creation
+    const dateDifference = (start, end) => {
+        return +start - +end
     }
 
     const convertDate = (date) => {
@@ -13,8 +13,12 @@ const DateConverter = ({date}) => {
             todaysMonth === creationMonth &&
             todaysDay === creationDay &&
             todaysHour === creationHour &&
-            dateDifference(todaysMin, creationMin) === 0 &&
-            todaysSec !== creationSec) {
+            dateDifference(todaysMin, creationMin) === 0 ||
+            todaysYear === creationYear &&
+            todaysMonth === creationMonth &&
+            todaysDay === creationDay &&
+            todaysHour === creationHour &&
+            (dateDifference(creationMin, todaysMin) < 60)) {
                 return '<1 minute ago'
         }
         // Same year, same month, same day, same hour, same minutes
@@ -36,8 +40,8 @@ const DateConverter = ({date}) => {
             todaysMonth === creationMonth &&
             todaysDay === creationDay &&
             dateDifference(todaysHour, creationHour) === 1) &&
-            (60 + dateDifference(todaysMin, creationMin) < 60 )) {
-                return `${dateDifference(todaysMin, creationMin)} minutes ago`
+            (dateDifference(creationMin, todaysMin) < 60)) {
+                return `${dateDifference(creationMin, todaysMin)} minutes ago`
         }
         // Same year, same month, same day, different hour
         if (todaysYear === creationYear &&
@@ -55,30 +59,22 @@ const DateConverter = ({date}) => {
             todaysYear === creationYear &&
             todaysMonth === creationMonth &&
             dateDifference(todaysDay, creationDay) === 1 &&
-            (24 + dateDifference(todaysHour, creationHour) < 24)) {
-                return `${dateDifference(todaysHour, creationHour)} hours ago`
+            (dateDifference(creationHour, todaysHour) < 24)) {
+                return `${dateDifference(creationHour, todaysHour)} hours ago`
         }
-        // Same year, same month, different day
-        if (todaysYear === creationYear &&
-            todaysMonth === creationMonth &&
-            dateDifference(todaysDay, creationDay) === 1 &&
-            creationHour > todaysHour) {
-                return `${dateDifference(todaysDay, creationDay)} day ago`
+        // One day ago
+        if (Math.floor(((new Date()) - (new Date(date))) / (1000 * 60 * 60 * 24)) === 1) {
+                return `1 day ago`
         }
-        // Same year, same month, different day
-        if (todaysYear === creationYear &&
-            todaysMonth === creationMonth &&
-            dateDifference(todaysDay, creationDay) > 1 ||
-            todaysYear === creationYear &&
-            dateDifference(todaysMonth, creationMonth) === 1 &&
-            (30 + dateDifference(todaysDay, creationDay) < 30)) {
-                return `${dateDifference(todaysDay, creationDay)} days ago`
+        // Days ago
+        if (Math.floor(((new Date()) - (new Date(date))) / (1000 * 60 * 60 * 24)) < 30) {
+                return `${Math.floor(((new Date()) - (new Date(date))) / (1000 * 60 * 60 * 24))} days ago`
         }
-        // Same year, same month OR
+        // Same year, same month OR different year, one month apart (Dec 2022 and Jan 2023)
         if (todaysYear === creationYear &&
             dateDifference(todaysMonth, creationMonth) === 1 ||
             dateDifference(todaysYear, creationYear) === 1 &&
-            12 + dateDifference(todaysMonth, creationMonth) === 1) {
+            dateDifference(creationMonth, todaysMonth) === 1) {
             return '1 month ago'
         }
         // Same year, different month
@@ -86,8 +82,8 @@ const DateConverter = ({date}) => {
         // If years are one year apart and month difference is less than 12, then return months.
         if (todaysYear === creationYear && (dateDifference(todaysMonth, creationMonth) < 12) ||
             dateDifference(todaysYear, creationYear) === 1 &&
-            (dateDifference(todaysMonth, creationMonth) + 12) < 12) {
-                return `${dateDifference(todaysMonth, creationMonth)} months ago`
+            (dateDifference(creationMonth, todaysMonth)) < 12) {
+                return `${dateDifference(creationMonth, todaysMonth)} months ago`
         }
         // One year apart
         if (dateDifference(todaysYear, creationYear) === 1 && todaysMonth === creationMonth) {
