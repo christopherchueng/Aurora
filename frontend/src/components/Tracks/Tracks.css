@@ -144,6 +144,11 @@
     padding-top: 10px;
 }
 
+.track-like-icon {
+    display: flex;
+    align-items: center;
+}
+
 .title-date-ctn {
     padding-top: 30px;
 }
