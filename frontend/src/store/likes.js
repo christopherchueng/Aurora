@@ -18,10 +18,10 @@ export const addLike = (like) => {
     }
 }
 
-export const removeLike = (like) => {
+export const removeLike = (likeId) => {
     return {
         type: REMOVE_LIKE,
-        like
+        likeId
     }
 }
 
@@ -45,13 +45,13 @@ export const postLike = (payload) => async (dispatch) => {
     }
 }
 
-export const deleteLike = (trackId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/likes/${trackId}`, {
+export const deleteLike = (likeId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/likes/${likeId}`, {
         method: 'DELETE'
     })
 
     if (response.ok) {
-        dispatch(removeLike(trackId))
+        dispatch(removeLike(likeId))
     }
 }
 
@@ -70,7 +70,7 @@ const likeReducer = (state = initialState, action) => {
             return newState
         case REMOVE_LIKE:
             newState = { ...state, entries: { ...state.entries }}
-            delete newState.entries[action.like.id]
+            delete newState.entries[action.likeId]
             return newState
         default:
             return state

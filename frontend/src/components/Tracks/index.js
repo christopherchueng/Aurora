@@ -7,7 +7,7 @@ import DeleteTrackModal from './DeleteTrackModal';
 import Comments from '../Comments';
 import DateConverter from '../DateConverter';
 import './Tracks.css';
-import { getLikes } from '../../store/likes';
+import { deleteLike, getLikes, postLike } from '../../store/likes';
 
 const Tracks = () => {
     const dispatch = useDispatch();
@@ -18,6 +18,8 @@ const Tracks = () => {
     const likes = useSelector(state => state?.like?.entries)
     const likesArr = Object.values(likes)
     const track = tracks[+trackId];
+
+    const userLike = likesArr.find(like => like.trackId === +trackId && like.userId === sessionUser?.id)
 
     // States
     const { isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
@@ -32,8 +34,11 @@ const Tracks = () => {
 
     useEffect(() => {
         dispatch(getTracks())
-        dispatch(getLikes(trackId))
     }, [dispatch])
+
+    useEffect(() => {
+        dispatch(getLikes(trackId))
+    }, [dispatch, trackId])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -115,6 +120,19 @@ const Tracks = () => {
         console.log('SHUFFLED ARR AFTER', shuffledArr)
     }
 
+    const updateLike = async (e) => {
+        e.preventDefault()
+        if (userLike) {
+            dispatch(deleteLike(userLike?.id))
+        } else {
+            const payload = {
+                trackId,
+                userId: sessionUser?.id
+            }
+            await dispatch(postLike(payload))
+        }
+    }
+
     return (
         <>
             <div className='music-player-ctn'>
@@ -174,9 +192,9 @@ const Tracks = () => {
                                 </div>
                             </div>
                             <div className='track-like-icon'>
-                                <button className='like-button'>
-                                    <i className="fa-regular fa-heart fa-xl"></i>
-                                    <i className="fa-solid fa-heart fa-xl"></i>
+                                <button onClick={updateLike} className='like-button'>
+                                    {userLike ? <i className="fa-solid fa-heart fa-xl liked-icon"></i> : <i className="fa-regular fa-heart fa-xl"></i>
+                                    }
                                 </button>
                                 <span className='like-count'>{likesArr && likesArr.length === 1 ? `1 like` : `${likesArr.length} likes`}</span>
                             </div>

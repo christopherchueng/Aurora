@@ -97,12 +97,20 @@
     margin: 0;
 }
 
+.liked-icon {
+    color: #F050ED;
+}
+
 .like-button {
     border: 0;
     background-color: transparent;
     color: white;
     cursor: pointer;
     padding: 0;
+}
+
+.like-count {
+    padding-left: 10px;
 }
 
 .media-controls {
