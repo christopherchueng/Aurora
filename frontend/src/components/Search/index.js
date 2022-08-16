@@ -4,6 +4,7 @@ import { useHistory, useLocation } from "react-router-dom"
 import { getSearchedTracks } from "../../store/search"
 import SearchResults from "./SearchResults"
 import './Search.css'
+import { getAllLikes } from "../../store/likes"
 
 const Search = () => {
     const history = useHistory()
@@ -20,6 +21,7 @@ const Search = () => {
 
     useEffect(() => {
         dispatch(getSearchedTracks({keyword}))
+        dispatch(getAllLikes())
     }, [dispatch, search])
 
     return (

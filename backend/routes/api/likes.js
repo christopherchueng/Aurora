@@ -6,6 +6,12 @@ const asyncHandler = require('express-async-handler');
 
 const router = express.Router()
 
+router.get('/', asyncHandler(async (req, res) => {
+    const likes = await Like.findAll()
+
+    return res.json(likes)
+}))
+
 // Get all likes under one track
 router.get('/:trackId', asyncHandler(async (req, res) => {
     const trackId = parseInt(req.params.trackId, 10)

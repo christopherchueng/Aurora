@@ -8,8 +8,8 @@ const DateConverter = ({date}) => {
         const [todaysMonth, todaysDay, todaysYear, todaysHour, todaysMin, todaysSec] = new Date().toLocaleDateString('en-US', {hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric'}).split(/[,/:]/)
         const [creationMonth, creationDay, creationYear, creationHour, creationMin, creationSec] = new Date(date).toLocaleDateString('en-US', {hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric'}).split(/[,/:]/)
 
-        console.log('what is the hour and min here', creationHour, creationMin, creationSec)
-        console.log('date difference', dateDifference(todaysMin, creationMin))
+        // console.log('what is the hour and min here', creationHour, creationMin, creationSec)
+        // console.log('date difference', dateDifference(todaysMin, creationMin))
         // Same year, same month, same day, same hour, same minutes
         if (todaysYear === creationYear &&
             todaysMonth === creationMonth &&

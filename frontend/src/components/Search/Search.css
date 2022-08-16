@@ -136,7 +136,8 @@
 }
 
 .search-track-user,
-.search-track-createDate {
+.search-track-createDate,
+.search-like-count {
     font-size: 10pt;
 }
 
@@ -145,4 +146,23 @@
     color: black;
     transition-duration: 0.2s;
     transition-property: opacity;
+}
+
+.search-like-ctn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.search-like-button {
+    border: 0;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-like,
+.search-unlike {
+    color: #F050ED;
 }

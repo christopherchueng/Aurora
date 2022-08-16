@@ -1,12 +1,20 @@
 import { csrfFetch } from "./csrf"
 
 const LOAD_LIKES = 'like/loadLikes'
+const LOAD_ALL_LIKES = 'like/loadAllLikes'
 const ADD_LIKE = 'like/addLike'
 const REMOVE_LIKE = 'like/removeLike'
 
 export const loadLikes = (likes) => {
     return {
         type: LOAD_LIKES,
+        likes
+    }
+}
+
+export const loadAllLikes = (likes) => {
+    return {
+        type: LOAD_ALL_LIKES,
         likes
     }
 }
@@ -30,6 +38,13 @@ export const getLikes = (trackId) => async (dispatch) => {
 
     const likes = await response.json()
     dispatch(loadLikes(likes))
+}
+
+export const getAllLikes = () => async (dispatch) => {
+    const response = await csrfFetch('/api/likes')
+
+    const likes = await response.json()
+    dispatch(loadAllLikes(likes))
 }
 
 export const postLike = (payload) => async (dispatch) => {
@@ -62,6 +77,10 @@ const likeReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_LIKES:
             newState = { entries: {} }
+            action.likes.forEach(like => newState.entries[like.id] = like)
+            return newState
+        case LOAD_ALL_LIKES:
+            newState = { entries: {...state, entries: {...state.entries}} }
             action.likes.forEach(like => newState.entries[like.id] = like)
             return newState
         case ADD_LIKE:
