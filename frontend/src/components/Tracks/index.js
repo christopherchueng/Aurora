@@ -196,6 +196,7 @@ const Tracks = () => {
                                 </div>
                             </div>
                             <div className='track-like-icon'>
+                                {sessionUser ?
                                 <button
                                     onClick={updateLike}
                                     className={animate ? 'like-button' : 'unlike-button'}
@@ -203,7 +204,11 @@ const Tracks = () => {
                                     {userLike ? <i className="fa-solid fa-heart fa-xl liked-icon"></i> : <i className="fa-regular fa-heart fa-xl unliked-icon"></i>
                                     }
                                 </button>
-                                <span className='like-count'>{likesArr && likesArr.length === 1 ? `1 like` : `${(likesArr.length).toLocaleString()} likes`}</span>
+                                : ''
+                                }
+                                <span className='like-count' style={{paddingLeft: sessionUser ? '10px' : '0'}}>
+                                    {likesArr && likesArr.length === 1 ? `1 like` : `${(likesArr.length).toLocaleString()} likes`}
+                                </span>
                             </div>
                         </div>
                     </div>
