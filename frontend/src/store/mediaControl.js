@@ -25,7 +25,7 @@ export const pauseTrack = () => async (dispatch) => {
 
 export const setCurrentTrack = (track) => async (dispatch) => {
     dispatch(setTrack(track))
-    dispatch(isPlaying(true))
+    // dispatch(isPlaying(true))
 }
 
 let initialState = {entries: {}}

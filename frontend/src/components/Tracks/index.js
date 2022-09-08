@@ -97,12 +97,15 @@ const Tracks = () => {
 
     const playBtn = (e) => {
         e.preventDefault()
+        dispatch(setCurrentTrack(currentTrack))
+
         if (playing && track?.id === currentTrack) {
             dispatch(pauseTrack())
+            setIsPlaying(false)
         } else if (!playing && track?.id === currentTrack) {
             dispatch(playTrack())
+            setIsPlaying(true)
         }
-        // dispatch(setCurrentTrack(track?.id))
     }
 
     const nextBtn = () => {
@@ -179,7 +182,7 @@ const Tracks = () => {
                                 onEnded={nextBtn}
                                 // play={isPlaying === true}
                                 // pause={isPlaying === false}
-                                onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
+                                // onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
                             >
                             </audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
