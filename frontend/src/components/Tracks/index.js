@@ -8,6 +8,7 @@ import Comments from '../Comments';
 import DateConverter from '../DateConverter';
 import './Tracks.css';
 import { deleteLike, getLikes, postLike } from '../../store/likes';
+import { pauseTrack, playTrack, setCurrentTrack } from '../../store/mediaControl';
 
 const Tracks = () => {
     const dispatch = useDispatch();
@@ -15,16 +16,20 @@ const Tracks = () => {
     const { trackId } = useParams();
     const tracks = useSelector(state => state?.track?.entries)
     const sessionUser = useSelector(state => state?.session?.user);
+    const playing = useSelector(state => state?.mediaControl?.playing)
+    const currentTrack = useSelector(state => state?.mediaControl?.track)
     const likes = useSelector(state => state?.like?.entries)
     const likesArr = Object.values(likes)
     const track = tracks[+trackId];
+
+    console.log('playing here', playing)
 
     const userLike = likesArr.find(like => like.trackId === +trackId && like.userId === sessionUser?.id)
 
     // States
     const { isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
     const [currentSong, setCurrentSong] = useState(track)
-    const [isPlaying, setIsPlaying] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(!!playing)
     const [animate, setAnimate] = useState(false)
 
     let tracksArr = Object.values(tracks);
@@ -54,6 +59,16 @@ const Tracks = () => {
         isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
     }, [isPlaying, trackId])
 
+    useEffect(() => {
+        if (playing && currentTrack) {
+            setIsPlaying(false)
+        } else if (!playing && currentTrack) {
+            setIsPlaying(true)
+        } else if (playing && !currentTrack && !isPlaying) {
+            setIsPlaying(false)
+        }
+    }, [playing, currentTrack])
+
 
     const durationFormula = (seconds) => {
         const minutes = Math.floor(seconds / 60)
@@ -78,6 +93,16 @@ const Tracks = () => {
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[tracksArr.length - 1]?.id}`)
         }
+    }
+
+    const playBtn = (e) => {
+        e.preventDefault()
+        if (playing && track?.id === currentTrack) {
+            dispatch(pauseTrack())
+        } else if (!playing && track?.id === currentTrack) {
+            dispatch(playTrack())
+        }
+        // dispatch(setCurrentTrack(track?.id))
     }
 
     const nextBtn = () => {
@@ -256,8 +281,8 @@ const Tracks = () => {
                                 <button
                                     type='button'
                                     className='play-pause'
-                                    onClick={() => setIsPlaying(!isPlaying)}
-                                    // onChange={isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()}
+                                    // onClick={() => setIsPlaying(!isPlaying)}
+                                    onClick={playBtn}
                                 >
                                     {isPlaying
                                     ? <i className="fa-solid fa-circle-pause fa-7x"></i>

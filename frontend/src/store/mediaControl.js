@@ -28,18 +28,20 @@ export const setCurrentTrack = (track) => async (dispatch) => {
     dispatch(isPlaying(true))
 }
 
-let initialState = {entries: {}, isLoading: true}
+let initialState = {entries: {}}
 
 const mediaControlReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case SET_TRACK:
-            newState = {...state}
-            newState.entries[action.track] = action.track
+            newState = {...state, track: action.track}
+            console.log('what is this new state SET TRACK', newState)
+            // newState.entries.track = action.track
             return newState
         case SET_PLAYING:
-            newState = {...state}
-            newState.entries[action.playing] = action.playing
+            newState = {...state, playing: action.playing}
+            // newState.entries.playing = action.playing
+            console.log('what is this new state in SET PLAYING', newState)
             return newState
         default:
             return state
