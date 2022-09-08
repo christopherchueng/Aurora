@@ -6,6 +6,7 @@ import commentReducer from './commentReducer';
 import userReducer from './user'
 import searchReducer from './search';
 import likeReducer from './likes';
+import mediaControlReducer from './mediaControl';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   comment: commentReducer,
   user: userReducer,
   search: searchReducer,
-  like: likeReducer
+  like: likeReducer,
+  mediaControl: mediaControlReducer
 });
 
 
