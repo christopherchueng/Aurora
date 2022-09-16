@@ -27,10 +27,12 @@ const Tracks = () => {
     const userLike = likesArr.find(like => like.trackId === +trackId && like.userId === sessionUser?.id)
 
     // States
-    const { isShuffled, setIsShuffled, duration, setDuration, currentTime, setCurrentTime } = useTrackContext()
+    const { isShuffled, setIsShuffled, currentTime, setCurrentTime } = useTrackContext()
     const [currentSong, setCurrentSong] = useState(track)
     const [isPlaying, setIsPlaying] = useState(!!playing)
     const [animate, setAnimate] = useState(false)
+    const [duration, setDuration] = useState(0)
+    const [elapsedTime, setElapsedTime] = useState(0)
 
     let tracksArr = Object.values(tracks);
     let shuffledArr = []
@@ -48,6 +50,8 @@ const Tracks = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        setDuration(formatTrackTime(audioPlayer?.current?.duration))
+        setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
     }, [])
 
     // useEffect(() => {
@@ -57,7 +61,19 @@ const Tracks = () => {
 
     useEffect(() => {
         isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
+
     }, [isPlaying, trackId])
+
+    useEffect(() => {
+
+        if (isPlaying) {
+            let durationInterval = setInterval(() => {
+                setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
+            }, [1000])
+        }
+        setDuration(formatTrackTime(audioPlayer?.current?.duration))
+
+    }, [isPlaying])
 
     useEffect(() => {
         if (playing && currentTrack) {
@@ -68,6 +84,16 @@ const Tracks = () => {
             setIsPlaying(false)
         }
     }, [playing, currentTrack])
+
+    const formatTrackTime = (time) => {
+        if (time && !isNaN(time)) {
+            const minutes = Math.floor(time / 60) < 10 ? `0${Math.floor(time / 60)}` : Math.floor(time / 60)
+            const seconds = Math.floor(time % 60) < 10 ? `0${Math.floor(time % 60)}` : Math.floor(time % 60)
+            return `${minutes}:${seconds}`
+        }
+
+        return '00:00'
+    }
 
 
     const durationFormula = (seconds) => {
@@ -188,10 +214,10 @@ const Tracks = () => {
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
                     </div>
-                    {/* <div className='duration-ctn'>
-                        <div className='start-time'>{durationFormula(currentTime)}</div>
-                        <div className='end-time'>{(duration && !isNaN(duration)) && durationFormula(duration)}</div>
-                    </div> */}
+                    <div className='duration-ctn'>
+                        <div className='start-time'>{elapsedTime}</div>
+                        <div className='end-time'>{duration}</div>
+                    </div>
 
                     <div className='title-ctn'>
                         <div className='top-info'>
