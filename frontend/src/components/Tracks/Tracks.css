@@ -38,6 +38,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 16pt;
+    background-color: black;
 }
 
 .top-info {
