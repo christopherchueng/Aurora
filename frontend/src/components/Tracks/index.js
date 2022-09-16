@@ -48,8 +48,8 @@ const Tracks = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
-        setDuration(formatTrackTime(audioPlayer?.current?.duration))
+        setElapsedTime(formatTrackTime(0))
+        setDuration(audioPlayer?.current?.duration)
     }, [])
 
     // useEffect(() => {
@@ -59,7 +59,7 @@ const Tracks = () => {
 
     useEffect(() => {
         isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
-        setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
+        // setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
         // setDuration(formatTrackTime(audioPlayer?.current?.duration))
     }, [isPlaying, trackId])
 
@@ -67,8 +67,8 @@ const Tracks = () => {
 
         if (isPlaying) {
             setInterval(() => {
-                setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
-            }, [1000])
+                setElapsedTime(audioPlayer.current?.currentTime)
+            }, [100])
         }
         // setDuration(formatTrackTime(audioPlayer?.current?.duration))
 
@@ -86,11 +86,11 @@ const Tracks = () => {
 
     const formatTrackTime = (time) => {
         if (time && !isNaN(time)) {
-            const minutes = Math.floor(time / 60) < 10 ? `0${Math.floor(time / 60)}` : Math.floor(time / 60)
+            const minutes = Math.floor(time / 60)
             const seconds = Math.floor(time % 60) < 10 ? `0${Math.floor(time % 60)}` : Math.floor(time % 60)
             return `${minutes}:${seconds}`
         } else {
-            return '00:00'
+            return '0:00'
         }
     }
 
@@ -131,6 +131,8 @@ const Tracks = () => {
                 // setCurrentSong(tracks[+trackId])
                 setIsPlaying(true)
                 // audioPlayer.current.play();
+                audioPlayer.current.src = tracksArr[i + 1].trackPath
+                setDuration(audioPlayer?.current?.duration)
                 history.push(`/tracks/${tracksArr[i + 1]?.id}`)
             }
         }
@@ -138,9 +140,31 @@ const Tracks = () => {
         // If at the end of the playlist, then restart at 1
         if (+trackId === tracksArr[tracksArr.length - 1]?.id) {
             setIsPlaying(true)
+            audioPlayer.current.src = tracksArr[0].trackPath
+            setDuration(audioPlayer?.current?.duration)
             history.push(`/tracks/${tracksArr[0]?.id}`)
         }
+
+        setElapsedTime(0)
+        setDuration(audioPlayer?.current?.duration)
     }
+    // const nextBtn = () => {
+    //     for (let i = 0; i < tracksArr.length; i++) {
+    //         let track = tracksArr[i]
+    //         if (+trackId === track.id) {
+    //             // setCurrentSong(tracks[+trackId])
+    //             setIsPlaying(true)
+    //             // audioPlayer.current.play();
+    //             history.push(`/tracks/${tracksArr[i + 1]?.id}`)
+    //         }
+    //     }
+
+    //     // If at the end of the playlist, then restart at 1
+    //     if (+trackId === tracksArr[tracksArr.length - 1]?.id) {
+    //         setIsPlaying(true)
+    //         history.push(`/tracks/${tracksArr[0]?.id}`)
+    //     }
+    // }
 
     // const autoPlay = e => {
     //     if (e.currentTarget.className === 'play') {
@@ -205,8 +229,8 @@ const Tracks = () => {
                         </div>
                     </div>
                     <div className='duration-ctn'>
-                        <div className='start-time'>{elapsedTime}</div>
-                        <div className='end-time'>{duration}</div>
+                        <div className='start-time'>{formatTrackTime(elapsedTime)}</div>
+                        <div className='end-time'>{formatTrackTime(duration)}</div>
                     </div>
 
                     <div className='title-ctn'>
