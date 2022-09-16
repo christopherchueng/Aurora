@@ -54,8 +54,6 @@ const Tracks = () => {
             const trackDuration = audioPlayer?.current?.duration
             setDuration(trackDuration)
         }, 100)
-
-        clearInterval(durationInt)
     }, [])
 
     useEffect(() => {
@@ -85,8 +83,6 @@ const Tracks = () => {
             let track = tracksArr[i]
             if (+trackId === track?.id) {
                 setIsPlaying(true)
-                // audioPlayer.current.play();
-                // setCurrentSong(tracks[+trackId])
                 history.push(`/tracks/${tracksArr[i - 1]?.id}`)
             }
         }
@@ -124,9 +120,6 @@ const Tracks = () => {
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[0]?.id}`)
         }
-
-        // setElapsedTime(0)
-        // setDuration(audioPlayer?.current?.duration)
     }
 
     // const autoPlay = e => {
