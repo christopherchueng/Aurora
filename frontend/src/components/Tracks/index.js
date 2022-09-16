@@ -48,50 +48,50 @@ const Tracks = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        setElapsedTime(formatTrackTime(0))
-        setDuration(audioPlayer?.current?.duration)
-    }, [])
+        setElapsedTime(0)
 
-    // useEffect(() => {
-    //     const seconds = Math.floor(audioPlayer.current.duration)
-    //     setDuration(seconds)
-    // }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+        const durationInt = setInterval(() => {
+            const trackDuration = audioPlayer?.current?.duration
+            setDuration(trackDuration)
+        }, 100)
+
+        clearInterval(durationInt)
+    }, [])
 
     useEffect(() => {
         isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
         // setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
-        // setDuration(formatTrackTime(audioPlayer?.current?.duration))
+
     }, [isPlaying, trackId])
 
     useEffect(() => {
-
-        if (isPlaying) {
+        if (isPlaying === true) {
             setInterval(() => {
                 setElapsedTime(audioPlayer.current?.currentTime)
-            }, [100])
+            }, 100)
         }
-        // setDuration(formatTrackTime(audioPlayer?.current?.duration))
-
     }, [isPlaying])
 
-    useEffect(() => {
-        if (playing && currentTrack) {
-            setIsPlaying(false)
-        } else if (!playing && currentTrack) {
-            setIsPlaying(true)
-        } else if (playing && !currentTrack && !isPlaying) {
-            setIsPlaying(false)
-        }
-    }, [playing, currentTrack])
+    // console.log('here is audioplayer', audioPlayer.current.duration)
+    // useEffect(() => {
+    //     if (playing && currentTrack) {
+    //         setIsPlaying(false)
+    //     } else if (!playing && currentTrack) {
+    //         setIsPlaying(true)
+    //     } else if (playing && !currentTrack && !isPlaying) {
+    //         setIsPlaying(false)
+    //     }
+    // }, [playing, currentTrack])
 
     const formatTrackTime = (time) => {
-        if (time && !isNaN(time)) {
+        if (time && !Number.isNaN(time)) {
             const minutes = Math.floor(time / 60)
-            const seconds = Math.floor(time % 60) < 10 ? `0${Math.floor(time % 60)}` : Math.floor(time % 60)
-            return `${minutes}:${seconds}`
-        } else {
-            return '0:00'
+            const seconds = Math.floor(time % 60)
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
         }
+        console.log('what is this time', time)
+
+        return '0:00'
     }
 
     const backBtn = () => {
@@ -128,10 +128,9 @@ const Tracks = () => {
         for (let i = 0; i < tracksArr.length; i++) {
             let track = tracksArr[i]
             if (+trackId === track.id) {
-                // setCurrentSong(tracks[+trackId])
                 setIsPlaying(true)
                 // audioPlayer.current.play();
-                audioPlayer.current.src = tracksArr[i + 1].trackPath
+                audioPlayer.current.src = tracksArr[i + 1]?.trackPath
                 setDuration(audioPlayer?.current?.duration)
                 history.push(`/tracks/${tracksArr[i + 1]?.id}`)
             }
@@ -222,7 +221,7 @@ const Tracks = () => {
                                 onEnded={nextBtn}
                                 // play={isPlaying === true}
                                 // pause={isPlaying === false}
-                                onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
+                                // onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
                             >
                             </audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
