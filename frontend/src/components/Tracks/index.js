@@ -60,8 +60,6 @@ const Tracks = () => {
 
     useEffect(() => {
         isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
-        // setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
-
     }, [isPlaying, trackId])
 
     useEffect(() => {
@@ -72,24 +70,12 @@ const Tracks = () => {
         }
     }, [isPlaying])
 
-    // console.log('here is audioplayer', audioPlayer.current.duration)
-    // useEffect(() => {
-    //     if (playing && currentTrack) {
-    //         setIsPlaying(false)
-    //     } else if (!playing && currentTrack) {
-    //         setIsPlaying(true)
-    //     } else if (playing && !currentTrack && !isPlaying) {
-    //         setIsPlaying(false)
-    //     }
-    // }, [playing, currentTrack])
-
     const formatTrackTime = (time) => {
         if (time && !Number.isNaN(time)) {
             const minutes = Math.floor(time / 60)
             const seconds = Math.floor(time % 60)
             return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
         }
-        console.log('what is this time', time)
 
         return '0:00'
     }
@@ -129,9 +115,6 @@ const Tracks = () => {
             let track = tracksArr[i]
             if (+trackId === track.id) {
                 setIsPlaying(true)
-                // audioPlayer.current.play();
-                audioPlayer.current.src = tracksArr[i + 1]?.trackPath
-                setDuration(audioPlayer?.current?.duration)
                 history.push(`/tracks/${tracksArr[i + 1]?.id}`)
             }
         }
@@ -139,31 +122,12 @@ const Tracks = () => {
         // If at the end of the playlist, then restart at 1
         if (+trackId === tracksArr[tracksArr.length - 1]?.id) {
             setIsPlaying(true)
-            audioPlayer.current.src = tracksArr[0].trackPath
-            setDuration(audioPlayer?.current?.duration)
             history.push(`/tracks/${tracksArr[0]?.id}`)
         }
 
-        setElapsedTime(0)
-        setDuration(audioPlayer?.current?.duration)
+        // setElapsedTime(0)
+        // setDuration(audioPlayer?.current?.duration)
     }
-    // const nextBtn = () => {
-    //     for (let i = 0; i < tracksArr.length; i++) {
-    //         let track = tracksArr[i]
-    //         if (+trackId === track.id) {
-    //             // setCurrentSong(tracks[+trackId])
-    //             setIsPlaying(true)
-    //             // audioPlayer.current.play();
-    //             history.push(`/tracks/${tracksArr[i + 1]?.id}`)
-    //         }
-    //     }
-
-    //     // If at the end of the playlist, then restart at 1
-    //     if (+trackId === tracksArr[tracksArr.length - 1]?.id) {
-    //         setIsPlaying(true)
-    //         history.push(`/tracks/${tracksArr[0]?.id}`)
-    //     }
-    // }
 
     // const autoPlay = e => {
     //     if (e.currentTarget.className === 'play') {
