@@ -7,7 +7,6 @@ export const useTrackContext = () => useContext(trackContext);
 export default function TrackProvider({ children }) {
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffled, setIsShuffled] = useState(false)
-    const [currentTime, setCurrentTime] = useState(0)
 
 
     return (
@@ -15,9 +14,7 @@ export default function TrackProvider({ children }) {
             isPlaying,
             setIsPlaying,
             isShuffled,
-            setIsShuffled,
-            currentTime,
-            setCurrentTime
+            setIsShuffled
         }}>
             { children }
         </trackContext.Provider>

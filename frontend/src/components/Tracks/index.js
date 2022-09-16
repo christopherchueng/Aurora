@@ -22,12 +22,10 @@ const Tracks = () => {
     const likesArr = Object.values(likes)
     const track = tracks[+trackId];
 
-    console.log('playing here', playing)
-
     const userLike = likesArr.find(like => like.trackId === +trackId && like.userId === sessionUser?.id)
 
     // States
-    const { isShuffled, setIsShuffled, currentTime, setCurrentTime } = useTrackContext()
+    const { isShuffled, setIsShuffled } = useTrackContext()
     const [currentSong, setCurrentSong] = useState(track)
     const [isPlaying, setIsPlaying] = useState(!!playing)
     const [animate, setAnimate] = useState(false)
@@ -50,8 +48,8 @@ const Tracks = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        setDuration(formatTrackTime(audioPlayer?.current?.duration))
         setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
+        setDuration(formatTrackTime(audioPlayer?.current?.duration))
     }, [])
 
     // useEffect(() => {
@@ -61,17 +59,18 @@ const Tracks = () => {
 
     useEffect(() => {
         isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
-
+        setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
+        // setDuration(formatTrackTime(audioPlayer?.current?.duration))
     }, [isPlaying, trackId])
 
     useEffect(() => {
 
         if (isPlaying) {
-            let durationInterval = setInterval(() => {
+            setInterval(() => {
                 setElapsedTime(formatTrackTime(audioPlayer.current?.currentTime))
             }, [1000])
         }
-        setDuration(formatTrackTime(audioPlayer?.current?.duration))
+        // setDuration(formatTrackTime(audioPlayer?.current?.duration))
 
     }, [isPlaying])
 
@@ -90,18 +89,9 @@ const Tracks = () => {
             const minutes = Math.floor(time / 60) < 10 ? `0${Math.floor(time / 60)}` : Math.floor(time / 60)
             const seconds = Math.floor(time % 60) < 10 ? `0${Math.floor(time % 60)}` : Math.floor(time % 60)
             return `${minutes}:${seconds}`
+        } else {
+            return '00:00'
         }
-
-        return '00:00'
-    }
-
-
-    const durationFormula = (seconds) => {
-        const minutes = Math.floor(seconds / 60)
-        const trackMin = minutes < 10 ? `0${minutes}` : `${minutes}`
-        const sec = Math.floor(seconds % 60)
-        const trackSec = seconds < 10 ? `0${sec}` : `${sec}`
-        return `${trackMin}:${trackSec}`
     }
 
     const backBtn = () => {
