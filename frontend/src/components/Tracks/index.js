@@ -97,13 +97,13 @@ const Tracks = () => {
 
     const playBtn = (e) => {
         e.preventDefault()
-        dispatch(setCurrentTrack(currentTrack))
+        // dispatch(setCurrentTrack(currentTrack))
 
         if (playing && track?.id === currentTrack) {
-            dispatch(pauseTrack())
+            // dispatch(pauseTrack())
             setIsPlaying(false)
         } else if (!playing && track?.id === currentTrack) {
-            dispatch(playTrack())
+            // dispatch(playTrack())
             setIsPlaying(true)
         }
     }
@@ -182,7 +182,7 @@ const Tracks = () => {
                                 onEnded={nextBtn}
                                 // play={isPlaying === true}
                                 // pause={isPlaying === false}
-                                // onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
+                                onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
                             >
                             </audio>
                             {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
@@ -284,8 +284,8 @@ const Tracks = () => {
                                 <button
                                     type='button'
                                     className='play-pause'
-                                    // onClick={() => setIsPlaying(!isPlaying)}
-                                    onClick={playBtn}
+                                    onClick={() => setIsPlaying(!isPlaying)}
+                                    // onClick={playBtn}
                                 >
                                     {isPlaying
                                     ? <i className="fa-solid fa-circle-pause fa-7x"></i>
