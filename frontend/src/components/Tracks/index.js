@@ -37,6 +37,7 @@ const Tracks = () => {
 
     // References
     const audioPlayer = useRef();
+    const progressBar = useRef()
 
     useEffect(() => {
         dispatch(getTracks())
@@ -167,6 +168,11 @@ const Tracks = () => {
         // setTimeout(() => setAnimate(false), 1000)
     }
 
+    const setProgress = () => {
+        audioPlayer.current.currentTime = progressBar.current.value
+        setElapsedTime(progressBar.current.value)
+    }
+
     return (
         <>
             <div className='music-player-ctn'>
@@ -188,7 +194,14 @@ const Tracks = () => {
                             >
                             </audio>
                         </div>
-                        <input type='range' value={elapsedTime} min='0' max={duration} className='input-tracker' onChange={(e) => setElapsedTime(e.target.value)} />
+                        <input
+                            type='range'
+                            value={elapsedTime}
+                            min='0'
+                            max={duration}
+                            step='any'
+                            className='input-tracker'
+                            ref={progressBar} onChange={setProgress} />
                     </div>
                     <div className='duration-ctn'>
                         <div className='start-time'>{formatTrackTime(elapsedTime)}</div>
