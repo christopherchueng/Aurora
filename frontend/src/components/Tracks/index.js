@@ -46,6 +46,12 @@ const Tracks = () => {
         dispatch(getLikes(trackId))
     }, [dispatch, trackId])
 
+    // useEffect(() => {
+    //     if (audioPlayer) {
+    //         audioPlayer?.current?.duration = elapsedTime
+    //     }
+    // }, [elapsedTime])
+
     useEffect(() => {
         window.scrollTo(0, 0)
         setElapsedTime(0)
@@ -181,8 +187,8 @@ const Tracks = () => {
                                 // onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
                             >
                             </audio>
-                            {/* <input type='range' defaultValue='0'  className='input-tracker'></input> */}
                         </div>
+                        <input type='range' value={elapsedTime} min='0' max={duration} className='input-tracker' onChange={(e) => setElapsedTime(e.target.value)} />
                     </div>
                     <div className='duration-ctn'>
                         <div className='start-time'>{formatTrackTime(elapsedTime)}</div>
