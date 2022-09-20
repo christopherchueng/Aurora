@@ -36,8 +36,9 @@ const Tracks = () => {
     let shuffledArr = []
 
     // References
-    const audioPlayer = useRef();
+    const audioPlayer = useRef()
     const progressBar = useRef()
+    const progressAnimation = useRef() // Have progress background update as progressBar moves
 
     useEffect(() => {
         dispatch(getTracks())
@@ -64,7 +65,14 @@ const Tracks = () => {
     }, [])
 
     useEffect(() => {
-        isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
+        if (isPlaying) {
+            audioPlayer?.current?.play()
+            progressAnimation.current = requestAnimationFrame(currentlyPlaying)
+        } else {
+            audioPlayer?.current?.pause()
+            cancelAnimationFrame(progressAnimation.current)
+        }
+        // isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
     }, [isPlaying, trackId])
 
     useEffect(() => {
@@ -107,9 +115,11 @@ const Tracks = () => {
         if (playing && track?.id === currentTrack) {
             // dispatch(pauseTrack())
             setIsPlaying(false)
+            progressAnimation.current = requestAnimationFrame(currentlyPlaying)
         } else if (!playing && track?.id === currentTrack) {
             // dispatch(playTrack())
             setIsPlaying(true)
+            cancelAnimationFrame(progressAnimation.current)
         }
     }
 
@@ -168,8 +178,23 @@ const Tracks = () => {
         // setTimeout(() => setAnimate(false), 1000)
     }
 
+    // While track is playing, sync progress bar with the current value of the audio player time
+    // Background should also update while track is playing
+    const currentlyPlaying = () => {
+        progressBar.current.value = audioPlayer.current.currentTime
+        dragDuration()
+        progressAnimation.current = requestAnimationFrame(currentlyPlaying) // Allows for bg color before thumb to move WHILE track is playing
+    }
+
+    // Skip by dragging thumb around progress bar
     const setProgress = () => {
         audioPlayer.current.currentTime = progressBar.current.value
+        dragDuration()
+    }
+
+    // Sets background color before thumb
+    const dragDuration = () => {
+        progressBar.current.style.setProperty('--before-thumb', `${progressBar.current.value / audioPlayer?.current?.duration * 100}%`)
         setElapsedTime(progressBar.current.value)
     }
 
@@ -201,7 +226,9 @@ const Tracks = () => {
                             max={duration}
                             step='any'
                             className='input-tracker'
-                            ref={progressBar} onChange={setProgress} />
+                            ref={progressBar}
+                            onChange={setProgress}
+                        />
                     </div>
                     <div className='duration-ctn'>
                         <div className='start-time'>{formatTrackTime(elapsedTime)}</div>
