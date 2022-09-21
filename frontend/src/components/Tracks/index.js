@@ -31,6 +31,8 @@ const Tracks = () => {
     const [animate, setAnimate] = useState(false)
     const [duration, setDuration] = useState(0)
     const [elapsedTime, setElapsedTime] = useState(0)
+    const [volume, setVolume] = useState(1)
+    const [isMute, setIsMute] = useState(false)
 
     let tracksArr = Object.values(tracks);
     let shuffledArr = []
@@ -82,6 +84,11 @@ const Tracks = () => {
             }, 100)
         }
     }, [isPlaying])
+
+    useEffect(() => {
+        if (isMute) audioPlayer.current.volume = 0
+        else audioPlayer.current.volume = volume
+    }, [volume, isMute])
 
     const formatTrackTime = (time) => {
         if (time && !Number.isNaN(time)) {
@@ -348,15 +355,19 @@ const Tracks = () => {
                             </div>
 
                             {/* ------------------ VOLUME ------------------ */}
-                            {/* <div className='volume-ctn'>
-                                <button
-                                    type='button'
-                                    className='volume'
-                                    // onClick={}
-                                >
+                            <div className='volume-ctn'>
+                                <button className='volume' onClick={() => setIsMute(!isMute)}>
                                     <i className="fa-solid fa-volume-high fa-xl"></i>
                                 </button>
-                            </div> */}
+                                <input
+                                    type='range'
+                                    value={volume}
+                                    min='0'
+                                    max='1'
+                                    step='any'
+                                    className='volume'
+                                />
+                            </div>
 
                             {/* ------------------ EDIT ------------------ */}
                             {sessionUser?.id === track?.User?.id
