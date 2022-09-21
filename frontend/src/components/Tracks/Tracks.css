@@ -30,6 +30,37 @@
     -webkit-appearance: none;
 }
 
+/* .volume-bar {
+    --before-thumb: 0;
+
+    appearance: none;
+    outline: none;
+    width: 100px;
+    z-index: 1;
+    height: 5px;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.volume-bar::before {
+    content: '';
+    height: 11px;
+    position: absolute;
+    width: 50px;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.volume-bar::-webkit-slider-thumb {
+    appearance: none;
+    height: 11px;
+    width: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+} */
+
 .input-tracker::before {
     content: '';
     height: 565px;

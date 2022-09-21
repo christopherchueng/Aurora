@@ -33,6 +33,7 @@ const Tracks = () => {
     const [elapsedTime, setElapsedTime] = useState(0)
     const [volume, setVolume] = useState(1)
     const [isMute, setIsMute] = useState(false)
+    const [volumeBeforeMute, setVolumeBeforeMute] = useState(0)
 
     let tracksArr = Object.values(tracks);
     let shuffledArr = []
@@ -87,11 +88,22 @@ const Tracks = () => {
     }, [isPlaying])
 
     useEffect(() => {
-        if (isMute === true) audioPlayer.current.volume = 0
-        else audioPlayer.current.volume = volume
+        setVolumeBeforeMute(volume)
+        if (isMute === true) {
+            setVolume(0)
+            audioPlayer.current.volume = 0
+            volumeBar.current.value = 0
+        }
+        if (isMute === false) {
+            audioPlayer.current.volume = volumeBeforeMute
+            volumeBar.current.value = audioPlayer.current.volume
+            setVolume(volumeBar.current.value)
+        }
+    }, [isMute])
 
+    useEffect(() => {
         volumeBar.current.value = audioPlayer.current.volume
-    }, [volume, isMute])
+    }, [volume])
 
     const formatTrackTime = (time) => {
         if (time && !Number.isNaN(time)) {
@@ -189,9 +201,10 @@ const Tracks = () => {
     }
 
     const updateVolume = () => {
+        console.log('what is isMute here', isMute)
         // When the volume bar is dragged, the volume updates.
         audioPlayer.current.volume = volumeBar.current.value
-
+        console.log('what is audioplayer volume now', audioPlayer.current.volume)
         // This allows the volume bar to visually move on the client side while the volume is updating
         setVolume(audioPlayer.current.volume)
     }
@@ -378,7 +391,7 @@ const Tracks = () => {
                                     min='0'
                                     max='1'
                                     step='any'
-                                    className='volume'
+                                    className='volume-bar'
                                     ref={volumeBar}
                                     onChange={updateVolume}
                                 />
