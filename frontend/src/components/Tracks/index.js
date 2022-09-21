@@ -201,10 +201,9 @@ const Tracks = () => {
     }
 
     const updateVolume = () => {
-        console.log('what is isMute here', isMute)
         // When the volume bar is dragged, the volume updates.
         audioPlayer.current.volume = volumeBar.current.value
-        console.log('what is audioplayer volume now', audioPlayer.current.volume)
+
         // This allows the volume bar to visually move on the client side while the volume is updating
         setVolume(audioPlayer.current.volume)
     }
