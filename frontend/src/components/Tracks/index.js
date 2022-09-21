@@ -39,6 +39,7 @@ const Tracks = () => {
 
     // References
     const audioPlayer = useRef()
+    const volumeBar = useRef()
     const progressBar = useRef()
     const progressAnimation = useRef() // Have progress background update as progressBar moves
 
@@ -86,8 +87,10 @@ const Tracks = () => {
     }, [isPlaying])
 
     useEffect(() => {
-        if (isMute) audioPlayer.current.volume = 0
+        if (isMute === true) audioPlayer.current.volume = 0
         else audioPlayer.current.volume = volume
+
+        volumeBar.current.value = audioPlayer.current.volume
     }, [volume, isMute])
 
     const formatTrackTime = (time) => {
@@ -183,6 +186,14 @@ const Tracks = () => {
             dispatch(postLike(payload))
         }
         // setTimeout(() => setAnimate(false), 1000)
+    }
+
+    const updateVolume = () => {
+        // When the volume bar is dragged, the volume updates.
+        audioPlayer.current.volume = volumeBar.current.value
+
+        // This allows the volume bar to visually move on the client side while the volume is updating
+        setVolume(audioPlayer.current.volume)
     }
 
     // While track is playing, sync progress bar with the current value of the audio player time
@@ -357,7 +368,9 @@ const Tracks = () => {
                             {/* ------------------ VOLUME ------------------ */}
                             <div className='volume-ctn'>
                                 <button className='volume' onClick={() => setIsMute(!isMute)}>
-                                    <i className="fa-solid fa-volume-high fa-xl"></i>
+                                    {audioPlayer?.current?.volume >= 0.5 && <i className="fa-solid fa-volume-high fa-xl"></i>}
+                                    {(audioPlayer?.current?.volume > 0 && audioPlayer?.current?.volume < 0.5) && <i className="fa-solid fa-volume-low fa-xl"></i>}
+                                    {audioPlayer?.current?.volume === 0 && <i className="fa-solid fa-volume-xmark fa-xl"></i>}
                                 </button>
                                 <input
                                     type='range'
@@ -366,6 +379,8 @@ const Tracks = () => {
                                     max='1'
                                     step='any'
                                     className='volume'
+                                    ref={volumeBar}
+                                    onChange={updateVolume}
                                 />
                             </div>
 
