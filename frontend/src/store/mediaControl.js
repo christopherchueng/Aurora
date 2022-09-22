@@ -53,11 +53,11 @@ export const setCurrentTrack = (track) => async (dispatch) => {
     // dispatch(isPlaying(true))
 }
 
-export const getVolume = (volume) => async (dispatch) => {
+export const getStateVolume = (volume) => async (dispatch) => {
     dispatch(loadVolume(volume))
 }
 
-export const updateVolume = (volume) => async (dispatch) => {
+export const updateStateVolume = (volume) => async (dispatch) => {
     dispatch(setVolume(volume))
 }
 
@@ -82,7 +82,7 @@ const mediaControlReducer = (state = initialState, action) => {
             return newState
         case LOAD_VOLUME:
             newState = { ...state }
-            newState.volume = action.volume
+            // newState.volume = action.volume
             return newState
         case SET_VOLUME:
             newState = { ...state }
