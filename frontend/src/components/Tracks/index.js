@@ -44,6 +44,7 @@ const Tracks = () => {
     const audioPlayer = useRef()
     const volumeBarRef = useRef()
     const progressBar = useRef()
+    const volumeAnimation = useRef() // Have progress background update as progressBar moves
     const progressAnimation = useRef() // Have progress background update as progressBar moves
 
     useEffect(() => {
@@ -200,8 +201,12 @@ const Tracks = () => {
         // When the volume bar is dragged, the volume updates.
         audioPlayer.current.volume = volumeBarRef.current.value
 
+        volumeBarRef.current.style.setProperty('--before-volume-thumb', `${audioPlayer?.current?.volume * 100}px`)
+
         // This allows the volume bar to visually move on the client side while the volume is updating
         setVolumeBar(audioPlayer.current.volume)
+
+        volumeAnimation.current = requestAnimationFrame(currentVolumeLevel)
 
         // return volumeBarRef.current.value
     }
@@ -237,9 +242,8 @@ const Tracks = () => {
         } else {
             audioPlayer.current.volume = 0.01
         }
-
         volumeBarRef.current.value = audioPlayer.current.volume
-        setVolumeBar(volumeBarRef.current.value)
+        dragVolume()
     }
 
     // While track is playing, sync progress bar with the current value of the audio player time
@@ -250,16 +254,34 @@ const Tracks = () => {
         progressAnimation.current = requestAnimationFrame(currentlyPlaying) // Allows for bg color before thumb to move WHILE track is playing
     }
 
+    const currentVolumeLevel = () => {
+        volumeBarRef.current.value = audioPlayer.current.volume
+        dragVolume()
+        volumeAnimation.current = requestAnimationFrame(currentVolumeLevel) // Allows for bg color before thumb to move WHILE track is playing
+    }
+
     // Skip by dragging thumb around progress bar
     const setProgress = () => {
         audioPlayer.current.currentTime = progressBar.current.value
         dragDuration()
     }
 
-    // Sets background color before thumb
+    // Skip by dragging thumb around progress bar
+    const setVolume = () => {
+        audioPlayer.current.currentTime = progressBar.current.value
+        dragDuration()
+    }
+
+    // Sets background color before progress thumb
     const dragDuration = () => {
         progressBar.current.style.setProperty('--before-thumb', `${progressBar.current.value / audioPlayer?.current?.duration * 100}%`)
         setElapsedTime(progressBar.current.value)
+    }
+
+    // Sets background color before volume thumb
+    const dragVolume = () => {
+        volumeBarRef.current.style.setProperty('--before-volume-thumb', `${audioPlayer?.current?.volume * 100}px`)
+        setVolumeBar(volumeBarRef.current.value)
     }
 
     return (
@@ -330,19 +352,40 @@ const Tracks = () => {
                                 </div>
                             </div>
                             <div className='track-like-icon'>
-                                {sessionUser ?
-                                <button
-                                    onClick={updateLike}
-                                    className={animate ? 'like-button' : 'unlike-button'}
-                                >
-                                    {userLike ? <i className="fa-solid fa-heart fa-xl liked-icon"></i> : <i className="fa-regular fa-heart fa-xl unliked-icon"></i>
+                                <div className='likes-section'>
+                                    {sessionUser ?
+                                    <button
+                                        onClick={updateLike}
+                                        className={animate ? 'like-button' : 'unlike-button'}
+                                    >
+                                        {userLike ? <i className="fa-solid fa-heart fa-xl liked-icon"></i> : <i className="fa-regular fa-heart fa-xl unliked-icon"></i>
+                                        }
+                                    </button>
+                                    : <button className='no-auth-span'><i className="fa-solid fa-heart fa-xl no-user-heart"></i></button>
                                     }
-                                </button>
-                                : <button className='no-auth-span'><i className="fa-solid fa-heart fa-xl no-user-heart"></i></button>
-                                }
-                                <span className='like-count'>
-                                    {likesArr && likesArr.length === 1 ? `1 like` : `${(likesArr.length).toLocaleString()} likes`}
-                                </span>
+                                    <span className='like-count'>
+                                        {likesArr && likesArr.length === 1 ? `1 like` : `${(likesArr.length).toLocaleString()} likes`}
+                                    </span>
+                                </div>
+                                {/* ------------------ VOLUME ------------------ */}
+                                <div className='volume-ctn'>
+                                    <button className='volume' onClick={pushMuteButton}>
+                                        {audioPlayer?.current?.volume >= 0.5 && <i className="fa-solid fa-volume-high fa-xl"></i>}
+                                        {(audioPlayer?.current?.volume > 0 && audioPlayer?.current?.volume < 0.5) && <i className="fa-solid fa-volume-low fa-xl"></i>}
+                                        {audioPlayer?.current?.volume === 0 && <i className="fa-solid fa-volume-xmark fa-xl"></i>}
+                                    </button>
+                                    <input
+                                        type='range'
+                                        value={volumeBar}
+                                        min='0'
+                                        max='1'
+                                        step='any'
+                                        className='volume-bar'
+                                        ref={volumeBarRef}
+                                        onChange={updateVolume}
+                                        onMouseDown={() => dispatch(updateStateVolume(+volumeBarRef?.current?.value))}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -409,26 +452,6 @@ const Tracks = () => {
                                 >
                                     <i className="fa-solid fa-forward-step fa-3x"></i>
                                 </button>
-                            </div>
-
-                            {/* ------------------ VOLUME ------------------ */}
-                            <div className='volume-ctn'>
-                                <button className='volume' onClick={pushMuteButton}>
-                                    {audioPlayer?.current?.volume >= 0.5 && <i className="fa-solid fa-volume-high fa-xl"></i>}
-                                    {(audioPlayer?.current?.volume > 0 && audioPlayer?.current?.volume < 0.5) && <i className="fa-solid fa-volume-low fa-xl"></i>}
-                                    {audioPlayer?.current?.volume === 0 && <i className="fa-solid fa-volume-xmark fa-xl"></i>}
-                                </button>
-                                <input
-                                    type='range'
-                                    value={volumeBar}
-                                    min='0'
-                                    max='1'
-                                    step='any'
-                                    className='volume-bar'
-                                    ref={volumeBarRef}
-                                    onChange={updateVolume}
-                                    onMouseDown={() => dispatch(updateStateVolume(+volumeBarRef?.current?.value))}
-                                />
                             </div>
 
                             {/* ------------------ EDIT ------------------ */}

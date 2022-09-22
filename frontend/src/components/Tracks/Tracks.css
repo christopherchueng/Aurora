@@ -30,8 +30,8 @@
     -webkit-appearance: none;
 }
 
-/* .volume-bar {
-    --before-thumb: 0;
+.volume-bar {
+    --before-volume-thumb: 100px;
 
     appearance: none;
     outline: none;
@@ -39,27 +39,11 @@
     z-index: 1;
     height: 5px;
     cursor: pointer;
+    position: relative;
     -webkit-appearance: none;
+    background-color: #272727;
+    border-radius: 5px;
 }
-
-.volume-bar::before {
-    content: '';
-    height: 11px;
-    position: absolute;
-    width: 50px;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    cursor: pointer;
-}
-
-.volume-bar::-webkit-slider-thumb {
-    appearance: none;
-    height: 11px;
-    width: 5px;
-    border-radius: 10px;
-    cursor: pointer;
-} */
 
 .input-tracker::before {
     content: '';
@@ -73,12 +57,48 @@
     cursor: pointer;
 }
 
-input[type=range]::-webkit-slider-thumb {
+.volume-bar::before {
+    content: '';
+    height: 5px;
+    position: absolute;
+    width: var(--before-volume-thumb);
+    border-radius: 5px;
+    /* width: 50px; */
+    background: #F050ED;
+    /* top: 0;
+    left: 0; */
+    z-index: 2;
+    cursor: pointer;
+}
+
+input[type=range].input-tracker::-webkit-slider-thumb {
     appearance: none;
     /* border: 1px solid black; */
     height: 565px;
     width: 1px;
     cursor: pointer;
+}
+
+input[type=range].volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    z-index: 3;
+    background: white;
+    cursor: pointer;
+    position: relative;
+    margin: -2px 0 0 0;
+}
+
+.volume-bar:hover::-webkit-slider-thumb {
+    /* -webkit-appearance: none; */
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    z-index: 3;
+    background: white;
+    cursor: pointer;
+    position: relative;
+    margin: -2px 0 0 0;
+    box-sizing: border-box;
 }
 
 .cover-photo-ctn {
@@ -138,7 +158,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .track-title,
 .track-artist,
-.track-like-icon {
+.likes-section {
     margin-left: 50px;
 }
 
@@ -188,7 +208,8 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .title-date-ctn,
-.artist-genre-ctn {
+.artist-genre-ctn,
+.track-like-icon {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -199,11 +220,6 @@ input[type=range]::-webkit-slider-thumb {
 .artist-genre-ctn,
 .track-like-icon {
     padding-top: 10px;
-}
-
-.track-like-icon {
-    display: flex;
-    align-items: center;
 }
 
 .title-date-ctn {
@@ -270,14 +286,19 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .genre-ctn,
-.date-ctn {
+.date-ctn,
+.volume-ctn {
     display: flex;
     justify-content: flex-end;
     width: 210px;
     margin-right: 50px;
 }
 
-.volume-ctn,
+.volume-ctn {
+    align-items: center;
+    height: 25px;
+}
+
 .shuffle-ctn,
 .delete-cancel-ctn,
 .edit-save-ctn {
