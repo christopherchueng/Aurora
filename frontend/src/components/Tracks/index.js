@@ -69,7 +69,7 @@ const Tracks = () => {
         setInterval(() => {
             const trackDuration = audioPlayer?.current?.duration
             setDuration(trackDuration)
-        }, 500)
+        }, 100)
     }, [])
 
     useEffect(() => {
@@ -87,7 +87,7 @@ const Tracks = () => {
         if (isPlaying === true) {
             const durationInterval = setInterval(() => {
                 setElapsedTime(audioPlayer.current?.currentTime)
-            }, 100)
+            }, 1000)
 
             clearInterval(durationInterval)
         }
