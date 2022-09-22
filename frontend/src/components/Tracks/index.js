@@ -8,7 +8,7 @@ import Comments from '../Comments';
 import DateConverter from '../DateConverter';
 import './Tracks.css';
 import { deleteLike, getLikes, postLike } from '../../store/likes';
-import { pauseTrack, playTrack, setCurrentTrack } from '../../store/mediaControl';
+import { getVolume, pauseTrack, playTrack, setCurrentTrack, updateVolume, getMute } from '../../store/mediaControl';
 
 const Tracks = () => {
     const dispatch = useDispatch();
@@ -18,6 +18,8 @@ const Tracks = () => {
     const sessionUser = useSelector(state => state?.session?.user);
     const playing = useSelector(state => state?.mediaControl?.playing)
     const currentTrack = useSelector(state => state?.mediaControl?.track)
+    const volumeLevel = useSelector(state => state?.mediaControl?.volume)
+    // const muteTrack = useSelector(state => state?.mediaControl?.mute)
     const likes = useSelector(state => state?.like?.entries)
     const likesArr = Object.values(likes)
     const track = tracks[+trackId];
@@ -31,9 +33,9 @@ const Tracks = () => {
     const [animate, setAnimate] = useState(false)
     const [duration, setDuration] = useState(0)
     const [elapsedTime, setElapsedTime] = useState(0)
-    const [volume, setVolume] = useState(1)
-    const [isMute, setIsMute] = useState(false)
-    const [volumeBeforeMute, setVolumeBeforeMute] = useState(0)
+    const [volume, setVolume] = useState('')
+    const [volumeBeforeMute, setVolumeBeforeMute] = useState('')
+    const [mute, setMute] = useState(false)
 
     let tracksArr = Object.values(tracks);
     let shuffledArr = []
@@ -46,6 +48,8 @@ const Tracks = () => {
 
     useEffect(() => {
         dispatch(getTracks())
+        dispatch(getVolume(0))
+        // dispatch(getMute(mute))
     }, [dispatch])
 
     useEffect(() => {
@@ -61,8 +65,10 @@ const Tracks = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         setElapsedTime(0)
+        setVolume(1)
+        dispatch(getVolume(volumeLevel))
 
-        const durationInt = setInterval(() => {
+        setInterval(() => {
             const trackDuration = audioPlayer?.current?.duration
             setDuration(trackDuration)
         }, 100)
@@ -87,21 +93,22 @@ const Tracks = () => {
         }
     }, [isPlaying])
 
-    useEffect(() => {
-        setVolumeBeforeMute(volume)
-        if (isMute === true) {
-            setVolume(0)
-            audioPlayer.current.volume = 0
-            volumeBar.current.value = 0
-        }
-        if (isMute === false) {
-            audioPlayer.current.volume = volumeBeforeMute
-            volumeBar.current.value = audioPlayer.current.volume
-            setVolume(volumeBar.current.value)
-        }
-    }, [isMute])
+    // useEffect(() => {
+    //     setVolumeBeforeMute(volumeBar.current.value)
+    //     // if (mute === true) {
+    //     //     setVolume(0)
+    //     //     audioPlayer.current.volume = 0
+    //     //     volumeBar.current.value = 0
+    //     // }
+    //     // // if (mute === false) {
+    //     //     audioPlayer.current.volume = volumeLevel
+    //     //     volumeBar.current.value = audioPlayer.current.volume
+    //     //     setVolume(volumeBar.current.value)
+    //     // // }
+    // }, [mute])
 
     useEffect(() => {
+        // setVolumeBeforeMute(volume)
         volumeBar.current.value = audioPlayer.current.volume
     }, [volume])
 
@@ -200,13 +207,61 @@ const Tracks = () => {
         // setTimeout(() => setAnimate(false), 1000)
     }
 
+    // Volume progress bar control
     const updateVolume = () => {
+        // // dispatch(getMute(!muteTrack?.mute))
+        if (volumeBar.current.value === 0) {
+            audioPlayer.current.volume = 0
+            setMute(true)
+        }
         // When the volume bar is dragged, the volume updates.
         audioPlayer.current.volume = volumeBar.current.value
 
         // This allows the volume bar to visually move on the client side while the volume is updating
         setVolume(audioPlayer.current.volume)
+
+        dispatch(getVolume(+audioPlayer.current.volume))
+
+        // if (mute === true) {
+        //     setVolumeBeforeMute(volume)
+        //     audioPlayer.current.volume = 0
+        //     volumeBar.current.value = 0
+        //     setVolume(audioPlayer.current.volume)
+        // } else {
+        //     audioPlayer.current.volume = volumeBeforeMute
+        //     volumeBar.current.value = audioPlayer.current.volume
+        //     setVolume(audioPlayer.current.volume)
+        // }
     }
+
+    const pushMuteButton = (e) => {
+        e.preventDefault()
+
+        setMute(!mute)
+        dispatch(getVolume(+volumeBar.current.value))
+        if (mute === true && +volumeBar.current.value) {
+            audioPlayer.current.volume = 0
+            volumeBar.current.value = 0
+            setVolume(volumeBar.current.value)
+        } else {
+            audioPlayer.current.volume = volumeLevel
+            volumeBar.current.value = audioPlayer.current.volume
+            setVolume(volumeBar.current.value)
+        }
+    }
+    // const pushMuteButton = () => {
+    //     setMute(!mute)
+    //     setVolumeBeforeMute(volume)
+    //     if (mute === true) {
+    //         audioPlayer.current.volume = 0
+    //         volumeBar.current.value = 0
+    //         setVolume(volumeBar.current.value)
+    //     } else {
+    //         audioPlayer.current.volume = volumeBeforeMute
+    //         volumeBar.current.value = audioPlayer.current.volume
+    //         setVolume(volumeBar.current.value)
+    //     }
+    // }
 
     // While track is playing, sync progress bar with the current value of the audio player time
     // Background should also update while track is playing
@@ -379,7 +434,7 @@ const Tracks = () => {
 
                             {/* ------------------ VOLUME ------------------ */}
                             <div className='volume-ctn'>
-                                <button className='volume' onClick={() => setIsMute(!isMute)}>
+                                <button className='volume' onClick={pushMuteButton}>
                                     {audioPlayer?.current?.volume >= 0.5 && <i className="fa-solid fa-volume-high fa-xl"></i>}
                                     {(audioPlayer?.current?.volume > 0 && audioPlayer?.current?.volume < 0.5) && <i className="fa-solid fa-volume-low fa-xl"></i>}
                                     {audioPlayer?.current?.volume === 0 && <i className="fa-solid fa-volume-xmark fa-xl"></i>}
