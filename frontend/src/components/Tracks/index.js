@@ -8,7 +8,7 @@ import Comments from '../Comments';
 import DateConverter from '../DateConverter';
 import './Tracks.css';
 import { deleteLike, getLikes, postLike } from '../../store/likes';
-import { getStateVolume, pauseTrack, playTrack, setCurrentTrack, updateStateVolume, getMute } from '../../store/mediaControl';
+import { getStateVolume, updateStateVolume } from '../../store/mediaControl';
 
 const Tracks = () => {
     const dispatch = useDispatch();
@@ -44,7 +44,6 @@ const Tracks = () => {
     const audioPlayer = useRef()
     const volumeBarRef = useRef()
     const progressBar = useRef()
-    const volumeAnimation = useRef() // Have progress background update as progressBar moves
     const progressAnimation = useRef() // Have progress background update as progressBar moves
 
     useEffect(() => {
@@ -66,12 +65,11 @@ const Tracks = () => {
         window.scrollTo(0, 0)
         setElapsedTime(0)
         setVolumeBar(1)
-        // dispatch(getStateVolume(volumeLevel))
 
         setInterval(() => {
             const trackDuration = audioPlayer?.current?.duration
             setDuration(trackDuration)
-        }, 100)
+        }, 500)
     }, [])
 
     useEffect(() => {
@@ -87,9 +85,11 @@ const Tracks = () => {
 
     useEffect(() => {
         if (isPlaying === true) {
-            setInterval(() => {
+            const durationInterval = setInterval(() => {
                 setElapsedTime(audioPlayer.current?.currentTime)
             }, 100)
+
+            clearInterval(durationInterval)
         }
     }, [isPlaying])
 
@@ -206,8 +206,6 @@ const Tracks = () => {
         // This allows the volume bar to visually move on the client side while the volume is updating
         setVolumeBar(audioPlayer.current.volume)
 
-        volumeAnimation.current = requestAnimationFrame(currentVolumeLevel)
-
         // return volumeBarRef.current.value
     }
 
@@ -254,20 +252,8 @@ const Tracks = () => {
         progressAnimation.current = requestAnimationFrame(currentlyPlaying) // Allows for bg color before thumb to move WHILE track is playing
     }
 
-    const currentVolumeLevel = () => {
-        volumeBarRef.current.value = audioPlayer.current.volume
-        dragVolume()
-        volumeAnimation.current = requestAnimationFrame(currentVolumeLevel) // Allows for bg color before thumb to move WHILE track is playing
-    }
-
     // Skip by dragging thumb around progress bar
     const setProgress = () => {
-        audioPlayer.current.currentTime = progressBar.current.value
-        dragDuration()
-    }
-
-    // Skip by dragging thumb around progress bar
-    const setVolume = () => {
         audioPlayer.current.currentTime = progressBar.current.value
         dragDuration()
     }
