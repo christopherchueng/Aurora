@@ -49,8 +49,6 @@ const Tracks = () => {
     useEffect(() => {
         dispatch(getTracks())
         dispatch(getStateVolume(0))
-        // dispatch(getStateVolume(volumeLevel))
-        // dispatch(getMute(mute))
     }, [dispatch])
 
     useEffect(() => {
@@ -94,22 +92,7 @@ const Tracks = () => {
         }
     }, [isPlaying])
 
-    // useEffect(() => {
-    //     setVolumeBarBeforeMute(volumeBarRef.current.value)
-    //     // if (mute === true) {
-    //     //     setVolumeBar(0)
-    //     //     audioPlayer.current.volume = 0
-    //     //     volumeBarRef.current.value = 0
-    //     // }
-    //     // // if (mute === false) {
-    //     //     audioPlayer.current.volume = volumeLevel
-    //     //     volumeBarRef.current.value = audioPlayer.current.volume
-    //     //     setVolumeBar(volumeBarRef.current.value)
-    //     // // }
-    // }, [mute])
-
     useEffect(() => {
-        // setVolumeBarBeforeMute(volume)
         volumeBarRef.current.value = audioPlayer.current.volume
     }, [volumeBar])
 
@@ -214,84 +197,50 @@ const Tracks = () => {
     // volume bar should return back to the saved volume value.
     // Volume progress bar control
     const updateVolume = () => {
-        // // dispatch(getMute(!muteTrack?.mute))
         // When the volume bar is dragged, the volume updates.
         audioPlayer.current.volume = volumeBarRef.current.value
 
         // This allows the volume bar to visually move on the client side while the volume is updating
         setVolumeBar(audioPlayer.current.volume)
-        // let volumeBeforeMute
-        // if (volumeBarRef.current.value === 0) {
-        //     // volumeBeforeMute =
-        //     // audioPlayer.current.volume = 0
-        //     // setMute(true)
-        //     pushMuteButton()
-        // }
 
-        return volumeBarRef.current.value
-
-
-        // if (mute === true) {
-        //     setVolumeBarBeforeMute(volume)
-        //     audioPlayer.current.volume = 0
-        //     volumeBarRef.current.value = 0
-        //     setVolumeBar(audioPlayer.current.volume)
-        // } else {
-        //     audioPlayer.current.volume = volumeBeforeMute
-        //     volumeBarRef.current.value = audioPlayer.current.volume
-        //     setVolumeBar(audioPlayer.current.volume)
-        // }
+        // return volumeBarRef.current.value
     }
 
     // If I push mute button to mute song,
     // volume level should drop to 0 and volume bar should be at 0.
     // If I push mute button to UNMUTE,
     // volume level AND volume bar should return to previous volume level prior to muting
-
     const pushMuteButton = (e) => {
         e.preventDefault()
 
         setMute(!mute)
-        setSpecialCaseVolume(+volumeBarRef.current.value)
-
+        dispatch(getStateVolume(+volumeBarRef.current.value))
+        setSpecialCaseVolume(volumeLevel)
         dispatch(updateStateVolume(+volumeBarRef.current.value))
-        // dispatch(getStateVolume(+volumeBarRef.current.value))
+
         // If NOT mute and volume bar is NOT 0, then volume level and volume bar should be at 0
         if (mute === false && +volumeBarRef.current.value) {
-            console.log('NOT mute and volume bar is NOT 0')
             audioPlayer.current.volume = 0
-            volumeBarRef.current.value = 0
-            setVolumeBar(volumeBarRef.current.value)
 
         // If muted and volume bar is AT 0, then bring volume button back to the previous level prior to muting
         } else if (mute === true && +volumeBarRef.current.value === 0) {
-            console.log('if muted and volume bar is AT 0')
             audioPlayer.current.volume = volumeLevel
-            volumeBarRef.current.value = audioPlayer.current.volume
-            setVolumeBar(volumeBarRef.current.value)
 
-        // If dragged volume bar down to 0 and then press the mute button again
+        // If dragged volume bar down to 0 and then press the mute button again, volume bar
+        // should go back to previous volume level prior to muting
+        // Special case involves clicking volume bar straight to 0 and then pressing
+        // mute button to unmute.
         } else if (mute === false && +volumeBarRef.current.value === 0) {
-            console.log('what is the volumeBar here', specialCaseVolume)
             setMute(false)
-            audioPlayer.current.volume = 0.1
-            volumeBarRef.current.value = audioPlayer.current.volume
-            setVolumeBar(volumeBarRef.current.value)
+            audioPlayer.current.volume = specialCaseVolume ? specialCaseVolume : (volumeLevel ? volumeLevel : 1)
+
+        } else {
+            audioPlayer.current.volume = 0.01
         }
+
+        volumeBarRef.current.value = audioPlayer.current.volume
+        setVolumeBar(volumeBarRef.current.value)
     }
-    // const pushMuteButton = () => {
-    //     setMute(!mute)
-    //     setVolumeBarBeforeMute(volume)
-    //     if (mute === true) {
-    //         audioPlayer.current.volume = 0
-    //         volumeBarRef.current.value = 0
-    //         setVolumeBar(volumeBarRef.current.value)
-    //     } else {
-    //         audioPlayer.current.volume = volumeBeforeMute
-    //         volumeBarRef.current.value = audioPlayer.current.volume
-    //         setVolumeBar(volumeBarRef.current.value)
-    //     }
-    // }
 
     // While track is playing, sync progress bar with the current value of the audio player time
     // Background should also update while track is playing
@@ -478,7 +427,7 @@ const Tracks = () => {
                                     className='volume-bar'
                                     ref={volumeBarRef}
                                     onChange={updateVolume}
-                                    onMouseUp={() => dispatch(updateStateVolume(+volumeBarRef?.current?.value))}
+                                    onMouseDown={() => dispatch(updateStateVolume(+volumeBarRef?.current?.value))}
                                 />
                             </div>
 
