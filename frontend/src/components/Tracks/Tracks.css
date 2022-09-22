@@ -64,11 +64,15 @@
     width: var(--before-volume-thumb);
     border-radius: 5px;
     /* width: 50px; */
-    background: #F050ED;
+    background: lightgray;
     /* top: 0;
     left: 0; */
     z-index: 2;
     cursor: pointer;
+}
+
+.volume-bar:hover::before {
+    background-color: #F050ED;
 }
 
 input[type=range].input-tracker::-webkit-slider-thumb {
