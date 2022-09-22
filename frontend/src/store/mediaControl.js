@@ -2,7 +2,6 @@ const SET_TRACK = 'mediaControl/setTrack'
 const SET_PLAYING = 'mediaControl/setPlaying'
 const LOAD_VOLUME = 'mediaControl/loadVolume'
 const SET_VOLUME = 'mediaControl/setVolume'
-const SET_MUTE = 'mediaControl/setMute'
 
 const setTrack = (track) => {
     return {
@@ -32,14 +31,6 @@ const setVolume = (volume) => {
     }
 }
 
-const setMute = (mute) => {
-    return {
-        type: SET_MUTE,
-        mute,
-        volume: 0
-    }
-}
-
 export const playTrack = () => async (dispatch) => {
     dispatch(isPlaying(true))
 }
@@ -61,11 +52,7 @@ export const updateStateVolume = (volume) => async (dispatch) => {
     dispatch(setVolume(volume))
 }
 
-export const getMute = (mute) => async (dispatch) => {
-    dispatch(setMute(mute))
-}
-
-let initialState = {entries: {}, volume: {}, mute: {}}
+let initialState = {entries: {}, volume: {}}
 
 const mediaControlReducer = (state = initialState, action) => {
     let newState
@@ -82,16 +69,10 @@ const mediaControlReducer = (state = initialState, action) => {
             return newState
         case LOAD_VOLUME:
             newState = { ...state }
-            // newState.volume = action.volume
             return newState
         case SET_VOLUME:
             newState = { ...state }
             newState.volume = action.volume
-            return newState
-        case SET_MUTE:
-            newState = { ...state }
-            newState.mute.mute = action.mute
-            newState.mute.volume = action.volume
             return newState
         default:
             return state

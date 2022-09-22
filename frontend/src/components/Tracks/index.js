@@ -19,7 +19,6 @@ const Tracks = () => {
     const playing = useSelector(state => state?.mediaControl?.playing)
     const currentTrack = useSelector(state => state?.mediaControl?.track)
     const volumeLevel = useSelector(state => state?.mediaControl?.volume)
-    // const muteTrack = useSelector(state => state?.mediaControl?.mute)
     const likes = useSelector(state => state?.like?.entries)
     const likesArr = Object.values(likes)
     const track = tracks[+trackId];
