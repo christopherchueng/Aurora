@@ -260,7 +260,10 @@ input[type=range].volume-bar::-webkit-slider-thumb {
 .shuffle,
 .fa-volume-high,
 .fa-pen,
-.fa-trash {
+.fa-trash,
+.no-loop-icon,
+.loop-icon,
+.repeat-one-icon {
     transition-duration: 0.2s;
     transition-property: opacity;
 }
@@ -272,7 +275,10 @@ input[type=range].volume-bar::-webkit-slider-thumb {
 .shuffle:hover,
 .fa-volume-high:hover,
 .fa-pen:hover,
-.fa-trash:hover {
+.fa-trash:hover,
+.no-loop-icon:hover,
+.loop-icon:hover,
+.repeat-one-icon:hover {
     opacity: 40%;
 }
 
@@ -313,6 +319,7 @@ input[type=range].volume-bar::-webkit-slider-thumb {
 .repeat-one-icon {
     width: 35px;
     height: 35px;
+    cursor: pointer;
 }
 
 .shuffle-ctn,

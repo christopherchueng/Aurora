@@ -39,7 +39,6 @@ const Tracks = () => {
 
     let tracksArr = Object.values(tracks);
     let shuffledArr = []
-    const loop = ['none', 'continuous', 'repeat']
 
     // References
     const audioPlayer = useRef()
@@ -382,16 +381,16 @@ const Tracks = () => {
 
 
                             {/* ------------------ SHUFFLE BUTTON ------------------ */}
-                            {/* <div className='shuffle-ctn'>
+                            <div className='shuffle-ctn'>
                                 <button
                                     type='button'
                                     className='shuffle'
                                     onClick={shuffleTracks}
                                     style={{ color: isShuffled ? 'lightgreen' : ''}}
                                 >
-                                    <i className="fa-solid fa-shuffle fa-xl"></i>
+                                    <i className="fa-solid fa-shuffle fa-2xl"></i>
                                 </button>
-                            </div> */}
+                            </div>
 
                             {/* ------------------ BACK BUTTON ------------------ */}
                             <div className='back-ctn'>
