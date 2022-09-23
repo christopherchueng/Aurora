@@ -274,9 +274,6 @@ const Tracks = () => {
                                 ref={audioPlayer}
                                 src={track?.trackPath}
                                 onEnded={loopIdx === 2 ? continuousLoop : nextBtn}
-                                // play={isPlaying === true}
-                                // pause={isPlaying === false}
-                                // onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
                             >
                             </audio>
                         </div>
@@ -409,7 +406,6 @@ const Tracks = () => {
                                     type='button'
                                     className='play-pause'
                                     onClick={() => setIsPlaying(!isPlaying)}
-                                    // onClick={playBtn}
                                 >
                                     {isPlaying
                                     ? <i className="fa-solid fa-circle-pause fa-7x"></i>
