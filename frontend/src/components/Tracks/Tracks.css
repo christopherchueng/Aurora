@@ -303,9 +303,22 @@ input[type=range].volume-bar::-webkit-slider-thumb {
     height: 25px;
 }
 
+.loop {
+    background-color: transparent;
+    border: none;
+}
+
+.no-loop-icon,
+.loop-icon,
+.repeat-one-icon {
+    width: 40px;
+    height: 40px;
+}
+
 .shuffle-ctn,
 .delete-cancel-ctn,
-.edit-save-ctn {
+.edit-save-ctn,
+.loop-ctn {
     width: 30px;
     padding: 0 50px;
 }
