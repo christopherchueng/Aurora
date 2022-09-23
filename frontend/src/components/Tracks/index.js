@@ -56,12 +56,6 @@ const Tracks = () => {
         dispatch(getLikes(trackId))
     }, [dispatch, trackId])
 
-    // useEffect(() => {
-    //     if (audioPlayer) {
-    //         audioPlayer?.current?.duration = elapsedTime
-    //     }
-    // }, [elapsedTime])
-
     useEffect(() => {
         window.scrollTo(0, 0)
         setElapsedTime(0)
@@ -149,16 +143,6 @@ const Tracks = () => {
             history.push(`/tracks/${tracksArr[+trackId]?.id}`)
         }
     }
-
-    // const autoPlay = e => {
-    //     if (e.currentTarget.className === 'play') {
-    //         setIsPlaying(true)
-    //         return true
-    //     } else if (e.currentTarget.className === 'pause') {
-    //         setIsPlaying(false)
-    //         return false
-    //     }
-    // }
 
     const shuffleTracks = () => {
         console.log('tracksArr BEFOREEEE', tracksArr)
