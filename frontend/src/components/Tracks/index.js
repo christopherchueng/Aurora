@@ -129,21 +129,6 @@ const Tracks = () => {
         }
     }
 
-    const playBtn = (e) => {
-        e.preventDefault()
-        // dispatch(setCurrentTrack(currentTrack))
-
-        if (playing && track?.id === currentTrack) {
-            // dispatch(pauseTrack())
-            setIsPlaying(false)
-            progressAnimation.current = requestAnimationFrame(currentlyPlaying)
-        } else if (!playing && track?.id === currentTrack) {
-            // dispatch(playTrack())
-            setIsPlaying(true)
-            cancelAnimationFrame(progressAnimation.current)
-        }
-    }
-
     const nextBtn = () => {
         // If at the end of the playlist, then restart at 1
         if (+trackId === tracksArr[tracksArr.length - 1]?.id && loopIdx !== 0) {
