@@ -109,17 +109,23 @@ const Tracks = () => {
     }
 
     const backBtn = () => {
-        for (let i = 0; i < tracksArr.length; i++) {
-            let track = tracksArr[i]
-            if (+trackId === track?.id) {
-                setIsPlaying(true)
-                history.push(`/tracks/${tracksArr[i - 1]?.id}`)
-            }
-        }
-
-        if (+trackId === tracksArr[0]?.id) {
+        // If at the beginning of the playlist, then backtrack to last track of playlist
+        if (+trackId === tracksArr[0]?.id && loopIdx !== 0) {
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[tracksArr.length - 1]?.id}`)
+
+        // If at the beginning of the playlist and no loop is on, then stay on track and just reset progress bar.
+        } else if (+trackId === tracksArr[0]?.id && loopIdx === 0) {
+            setIsPlaying(false)
+            audioPlayer.current.currentTime = 0
+            progressBar.current.value = audioPlayer.current.currentTime
+            dragDuration()
+
+        // Otherwise, go back one track
+        } else {
+            setIsPlaying(true)
+            // Why subtract by 2 to go back ONE track...?
+            history.push(`/tracks/${tracksArr[trackId - 2]?.id}`)
         }
     }
 
@@ -139,18 +145,23 @@ const Tracks = () => {
     }
 
     const nextBtn = () => {
-        for (let i = 0; i < tracksArr.length; i++) {
-            let track = tracksArr[i]
-            if (+trackId === track.id) {
-                setIsPlaying(true)
-                history.push(`/tracks/${tracksArr[i + 1]?.id}`)
-            }
-        }
-
         // If at the end of the playlist, then restart at 1
-        if (+trackId === tracksArr[tracksArr.length - 1]?.id) {
+        if (+trackId === tracksArr[tracksArr.length - 1]?.id && loopIdx !== 0) {
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[0]?.id}`)
+
+        // If at the end of the playlist and no loop is on, then stay on track and just reset progress bar.
+        } else if (+trackId === tracksArr[tracksArr.length - 1]?.id && loopIdx === 0) {
+            setIsPlaying(false)
+            audioPlayer.current.currentTime = 0
+            progressBar.current.value = audioPlayer.current.currentTime
+            dragDuration()
+
+        // Otherwise, move on to next track.
+        } else {
+            setIsPlaying(true)
+            // Why does this have an implicit addition of 1?
+            history.push(`/tracks/${tracksArr[+trackId]?.id}`)
         }
     }
 
@@ -271,6 +282,14 @@ const Tracks = () => {
         setVolumeBar(volumeBarRef.current.value)
     }
 
+    const continuousLoop = () => {
+        setIsPlaying(true)
+        audioPlayer.current.currentTime = 0
+        progressBar.current.value = audioPlayer.current.currentTime
+        audioPlayer.current.play()
+        dragDuration()
+    }
+
     return (
         <>
             <div className='music-player-ctn'>
@@ -285,7 +304,7 @@ const Tracks = () => {
                             <audio
                                 ref={audioPlayer}
                                 src={track?.trackPath}
-                                onEnded={nextBtn}
+                                onEnded={loopIdx === 2 ? continuousLoop : nextBtn}
                                 // play={isPlaying === true}
                                 // pause={isPlaying === false}
                                 // onChange={(e) => isPlaying ? e.current?.play() : e.current?.pause()}
