@@ -121,6 +121,9 @@ const Tracks = () => {
             // Why subtract by 2 to go back ONE track...?
             history.push(`/tracks/${tracksArr[trackId - 2]?.id}`)
         }
+
+        // Opted for Spotify's functionality: If on repeat setting but click back, revert to continuous loop
+        if (loopIdx === 2) setLoopIdx(1)
     }
 
     const nextBtn = () => {
@@ -142,6 +145,9 @@ const Tracks = () => {
             // Why does this have an implicit addition of 1?
             history.push(`/tracks/${tracksArr[+trackId]?.id}`)
         }
+
+        // Opted for Spotify's functionality: If on repeat setting but click next, revert to continuous loop
+        if (loopIdx === 2) setLoopIdx(1)
     }
 
     const shuffleTracks = () => {
