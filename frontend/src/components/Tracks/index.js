@@ -35,9 +35,11 @@ const Tracks = () => {
     const [volumeBar, setVolumeBar] = useState('')
     const [mute, setMute] = useState(false)
     const [specialCaseVolume, setSpecialCaseVolume] = useState('')
+    const [loopIdx, setLoopIdx] = useState(0)
 
     let tracksArr = Object.values(tracks);
     let shuffledArr = []
+    const loop = ['none', 'continuous', 'repeat']
 
     // References
     const audioPlayer = useRef()
@@ -436,6 +438,19 @@ const Tracks = () => {
                                     onClick={nextBtn}
                                 >
                                     <i className="fa-solid fa-forward-step fa-3x"></i>
+                                </button>
+                            </div>
+
+                            {/* ------------------ LOOP BUTTON ------------------ */}
+                            <div className='loop-ctn'>
+                                <button
+                                    type='button'
+                                    className='loop'
+                                    onClick={() => setLoopIdx(prev => prev === 2 ? 0 : prev + 1)}
+                                >
+                                    {loopIdx === 0 && <img className='no-loop-icon' src={process.env.PUBLIC_URL + '/images/no-loop.png'}></img>}
+                                    {loopIdx === 1 && <img className='loop-icon' src={process.env.PUBLIC_URL + '/images/loop.png'}></img>}
+                                    {loopIdx === 2 && <img className='repeat-one-icon' src={process.env.PUBLIC_URL + '/images/repeat-one.png'}></img>}
                                 </button>
                             </div>
 
