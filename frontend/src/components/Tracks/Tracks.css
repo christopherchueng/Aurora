@@ -311,24 +311,34 @@ input[type=range].volume-bar::-webkit-slider-thumb {
 .no-loop-icon,
 .loop-icon,
 .repeat-one-icon {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 }
 
 .shuffle-ctn,
+.loop-ctn {
+    width: 35px;
+    padding: 0 50px;
+}
+
 .delete-cancel-ctn,
+.edit-save-ctn {
+    width: 30px;
+}
+
+.delete-track-modal-ctn,
 .edit-save-ctn,
 .loop-ctn {
-    width: 30px;
-    padding: 0 50px;
+    display: flex;
+    justify-content: center;
 }
 
 .delete-cancel-ctn {
     margin-left: auto;
 }
+
 .edit-save-ctn {
     margin-right: auto;
-
 }
 
 .edit-save-ctn > a {
