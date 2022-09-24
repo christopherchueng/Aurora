@@ -34,7 +34,7 @@ const Search = () => {
             <div className='search-ctn'>
                 {tracksArr.length !== 0
                 ? (tracksArr && tracksArr.map(track => (
-                    <div key={track.id} className='search-content'>
+                    <div key={track.id} className='search-results-section'>
                         <SearchResults track={track} />
                     </div>
                 )))
