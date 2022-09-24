@@ -43,6 +43,7 @@ const SearchResults = ({track}) => {
         }
     }, [isPlaying])
 
+    // When track ends, reset progress bar and audio.
     const trackEnded = () => {
         setIsPlaying(false)
         audioPlayer.current.currentTime = 0
