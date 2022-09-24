@@ -44,12 +44,10 @@ const SearchResults = ({track}) => {
     }, [isPlaying])
 
     const trackEnded = () => {
-        if (isPlaying) {
-            setIsPlaying(false)
-            audioPlayer.current.currentTime = 0
-            progressBar.current.value = audioPlayer.current.currentTime
-            dragDuration()
-        }
+        setIsPlaying(false)
+        audioPlayer.current.currentTime = 0
+        progressBar.current.value = audioPlayer.current.currentTime
+        dragDuration()
     }
 
     const updateLike = (e) => {
