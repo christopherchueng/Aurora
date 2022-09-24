@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { getSearchedTracks } from "../../store/search"
 import SearchResults from "./SearchResults"
 import './Search.css'
 import { getAllLikes } from "../../store/likes"
 
 const Search = () => {
-    const history = useHistory()
     const dispatch = useDispatch()
 
     // useLocation will grab the path after search (?q=someKeyword)
@@ -18,6 +17,10 @@ const Search = () => {
 
     const trackQueries = useSelector(state => state?.search?.entries)
     const tracksArr = Object.values(trackQueries)
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     useEffect(() => {
         dispatch(getSearchedTracks({keyword}))
@@ -33,9 +36,9 @@ const Search = () => {
             </div>
             <div className='search-ctn'>
                 {tracksArr.length !== 0
-                ? (tracksArr && tracksArr.map(track => (
+                ? (tracksArr && tracksArr.map((track, trackIdx) => (
                     <div key={track.id} className='search-results-section'>
-                        <SearchResults track={track} />
+                        <SearchResults tracksArr={tracksArr} track={track} trackIdx={trackIdx} />
                     </div>
                 )))
                 :

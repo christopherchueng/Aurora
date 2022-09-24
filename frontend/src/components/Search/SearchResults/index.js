@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getLikes, postLike, deleteLike } from '../../../store/likes'
+import { postLike, deleteLike } from '../../../store/likes'
 import DateConverter from '../../DateConverter'
 import '../Search.css'
 
@@ -16,6 +16,7 @@ const SearchResults = ({track}) => {
     // States
     const [elapsedTime, setElapsedTime] = useState(0)
     const [duration, setDuration] = useState(0)
+    const [currentTrack] = useState(track)
     const [isPlaying, setIsPlaying] = useState(!!playing)
 
     // References
@@ -41,6 +42,15 @@ const SearchResults = ({track}) => {
             cancelAnimationFrame(progressAnimation.current)
         }
     }, [isPlaying])
+
+    const trackEnded = () => {
+        if (isPlaying) {
+            setIsPlaying(false)
+            audioPlayer.current.currentTime = 0
+            progressBar.current.value = audioPlayer.current.currentTime
+            dragDuration()
+        }
+    }
 
     const updateLike = (e) => {
         e.preventDefault()
@@ -138,7 +148,12 @@ const SearchResults = ({track}) => {
                         </div>
                     </div>
                     <div className="search-trackPath">
-                        <audio ref={audioPlayer} src={track.trackPath}></audio>
+                        <audio
+                            ref={audioPlayer}
+                            src={currentTrack?.trackPath}
+                            onEnded={trackEnded}
+                        >
+                        </audio>
                     </div>
                     <div className='search-tracker-ctn'>
                         <input
