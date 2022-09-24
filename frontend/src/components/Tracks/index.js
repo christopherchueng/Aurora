@@ -17,7 +17,7 @@ const Tracks = () => {
     const tracks = useSelector(state => state?.track?.entries)
     const sessionUser = useSelector(state => state?.session?.user);
     const playing = useSelector(state => state?.mediaControl?.playing)
-    const currentTrack = useSelector(state => state?.mediaControl?.track)
+    // const currentTrack = useSelector(state => state?.mediaControl?.track)
     const volumeLevel = useSelector(state => state?.mediaControl?.volume)
     const likes = useSelector(state => state?.like?.entries)
     const likesArr = Object.values(likes)
@@ -26,8 +26,9 @@ const Tracks = () => {
     const userLike = likesArr.find(like => like.trackId === +trackId && like.userId === sessionUser?.id)
 
     // States
-    const { isShuffled, setIsShuffled } = useTrackContext()
-    const [currentSong, setCurrentSong] = useState(track)
+    // const { isShuffled, setIsShuffled } = useTrackContext()
+    const [isShuffled, setIsShuffled] = useState(false)
+    const [currentTrack, setCurrentTrack] = useState()
     const [isPlaying, setIsPlaying] = useState(!!playing)
     const [animate, setAnimate] = useState(false)
     const [duration, setDuration] = useState(0)
@@ -36,8 +37,9 @@ const Tracks = () => {
     const [mute, setMute] = useState(false)
     const [specialCaseVolume, setSpecialCaseVolume] = useState('')
     const [loopIdx, setLoopIdx] = useState(0)
+    const [tracksArr, setTracksArr] = useState([])
 
-    let tracksArr = Object.values(tracks);
+    // let tracksArr = Object.values(tracks);
     let shuffledArr = []
 
     // References
@@ -59,6 +61,8 @@ const Tracks = () => {
         window.scrollTo(0, 0)
         setElapsedTime(0)
         setVolumeBar(1)
+        setTracksArr(Object.values(tracks))
+        setCurrentTrack(track)
 
         setInterval(() => {
             const trackDuration = audioPlayer?.current?.duration
@@ -91,6 +95,104 @@ const Tracks = () => {
         volumeBarRef.current.value = audioPlayer.current.volume
     }, [volumeBar])
 
+    useEffect(() => {
+        if (isShuffled) setTracksArr(shuffleTracks(tracksArr))
+        else {
+            let tracksArrCopy = Object.values(tracks)
+            let sortedArr = []
+            let start = 0
+            let end = tracksArrCopy.length - 1
+
+            // Using two pointers to sort tracks in id numerical order
+            for (let i = tracksArrCopy.length - 1; i >= 0; i--) {
+
+                // If starting id is bigger than ending id, then place bigger id in right most spot.
+                if (tracksArrCopy[start]?.id > tracksArrCopy[end]?.id) {
+                    sortedArr[i] = tracksArrCopy[start]
+                    // Then increase starting index.
+                    start++
+                } else {
+                    // Otherwise, put ending id to right most index.
+                    sortedArr[i] = tracksArrCopy[end]
+                    end--
+                }
+            }
+            setTracksArr(sortedArr)
+        }
+
+        console.log(tracksArr)
+        // let tracksArrCopy = Object.values(tracks)
+
+        // const currentTrack = tracksArrCopy.splice(+trackId - 1, 1)[0]
+        // tracksArrCopy.unshift(currentTrack)
+
+        // if (isShuffled === true) {
+        //     let visited = new Set() // { 3, 5 }
+        //     let i = tracksArrCopy.length - 1 // 22
+
+        //     while (visited.size !== tracksArrCopy.length) { // 1 !== 23
+        //         let randomIdx = Math.floor(Math.random() * tracksArrCopy.length) // 3
+
+        //         if (!visited.has(randomIdx)) { //
+        //             visited.add(randomIdx)
+        //             const temp = tracksArrCopy[i] // id24; idx23; aiyah
+        //             tracksArrCopy[i] = tracksArrCopy[randomIdx] // id5; idx4; 0.03
+        //             tracksArrCopy[randomIdx] = temp; //
+        //             i--
+        //         }
+
+        //     }
+
+        //     // tracksArrCopy.forEach((track, i) => {
+        //     //     const randomIdx = Math.floor(Math.random() * tracksArrCopy.length)
+        //     //     let temp = track
+        //     //     tracksArrCopy[i] = tracksArrCopy[randomIdx]
+        //     //     tracksArrCopy[randomIdx] = temp
+        //     // })
+        //     // console.log('tracks arr before switching current with first', tracksArrCopy)
+        //     // [tracksArrCopy[0], tracksArrCopy[currentIdx]] = [tracksArrCopy[currentIdx], tracksArrCopy[0]]
+        //     // console.log('tracks arr AFTER switching current with first', tracksArrCopy)
+
+        //     // console.log('AFTER moving current track TO THE FRONT', tracksArrCopy)
+
+        //     // for (let i = tracksArrCopy.length - 1; i > 0; i--) { // 1 - 23
+        //     //     const randomIdx = Math.round(Math.random() * (i + 1)) // 5
+        //     //     if (!visited.has(randomIdx)) {
+        //     //         visited.add(randomIdx)
+        //     //         const temp = tracksArrCopy[i] // id24; idx23; aiyah
+        //     //         tracksArrCopy[i] = tracksArrCopy[randomIdx] // id5; idx4; 0.03
+        //     //         tracksArrCopy[randomIdx] = temp; //
+
+        //     //     }
+        //     // }
+
+        //     setTracksArr(tracksArrCopy)
+        // } else {
+        //     let sortedArr = []
+        //     let start = 0
+        //     let end = tracksArrCopy.length - 1
+
+        //     // Using two pointers to sort tracks in id numerical order
+        //     for (let i = tracksArrCopy.length - 1; i >= 0; i--) {
+
+        //         // If starting id is bigger than ending id, then place bigger id in right most spot.
+        //         if (tracksArrCopy[start]?.id > tracksArrCopy[end]?.id) {
+        //             sortedArr[i] = tracksArrCopy[start]
+        //             // Then increase starting index.
+        //             start++
+        //         } else {
+        //             // Otherwise, put ending id to right most index.
+        //             sortedArr[i] = tracksArrCopy[end]
+        //             end--
+        //         }
+        //     }
+        //     setTracksArr(sortedArr)
+        // }
+
+    }, [isShuffled])
+
+    // console.log('here is TrackArray', tracksArr)
+
     const formatTrackTime = (time) => {
         if (time && !Number.isNaN(time)) {
             const minutes = Math.floor(time / 60)
@@ -102,13 +204,16 @@ const Tracks = () => {
     }
 
     const backBtn = () => {
+        let tracksArrCopy = Object.values(tracks)
+        const currTrackIdx = tracksArrCopy?.indexOf(track)
+
         // If at the beginning of the playlist, then backtrack to last track of playlist
-        if (+trackId === tracksArr[0]?.id && loopIdx !== 0) {
+        if (currTrackIdx === tracksArr.length - 1 && loopIdx !== 0) {
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[tracksArr.length - 1]?.id}`)
 
         // If at the beginning of the playlist and no loop is on, then stay on track and just reset progress bar.
-        } else if (+trackId === tracksArr[0]?.id && loopIdx === 0) {
+        } else if (currTrackIdx === tracksArr.length - 1 && loopIdx === 0) {
             setIsPlaying(false)
             audioPlayer.current.currentTime = 0
             progressBar.current.value = audioPlayer.current.currentTime
@@ -118,7 +223,7 @@ const Tracks = () => {
         } else {
             setIsPlaying(true)
             // Why subtract by 2 to go back ONE track...?
-            history.push(`/tracks/${tracksArr[trackId - 2]?.id}`)
+            history.push(`/tracks/${tracksArr[currTrackIdx - 1]?.id}`)
         }
 
         // Opted for Spotify's functionality: If on repeat setting but click back, revert to continuous loop
@@ -126,13 +231,16 @@ const Tracks = () => {
     }
 
     const nextBtn = () => {
+        let tracksArrCopy = Object.values(tracks)
+        const currTrackIdx = tracksArrCopy?.indexOf(track)
+
         // If at the end of the playlist, then restart at 1
-        if (+trackId === tracksArr[tracksArr.length - 1]?.id && loopIdx !== 0) {
+        if (currTrackIdx === tracksArr.length - 1 && loopIdx !== 0) {
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[0]?.id}`)
 
         // If at the end of the playlist and no loop is on, then stay on track and just reset progress bar.
-        } else if (+trackId === tracksArr[tracksArr.length - 1]?.id && loopIdx === 0) {
+        } else if (tracksArr?.indexOf(track) === tracksArr.length - 1 && loopIdx === 0) {
             setIsPlaying(false)
             audioPlayer.current.currentTime = 0
             progressBar.current.value = audioPlayer.current.currentTime
@@ -140,26 +248,36 @@ const Tracks = () => {
 
         // Otherwise, move on to next track.
         } else {
+            console.log('nani', tracksArrCopy[currTrackIdx + 1]?.id)
             setIsPlaying(true)
             // Why does this have an implicit addition of 1?
-            history.push(`/tracks/${tracksArr[+trackId]?.id}`)
+            history.push(`/tracks/${tracksArr[currTrackIdx + 1]?.id}`)
         }
 
         // Opted for Spotify's functionality: If on repeat setting but click next, revert to continuous loop
         if (loopIdx === 2) setLoopIdx(1)
     }
 
-    const shuffleTracks = () => {
-        console.log('tracksArr BEFOREEEE', tracksArr)
-        // for (let i = tracksArr.length - 1; i > 1; i--) {
-        //     const randomIdx = Math.floor(Math.random() * tracksArr.length + 1)
-        //     const temp = tracksArr[i]
-        //     tracksArr[i] = tracksArr[randomIdx]
-        //     tracksArr[randomIdx] = temp;
+    const shuffleTracks = (array) => {
+        if (array.length === 1) return array
+        const randomIdx = Math.floor(Math.random() * array.length)
+        return [array[randomIdx], ...shuffleTracks(array.filter((_, i) => i !== randomIdx))]
+        // setIsShuffled(!isShuffled)
+        // if (isShuffled === true) {
+        //     let tracksArrCopy = [...tracksArr]
+        //     for (let i = tracksArrCopy.length - 1; i > 1; i--) {
+        //         const randomIdx = Math.floor(Math.random() * tracksArrCopy.length + 1)
+        //         const temp = tracksArrCopy[i]
+        //         tracksArrCopy[i] = tracksArrCopy[randomIdx]
+        //         tracksArrCopy[randomIdx] = temp;
+        //     }
+
+        //     setTracksArr(tracksArrCopy)
+        // } else {
+        //     setTracksArr(tracksArr)
         // }
-        // tracks = tracksArr;
-        setIsShuffled(!isShuffled);
-        console.log('SHUFFLED ARR AFTER', shuffledArr)
+        // // console.log('SHUFFLED ARR AFTER', shuffledArr)
+
     }
 
     const updateLike = (e) => {
@@ -385,7 +503,7 @@ const Tracks = () => {
                                 <button
                                     type='button'
                                     className='shuffle'
-                                    onClick={shuffleTracks}
+                                    onClick={() => setIsShuffled(!isShuffled)}
                                     style={{ color: isShuffled ? 'lightgreen' : ''}}
                                 >
                                     <i className="fa-solid fa-shuffle fa-2xl"></i>
