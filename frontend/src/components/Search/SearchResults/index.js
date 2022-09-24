@@ -81,7 +81,7 @@ const SearchResults = ({track}) => {
             <div className='search-content'>
                 <div className="left-search">
                     <div className="search-imagePath">
-                        <Link to={`/tracks/${track?.id}`}><img src={track.imagePath}></img></Link>
+                        <Link to={`/tracks/${track?.id}`}><img src={track.imagePath} className='search-result-img'></img></Link>
                     </div>
                 </div>
                 <div className='right-search'>
@@ -140,20 +140,20 @@ const SearchResults = ({track}) => {
                     <div className="search-trackPath">
                         <audio ref={audioPlayer} src={track.trackPath}></audio>
                     </div>
+                    <div className='search-tracker-ctn'>
+                        <input
+                            type='range'
+                            value={elapsedTime}
+                            min='0'
+                            max={duration}
+                            step='any'
+                            className='search-tracker'
+                            ref={progressBar}
+                            onChange={setProgress}
+                        />
+                    </div>
                 </div>
             </div>
-            {/* <div className='search-tracker-ctn'> */}
-                <input
-                    type='range'
-                    value={elapsedTime}
-                    min='0'
-                    max={duration}
-                    step='any'
-                    className='search-tracker'
-                    ref={progressBar}
-                    onChange={setProgress}
-                />
-            {/* </div> */}
         </>
     )
 
