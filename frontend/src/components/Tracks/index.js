@@ -21,14 +21,14 @@ const Tracks = () => {
     const volumeLevel = useSelector(state => state?.mediaControl?.volume)
     const likes = useSelector(state => state?.like?.entries)
     const likesArr = Object.values(likes)
-    const track = tracks[+trackId];
+    const currentTrack = tracks[+trackId];
 
     const userLike = likesArr.find(like => like.trackId === +trackId && like.userId === sessionUser?.id)
 
     // States
     // const { isShuffled, setIsShuffled } = useTrackContext()
     const [isShuffled, setIsShuffled] = useState(false)
-    const [currentTrack, setCurrentTrack] = useState()
+    // const [currentTrack, setCurrentTrack] = useState()
     const [isPlaying, setIsPlaying] = useState(!!playing)
     const [animate, setAnimate] = useState(false)
     const [duration, setDuration] = useState(0)
@@ -38,9 +38,6 @@ const Tracks = () => {
     const [specialCaseVolume, setSpecialCaseVolume] = useState('')
     const [loopIdx, setLoopIdx] = useState(0)
     const [tracksArr, setTracksArr] = useState([])
-
-    // let tracksArr = Object.values(tracks);
-    let shuffledArr = []
 
     // References
     const audioPlayer = useRef()
@@ -62,7 +59,7 @@ const Tracks = () => {
         setElapsedTime(0)
         setVolumeBar(1)
         setTracksArr(Object.values(tracks))
-        setCurrentTrack(track)
+        // setCurrentTrack(tracksArr.indexOf())
 
         setInterval(() => {
             const trackDuration = audioPlayer?.current?.duration
@@ -205,15 +202,17 @@ const Tracks = () => {
 
     const backBtn = () => {
         let tracksArrCopy = Object.values(tracks)
-        const currTrackIdx = tracksArrCopy?.indexOf(track)
+        const currTrackIdx = tracksArr.map(obj => obj.id).indexOf(+trackId)
 
         // If at the beginning of the playlist, then backtrack to last track of playlist
         if (currTrackIdx === tracksArr.length - 1 && loopIdx !== 0) {
+            console.log('i hit the BEGINNING of the playlist')
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[tracksArr.length - 1]?.id}`)
 
         // If at the beginning of the playlist and no loop is on, then stay on track and just reset progress bar.
-        } else if (currTrackIdx === tracksArr.length - 1 && loopIdx === 0) {
+        } else if (currTrackIdx === 0 && loopIdx === 0) {
+            console.log('i am at the beginning of the playlist and there is no loop on')
             setIsPlaying(false)
             audioPlayer.current.currentTime = 0
             progressBar.current.value = audioPlayer.current.currentTime
@@ -221,6 +220,7 @@ const Tracks = () => {
 
         // Otherwise, go back one track
         } else {
+            console.log('i am in the middle of the playlist and Im going back')
             setIsPlaying(true)
             // Why subtract by 2 to go back ONE track...?
             history.push(`/tracks/${tracksArr[currTrackIdx - 1]?.id}`)
@@ -231,16 +231,18 @@ const Tracks = () => {
     }
 
     const nextBtn = () => {
-        let tracksArrCopy = Object.values(tracks)
-        const currTrackIdx = tracksArrCopy?.indexOf(track)
+        // let tracksArrCopy = tracksArr
+        const currTrackIdx = tracksArr.map(obj => obj.id).indexOf(+trackId)
 
         // If at the end of the playlist, then restart at 1
         if (currTrackIdx === tracksArr.length - 1 && loopIdx !== 0) {
+            console.log('i hit the end of the playlist')
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[0]?.id}`)
 
         // If at the end of the playlist and no loop is on, then stay on track and just reset progress bar.
-        } else if (tracksArr?.indexOf(track) === tracksArr.length - 1 && loopIdx === 0) {
+        } else if (currTrackIdx === tracksArr.length - 1 && loopIdx === 0) {
+            console.log('there is no loop so Im just gonna stop here')
             setIsPlaying(false)
             audioPlayer.current.currentTime = 0
             progressBar.current.value = audioPlayer.current.currentTime
@@ -248,7 +250,7 @@ const Tracks = () => {
 
         // Otherwise, move on to next track.
         } else {
-            console.log('nani', tracksArrCopy[currTrackIdx + 1]?.id)
+            console.log('i am in the middle of the playlist and Im going forward')
             setIsPlaying(true)
             // Why does this have an implicit addition of 1?
             history.push(`/tracks/${tracksArr[currTrackIdx + 1]?.id}`)
@@ -390,12 +392,12 @@ const Tracks = () => {
 
                         {/* ------------------ IMAGEPATH ------------------ */}
                         <div className='cover-photo-ctn'>
-                            <img className='cover-photo' src={track?.imagePath}></img>
+                            <img className='cover-photo' src={currentTrack?.imagePath}></img>
                         </div>
                         <div className='track-bar-ctn'>
                             <audio
                                 ref={audioPlayer}
-                                src={track?.trackPath}
+                                src={currentTrack?.trackPath}
                                 onEnded={loopIdx === 2 ? continuousLoop : nextBtn}
                             >
                             </audio>
@@ -422,14 +424,14 @@ const Tracks = () => {
                                 {/* ------------------ TITLE ------------------ */}
                                 <div className='track-title'>
                                     <span>
-                                        {track?.title}
+                                        {currentTrack?.title}
                                     </span>
                                 </div>
                                 <div className='control-right'>
                                     {/* ------------------ DATE ------------------ */}
                                     <div className='date-ctn'>
                                         <div className='date'>
-                                            <span><DateConverter date={track?.createdAt} /></span>
+                                            <span><DateConverter date={currentTrack?.createdAt} /></span>
                                         </div>
                                     </div>
                                 </div>
@@ -437,12 +439,12 @@ const Tracks = () => {
                             <div className='artist-genre-ctn'>
                                 {/* ------------------ ARTIST ------------------ */}
                                 <div className='track-artist'>
-                                    <p>{track?.User?.username}</p>
+                                    <p>{currentTrack?.User?.username}</p>
                                 </div>
                                 {/* ------------------ GENRE ------------------ */}
                                 <div className='genre-ctn'>
                                     <div className='genre'>
-                                        <span>#{track?.genre}</span>
+                                        <span>#{currentTrack?.genre}</span>
                                     </div>
                                 </div>
                             </div>
@@ -491,7 +493,7 @@ const Tracks = () => {
                         {/* ------------------ MEDIA CONTROLS ------------------ */}
                         <div className='control-center'>
                             {/* ------------------ DELETE ------------------ */}
-                            {sessionUser?.id === track?.User?.id
+                            {sessionUser?.id === currentTrack?.User?.id
                             ? <div className='delete-cancel-ctn'>
                                 <DeleteTrackModal />
                             </div>
@@ -562,9 +564,9 @@ const Tracks = () => {
                             </div>
 
                             {/* ------------------ EDIT ------------------ */}
-                            {sessionUser?.id === track?.User?.id
+                            {sessionUser?.id === currentTrack?.User?.id
                             ? <div className='edit-save-ctn'>
-                                <Link to={`/tracks/${track?.id}/edit`}>
+                                <Link to={`/tracks/${currentTrack?.id}/edit`}>
                                     <i className="fa-solid fa-pen fa-xl comment"></i>
                                 </Link>
                             </div>
@@ -577,7 +579,7 @@ const Tracks = () => {
                     {/* ------------------ DESCRIPTION ------------------ */}
                     <div className='track-info-ctn'>
                         <div className='description'>
-                            {track?.description}
+                            {currentTrack?.description}
                         </div>
                     </div>
                 </div>
