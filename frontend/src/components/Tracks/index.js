@@ -416,7 +416,7 @@ const Tracks = () => {
                                     type='button'
                                     className='shuffle'
                                     onClick={() => setIsShuffled(!isShuffled)}
-                                    style={{ color: isShuffled ? 'lightgreen' : ''}}
+                                    style={{ color: isShuffled ? '#F050ED' : ''}}
                                 >
                                     <i className="fa-solid fa-shuffle fa-2xl"></i>
                                 </button>
