@@ -87,7 +87,13 @@ const Tracks = () => {
     }, [volumeBar])
 
     useEffect(() => {
-        if (isShuffled) setTracksArr(shuffleTracks(tracksArr))
+        if (isShuffled) {
+            // When shuffled, put the current track at the very front of the playlist
+            let shuffledPlaylist = shuffleTracks(tracksArr)
+            let current = shuffledPlaylist.splice(shuffledPlaylist.map(obj => obj.id).indexOf(+trackId), 1)[0]
+            shuffledPlaylist.unshift(current)
+            setTracksArr(shuffledPlaylist)
+        }
         else {
             let tracksArrCopy = Object.values(tracks)
             let sortedArr = []
