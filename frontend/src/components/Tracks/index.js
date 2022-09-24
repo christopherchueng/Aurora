@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { getTracks } from '../../store/trackReducer';
-import { useTrackContext } from '../../context/TrackContext';
 import DeleteTrackModal from './DeleteTrackModal';
 import Comments from '../Comments';
 import DateConverter from '../DateConverter';
@@ -17,7 +16,6 @@ const Tracks = () => {
     const tracks = useSelector(state => state?.track?.entries)
     const sessionUser = useSelector(state => state?.session?.user);
     const playing = useSelector(state => state?.mediaControl?.playing)
-    // const currentTrack = useSelector(state => state?.mediaControl?.track)
     const volumeLevel = useSelector(state => state?.mediaControl?.volume)
     const likes = useSelector(state => state?.like?.entries)
     const likesArr = Object.values(likes)
@@ -26,9 +24,7 @@ const Tracks = () => {
     const userLike = likesArr.find(like => like.trackId === +trackId && like.userId === sessionUser?.id)
 
     // States
-    // const { isShuffled, setIsShuffled } = useTrackContext()
     const [isShuffled, setIsShuffled] = useState(false)
-    // const [currentTrack, setCurrentTrack] = useState()
     const [isPlaying, setIsPlaying] = useState(!!playing)
     const [animate, setAnimate] = useState(false)
     const [duration, setDuration] = useState(0)
@@ -59,7 +55,6 @@ const Tracks = () => {
         setElapsedTime(0)
         setVolumeBar(1)
         setTracksArr(Object.values(tracks))
-        // setCurrentTrack(tracksArr.indexOf())
 
         setInterval(() => {
             const trackDuration = audioPlayer?.current?.duration
@@ -75,7 +70,6 @@ const Tracks = () => {
             audioPlayer?.current?.pause()
             cancelAnimationFrame(progressAnimation.current)
         }
-        // isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
     }, [isPlaying, trackId])
 
     useEffect(() => {
@@ -117,78 +111,7 @@ const Tracks = () => {
             setTracksArr(sortedArr)
         }
 
-        console.log(tracksArr)
-        // let tracksArrCopy = Object.values(tracks)
-
-        // const currentTrack = tracksArrCopy.splice(+trackId - 1, 1)[0]
-        // tracksArrCopy.unshift(currentTrack)
-
-        // if (isShuffled === true) {
-        //     let visited = new Set() // { 3, 5 }
-        //     let i = tracksArrCopy.length - 1 // 22
-
-        //     while (visited.size !== tracksArrCopy.length) { // 1 !== 23
-        //         let randomIdx = Math.floor(Math.random() * tracksArrCopy.length) // 3
-
-        //         if (!visited.has(randomIdx)) { //
-        //             visited.add(randomIdx)
-        //             const temp = tracksArrCopy[i] // id24; idx23; aiyah
-        //             tracksArrCopy[i] = tracksArrCopy[randomIdx] // id5; idx4; 0.03
-        //             tracksArrCopy[randomIdx] = temp; //
-        //             i--
-        //         }
-
-        //     }
-
-        //     // tracksArrCopy.forEach((track, i) => {
-        //     //     const randomIdx = Math.floor(Math.random() * tracksArrCopy.length)
-        //     //     let temp = track
-        //     //     tracksArrCopy[i] = tracksArrCopy[randomIdx]
-        //     //     tracksArrCopy[randomIdx] = temp
-        //     // })
-        //     // console.log('tracks arr before switching current with first', tracksArrCopy)
-        //     // [tracksArrCopy[0], tracksArrCopy[currentIdx]] = [tracksArrCopy[currentIdx], tracksArrCopy[0]]
-        //     // console.log('tracks arr AFTER switching current with first', tracksArrCopy)
-
-        //     // console.log('AFTER moving current track TO THE FRONT', tracksArrCopy)
-
-        //     // for (let i = tracksArrCopy.length - 1; i > 0; i--) { // 1 - 23
-        //     //     const randomIdx = Math.round(Math.random() * (i + 1)) // 5
-        //     //     if (!visited.has(randomIdx)) {
-        //     //         visited.add(randomIdx)
-        //     //         const temp = tracksArrCopy[i] // id24; idx23; aiyah
-        //     //         tracksArrCopy[i] = tracksArrCopy[randomIdx] // id5; idx4; 0.03
-        //     //         tracksArrCopy[randomIdx] = temp; //
-
-        //     //     }
-        //     // }
-
-        //     setTracksArr(tracksArrCopy)
-        // } else {
-        //     let sortedArr = []
-        //     let start = 0
-        //     let end = tracksArrCopy.length - 1
-
-        //     // Using two pointers to sort tracks in id numerical order
-        //     for (let i = tracksArrCopy.length - 1; i >= 0; i--) {
-
-        //         // If starting id is bigger than ending id, then place bigger id in right most spot.
-        //         if (tracksArrCopy[start]?.id > tracksArrCopy[end]?.id) {
-        //             sortedArr[i] = tracksArrCopy[start]
-        //             // Then increase starting index.
-        //             start++
-        //         } else {
-        //             // Otherwise, put ending id to right most index.
-        //             sortedArr[i] = tracksArrCopy[end]
-        //             end--
-        //         }
-        //     }
-        //     setTracksArr(sortedArr)
-        // }
-
     }, [isShuffled])
-
-    // console.log('here is TrackArray', tracksArr)
 
     const formatTrackTime = (time) => {
         if (time && !Number.isNaN(time)) {
@@ -201,18 +124,16 @@ const Tracks = () => {
     }
 
     const backBtn = () => {
-        let tracksArrCopy = Object.values(tracks)
+        // Find the index of the current track we're on in the playlist array
         const currTrackIdx = tracksArr.map(obj => obj.id).indexOf(+trackId)
 
-        // If at the beginning of the playlist, then backtrack to last track of playlist
-        if (currTrackIdx === tracksArr.length - 1 && loopIdx !== 0) {
-            console.log('i hit the BEGINNING of the playlist')
+        // If at the beginning of the playlist and on continuous loop/repeat, then backtrack to last track of playlist
+        if (currTrackIdx === 0 && loopIdx !== 0) {
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[tracksArr.length - 1]?.id}`)
 
         // If at the beginning of the playlist and no loop is on, then stay on track and just reset progress bar.
         } else if (currTrackIdx === 0 && loopIdx === 0) {
-            console.log('i am at the beginning of the playlist and there is no loop on')
             setIsPlaying(false)
             audioPlayer.current.currentTime = 0
             progressBar.current.value = audioPlayer.current.currentTime
@@ -220,9 +141,7 @@ const Tracks = () => {
 
         // Otherwise, go back one track
         } else {
-            console.log('i am in the middle of the playlist and Im going back')
             setIsPlaying(true)
-            // Why subtract by 2 to go back ONE track...?
             history.push(`/tracks/${tracksArr[currTrackIdx - 1]?.id}`)
         }
 
@@ -231,18 +150,16 @@ const Tracks = () => {
     }
 
     const nextBtn = () => {
-        // let tracksArrCopy = tracksArr
+        // Find the index of the current track we're on in the playlist array
         const currTrackIdx = tracksArr.map(obj => obj.id).indexOf(+trackId)
 
-        // If at the end of the playlist, then restart at 1
+        // If at the end of the playlist and on continuous loop/repeat, then restart at beginning of playlist
         if (currTrackIdx === tracksArr.length - 1 && loopIdx !== 0) {
-            console.log('i hit the end of the playlist')
             setIsPlaying(true)
             history.push(`/tracks/${tracksArr[0]?.id}`)
 
         // If at the end of the playlist and no loop is on, then stay on track and just reset progress bar.
         } else if (currTrackIdx === tracksArr.length - 1 && loopIdx === 0) {
-            console.log('there is no loop so Im just gonna stop here')
             setIsPlaying(false)
             audioPlayer.current.currentTime = 0
             progressBar.current.value = audioPlayer.current.currentTime
@@ -250,9 +167,7 @@ const Tracks = () => {
 
         // Otherwise, move on to next track.
         } else {
-            console.log('i am in the middle of the playlist and Im going forward')
             setIsPlaying(true)
-            // Why does this have an implicit addition of 1?
             history.push(`/tracks/${tracksArr[currTrackIdx + 1]?.id}`)
         }
 
@@ -260,30 +175,20 @@ const Tracks = () => {
         if (loopIdx === 2) setLoopIdx(1)
     }
 
-    const shuffleTracks = (array) => {
-        if (array.length === 1) return array
-        const randomIdx = Math.floor(Math.random() * array.length)
-        return [array[randomIdx], ...shuffleTracks(array.filter((_, i) => i !== randomIdx))]
-        // setIsShuffled(!isShuffled)
-        // if (isShuffled === true) {
-        //     let tracksArrCopy = [...tracksArr]
-        //     for (let i = tracksArrCopy.length - 1; i > 1; i--) {
-        //         const randomIdx = Math.floor(Math.random() * tracksArrCopy.length + 1)
-        //         const temp = tracksArrCopy[i]
-        //         tracksArrCopy[i] = tracksArrCopy[randomIdx]
-        //         tracksArrCopy[randomIdx] = temp;
-        //     }
+    // Used recursion to shuffle playlist around
+    const shuffleTracks = (playlist) => {
+        // Base case
+        if (playlist.length === 1) return playlist
 
-        //     setTracksArr(tracksArrCopy)
-        // } else {
-        //     setTracksArr(tracksArr)
-        // }
-        // // console.log('SHUFFLED ARR AFTER', shuffledArr)
+        // Generate a random number with respect to the playlist size
+        const randomIdx = Math.floor(Math.random() * playlist.length)
 
+        return [playlist[randomIdx], ...shuffleTracks(playlist.filter((_, i) => i !== randomIdx))]
     }
 
     const updateLike = (e) => {
         e.preventDefault()
+
         if (userLike) {
             setAnimate(false)
             dispatch(deleteLike(userLike?.id))
@@ -295,7 +200,6 @@ const Tracks = () => {
             }
             dispatch(postLike(payload))
         }
-        // setTimeout(() => setAnimate(false), 1000)
     }
 
     // If I drag the volume bar around, the volume level should change accordingly
