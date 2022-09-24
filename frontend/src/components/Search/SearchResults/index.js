@@ -6,17 +6,40 @@ import DateConverter from '../../DateConverter'
 import '../Search.css'
 
 const SearchResults = ({track}) => {
-    const audioPlayer = useRef();
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state?.session?.user)
     const likes = useSelector(state => state?.like?.entries)
     const likesArr = Object.values(likes).filter(like => like.trackId === track?.id)
     const userLike = likesArr.find(like => like.userId === sessionUser?.id)
+    const playing = useSelector(state => state?.mediaControl?.playing)
 
-    const [isPlaying, setIsPlaying] = useState(false)
+    // States
+    const [elapsedTime, setElapsedTime] = useState(0)
+    const [duration, setDuration] = useState(0)
+    const [isPlaying, setIsPlaying] = useState(!!playing)
+
+    // References
+    const audioPlayer = useRef()
+    const progressBar = useRef()
+    const progressAnimation = useRef()
 
     useEffect(() => {
-        isPlaying ? audioPlayer?.current?.play() : audioPlayer?.current?.pause()
+        setElapsedTime(0)
+
+        setInterval(() => {
+            const trackDuration = audioPlayer?.current?.duration
+            setDuration(trackDuration)
+        }, 100)
+    }, [])
+
+    useEffect(() => {
+        if (isPlaying) {
+            audioPlayer?.current?.play()
+            progressAnimation.current = requestAnimationFrame(currentlyPlaying)
+        } else {
+            audioPlayer?.current?.pause()
+            cancelAnimationFrame(progressAnimation.current)
+        }
     }, [isPlaying])
 
     const updateLike = (e) => {
@@ -33,8 +56,38 @@ const SearchResults = ({track}) => {
         // setTimeout(() => setAnimate(false), 1000)
     }
 
+    // While track is playing, sync progress bar with the current value of the audio player time
+    // Background should also update while track is playing
+    const currentlyPlaying = () => {
+        progressBar.current.value = audioPlayer.current.currentTime
+        dragDuration()
+        progressAnimation.current = requestAnimationFrame(currentlyPlaying) // Allows for bg color before thumb to move WHILE track is playing
+    }
+
+    // Skip by dragging thumb around progress bar
+    const setProgress = () => {
+        audioPlayer.current.currentTime = progressBar.current.value
+        dragDuration()
+    }
+
+    // Sets background color before progress thumb
+    const dragDuration = () => {
+        progressBar.current.style.setProperty('--before-thumb', `${progressBar.current.value / audioPlayer?.current?.duration * 100}%`)
+        setElapsedTime(progressBar.current.value)
+    }
+
     return (
         <>
+            <input
+                type='range'
+                value={elapsedTime}
+                min='0'
+                max={duration}
+                step='any'
+                className='search-tracker'
+                ref={progressBar}
+                onChange={setProgress}
+            />
             <div className="left-search">
                 <div className="search-imagePath">
                     <Link to={`/tracks/${track?.id}`}><img src={track.imagePath}></img></Link>
