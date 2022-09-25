@@ -34,24 +34,26 @@ const Search = () => {
                     <h1 className="search-string">Search results for "{keyword}</h1><h1>"</h1>
                 </div>
             </div>
-            <div className='search-ctn'>
-                {tracksArr.length !== 0
-                ? (tracksArr && tracksArr.map((track, trackIdx) => (
-                    <div key={track.id} className='search-results-section'>
-                        <SearchResults tracksArr={tracksArr} track={track} trackIdx={trackIdx} />
+            <div className="search-main">
+                <div className='search-ctn'>
+                    {tracksArr.length !== 0
+                    ? (tracksArr && tracksArr.map((track, trackIdx) => (
+                        <div key={track.id} className='search-results-section'>
+                            <SearchResults tracksArr={tracksArr} track={track} trackIdx={trackIdx} />
+                        </div>
+                    )))
+                    :
+                    <div className="no-results-content">
+                        <div className='zero-results-img'>
+                            <img src={process.env.PUBLIC_URL + '/images/error-img.png'}></img>
+                        </div>
+                        <div className='zero-results-msgs'>
+                            <p>{`Sorry we didn't find any results for “${keyword}”.`}</p>
+                            <p>Check the spelling, or try a different search.</p>
+                        </div>
                     </div>
-                )))
-                :
-                <div className="no-results-content">
-                    <div className='zero-results-img'>
-                        <img src={process.env.PUBLIC_URL + '/images/error-img.png'}></img>
-                    </div>
-                    <div className='zero-results-msgs'>
-                        <p>{`Sorry we didn't find any results for “${keyword}”.`}</p>
-                        <p>Check the spelling, or try a different search.</p>
-                    </div>
+                }
                 </div>
-            }
             </div>
         </div>
     )

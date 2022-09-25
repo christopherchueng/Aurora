@@ -8,6 +8,12 @@
     background: linear-gradient(#272727, #1c1c1c, #272727);
 }
 
+.search-main {
+    display: flex;
+    justify-content: flex-end;
+    width: 100vw;
+}
+
 .no-auth-span {
     border: 0;
     background-color: transparent;
@@ -45,6 +51,7 @@
 
 .search-ctn {
     width: 75%;
+    /* width: 85rem; */
     height: 100%;
     background-color: white;
     border: 1px solid black;
@@ -113,13 +120,17 @@
     position: relative;
 }
 
+.search-tracker-ctn {
+    width: 100%;
+}
+
 .search-tracker {
     --before-thumb: 0;
 
     appearance: none;
     background: transparent;
     outline: none;
-    width: 930px;
+    width: fill-available;
     z-index: 3;
     height: 150px;
     cursor: pointer;
