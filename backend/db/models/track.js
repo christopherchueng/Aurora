@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     Track.belongsTo(models.User, { foreignKey: 'userId' })
     Track.hasMany(models.Like, { foreignKey: 'trackId', onDelete: 'CASCADE', hooks: true })
     Track.hasMany(models.Comment, { foreignKey: 'trackId', onDelete: 'CASCADE', hooks: true })
+    Track.hasMany(models.PlaylistTrack, { foreignKey: 'trackId', onDelete: 'CASCADE', hooks: true })
   };
   return Track;
 };

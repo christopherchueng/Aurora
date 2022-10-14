@@ -50,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function(models) {
     User.hasMany(models.Like, { foreignKey: 'userId' })
     User.hasMany(models.Track, { foreignKey: 'userId' })
+    User.hasMany(models.Playlist, { foreignKey: 'userId' })
     User.hasMany(models.Comment, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true })
   };
 
