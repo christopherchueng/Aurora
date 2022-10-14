@@ -1,4 +1,4 @@
-genre:string,trackPath:string,imagePath:string,userId:integer
+npx sequelize model:generate --name Track --attributes title:string,description:text,genre:string,trackPath:string,imagePath:string,userId:integer
 npx sequelize model:generate --name Comment --attributes message:string,trackId:integer,userId:integer
 npx sequelize model:generate --name Like --attributes trackId:integer,userId:integer
 npx sequelize model:generate --name Playlist --attributes name:string,userId:integer
