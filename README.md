@@ -61,9 +61,3 @@ If a user wants to delete a comment, they can simply press the delete icon under
 
 # Incoming Features
 - User profile
-- Likes
-- Continuous loop
-- Shuffle
-- Track bar
-- Playlists
-- AWS Upload

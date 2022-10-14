@@ -1,10 +1,12 @@
-,genre:string,trackPath:string,imagePath:string,userId:integer
+genre:string,trackPath:string,imagePath:string,userId:integer
 npx sequelize model:generate --name Comment --attributes message:string,trackId:integer,userId:integer
-,npx sequelize model:generate --name Like --attributes trackId:integer,userId:integer
-,
+npx sequelize model:generate --name Like --attributes trackId:integer,userId:integer
+npx sequelize model:generate --name Playlist --attributes name:string,userId:integer
+
 npx sequelize seed:generate --name trackSeeds
 npx sequelize seed:generate --name commentSeeds
 npx sequelize seed:generate --name likeSeeds
+npx sequelize seed:generate --name playlistSeeds
 
 npx dotenv sequelize db:migrate
 npx dotenv sequelize db:seed:all
