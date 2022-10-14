@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     trackId: DataTypes.INTEGER
   }, {});
   PlaylistTrack.associate = function(models) {
-    PlaylistTrack.belongsTo(models.Playlist, { foreignKey: 'playlistId' })
-    PlaylistTrack.belongsTo(models.Track, { foreignKey: 'trackId' })
+    // PlaylistTrack.belongsTo(models.Playlist, { foreignKey: 'playlistId' })
+    // PlaylistTrack.belongsTo(models.Track, { foreignKey: 'trackId' })
   };
   return PlaylistTrack;
 };

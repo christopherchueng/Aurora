@@ -6,7 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Playlist.associate = function(models) {
     Playlist.belongsTo(models.User, { foreignKey: 'userId' })
-    Playlist.hasMany(models.Track, { foreignKey: 'trackId', onDelete: 'CASCADE', hooks: true })
+    Playlist.belongsToMany(models.Track, {
+      through: 'PlaylistTrack',
+      otherKey: 'trackId',
+      foreignKey: 'playlistId'
+     })
   };
   return Playlist;
 };
