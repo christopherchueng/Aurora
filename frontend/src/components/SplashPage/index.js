@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, Redirect } from 'react-router-dom'
 import { getTracks } from '../../store/trackReducer';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -13,6 +13,7 @@ const SplashPage = () => {
         const tracksObj = Object.values(state.track.entries)
         return tracksObj.slice(tracksObj.length - 12)
     })
+    const currentUser = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(getTracks())
@@ -21,6 +22,10 @@ const SplashPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+
+    if (currentUser) {
+        return <Redirect to='/discover' />;
+    }
 
     return (
         <>

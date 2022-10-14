@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, Redirect } from "react-router-dom";
 import DemoUser from "../DemoUser";
 import './LoginForm.css'
 
 function LoginForm() {
     const dispatch = useDispatch();
+    const history = useHistory()
+    const user = useSelector(state => state.session.user);
+
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
       e.preventDefault();
       setErrors([]);
-      return dispatch(sessionActions.login({ credential, password })).catch(
-        async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        }
-      );
+
+      const data = await dispatch(sessionActions.login({ credential, password }))
+
+      if (data) setErrors(data)
+      else {
+        // return <Redirect to='/discover' />
+        history.push('/discover')
+      }
     };
 
     return (

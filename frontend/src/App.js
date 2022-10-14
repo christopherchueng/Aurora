@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Route, Switch, useLocation } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
@@ -8,14 +8,14 @@ import DiscoverPage from "./components/DiscoverPage";
 import CreateTrackForm from "./components/Tracks/CreateTrackForm";
 import UpdateTrackForm from "./components/Tracks/UpdateTrackForm";
 import Tracks from "./components/Tracks";
-import ErrorPage from "./components/ErrorPage";import Search from "./components/Search";
-;
+import ErrorPage from "./components/ErrorPage";
+import Search from "./components/Search";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [color, setColor] = useState('')
-  const sessionUser = useSelector(state => state.session.user)
 
   const path = useLocation().pathname
 
@@ -37,18 +37,18 @@ function App() {
         <Route exact path='/'>
           <SplashPage />
         </Route>
-        <Route path='/upload'>
+        <ProtectedRoute exact path='/discover'>
+          <DiscoverPage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/upload'>
           <CreateTrackForm />
-        </Route>
-        <Route path='/discover'>
-          {sessionUser ? <DiscoverPage /> : <Redirect to='/' />}
-        </Route>
+        </ProtectedRoute>
         <Route exact path='/tracks/:trackId'>
           <Tracks />
         </Route>
-        <Route exact path='/tracks/:trackId/edit'>
+        <ProtectedRoute exact path='/tracks/:trackId/edit'>
           <UpdateTrackForm />
-        </Route>
+        </ProtectedRoute>
         <Route path='/search'>
           <Search />
         </Route>
