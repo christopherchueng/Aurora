@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
@@ -15,6 +15,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [color, setColor] = useState('')
+  const sessionUser = useSelector(state => state.session.user)
 
   const path = useLocation().pathname
 
@@ -38,6 +39,9 @@ function App() {
         </Route>
         <Route path='/upload'>
           <CreateTrackForm />
+        </Route>
+        <Route path='/discover'>
+          {sessionUser ? <DiscoverPage /> : <Redirect to='/' />}
         </Route>
         <Route exact path='/tracks/:trackId'>
           <Tracks />
