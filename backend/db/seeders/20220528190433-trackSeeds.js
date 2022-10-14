@@ -9,6 +9,7 @@ module.exports = {
       Example:
       */
     return queryInterface.bulkInsert('Tracks', [
+      // 1
       {
         title: 'All I Got Mashup',
         description: 'Test description',
@@ -19,6 +20,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 2
       {
         title: 'Clarity (Remix)',
         description: 'Test description',
@@ -29,6 +31,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 3
       {
         title: 'Shelter',
         description: 'Test description',
@@ -39,6 +42,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 4
       {
         title: 'Get It Right',
         description: 'Test description',
@@ -49,6 +53,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 5
       {
         title: '0.03',
         description: 'Test description',
@@ -59,6 +64,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 6
       {
         title: 'Mo Freaky',
         description: 'Test description',
@@ -69,6 +75,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 7
       {
         title: 'Boom',
         description: 'Test description',
@@ -79,6 +86,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 8
       {
         title: 'Bruce Wayne',
         description: 'Test description',
@@ -89,6 +97,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 9
       {
         title: 'N95',
         description: 'Test description',
@@ -99,6 +108,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 10
       {
         title: 'Boy With Luv',
         description: 'Test description',
@@ -109,6 +119,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 11
       {
         title: 'MIC Drop',
         description: 'Test description',
@@ -119,6 +130,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 12
       {
         title: 'SCIENTIST',
         description: 'Test description',
@@ -129,6 +141,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 13
       {
         title: 'The Feels',
         description: 'Test description',
@@ -139,6 +152,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 14
       {
         title: '2AM (Cover)',
         description: 'Test description',
@@ -149,6 +163,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 15
       {
         title: 'Stuck',
         description: 'Test description',
@@ -159,6 +174,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 16
       {
         title: 'How Could You',
         description: 'Test description',
@@ -169,6 +185,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 17
       {
         title: 'Vintage',
         description: 'Test description',
@@ -179,6 +196,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // 18
       {
         title: 'Weak',
         description: 'Test description',
