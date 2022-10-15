@@ -8,6 +8,7 @@ const DiscoverPage = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state?.session?.user)
     const playlists = useSelector(state => state?.playlist?.entries)
+    const playlistsArr = Object.values(playlists)
 
     useEffect(() => {
         dispatch(getPlaylists())
@@ -20,6 +21,15 @@ const DiscoverPage = () => {
                 <div className='selection-field-title'>
                     <h2>Curated for you</h2>
                 </div>
+            </div>
+            <div className="playlists-content">
+                {playlistsArr && playlistsArr.map(playlist => (
+                    <div className="playlist-ctn" key={playlist?.id}>
+                        <div className="playlist-name">
+                            {playlist.name}
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );
