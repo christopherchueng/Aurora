@@ -14,4 +14,34 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(playlists)
 }))
 
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
+    const { name, userId } = req.body
+
+    const playlist = await Playlist.create({ name, userId })
+
+    return res.json(playlist)
+}))
+
+router.update('/:playlistId', requireAuth, asyncHandler(async (req, res) => {
+    const playlistId = parseInt(req.params.playlistId, 10)
+
+    const playlist = await Playlist.findByPk(playlistId)
+
+    const { name, userId } = req.body
+
+    await Playlist.update({ name, userId })
+
+    return res.json(playlist)
+}))
+
+router.delete('/:playlistId', requireAuth, asyncHandler(async (req, res) => {
+    const playlistId = parseInt(req.params.playlistId, 10)
+
+    const playlist = await Playlist.findByPk(playlistId)
+
+    await playlist.destroy()
+
+    return res.json(playlist)
+}))
+
 module.exports = router

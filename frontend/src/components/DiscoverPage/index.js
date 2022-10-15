@@ -8,9 +8,6 @@ const DiscoverPage = () => {
     const dispatch = useDispatch();
     const playlists = useSelector(state => state?.playlist?.entries)
 
-    console.log('here are all the playlists', playlists)
-
-
     useEffect(() => {
         dispatch(getPlaylists())
     }, [dispatch]);
