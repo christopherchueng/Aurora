@@ -7,6 +7,7 @@ import userReducer from './user'
 import searchReducer from './search';
 import likeReducer from './likes';
 import mediaControlReducer from './mediaControl';
+import playlistReducer from './playlists';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   search: searchReducer,
   like: likeReducer,
-  mediaControl: mediaControlReducer
+  mediaControl: mediaControlReducer,
+  playlist: playlistReducer
 });
 
 
