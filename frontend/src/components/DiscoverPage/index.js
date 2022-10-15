@@ -6,6 +6,7 @@ import './DiscoverPage.css'
 
 const DiscoverPage = () => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state?.session?.user)
     const playlists = useSelector(state => state?.playlist?.entries)
 
     useEffect(() => {

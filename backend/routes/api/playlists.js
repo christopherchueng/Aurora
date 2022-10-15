@@ -1,5 +1,5 @@
 const express = require('express')
-const { Playlist, Track, User } = require('../../db/models')
+const { Playlist, Track, User, PlaylistTrack } = require('../../db/models')
 const { check } = require('express-validator')
 
 const { requireAuth } = require('../../utils/auth')
@@ -13,12 +13,15 @@ const playlistValidators = [
     check('name')
     .exists({ checkFalsy: true })
     .isLength({ max: 100 })
-    .withMessage('Please provide a title that is no more than 100 characters long.'),
+    .withMessage('Please provide a name that is no more than 100 characters long.'),
     handleValidationErrors
 ]
 
+// Get all playlists and include the tracks that correspond with playlist many to many relationship
 router.get('/', asyncHandler(async (req, res) => {
-    const playlists = await Playlist.findAll()
+    const playlists = await Playlist.findAll({
+        include: {model: Track}
+    })
 
     return res.json(playlists)
 }))
@@ -31,7 +34,7 @@ router.post('/', requireAuth, playlistValidators, asyncHandler(async (req, res) 
     return res.json(playlist)
 }))
 
-router.update('/:playlistId', requireAuth, playlistValidators, asyncHandler(async (req, res) => {
+router.put('/:playlistId', requireAuth, playlistValidators, asyncHandler(async (req, res) => {
     const playlistId = parseInt(req.params.playlistId, 10)
 
     const playlist = await Playlist.findByPk(playlistId)

@@ -106,25 +106,25 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        playlistId: 5,
+        playlistId: 6,
         trackId: 8,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        playlistId: 5,
+        playlistId: 6,
         trackId: 9,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        playlistId: 5,
+        playlistId: 6,
         trackId: 13,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        playlistId: 5,
+        playlistId: 6,
         trackId: 4,
         createdAt: new Date(),
         updatedAt: new Date()
