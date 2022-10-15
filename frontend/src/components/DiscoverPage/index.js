@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { getPlaylists } from "../../store/playlists";
 import './DiscoverPage.css'
 
 const DiscoverPage = () => {
     const dispatch = useDispatch();
+    const playlists = useSelector(state => state?.playlist?.entries)
+
+    console.log('here are all the playlists', playlists)
 
 
     useEffect(() => {
-
+        dispatch(getPlaylists())
     }, [dispatch]);
 
     return (

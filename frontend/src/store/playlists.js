@@ -10,7 +10,7 @@ export const loadPlaylists = (playlists) => {
 }
 
 export const getPlaylists = () => async (dispatch) => {
-    const response = await csrfFetch('/api/playlist')
+    const response = await csrfFetch('/api/playlists')
 
     const playlists = await response.json()
     dispatch(loadPlaylists(playlists))
