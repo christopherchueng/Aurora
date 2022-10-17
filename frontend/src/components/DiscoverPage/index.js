@@ -15,27 +15,24 @@ const DiscoverPage = () => {
     }, [dispatch]);
 
     return (
-        <div className='discover-ctn'>
-            <h1>Here in Discover</h1>
-            <div className='selection-field'>
-                <div className='selection-field-title'>
-                    <h2>Curated for you</h2>
-                </div>
-            </div>
-            <div className="playlists-content">
+        <div id='discover'>
+            <div className="discover-container">
                 {playlistsArr && playlistsArr.map(playlist => (
                     <div className="playlist-ctn" key={playlist?.id}>
                         <div className="playlist-name">
-                            {playlist.name}
+                            <h1>{playlist.name}</h1>
                         </div>
                         <div className='playlistTracks'>
                             {playlist?.Tracks && (playlist.Tracks).map(track => (
                                 <div className='playlistTrack-content'>
-                                    <div className='track-here'>
-                                        {track.title}
-                                    </div>
                                     <div className="playlistTrack-imagePath">
                                         <img src={track.imagePath}></img>
+                                    </div>
+                                    <div className='playlistTrack-title'>
+                                        {track.title}
+                                    </div>
+                                    <div className='playlistTrack-artist'>
+                                        {track.User?.username}
                                     </div>
                                 </div>
                             ))}
