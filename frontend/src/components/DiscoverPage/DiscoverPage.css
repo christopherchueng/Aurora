@@ -4,3 +4,9 @@
     background-color: lightblue;
     padding-top: 75px;
 }
+
+.playlistTrack-cover-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}

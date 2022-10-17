@@ -25,8 +25,11 @@ const DiscoverPage = () => {
                         <div className='playlistTracks'>
                             {playlist?.Tracks && (playlist.Tracks).map(track => (
                                 <div className='playlistTrack-content'>
+                                    <div className="playlistTrack-trackPath">
+                                        <audio src={track.trackPath}></audio>
+                                    </div>
                                     <div className="playlistTrack-imagePath">
-                                        <img src={track.imagePath}></img>
+                                        <img className='playlistTrack-cover-photo' src={track.imagePath}></img>
                                     </div>
                                     <div className='playlistTrack-title'>
                                         {track.title}

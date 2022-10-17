@@ -22,9 +22,7 @@ router.get('/', asyncHandler(async (req, res) => {
     const playlists = await Playlist.findAll({
         include: {
             model: Track,
-            include: {
-                model: User
-            }
+            include: User
         }
     })
 
