@@ -19,6 +19,11 @@
 
 .playlistTrack-cover-photo {
     opacity: 0.3;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .playlist-conveyor-belt {

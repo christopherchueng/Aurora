@@ -96,6 +96,17 @@
     width: 100%;
 }
 
+.upload-img,
+.listen-img,
+.connect-img {
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+
 .splash-upload-text {
     display: flex;
     /* flex-direction: row-reverse; */
@@ -222,6 +233,11 @@
     /* opacity: 1; */
     transition-duration: 0.3s;
     transition-property: opacity;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .grid-image:hover {
