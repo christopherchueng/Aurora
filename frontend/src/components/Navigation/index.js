@@ -26,6 +26,8 @@ function Navigation({ isLoaded }){
       );
     }
 
+    if (!isLoaded) return null
+
     return (
       <div className='navbar'>
           <div className='navbar-list'>
