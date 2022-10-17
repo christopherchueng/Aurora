@@ -22,23 +22,29 @@ const DiscoverPage = () => {
                         <div className="playlist-name">
                             <h1>{playlist.name}</h1>
                         </div>
-                        <div className='playlistTracks'>
-                            {playlist?.Tracks && (playlist.Tracks).map(track => (
-                                <div className='playlistTrack-content'>
-                                    <div className="playlistTrack-trackPath">
-                                        <audio src={track.trackPath}></audio>
+                        <div className='playlistTracks flex-col'>
+                            <div className='playlist-conveyor-belt flex-row'>
+                                {playlist?.Tracks && (playlist.Tracks).map(track => (
+                                    <div key={track.id} className='playlistTrack-content'>
+                                        <div className='playlistTrack-info flex-col'>
+                                            <div className="playlistTrack-trackPath">
+                                                <audio src={track.trackPath}></audio>
+                                            </div>
+                                            <div className="playlistTrack-imagePath">
+                                                <img className='playlistTrack-cover-photo' src={track.imagePath}></img>
+                                            </div>
+                                            <div className='playlistTrack-title-artist flex-col'>
+                                                <div className='playlistTrack-title'>
+                                                    {track.title}
+                                                </div>
+                                                <div className='playlistTrack-artist'>
+                                                    {track.User?.username}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="playlistTrack-imagePath">
-                                        <img className='playlistTrack-cover-photo' src={track.imagePath}></img>
-                                    </div>
-                                    <div className='playlistTrack-title'>
-                                        {track.title}
-                                    </div>
-                                    <div className='playlistTrack-artist'>
-                                        {track.User?.username}
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 ))}
