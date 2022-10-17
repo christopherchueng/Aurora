@@ -23,7 +23,7 @@ const playlistReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case LOAD_PLAYLISTS:
-            newState = { ...state }
+            newState = { ...state, entries: { ...state.entries } }
             action.playlists.forEach(playlist => newState.entries[playlist.id] = playlist)
             return newState
         default:
