@@ -26,7 +26,7 @@ const DiscoverPage = () => {
                             <div className='playlist-conveyor-belt flex-row'>
                                 {playlist?.Tracks && (playlist.Tracks).map(track => (
                                     <div key={track.id} className='playlistTrack-content'>
-                                        <div className='playlistTrack-info flex-col'>
+                                        <div className='playlistTrack-info'>
                                             <div className="playlistTrack-trackPath">
                                                 <audio src={track.trackPath}></audio>
                                             </div>

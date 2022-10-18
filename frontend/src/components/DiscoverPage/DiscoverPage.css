@@ -5,6 +5,20 @@
     padding-top: 75px;
 }
 
+.playlist-conveyor-belt {
+    width: 75vw;
+    border: 1px solid black;
+    border-left: 0;
+    border-top-right-radius: 150px;
+    border-bottom-right-radius: 150px;
+    height: 272px;
+    overflow-x: scroll;
+}
+
+.playlist-conveyor-belt::-webkit-scrollbar {
+    display: none;
+}
+
 .playlistTrack-content {
     margin: 5px;
     padding: 10px;
@@ -17,6 +31,10 @@
     border-radius: 100%;
 }
 
+.playlistTrack-imagePath {
+    padding-bottom: 5px;
+}
+
 .playlistTrack-cover-photo {
     opacity: 0.3;
     -webkit-user-drag: none;
@@ -24,15 +42,6 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-}
-
-.playlist-conveyor-belt {
-    width: 85vw;
-    border: 1px solid black;
-    border-left: 0;
-    border-top-right-radius: 150px;
-    border-bottom-right-radius: 150px;
-    height: auto;
 }
 
 .playlistTrack-title-artist {
