@@ -5,6 +5,14 @@
     padding-top: 75px;
 }
 
+.playlist-name {
+    width: 70vw;
+}
+
+.playlist-name > h1 {
+    word-break: break-word;
+}
+
 .playlist-conveyor-belt {
     width: 75vw;
     border: 1px solid black;
