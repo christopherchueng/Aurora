@@ -31,8 +31,8 @@ const DiscoverTracks = ({track}) => {
                             onClick={() => setIsPlaying(!isPlaying)}
                         >
                             {isPlaying
-                            ? <i className="fa-solid fa-circle-pause fa-4x"></i>
-                            : <i className="fa-solid fa-circle-play fa-4x"></i>
+                            ? <i className="fa-solid fa-circle-pause fa-4x fontA-pause"></i>
+                            : <i className="fa-solid fa-circle-play fa-4x fontA-play"></i>
                             }
                         </button>
                     </div>

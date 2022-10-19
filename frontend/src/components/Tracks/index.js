@@ -443,8 +443,8 @@ const Tracks = () => {
                                     onClick={() => setIsPlaying(!isPlaying)}
                                 >
                                     {isPlaying
-                                    ? <i className="fa-solid fa-circle-pause fa-7x"></i>
-                                    : <i className="fa-solid fa-circle-play fa-7x"></i>
+                                    ? <i className="fa-solid fa-circle-pause fa-7x trackPage-pause"></i>
+                                    : <i className="fa-solid fa-circle-play fa-7x trackPage-play"></i>
                                     }
                                 </button>
                             </div>

@@ -69,6 +69,7 @@
     left: 0; */
     z-index: 2;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .volume-bar:hover::before {
@@ -259,8 +260,8 @@ input[type=range].volume-bar::-webkit-slider-thumb {
 }
 
 .fa-backward-step,
-.fa-circle-pause,
-.fa-circle-play,
+.trackPage-pause,
+.trackPage-play,
 .fa-forward-step,
 .shuffle,
 .fa-volume-high,
@@ -269,13 +270,20 @@ input[type=range].volume-bar::-webkit-slider-thumb {
 .no-loop-icon,
 .loop-icon,
 .repeat-one-icon {
+    color: white;
     transition-duration: 0.2s;
+    transition-property: color;
+}
+
+.no-loop-icon,
+.loop-icon,
+.repeat-one-icon {
     transition-property: opacity;
 }
 
 .fa-backward-step:hover,
-.fa-circle-pause:hover,
-.fa-circle-play:hover,
+.trackPage-pause:hover,
+.trackPage-play:hover,
 .fa-forward-step:hover,
 .shuffle:hover,
 .fa-volume-high:hover,
@@ -284,7 +292,13 @@ input[type=range].volume-bar::-webkit-slider-thumb {
 .no-loop-icon:hover,
 .loop-icon:hover,
 .repeat-one-icon:hover {
-    opacity: 40%;
+    color: rgb(200, 200, 200);
+}
+
+.no-loop-icon:hover,
+.loop-icon:hover,
+.repeat-one-icon:hover {
+    opacity: 70%;
 }
 
 .play-ctn {

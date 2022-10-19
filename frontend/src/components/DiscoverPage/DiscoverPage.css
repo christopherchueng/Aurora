@@ -47,14 +47,30 @@
 .play-playlistTrack-ctn {
     position: absolute;
     /* height: 100%; */
-    top: 75px;
-    left: 65px;
+    top: 88px;
+    left: 88px;
     z-index: 2;
 }
 
 .play-pause-playlistTrack {
     border: 0;
-    background-color: transparent;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fontA-pause,
+.fontA-play {
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.fontA-pause:hover,
+.fontA-play:hover {
+    color: rgb(43, 43, 43);
 }
 
 .playlistTrack-cover-photo {

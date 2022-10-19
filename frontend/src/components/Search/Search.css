@@ -172,6 +172,12 @@ input[type=range].search-tracker::-webkit-slider-thumb {
 .search-pause,
 .search-play {
     color: black;
+    transition: color 0.2s;
+}
+
+.search-pause:hover,
+.search-play:hover {
+    color: rgb(43, 43, 43);
 }
 
 .search-track-info {
