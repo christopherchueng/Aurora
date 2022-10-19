@@ -41,6 +41,20 @@
 
 .playlistTrack-imagePath {
     padding-bottom: 5px;
+    position: relative;
+}
+
+.play-playlistTrack-ctn {
+    position: absolute;
+    /* height: 100%; */
+    top: 75px;
+    left: 65px;
+    z-index: 2;
+}
+
+.play-pause-playlistTrack {
+    border: 0;
+    background-color: transparent;
 }
 
 .playlistTrack-cover-photo {

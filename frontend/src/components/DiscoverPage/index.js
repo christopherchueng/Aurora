@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getPlaylists } from "../../store/playlists";
 import './DiscoverPage.css'
+import DiscoverTracks from "./DiscoverTracks";
 
 const DiscoverPage = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const DiscoverPage = () => {
 
     useEffect(() => {
         dispatch(getPlaylists())
-    }, [dispatch]);
+    }, [dispatch])
 
     return (
         <div id='discover'>
@@ -25,24 +26,10 @@ const DiscoverPage = () => {
                         <div className='playlistTracks flex-col'>
                             <div className='playlist-conveyor-belt flex-row'>
                                 {playlist?.Tracks && (playlist.Tracks).map(track => (
-                                    <div key={track.id} className='playlistTrack-content'>
-                                        <div className='playlistTrack-info'>
-                                            <div className="playlistTrack-trackPath">
-                                                <audio src={track.trackPath}></audio>
-                                            </div>
-                                            <div className="playlistTrack-imagePath">
-                                                <img className='playlistTrack-cover-photo' src={track.imagePath}></img>
-                                            </div>
-                                            <div className='playlistTrack-title-artist flex-col'>
-                                                <div className='playlistTrack-title'>
-                                                    {track.title}
-                                                </div>
-                                                <div className='playlistTrack-artist'>
-                                                    {track.User?.username}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <DiscoverTracks
+                                        key={track.id}
+                                        track={track}
+                                    />
                                 ))}
                             </div>
                         </div>
