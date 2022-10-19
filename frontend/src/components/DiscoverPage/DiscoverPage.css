@@ -85,6 +85,12 @@
 .playlistTrack-title-artist {
     text-align: center;
     text-shadow: 0px 2px 5px black;
+    width: auto;
+}
+
+.playlistTrack-title > a {
+    color: white;
+    text-decoration: none;
 }
 
 .flex-row {
