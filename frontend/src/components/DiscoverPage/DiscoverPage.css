@@ -42,6 +42,7 @@
 .playlistTrack-imagePath {
     padding-bottom: 5px;
     position: relative;
+    clip-path: circle();
 }
 
 .play-playlistTrack-ctn {
