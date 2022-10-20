@@ -48,19 +48,18 @@
 .play-playlistTrack-ctn {
     position: absolute;
     /* height: 100%; */
-    top: 88px;
-    left: 88px;
+    top: 74px;
+    left: 66px;
     z-index: 2;
 }
 
 .play-pause-playlistTrack {
-    border: 0;
-    height: 25px;
-    width: 25px;
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid white;
+    clip-path: circle();
 }
 
 .fontA-pause,
@@ -75,7 +74,7 @@
 }
 
 .playlistTrack-cover-photo {
-    opacity: 0.3;
+    /* opacity: 0.3; */
     -webkit-user-drag: none;
     user-select: none;
     -moz-user-select: none;
