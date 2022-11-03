@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const DiscoverTracks = ({track}) => {
+const DiscoverTracks = ({track, tracksArr}) => {
     const playing = useSelector(state => state?.mediaControl?.playing)
     const [isPlaying, setIsPlaying] = useState(!!playing)
     const [showButton, setShowButton] = useState(false)
@@ -40,14 +40,14 @@ const DiscoverTracks = ({track}) => {
                     </div>
                     <Link to={`/tracks/${track.id}`}><img className='playlistTrack-cover-photo' src={track.imagePath}></img></Link>
                 </div>
-                <div className='playlistTrack-title-artist flex-col'>
+                {/* <div className='playlistTrack-title-artist flex-col'>
                     <div className='playlistTrack-title'>
                         <Link to={`/tracks/${track.id}`}>{track.title}</Link>
                     </div>
                     <div className='playlistTrack-artist'>
                         {track.User?.username}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

@@ -6,30 +6,46 @@
 }
 
 .discover-container {
+    display: flex;
+    flex-direction: row;
     margin: 0 100px;
     border-left: 1px solid gray;
     /* background-color: lightblue; */
     background-color: rgb(39, 39, 39);
+}
 
+.playlist-ctn {
+    margin-left: 20px;
 }
 
 .playlist-name {
     display: flex;
     align-items: center;
-    width: 70vw;
-    height: 125px;
+    justify-content: center;
+    width: 200px;
+    /* height: 125px; */
 }
 
-.playlist-name > h1 {
-    word-break: break-word;
+.playlist-name > h4 {
+    /* word-break: break-word; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 10px 0 5px 0;
+}
+
+.playlistTrack-artist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .playlist-conveyor-belt {
     width: 75vw;
-    border: 1px solid gray;
+    /* border: 1px solid gray;
     border-left: 0;
     border-top-right-radius: 150px;
-    border-bottom-right-radius: 150px;
+    border-bottom-right-radius: 150px; */
     height: 272px;
     overflow-x: scroll;
 }
