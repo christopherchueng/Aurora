@@ -6,7 +6,6 @@ const PlaylistCover = ({track}) => {
 
     const [isPlaying, setIsPlaying] = useState(!!playing)
     const [showButton, setShowButton] = useState(false)
-    const [isHoveringPlaylist, setIsHoveringPlaylist] = useState(false)
 
     const audioPlayer = useRef()
 
@@ -20,19 +19,9 @@ const PlaylistCover = ({track}) => {
         }
     }, [isPlaying])
 
-    const showButtonAndCover = () => {
-        setShowButton(true)
-        setIsHoveringPlaylist(true)
-    }
-
-    const hideButtonAndCover = () => {
-        setShowButton(false)
-        setIsHoveringPlaylist(false)
-    }
-
     return (
         <>
-            <div className='playlistTrack-info' onMouseEnter={showButtonAndCover} onMouseLeave={hideButtonAndCover}>
+            <div className='playlistTrack-info' onMouseEnter={() => setShowButton(true)} onMouseLeave={() => setShowButton(false)}>
                 <div className="playlistTrack-trackPath">
                     <audio src={track.trackPath} ref={audioPlayer}></audio>
                 </div>
