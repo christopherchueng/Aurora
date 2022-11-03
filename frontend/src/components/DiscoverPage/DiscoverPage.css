@@ -71,6 +71,7 @@
     padding-bottom: 5px;
     position: relative;
     clip-path: circle();
+    z-index: 2;
 }
 
 .playlistTrack-imagePath:hover .play-playlistTrack-ctn {
@@ -110,6 +111,11 @@
     height: 200px;
 }
 
+.playlistTrack-info {
+    clip-path: circle();
+}
+
+.playlistTrack-info,
 .playlistTrack-cover-photo {
     /* opacity: 1; */
     position: absolute;
@@ -125,7 +131,11 @@
     -ms-transition: opacity 0.5s ease-in-out;
 }
 
-.playlistTrack-cover-photo:hover {
+.playlistTrack-cover-photo {
+    top: 0;
+}
+
+.playlistTrack-info:hover .playlistTrack-cover-photo {
     opacity: 0;
 }
 

@@ -4,29 +4,13 @@ import { Link } from "react-router-dom";
 import PlaylistCover from "./PlaylistCover";
 
 const DiscoverPlaylists = ({playlist}) => {
-    const playing = useSelector(state => state?.mediaControl?.playing)
-    const [isPlaying, setIsPlaying] = useState(!!playing)
-    const [showButton, setShowButton] = useState(false)
-    const [isHoveringPlaylist, setIsHoveringPlaylist] = useState(false)
-
-    const audioPlayer = useRef()
-
-    useEffect(() => {
-        if (isPlaying) {
-            audioPlayer?.current?.play()
-            // progressAnimation.current = requestAnimationFrame(currentlyPlaying)
-        } else {
-            audioPlayer?.current?.pause()
-            // cancelAnimationFrame(progressAnimation.current)
-        }
-    }, [isPlaying])
 
     return (
         <>
             <div
                 className="playlist-cover"
-                onMouseOver={() => setIsHoveringPlaylist(true)}
-                onMouseOut={() => setIsHoveringPlaylist(false)}
+                // onMouseOver={() => setIsHoveringPlaylist(true)}
+                // onMouseOut={() => setIsHoveringPlaylist(false)}
             >
                 {playlist?.Tracks && (playlist.Tracks).map(track => (
                     <PlaylistCover track={track} key={track.id} />
