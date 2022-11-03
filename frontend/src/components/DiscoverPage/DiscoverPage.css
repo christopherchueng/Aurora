@@ -104,13 +104,28 @@
     color: rgb(43, 43, 43);
 }
 
+.playlist-cover {
+    position: relative;
+    height: 200px;
+}
+
 .playlistTrack-cover-photo {
-    /* opacity: 0.3; */
+    /* opacity: 1; */
+    position: absolute;
     -webkit-user-drag: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    transition: opacity 1s ease-in-out;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+}
+
+.playlistTrack-cover-photo:hover {
+    opacity: 0;
 }
 
 .playlistTrack-title-artist {
