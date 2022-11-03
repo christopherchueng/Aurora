@@ -8,10 +8,11 @@
 .discover-container {
     display: flex;
     flex-direction: row;
-    margin: 0 100px;
-    border-left: 1px solid gray;
-    /* background-color: lightblue; */
     background-color: rgb(39, 39, 39);
+}
+
+.discover-header {
+    margin-left: 25px;
 }
 
 .playlist-ctn {
