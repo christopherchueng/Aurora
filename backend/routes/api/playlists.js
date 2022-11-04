@@ -24,7 +24,7 @@ router.get('/', asyncHandler(async (req, res) => {
             model: Track,
             include: User,
         }],
-
+        limit: 10,
         order: [[Track, "id", "DESC"]],
     })
 

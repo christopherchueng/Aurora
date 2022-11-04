@@ -64,17 +64,18 @@
 .playlistTrack-imagePath {
     width: 200px;
     height: 200px;
-    border-radius: 100%;
+    border-radius: 50%;
 }
 
 .playlistTrack-imagePath {
-    padding-bottom: 5px;
+    margin-bottom: 5px;
     position: relative;
     clip-path: circle();
+    /* border: 2px solid red; */
     z-index: 2;
 }
 
-.playlistTrack-imagePath:hover .play-playlistTrack-ctn {
+.playlistTrack-info:hover .play-playlistTrack-ctn {
     position: absolute;
     /* height: 100%; */
     top: 74px;
@@ -91,8 +92,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid white;
     clip-path: circle();
+    border: 1px solid white;
 }
 
 .fontA-pause,
@@ -113,6 +114,10 @@
 
 .playlistTrack-info {
     clip-path: circle();
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid white;
 }
 
 .playlistTrack-info,
