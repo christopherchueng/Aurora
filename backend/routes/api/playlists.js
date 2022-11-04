@@ -20,10 +20,12 @@ const playlistValidators = [
 // Get all playlists and include the tracks that correspond with playlist many to many relationship
 router.get('/', asyncHandler(async (req, res) => {
     const playlists = await Playlist.findAll({
-        include: {
+        include: [{
             model: Track,
-            include: User
-        }
+            include: User,
+        }],
+
+        order: [[Track, "id", "DESC"]],
     })
 
     return res.json(playlists)
