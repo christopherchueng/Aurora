@@ -7,18 +7,10 @@ const DiscoverPlaylists = ({playlist}) => {
 
     return (
         <>
-            <div
-                className="playlist-cover"
-                // onMouseOver={() => setIsHoveringPlaylist(true)}
-                // onMouseOut={() => setIsHoveringPlaylist(false)}
-            >
+            <div className="playlist-cover">
                 {playlist?.Tracks && (playlist.Tracks).map(track => (
                     <PlaylistCover track={track} key={track.id} />
                 ))}
-                {/* <img
-                    className='playlistTrack-cover-photo'
-                    src={isHoveringPlaylist ? playlist?.Tracks[1]?.imagePath : playlist?.Tracks[0]?.imagePath}
-                /> */}
             </div>
             <div className="playlist-name">
                 <h4>{playlist.name}</h4>
